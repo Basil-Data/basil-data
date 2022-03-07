@@ -1,5 +1,7 @@
 import react from 'react';
 import {useState} from 'react';
+
+// MUI
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
@@ -7,6 +9,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Grid from '@mui/material/Grid';
 
 import '../Questionnaire.css'
 
@@ -29,7 +32,27 @@ function SectionOneStory () {
             <h5>When was the organization founded?</h5>
             <TextField id="outlined-basic" label="Date founded" variant="outlined" />
             <h5>What is your Mission Statement?</h5>
-            <TextField id="outlined-basic" label="Mission Statement" variant="outlined" />
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+            >
+                <Box
+                    sx={{
+                        width: 600,
+                        maxWidth: '100%',
+                    }}
+                >
+                    <TextField 
+                        id="outlined-basic" 
+                        label="Mission Statement" 
+                        variant="outlined" 
+                        multiline rows={5}
+                        fullWidth/>
+                </Box>
+            </Grid>
             <h5>How well do you understand the problem?</h5>
             <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
@@ -64,7 +87,27 @@ function SectionOneStory () {
                 </FormControl>
             </Box>
             <h5>How would you introduce your organization to a potential investor in a paragraph?</h5>
-            <TextField id="outlined-basic" label="Introduction" variant="outlined" />
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+            >
+                <Box
+                    sx={{
+                        width: 600,
+                        maxWidth: '100%',
+                    }}
+                >
+                    <TextField 
+                        id="outlined-basic" 
+                        label="Introduction" 
+                        variant="outlined" 
+                        multiline rows={5}
+                        fullWidth/>
+                </Box>
+            </Grid>
             <br/>
             <br/><button>Submit</button>
         </form>
