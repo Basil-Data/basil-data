@@ -26,6 +26,7 @@ import SectionTwoImpact from '../Questionnaire/SectionTwoImpact/SectionTwoImpact
 import SectionTwoImpactOpportunity from '../Questionnaire/SectionTwoImpactOpportunity/SectionTwoImpactOpportunity';
 import SectionThreeSolution from '../Questionnaire/SectionThreeSolution/SectionThreeSolution';
 import SectionSixRisksAndHurdles from '../Questionnaire/SectionSixRisksAndHurdles/SectionSixRisksAndHurdles';
+import SectionFourTraction from '../Questionnaire/SectionFourTraction/SectionFourTraction';
 
 import './App.css';
 
@@ -122,12 +123,21 @@ function App() {
               path="/impactOpportunity">
                 <SectionTwoImpactOpportunity/>
               </Route>
+
           <Route
-            exact    
+            exact
             path="/solution"
           >
             <SectionThreeSolution/>
           </Route>
+
+          <Route
+            exact    
+            path="/sectionfour">
+              <SectionFourTraction/>
+          </Route>
+
+
 
           <Route
             exact
