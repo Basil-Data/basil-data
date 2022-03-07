@@ -127,7 +127,7 @@ function App() {
 
             <Route
               exact
-              path="/impactOpportunity">
+              path="/impact-opportunity">
                 <SectionTwoImpactOpportunity/>
               </Route>
 
@@ -140,7 +140,7 @@ function App() {
 
           <Route
             exact    
-            path="/sectionfour">
+            path="/traction">
               <SectionFourTraction/>
           </Route>
 
