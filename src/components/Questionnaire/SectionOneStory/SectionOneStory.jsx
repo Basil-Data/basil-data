@@ -12,7 +12,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 
 import '../Questionnaire.css';
-import QuestionnaireNav from '../QuetsionnaireNav/QuestionnaireNav';
+import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 function SectionOneStory () {
 
