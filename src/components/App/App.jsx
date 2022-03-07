@@ -19,7 +19,9 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import SectionOneStory from '../Questionnaire/SectionOneStory';
+import SectionOneStory from '../Questionnaire/SectionOneStory/SectionOneStory';
+import SectionTwoImpact from '../Questionnaire/SectionTwoImpact/SectionTwoImpact';
+import SectionTwoImpactOpportunity from '../Questionnaire/SectionTwoImpactOpportunity/SectionTwoImpactOpportunity';
 
 import './App.css';
 
@@ -103,6 +105,19 @@ function App() {
           >
             <SectionOneStory/>
           </Route>
+
+          <Route
+            exact
+            path="/impact"
+            >
+              <SectionTwoImpact/>
+            </Route>
+
+            <Route
+              exact
+              path="/impactOpportunity">
+                <SectionTwoImpactOpportunity/>
+              </Route>
 
           <Route
             exact
