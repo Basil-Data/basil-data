@@ -24,7 +24,6 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import SectionOneStory from '../Questionnaire/SectionOneStory/SectionOneStory';
 import SectionThreeSolution from '../Questionnaire/SectionThreeSolution/SectionThreeSolution';
 
-
 import './App.css';
 
 function App() {
@@ -105,7 +104,7 @@ function App() {
             exact
             path="/story"
           >
-            <SectionOneStory/>
+            {/* <SectionOneStory/> */}
           </Route>
 
           <Route
