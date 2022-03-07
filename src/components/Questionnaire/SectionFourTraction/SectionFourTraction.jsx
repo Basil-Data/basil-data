@@ -9,6 +9,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
 import '../Questionnaire.css'
+import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 function SectionFourTraction() {
 
@@ -19,6 +20,7 @@ function SectionFourTraction() {
 
     return (
         <>
+            <QuestionnaireNav />
             <form className='questionnaireForm'>
                 <h1>Section Series A - Traction</h1>
                 <p>
@@ -66,7 +68,7 @@ function SectionFourTraction() {
                     What indicators other than sales show your progress since inception?
                 </h5>
                 <Box>
-                    <FormControl className='questionnaireForm' sx={{ display: 'flex'}}>
+                    <FormControl className='questionnaireForm centerHelp'>
                         {investmentStage.map(stage => (
                             <FormControlLabel control={<Checkbox />} label= {stage} />
                         ))}
