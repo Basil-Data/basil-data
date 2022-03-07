@@ -19,9 +19,13 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+
+// Sections for forms
 import SectionOneStory from '../Questionnaire/SectionOneStory/SectionOneStory';
 import SectionTwoImpact from '../Questionnaire/SectionTwoImpact/SectionTwoImpact';
 import SectionTwoImpactOpportunity from '../Questionnaire/SectionTwoImpactOpportunity/SectionTwoImpactOpportunity';
+import SectionThreeSolution from '../Questionnaire/SectionThreeSolution/SectionThreeSolution';
+import SectionSixRisksAndHurdles from '../Questionnaire/SectionSixRisksAndHurdles/SectionSixRisksAndHurdles';
 
 import './App.css';
 
@@ -101,7 +105,7 @@ function App() {
 
           <Route
             exact
-            path="/testing"
+            path="/story"
           >
             <SectionOneStory/>
           </Route>
@@ -118,6 +122,19 @@ function App() {
               path="/impactOpportunity">
                 <SectionTwoImpactOpportunity/>
               </Route>
+          <Route
+            exact    
+            path="/solution"
+          >
+            <SectionThreeSolution/>
+          </Route>
+
+          <Route
+            exact
+            path="/risks-and-hurdles"
+          >
+            <SectionSixRisksAndHurdles/>
+          </Route>
 
           <Route
             exact
