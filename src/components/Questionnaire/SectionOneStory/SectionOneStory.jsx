@@ -1,5 +1,7 @@
 import react from 'react';
-import {useState} from 'react';
+import { useState } from 'react';
+
+// MUI
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
@@ -7,6 +9,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Grid from '@mui/material/Grid';
 
 import '../Questionnaire.css'
 
@@ -20,19 +23,43 @@ function SectionOneStory () {
     return (
         <form className='questionnaireForm'>
             <h1>Section 1 - Story</h1>
+            <p>This section is about you and your team, your motivation for the problem, <br/>
+                the special make-up of your organization and most importantly a chance to <br/>
+                introduce yourself and your exciting solution to a potential investor!  <br/>
+                Make sure to be enthusiastic and show investors why they should go with you!</p>
             <h5>What is the size of your enterprise? (people)</h5>
             <TextField id="outlined-basic" label="Number of people" variant="outlined" />
             <h5>When was the organization founded?</h5>
             <TextField id="outlined-basic" label="Date founded" variant="outlined" />
             <h5>What is your Mission Statement?</h5>
-            <TextField id="outlined-basic" label="Mission Statement" variant="outlined" />
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+            >
+                <Box
+                    sx={{
+                        width: 600,
+                        maxWidth: '100%',
+                    }}
+                >
+                    <TextField 
+                        id="outlined-basic" 
+                        label="Mission Statement" 
+                        variant="outlined" 
+                        multiline rows={5}
+                        fullWidth/>
+                </Box>
+            </Grid>
             <h5>How well do you understand the problem?</h5>
             <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue=""
                 row
                 name="radio-buttons-group"
-                className='questionnaireForm'
+                className='centerHelp'
             >
                 <FormControlLabel labelPlacement="top" value="1" control={<Radio />} label="1" />
                 <FormControlLabel labelPlacement="top" value="2" control={<Radio />} label="2" />
@@ -52,7 +79,7 @@ function SectionOneStory () {
             <h5>What percentage of your founding team is female?</h5>
             <TextField id="outlined-basic" label="Percentage female" variant="outlined" />
             <h5>Select from the list of tangible competitive advantages that apply to your organization</h5>
-            <Box className='questionnaireForm' sx={{ display: 'flex' }}>
+            <Box className='centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
                     {competitiveAdvantages.map(advantage => (
                             <FormControlLabel control={<Checkbox />} label={advantage} />
@@ -60,7 +87,27 @@ function SectionOneStory () {
                 </FormControl>
             </Box>
             <h5>How would you introduce your organization to a potential investor in a paragraph?</h5>
-            <TextField id="outlined-basic" label="Introduction" variant="outlined" />
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+            >
+                <Box
+                    sx={{
+                        width: 600,
+                        maxWidth: '100%',
+                    }}
+                >
+                    <TextField 
+                        id="outlined-basic" 
+                        label="Introduction" 
+                        variant="outlined" 
+                        multiline rows={5}
+                        fullWidth/>
+                </Box>
+            </Grid>
             <br/>
             <br/><button>Submit</button>
         </form>

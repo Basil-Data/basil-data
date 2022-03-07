@@ -217,7 +217,7 @@ VALUES
 	'Financial - areas where your customers are spending too much. money',
 	'Productivity - areas where your customer wants to be more efficient or productive',
 	'Process - areas where you could provide more convenient processes for your customers',
-	'Support - areas where customers are not receiving the suppor they need'	
+	'Support - areas where customers are not receiving the support they need'	
 );
 	
 DROP TABLE "painPointsJunction";

@@ -32,8 +32,8 @@ Button
   border-color: #014041;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
-  color: #f8f8f8;
+  background-color: #bdb4d8;
+  color: #000000;
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
@@ -55,7 +55,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #008183;
+  background-color: #646a94;
   text-decoration: none;
 }
 
@@ -63,7 +63,7 @@ Button
 .btn_asLink {
   padding: 0;
   border-width: 0;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid #bdb4d8;
   border-radius: 0;
   background: none;
   font: inherit;
@@ -101,7 +101,7 @@ Form Treatment
   max-width: 100%;
   padding: 25px;
   margin: 0 auto 20px;
-  background-color: #efefef;
+  background-color: #8eaeb2;
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
 }
