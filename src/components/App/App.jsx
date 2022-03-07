@@ -22,6 +22,8 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 
 // Sections for forms
 import SectionOneStory from '../Questionnaire/SectionOneStory/SectionOneStory';
+import SectionTwoImpact from '../Questionnaire/SectionTwoImpact/SectionTwoImpact';
+import SectionTwoImpactOpportunity from '../Questionnaire/SectionTwoImpactOpportunity/SectionTwoImpactOpportunity';
 import SectionThreeSolution from '../Questionnaire/SectionThreeSolution/SectionThreeSolution';
 import SectionSixRisksAndHurdles from '../Questionnaire/SectionSixRisksAndHurdles/SectionSixRisksAndHurdles';
 import SectionFourTraction from '../Questionnaire/SectionFourTraction/SectionFourTraction';
@@ -112,9 +114,22 @@ function App() {
           <Route
             exact
             path="/traction">
-
-              <SectionFourTraction/>
+              <SectionFourTraction />
           </Route>
+
+            <Route
+             exact
+            path="/impact"
+            >
+              <SectionTwoImpact/>
+            </Route>
+
+
+            <Route
+              exact
+              path="/impactOpportunity">
+                <SectionTwoImpactOpportunity/>
+              </Route>
 
           <Route
             exact
@@ -122,6 +137,14 @@ function App() {
           >
             <SectionThreeSolution/>
           </Route>
+
+          <Route
+            exact    
+            path="/sectionfour">
+              <SectionFourTraction/>
+          </Route>
+
+
 
           <Route
             exact

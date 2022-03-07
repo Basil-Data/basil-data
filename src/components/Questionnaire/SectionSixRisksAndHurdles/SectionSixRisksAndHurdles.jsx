@@ -9,6 +9,8 @@ import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 
 import '../Questionnaire.css'
+import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
+
 
 function SectionOneStory () {
 
@@ -55,6 +57,8 @@ function SectionOneStory () {
     ];
 
     return (
+        <>
+        <QuestionnaireNav/>
         <form className='questionnaireForm'>
             <h1>Section 6 - Risks and Hurdles</h1>
             <p>Enhancing your Transparency by providing insight into current and future factors 
@@ -189,6 +193,7 @@ function SectionOneStory () {
             <br/>
             <br/><button>Submit</button>
         </form>
+        </>
     )
 };
 

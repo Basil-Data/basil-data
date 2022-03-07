@@ -9,7 +9,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 
-import '../Questionnaire.css'
+import '../Questionnaire.css';
+import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
+
 
 function SectionThreeSolution () {
 
@@ -60,6 +62,7 @@ function SectionThreeSolution () {
 
     return (
         <>
+            <QuestionnaireNav />
             <h1 className='questionnaireForm'>Section 3 - Solution</h1>
             <p className='questionnaireForm'>In this section we ask for more detail regarding your business
             offering and how it can help potential customers.</p>
