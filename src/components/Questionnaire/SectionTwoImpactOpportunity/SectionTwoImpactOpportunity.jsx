@@ -30,7 +30,7 @@ function SectionTwoImpactOpportunity() {
 
     return(
         <Box className="questionnaireForm">
-            <FormGroup>
+            <form>
                 <h1><b>Section 2 - Impact Opportunity</b></h1>
                 <p>Select the characteristics that support the efficacy of your solution</p>
                 <FormControl>
@@ -146,7 +146,7 @@ function SectionTwoImpactOpportunity() {
                     />
             
                 </RadioGroup>
-            </FormGroup>
+            </form>
         </Box>
     )
 

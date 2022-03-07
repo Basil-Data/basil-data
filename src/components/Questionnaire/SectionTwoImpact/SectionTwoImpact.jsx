@@ -20,6 +20,7 @@ import {
 } 
 from '@mui/material';
 
+import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 
 function SectionTwoImpact() {
@@ -28,8 +29,10 @@ function SectionTwoImpact() {
 
 
     return(
+        <>
+        <QuestionnaireNav/>
         <Box className="questionnaireForm">
-            <FormGroup>
+            <form>
                 <h1><b>Section 2 - Impact</b></h1>
                 <p className="definingImpact">Defining your Impact...</p>
                 <br></br>
@@ -113,8 +116,9 @@ function SectionTwoImpact() {
                 >
 
                 </TextField>
-            </FormGroup>
+            </form>
         </Box>
+        </>
     )
 }
 
