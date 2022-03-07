@@ -34,17 +34,23 @@ function SectionThreeSolution () {
     ];
 
     const painPoints = [
-        'Financial - areas where your customers are spending too much money',
-        'Productivity - areas where your customer wants to be more efficient or productive',
-        'Process - areas where you could provide more convenient processes for your customers',
-        'Support - areas where customers are not receiving the support they need'	
+        { name: 'Financial - areas where your customers are spending too much money', status: false},
+        { name: 'Productivity - areas where your customer wants to be more efficient or productive', status: false},
+        { name: 'Process - areas where you could provide more convenient processes for your customers', status: false},
+        { name: 'Support - areas where customers are not receiving the support they need', status: false}
     ];
 
-    const handleCheck = (event) => {
-        console.log('box has been checked')
 
-        painPoints[0].status = true;
-        setPainPointList(painPoints);
+    const handleCheck = (event) => {
+        console.log('box has been checked', event)
+
+        let selectedPainPoint = {
+            name: event,
+            status: true
+        };
+
+        console.log(selectedPainPoint)
+
     }
 
     return (
@@ -136,9 +142,9 @@ function SectionThreeSolution () {
                     {painPoints.map(point => (
                             <FormControlLabel 
                                 control={<Checkbox />} 
-                                onChange={(event) => handleCheck(event)}
-                                label={point}
-                                key={point} />
+                                onChange={() => handleCheck(point)}
+                                label={point.name}
+                                key={point.name} />
                     ))}
                 </FormControl>
             </Box>

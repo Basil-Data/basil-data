@@ -82,7 +82,7 @@ function SectionOneStory () {
             <Box className='centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
                     {competitiveAdvantages.map(advantage => (
-                            <FormControlLabel control={<Checkbox />} label={advantage} />
+                            <FormControlLabel key = {advantage} control={<Checkbox />} label={advantage} />
                     ))}
                 </FormControl>
             </Box>
