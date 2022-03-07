@@ -25,8 +25,11 @@ import SectionOneStory from '../Questionnaire/SectionOneStory/SectionOneStory';
 import SectionTwoImpact from '../Questionnaire/SectionTwoImpact/SectionTwoImpact';
 import SectionTwoImpactOpportunity from '../Questionnaire/SectionTwoImpactOpportunity/SectionTwoImpactOpportunity';
 import SectionThreeSolution from '../Questionnaire/SectionThreeSolution/SectionThreeSolution';
-import SectionSixRisksAndHurdles from '../Questionnaire/SectionSixRisksAndHurdles/SectionSixRisksAndHurdles';
 import SectionFourTraction from '../Questionnaire/SectionFourTraction/SectionFourTraction';
+import SectionSixRisksAndHurdles from '../Questionnaire/SectionSixRisksAndHurdles/SectionSixRisksAndHurdles';
+import SectionSevenNextSteps from '../Questionnaire/SectionSevenNextSteps/SectionSevenNextSteps';
+
+
 
 import './App.css';
 
@@ -151,6 +154,13 @@ function App() {
             path="/risks-and-hurdles"
           >
             <SectionSixRisksAndHurdles/>
+          </Route>
+
+          <Route
+            exact
+            path="/next-steps"
+          >
+            <SectionSevenNextSteps/>
           </Route>
 
           <Route
