@@ -8,7 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-import './Questionnaire.css'
+import '../Questionnaire.css'
 
 function SectionOneStory () {
 
