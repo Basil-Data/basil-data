@@ -23,6 +23,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 // Sections for forms
 import SectionOneStory from '../Questionnaire/SectionOneStory/SectionOneStory';
 import SectionThreeSolution from '../Questionnaire/SectionThreeSolution/SectionThreeSolution';
+import SectionSixRisksAndHurdles from '../Questionnaire/SectionSixRisksAndHurdles/SectionSixRisksAndHurdles';
 
 import './App.css';
 
@@ -104,7 +105,7 @@ function App() {
             exact
             path="/story"
           >
-            {/* <SectionOneStory/> */}
+            <SectionOneStory/>
           </Route>
 
           <Route
@@ -112,6 +113,13 @@ function App() {
             path="/solution"
           >
             <SectionThreeSolution/>
+          </Route>
+
+          <Route
+            exact
+            path="/risks-and-hurdles"
+          >
+            <SectionSixRisksAndHurdles/>
           </Route>
 
           <Route
