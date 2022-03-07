@@ -1,5 +1,5 @@
 import react from 'react';
-import {useState} from 'react';
+import { useState } from 'react';
 
 // MUI
 import Box from '@mui/material/Box';
