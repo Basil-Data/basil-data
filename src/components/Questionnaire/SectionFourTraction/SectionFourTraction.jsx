@@ -22,7 +22,7 @@ function SectionFourTraction() {
         <>
             <QuestionnaireNav />
             <form className='questionnaireForm'>
-                <h1>Section Series A - Traction</h1>
+                <h1>Section 4 - Traction</h1>
                 <p>
                 Tell us about the momentum behind your organization!
 
