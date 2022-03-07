@@ -19,7 +19,10 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+
+// Sections for forms
 import SectionOneStory from '../Questionnaire/SectionOneStory/SectionOneStory';
+import SectionThreeSolution from '../Questionnaire/SectionThreeSolution/SectionThreeSolution';
 import SectionSixRisksAndHurdles from '../Questionnaire/SectionSixRisksAndHurdles/SectionSixRisksAndHurdles';
 
 import './App.css';
@@ -100,9 +103,16 @@ function App() {
 
           <Route
             exact
-            path="/testing"
+            path="/story"
           >
             <SectionOneStory/>
+          </Route>
+
+          <Route
+            exact
+            path="/solution"
+          >
+            <SectionThreeSolution/>
           </Route>
 
           <Route
