@@ -24,6 +24,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import SectionOneStory from '../Questionnaire/SectionOneStory/SectionOneStory';
 import SectionThreeSolution from '../Questionnaire/SectionThreeSolution/SectionThreeSolution';
 import SectionSixRisksAndHurdles from '../Questionnaire/SectionSixRisksAndHurdles/SectionSixRisksAndHurdles';
+import SectionSevenNextSteps from '../Questionnaire/SectionSevenNextSteps/SectionSevenNextSteps';
 
 import './App.css';
 
@@ -120,6 +121,13 @@ function App() {
             path="/risks-and-hurdles"
           >
             <SectionSixRisksAndHurdles/>
+          </Route>
+
+          <Route
+            exact
+            path="/next-steps"
+          >
+            <SectionSevenNextSteps/>
           </Route>
 
           <Route
