@@ -8,7 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-import './Questionnaire.css'
+import '../Questionnaire.css'
 
 function SectionOneStory () {
 
@@ -20,6 +20,10 @@ function SectionOneStory () {
     return (
         <form className='questionnaireForm'>
             <h1>Section 1 - Story</h1>
+            <p>This section is about you and your team, your motivation for the problem, <br/>
+                the special make-up of your organization and most importantly a chance to <br/>
+                introduce yourself and your exciting solution to a potential investor!  <br/>
+                Make sure to be enthusiastic and show investors why they should go with you!</p>
             <h5>What is the size of your enterprise? (people)</h5>
             <TextField id="outlined-basic" label="Number of people" variant="outlined" />
             <h5>When was the organization founded?</h5>
@@ -32,7 +36,7 @@ function SectionOneStory () {
                 defaultValue=""
                 row
                 name="radio-buttons-group"
-                className='questionnaireForm'
+                className='centerHelp'
             >
                 <FormControlLabel labelPlacement="top" value="1" control={<Radio />} label="1" />
                 <FormControlLabel labelPlacement="top" value="2" control={<Radio />} label="2" />
@@ -52,7 +56,7 @@ function SectionOneStory () {
             <h5>What percentage of your founding team is female?</h5>
             <TextField id="outlined-basic" label="Percentage female" variant="outlined" />
             <h5>Select from the list of tangible competitive advantages that apply to your organization</h5>
-            <Box className='questionnaireForm' sx={{ display: 'flex' }}>
+            <Box className='centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
                     {competitiveAdvantages.map(advantage => (
                             <FormControlLabel control={<Checkbox />} label={advantage} />
