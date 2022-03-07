@@ -104,7 +104,7 @@ function App() {
             exact
             path="/story"
           >
-            {/* <SectionOneStory/> */}
+            <SectionOneStory/>
           </Route>
 
           <Route
