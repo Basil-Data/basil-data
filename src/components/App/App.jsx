@@ -19,7 +19,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import SectionOneStory from '../Questionnaire/SectionOneStory';
+import SectionOneStory from '../Questionnaire/SectionOneStory/SectionOneStory';
+import SectionFourTraction from '../Questionnaire/SectionFourTraction/SectionFourTraction';
 
 import './App.css';
 
@@ -102,6 +103,14 @@ function App() {
             path="/testing"
           >
             <SectionOneStory/>
+          </Route>
+
+          <Route
+            exact
+            path="/sectionfour">
+
+              <SectionFourTraction/>
+
           </Route>
 
           <Route
