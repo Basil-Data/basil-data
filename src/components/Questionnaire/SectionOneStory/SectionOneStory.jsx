@@ -11,7 +11,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 
-import '../Questionnaire.css'
+import '../Questionnaire.css';
+import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 function SectionOneStory () {
 
@@ -21,12 +22,14 @@ function SectionOneStory () {
     ]
 
     return (
-        <form className='questionnaireForm'>
-            <h1>Section 1 - Story</h1>
-            <p>This section is about you and your team, your motivation for the problem, <br/>
-                the special make-up of your organization and most importantly a chance to <br/>
-                introduce yourself and your exciting solution to a potential investor!  <br/>
+        <>
+        <QuestionnaireNav/>
+            <h1 className='questionnaireForm'>Section 1 - Story</h1>
+            <p className='questionnaireForm'>This section is about you and your team, your motivation for the problem, 
+                the special make-up of your organization and most importantly a chance to
+                introduce yourself and your exciting solution to a potential investor!  
                 Make sure to be enthusiastic and show investors why they should go with you!</p>
+        <form className='questionnaireForm'>
             <h5>What is the size of your enterprise? (people)</h5>
             <TextField id="outlined-basic" label="Number of people" variant="outlined" />
             <h5>When was the organization founded?</h5>
@@ -82,7 +85,7 @@ function SectionOneStory () {
             <Box className='centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
                     {competitiveAdvantages.map(advantage => (
-                            <FormControlLabel control={<Checkbox />} label={advantage} />
+                            <FormControlLabel key = {advantage} control={<Checkbox />} label={advantage} />
                     ))}
                 </FormControl>
             </Box>
@@ -111,6 +114,7 @@ function SectionOneStory () {
             <br/>
             <br/><button>Submit</button>
         </form>
+        </>
     )
 };
 
