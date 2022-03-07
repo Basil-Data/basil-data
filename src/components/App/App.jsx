@@ -111,7 +111,7 @@ function App() {
 
           <Route
             exact
-            path="/sectionfour">
+            path="/traction">
 
               <SectionFourTraction/>
           </Route>
