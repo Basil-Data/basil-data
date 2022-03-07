@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
+import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
@@ -51,9 +52,13 @@ function SectionOneStory () {
             <h5>What percentage of your founding team is female?</h5>
             <TextField id="outlined-basic" label="Percentage female" variant="outlined" />
             <h5>Select from the list of tangible competitive advantages that apply to your organization</h5>
-            {competitiveAdvantages.map(advantage => (
-                    <FormControlLabel control={<Checkbox />} label={advantage} />
-            ))}
+            <Box className='questionnaireForm' sx={{ display: 'flex' }}>
+                <FormControl className='questionnaireForm' sx={{ m : 3}}>
+                    {competitiveAdvantages.map(advantage => (
+                            <FormControlLabel control={<Checkbox />} label={advantage} />
+                    ))}
+                </FormControl>
+            </Box>
             <h5>How would you introduce your organization to a potential investor in a paragraph?</h5>
             <TextField id="outlined-basic" label="Introduction" variant="outlined" />
             <br/>
