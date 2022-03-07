@@ -1,0 +1,65 @@
+import react from 'react';
+import {useState} from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+
+import './Questionnaire.css'
+
+function SectionOneStory () {
+
+    const competitiveAdvantages = [
+        'Patent', 'Brand License', 'Regulation', 'Trademark', 'Copyrights', 
+        'Software', 'Customer Lists', 'Personal accreditation'
+    ]
+
+    return (
+        <form className='questionnaireForm'>
+            <h1>Section 1 - Story</h1>
+            <h5>What is the size of your enterprise? (people)</h5>
+            <TextField id="outlined-basic" label="Number of people" variant="outlined" />
+            <h5>When was the organization founded?</h5>
+            <TextField id="outlined-basic" label="Date founded" variant="outlined" />
+            <h5>What is your Mission Statement?</h5>
+            <TextField id="outlined-basic" label="Mission Statement" variant="outlined" />
+            <h5>How well do you understand the problem?</h5>
+            <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue=""
+                row
+                name="radio-buttons-group"
+                className='questionnaireForm'
+            >
+                <FormControlLabel labelPlacement="top" value="1" control={<Radio />} label="1" />
+                <FormControlLabel labelPlacement="top" value="2" control={<Radio />} label="2" />
+                <FormControlLabel labelPlacement="top" value="3" control={<Radio />} label="3" />
+                <FormControlLabel labelPlacement="top" value="4" control={<Radio />} label="4" />
+                <FormControlLabel labelPlacement="top" value="5" control={<Radio />} label="5" />
+                <FormControlLabel labelPlacement="top" value="6" control={<Radio />} label="6" />
+                <FormControlLabel labelPlacement="top" value="7" control={<Radio />} label="7" />
+                <FormControlLabel labelPlacement="top" value="8" control={<Radio />} label="8" />
+                <FormControlLabel labelPlacement="top" value="9" control={<Radio />} label="9" />
+                <FormControlLabel labelPlacement="top" value="10" control={<Radio />} label="10" />
+            </RadioGroup>
+            <h5>How many years of collective experience within the impact problem space?</h5>
+            <TextField id="outlined-basic" label="Number of years" variant="outlined" />
+            <h5>What percentage of your founding team is BIPOC (Black, Indigenous, Person of Color)?</h5>
+            <TextField id="outlined-basic" label="Percentage BIPOC" variant="outlined" />
+            <h5>What percentage of your founding team is female?</h5>
+            <TextField id="outlined-basic" label="Percentage female" variant="outlined" />
+            <h5>Select from the list of tangible competitive advantages that apply to your organization</h5>
+            {competitiveAdvantages.map(advantage => (
+                    <FormControlLabel control={<Checkbox />} label={advantage} />
+            ))}
+            <h5>How would you introduce your organization to a potential investor in a paragraph?</h5>
+            <TextField id="outlined-basic" label="Introduction" variant="outlined" />
+            <br/>
+            <br/><button>Submit</button>
+        </form>
+    )
+};
+
+export default SectionOneStory;

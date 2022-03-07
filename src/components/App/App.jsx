@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import SectionOneStory from '../Questionnaire/SectionOneStory';
 
 import './App.css';
 
@@ -94,6 +95,13 @@ function App() {
               // Otherwise, show the registration page
               <RegisterPage />
             }
+          </Route>
+
+          <Route
+            exact
+            path="/testing"
+          >
+            <SectionOneStory/>
           </Route>
 
           <Route
