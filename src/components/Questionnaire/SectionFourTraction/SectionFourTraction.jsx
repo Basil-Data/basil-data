@@ -36,7 +36,7 @@ function SectionFourTraction() {
                         defaultValue=""
                         row
                         name="radio-buttons-group"
-                        className='questionnaireForm'
+                        className='centerHelp'
                     >
                         <FormControlLabel labelPlacement="top" value="Concept/Research" control={<Radio />} label="Concept/Research" />
                         <FormControlLabel labelPlacement="top" value="Initial Prototype" control={<Radio />} label="Initial Prototype" />
@@ -54,7 +54,7 @@ function SectionFourTraction() {
                     defaultValue=""
                     row
                     name="radio-buttons-group"
-                    className='questionnaireForm'
+                    className='centerHelp'
                 >
 
                 <FormControlLabel labelPlacement="top" value="Bootstrap" control={<Radio />} label="Bootstrap" />
@@ -94,7 +94,7 @@ function SectionFourTraction() {
                     defaultValue=""
                     row
                     name="radio-buttons-group"
-                    className='questionnaireForm'
+                    className='centerHelp'
                 >
 
                 <FormControlLabel labelPlacement="top" value="Yes" control={<Radio />} label="Yes" />
