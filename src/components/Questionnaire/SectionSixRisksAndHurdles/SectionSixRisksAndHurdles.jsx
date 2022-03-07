@@ -1,11 +1,8 @@
 import react from 'react';
 import {useState} from 'react';
 
-
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -72,7 +69,7 @@ function SectionOneStory () {
             <p>We understand these risks may be new to you. If you have not yet considered 
                 any of these risks, please select "None at this stage"
             </p>
-            <Box className='questionnaireForm' sx={{ display: 'flex' }}>
+            <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
                     {anticipatedRisks.map(risk => (
                             <FormControlLabel control={<Checkbox />} label={risk} />
@@ -109,7 +106,7 @@ function SectionOneStory () {
             <p>The aim of this question is to gain a grasp of how your organization is dealing with/plans to 
                 deal with potential hurdles.
             </p>
-            <Box className='questionnaireForm' sx={{ display: 'flex' }}>
+            <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
                     {startupBarriers.map(barrier => (
                             <FormControlLabel control={<Checkbox />} label={barrier} />
@@ -151,7 +148,7 @@ function SectionOneStory () {
                 an understanding of external factors in your industry will help you to 
                 be more adept in from a business standpoint.
             </p>
-            <Box className='questionnaireForm' sx={{ display: 'flex' }}>
+            <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
                     {growthFactors.map(factor => (
                             <FormControlLabel control={<Checkbox />} label={factor} />
