@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
 
 function LoginForm() {
-  const [enterpriseName, setEnterpriseName] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector(store => store.errors);
   const dispatch = useDispatch();
@@ -11,11 +11,11 @@ function LoginForm() {
   const login = (event) => {
     event.preventDefault();
 
-    if (enterpriseName && password) {
+    if (username && password) {
       dispatch({
         type: 'LOGIN',
         payload: {
-          enterpriseName: enterpriseName,
+          username: username,
           password: password,
         },
       });
@@ -34,13 +34,13 @@ function LoginForm() {
       )}
       <div>
         <label htmlFor="username">
-          Enterprise Name:
+          Username:
           <input
             type="text"
-            name="enterpriseName"
+            name="username"
             required
-            value={enterpriseName}
-            onChange={(event) => setEnterpriseName(event.target.value)}
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
           />
         </label>
       </div>
