@@ -40,7 +40,6 @@ function RegisterForm() {
             type="text"
             name="enterpriseName"
             value={enterpriseName}
-            required
             onChange={(event) => setEnterpriseName(event.target.value)}
           />
         </label>
@@ -88,7 +87,6 @@ function RegisterForm() {
             type="text"
             name="logoUrl"
             value={logoUrl}
-            required
             onChange={(event) => setLogoUrl(event.target.value)}
           />
         </label>

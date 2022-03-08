@@ -1,5 +1,6 @@
 import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 
 function UserPage() {
@@ -7,8 +8,10 @@ function UserPage() {
   const user = useSelector((store) => store.user);
   return (
     <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
+      <h2>Welcome, {user.enterpriseName}!</h2>
+      <img src={user.logoUrl} height={300}/>
+      <p>To get started, click below!</p>
+      <Link to='/story'><button className="btn">Questionnaire</button></Link>
       <LogOutButton className="btn" />
     </div>
   );
