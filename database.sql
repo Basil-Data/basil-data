@@ -3,20 +3,18 @@
 -- You must use double quotes in every query that user is in:
 -- ex. SELECT * FROM "user";
 -- Otherwise you will have errors!
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
+
+-- database name: basil_data
 
 DROP TABLE "user";
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
-    "enterpriseName" VARCHAR (255) NOT NULL,
+    "enterpriseName" VARCHAR (255),
     "email" VARCHAR (255) NOT NULL,
-    "logoURL" VARCHAR (80),
+    "logoUrl" VARCHAR (80),
+    "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
-    "authLevel" VARCHAR (255)
+    "authLevel" VARCHAR (255) DEFAULT 'guest'
 );
 
 DROP TABLE "answers";
@@ -49,12 +47,12 @@ CREATE TABLE "answers" (
 	"fundingReceived3" INTEGER NOT NULL,
 	"customerGrowth3" INTEGER NOT NULL,
 	"generatingRevenue3" BOOLEAN NOT NULL,
-	"averageGrowth3" INTEGER NOT NULL,
-	"makingProfit3" BOOLEAN NOT NULL,
-	"netProfitMargin3" INTEGER NOT NULL,
-	"customerAcquisitionCost3" INTEGER NOT NULL,
-	"marketingExpenses3" INTEGER NOT NULL,
-	"newCustomers3" INTEGER NOT NULL,
+	"averageGrowth3" INTEGER DEFAULT NULL,
+	"makingProfit3" BOOLEAN DEFAULT NULL,
+	"netProfitMargin3" INTEGER DEFAULT NULL,
+	"customerAcquisitionCost3" INTEGER DEFAULT NULL,
+	"marketingExpenses3" INTEGER DEFAULT NULL,
+	"newCustomers3" INTEGER DEFAULT NULL,
 	"addressableMarket4" INTEGER NOT NULL,
 	"serviceableMarket4" INTEGER NOT NULL,
 	"obtainableMarket4" INTEGER NOT NULL,
@@ -141,7 +139,7 @@ VALUES
 	('Clean Water and Sanitation', 'public/images/SDGs/E-WEB-Goal-06.png')
 	('Affordable and Clean Energy', 'public/images/SDGs/E-WEB-Goal-07.png')
 	('Decent Work and Economic Growth', 'public/images/SDGs/E-WEB-Goal-08.png')
-	('Industry, Innvoation and Infrastructure', 'public/images/SDGs/E-WEB-Goal-09.png')
+	('Industry, Innovation and Infrastructure', 'public/images/SDGs/E-WEB-Goal-09.png')
 	('Reduced Inequality', 'public/images/SDGs/E-WEB-Goal-10.png')
 	('Sustainable Cities and Communities', 'public/images/SDGs/E-WEB-Goal-11.png')
 	('Responsible Consumption and Production', 'public/images/SDGs/E-WEB-Goal-12.png')

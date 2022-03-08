@@ -9,8 +9,10 @@ import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 
 import '../Questionnaire.css'
+import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
-function SectionOneStory () {
+
+function SectionSixRisksAndHurdles () {
 
     const anticipatedRisks = [
         'Evidence Risk - insufficient high-quality data exists', 
@@ -55,6 +57,8 @@ function SectionOneStory () {
     ];
 
     return (
+        <>
+        <QuestionnaireNav/>
         <form className='questionnaireForm'>
             <h1>Section 6 - Risks and Hurdles</h1>
             <p>Enhancing your Transparency by providing insight into current and future factors 
@@ -132,7 +136,7 @@ function SectionOneStory () {
                 >
                     <TextField 
                         id="outlined-basic" 
-                        label="Impact Risk Planning" 
+                        label="Planning for Startup Barriers" 
                         variant="outlined" 
                         multiline rows={5} 
                         fullWidth 
@@ -186,10 +190,11 @@ function SectionOneStory () {
                 </Box>
             </Grid>
 
-            <br/>
-            <br/><button>Submit</button>
+            <button>Submit</button>
+
         </form>
+        </>
     )
 };
 
-export default SectionOneStory;
+export default SectionSixRisksAndHurdles;
