@@ -15,8 +15,12 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 function SectionFourTraction() {
 
     const progressIndicators = [
-        'Bootstrap', 'Family/Friends', 'Seed', 'Series A', 'Series B',
-        'Series C'
+        'Leads Generated/Converted',
+        'Website Traffic Volume',
+        'Social Media Interaction',
+        'Cash Flow Forecasts',
+        'Customer Acquisition',
+        'None of the Above'
     ]
 
     const [generatedRevenue, setGeneratedRevenue] = useState(false);
@@ -81,8 +85,8 @@ function SectionFourTraction() {
                 </h5>
                 <Box>
                     <FormControl className='questionnaireForm centerHelp'>
-                        {progressIndicators.map(indicators => (
-                            <FormControlLabel control={<Checkbox />} label= {indicators} />
+                        {progressIndicators.map(name => (
+                            <FormControlLabel control={<Checkbox />} label= {name} />
                         ))}
 
                     </FormControl>
