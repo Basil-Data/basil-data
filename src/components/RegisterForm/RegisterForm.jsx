@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 function RegisterForm() {
   const [enterpriseName, setEnterpriseName] = useState('');
   const [email, setEmail] = useState('');
-  const [username, setUserame] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [logoUrl, setLogoUrl] = useState('');
   const errors = useSelector((store) => store.errors);
@@ -20,6 +20,7 @@ function RegisterForm() {
         email: email,
         username: username,
         password: password,
+        logoUrl: logoUrl
       },
     });
   }; // end registerUser
