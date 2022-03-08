@@ -139,7 +139,7 @@ VALUES
 	('Clean Water and Sanitation', 'public/images/SDGs/E-WEB-Goal-06.png')
 	('Affordable and Clean Energy', 'public/images/SDGs/E-WEB-Goal-07.png')
 	('Decent Work and Economic Growth', 'public/images/SDGs/E-WEB-Goal-08.png')
-	('Industry, Innvoation and Infrastructure', 'public/images/SDGs/E-WEB-Goal-09.png')
+	('Industry, Innovation and Infrastructure', 'public/images/SDGs/E-WEB-Goal-09.png')
 	('Reduced Inequality', 'public/images/SDGs/E-WEB-Goal-10.png')
 	('Sustainable Cities and Communities', 'public/images/SDGs/E-WEB-Goal-11.png')
 	('Responsible Consumption and Production', 'public/images/SDGs/E-WEB-Goal-12.png')
