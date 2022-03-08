@@ -57,7 +57,6 @@ function SectionTwoZeroHunger() {
                     <FormControlLabel control={<Checkbox />} label={'Region'}/>
                     <FormControlLabel control={<Checkbox />} label={'Ethnicity'}/>
                     <FormControlLabel control={<Checkbox />} label={'Sexual Preference'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Income'}/>
                 </FormControl>
                 <p> Where specifically is your current target population located?</p>
                 <p>In what regions, states or cities are you focusing your efforts today?</p>

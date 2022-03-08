@@ -55,7 +55,6 @@ function SectionTwoNoPoverty() {
                 <FormControlLabel control={<Checkbox />} label={'Region'}/>
                 <FormControlLabel control={<Checkbox />} label={'Ethnicity'}/>
                 <FormControlLabel control={<Checkbox />} label={'Sexual Preference'}/>
-                <FormControlLabel control={<Checkbox />} label={'Income'}/>
             </FormControl>
             <p> Where is your organization based?
             </p>

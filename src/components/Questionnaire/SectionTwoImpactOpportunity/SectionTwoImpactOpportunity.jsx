@@ -26,7 +26,7 @@ import {
 from '@mui/material';
 import SectionTwoNoPoverty from "../SectionTwoNoPoverty/SectionTwoNoPoverty";
 import SectionTwoZeroHunger from "../SectionTwoZeroHunger/SectionTwoZeroHunger";
-
+import SectionTwoHealth from "../SectionTwoHealth/SectionTwoHealth";
 
 function SectionTwoImpactOpportunity() {
 
@@ -151,8 +151,9 @@ function SectionTwoImpactOpportunity() {
             
                 </RadioGroup>
             </form>
-            <SectionTwoNoPoverty/>
+            <SectionTwoNoPoverty />
             <SectionTwoZeroHunger />
+            <SectionTwoHealth />
 
         </Box>
     )
