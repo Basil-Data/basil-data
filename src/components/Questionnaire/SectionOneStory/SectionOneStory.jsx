@@ -10,6 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link'
 
 import '../Questionnaire.css';
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
@@ -112,7 +113,10 @@ function SectionOneStory () {
                 </Box>
             </Grid>
             <br/>
-            <br/><button>Submit</button>
+            <br/>
+            <Link to=""></Link><button className="btn">Back</button>
+            <button className="btn">Submit</button>
+            <button className="btn">Next</button>
         </form>
         </>
     )

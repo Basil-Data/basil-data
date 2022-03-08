@@ -21,12 +21,25 @@ import {
 from '@mui/material';
 
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
+import SectionTwoImpactOpportunity from "./SectionTwoImpactOpportunity/SectionTwoImpactOpportunity";
 
 
 function SectionTwoImpact() {
+    const dispatch = useDispatch();
+    const history = useHistory();
 
+    useEffect(() => {
+        fetchImpactSectors();
+    }, [])
 
+    const impactSectors = useSelector(store => store.sectionTwoReducer);
+    console.log('impact sectors are:', impactSectors);
 
+    const fetchImpactSectors = () => {
+        dispatch({
+            type: 'FETCH_IMPACT_SECTORS'
+        });
+    }
 
     return(
         <>
@@ -116,6 +129,10 @@ function SectionTwoImpact() {
                 >
 
                 </TextField>
+                <SectionTwoImpactOpportunity />
+                <button className="btn">Back</button>
+                <button className="btn">Submit</button>
+                <button className="btn">Next</button>
             </form>
         </Box>
         </>

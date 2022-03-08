@@ -128,13 +128,6 @@ function App() {
               <SectionTwoImpact/>
           </Route>
 
-
-            <Route
-              exact
-              path="/impact-opportunity">
-                <SectionTwoImpactOpportunity/>
-              </Route>
-
           <Route
             exact
             path="/solution"
