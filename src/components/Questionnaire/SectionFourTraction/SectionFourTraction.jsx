@@ -9,6 +9,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
 import '../Questionnaire.css'
+import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 function SectionFourTraction() {
 
@@ -19,8 +20,9 @@ function SectionFourTraction() {
 
     return (
         <>
+            <QuestionnaireNav />
             <form className='questionnaireForm'>
-                <h1>Section Series A - Traction</h1>
+                <h1>Section 4 - Traction</h1>
                 <p>
                 Tell us about the momentum behind your organization!
 
@@ -34,7 +36,7 @@ function SectionFourTraction() {
                         defaultValue=""
                         row
                         name="radio-buttons-group"
-                        className='questionnaireForm'
+                        className='centerHelp'
                     >
                         <FormControlLabel labelPlacement="top" value="Concept/Research" control={<Radio />} label="Concept/Research" />
                         <FormControlLabel labelPlacement="top" value="Initial Prototype" control={<Radio />} label="Initial Prototype" />
@@ -52,7 +54,7 @@ function SectionFourTraction() {
                     defaultValue=""
                     row
                     name="radio-buttons-group"
-                    className='questionnaireForm'
+                    className='centerHelp'
                 >
 
                 <FormControlLabel labelPlacement="top" value="Bootstrap" control={<Radio />} label="Bootstrap" />
@@ -66,7 +68,7 @@ function SectionFourTraction() {
                     What indicators other than sales show your progress since inception?
                 </h5>
                 <Box>
-                    <FormControl className='questionnaireForm' sx={{ display: 'flex'}}>
+                    <FormControl className='questionnaireForm centerHelp'>
                         {investmentStage.map(stage => (
                             <FormControlLabel control={<Checkbox />} label= {stage} />
                         ))}
@@ -75,6 +77,7 @@ function SectionFourTraction() {
                 </Box>
 
                 <h5>How much have you received in funding to date?</h5>
+
                 <TextField id="outlined-basic" label="Short Answer Text" variant="outlined" />
 
                 <h5>
@@ -92,7 +95,7 @@ function SectionFourTraction() {
                     defaultValue=""
                     row
                     name="radio-buttons-group"
-                    className='questionnaireForm'
+                    className='centerHelp'
                 >
 
                 <FormControlLabel labelPlacement="top" value="Yes" control={<Radio />} label="Yes" />
@@ -100,17 +103,73 @@ function SectionFourTraction() {
 
                 </RadioGroup>
 
-
-
-
-
-
-
-
-
+                <h5>
+                    What is your average growth in monthly revenue over the past 6 months?
+                </h5>
                 
+                <TextField id="outlined-basic" label="Short Answer Text" variant="outlined" />
 
-            </form>
+                <h5>
+                    Are you making a profit?
+                </h5>
+
+                <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue=""
+                    row
+                    name="radio-buttons-group"
+                    className='centerHelp'
+                >
+
+                <FormControlLabel labelPlacement="top" value="Yes" control={<Radio />} label="Yes" />
+                <FormControlLabel labelPlacement="top" value="No" control={<Radio />} label="No" />
+
+                </RadioGroup>
+
+                {/* Questions below are generated if the user chooses yes. */}
+                
+                <h5>
+                    If yes, what is your net profit margin (%)?
+                </h5>
+
+                <TextField id="outlined-basic" label="Short Answer Text" variant="outlined" />
+
+                <h5>
+                    Customer Acquisition Cost (CAC)
+                </h5>
+                
+                <h6>
+                    In this brief section we want to gain more insight into the expenses associated with acquiring new customers in a given sales/marketing cycle. Please provide answers to the best of your ability. 
+
+                </h6>
+
+                <h5>
+                    What is your most recent Customer Acquisition Cost? (dollars)
+                </h5>
+
+                <h6>
+                    If known, provide below. If unknown, answer "N/A" and proceed to answer the further questions.
+                </h6>
+
+                <TextField id="outlined-basic" label="Short Answer Text" variant="outlined" />
+
+                <h5>
+                    What are your total marketing expenses during one sales/marketing cycle? (in dollars)
+                </h5>
+                
+                <h6>
+                    This includes campaigns, marketing salary expenses, overhead expenses, etc.
+                </h6>
+
+                <TextField id="outlined-basic" label="Short Answer Text" variant="outlined" />
+
+                <h5>
+                    How many new customers have you acquired in your most recent sales/marketing cycle?
+                </h5>
+
+                <TextField id="outlined-basic" label="Short Answer Text" variant="outlined" />
+                
+                </form>
         </>
     )
 }

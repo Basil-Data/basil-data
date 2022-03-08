@@ -12,7 +12,7 @@ import '../Questionnaire.css'
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 
-function SectionOneStory () {
+function SectionSixRisksAndHurdles () {
 
     const anticipatedRisks = [
         'Evidence Risk - insufficient high-quality data exists', 
@@ -136,7 +136,7 @@ function SectionOneStory () {
                 >
                     <TextField 
                         id="outlined-basic" 
-                        label="Impact Risk Planning" 
+                        label="Planning for Startup Barriers" 
                         variant="outlined" 
                         multiline rows={5} 
                         fullWidth 
@@ -190,11 +190,11 @@ function SectionOneStory () {
                 </Box>
             </Grid>
 
-            <br/>
-            <br/><button>Submit</button>
+            <button>Submit</button>
+
         </form>
         </>
     )
 };
 
-export default SectionOneStory;
+export default SectionSixRisksAndHurdles;
