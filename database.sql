@@ -60,7 +60,7 @@ CREATE TABLE "answers" (
 	"raisingFunds7" BOOLEAN NOT NULL,
 	"targetAmount7" INTEGER NOT NULL,
 	"nextSteps7" VARCHAR (1024) NOT NULL,
-	"understandProblem7" INTEGER NOT NULL,
+	"understandProblem7" INTEGER NOT NULL
 );
 
 DROP TABLE "competitiveAdvantages";
@@ -70,7 +70,7 @@ CREATE TABLE "competitiveAdvantages" (
 );
 INSERT INTO "competitiveAdvantages"
 	("advantages")
-VALULES
+VALUES
 	('Patent', 'Brand License', 'Regulation', 'Trademark', 'Copyrights', 'Software', 'Customer Lists', 'Personal Accreditation');
 
 DROP TABLE "impactSectors";
