@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 
@@ -45,8 +45,65 @@ import SectionTwoPartnerships from "../SectionTwoPartnerships/SectionTwoPartners
 
 
 function SectionTwoImpactOpportunity() {
+    const [sdgPrimary, setSdgPrimary] = useState('');
+    console.log(sdgPrimary);
 
-    
+    let component;
+    switch(sdgPrimary) {
+        case "No Poverty":
+            component = <SectionTwoNoPoverty />
+            break;
+        case "Zero Hunger":
+            component = <SectionTwoZeroHunger />
+            break;
+        case "Good Health and Well-being":
+            component = <SectionTwoHealth />
+            break;
+        case "Quality Education":
+            component = <SectionTwoEducation />
+            break;
+        case "Gender Equality":
+            component = <SectionTwoGenderEquality />
+            break;
+        case "Clean Water and Sanitation":
+            component = <SectionTwoCleanWater />
+            break;
+        case "Affordable and Clean Energy":
+            component = <SectionTwoCleanEnergy />
+            break;
+        case "Decent Work and Economic Growth":
+            component = <SectionTwoWorkGrowth />
+            break;
+        case "Industry, Innovation and Infrastructure":
+            component = <SectionTwoInfrastructure />
+            break;
+        case "Reduced Inequalities":
+            component = <SectionTwoReducingInequality />
+            break;
+        case "Sustainable Cities and Communities":
+            component = <SectionTwoSustainableCities />
+            break;
+        case "Responsible Consumption and Production":
+            component = <SectionTwoResponsibleConsumption />
+            break;
+        case "Climate Action":
+            component = <SectionTwoClimateAction />
+            break;
+        case "Life Below Water":
+            component = <SectionTwoLifeBelowWater />
+            break;
+        case "Life on Land":
+            component = <SectionTwoLifeOnLand />
+            break;
+        case "Peace, Justice and Strong Institutions":
+            component = <SectionTwoPeaceJustice />
+            break;
+        case "Partnerships for the Goals":
+            component = <SectionTwoPartnerships />
+            break;
+
+
+    }
 
     return(
         <Box className="questionnaireForm">
@@ -61,7 +118,10 @@ function SectionTwoImpactOpportunity() {
                 </FormControl>
                 <br></br>
                 <p>Which Sustainable Development Goal best aligns best with your impact objective?</p>
-                <RadioGroup className="centerHelp">
+                <RadioGroup 
+                    className="centerHelp"
+                    onChange={event => setSdgPrimary(event.target.value)}
+                >
                     <FormControlLabel 
                         control={<Radio/>} 
                         labelPlacement="end"
@@ -167,24 +227,9 @@ function SectionTwoImpactOpportunity() {
             
                 </RadioGroup>
             </form>
-            <SectionTwoNoPoverty />
-            <SectionTwoZeroHunger />
-            <SectionTwoHealth />
-            <SectionTwoEducation />
-            <SectionTwoGenderEquality />
-            <SectionTwoCleanWater />
-            <SectionTwoCleanEnergy />
-            <SectionTwoWorkGrowth />
-            <SectionTwoInfrastructure />
-            <SectionTwoReducingInequality />
-            <SectionTwoSustainableCities />
-            <SectionTwoResponsibleConsumption />
-            <SectionTwoClimateAction />
-            <SectionTwoLifeBelowWater />
-            <SectionTwoLifeOnLand />
-            <SectionTwoPeaceJustice />
-            <SectionTwoPartnerships />
-
+            <div>
+                {component}
+            </div>
         </Box>
     )
 
