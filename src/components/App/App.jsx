@@ -26,6 +26,7 @@ import SectionTwoImpact from '../Questionnaire/SectionTwoImpact/SectionTwoImpact
 import SectionTwoImpactOpportunity from '../Questionnaire/SectionTwoImpactOpportunity/SectionTwoImpactOpportunity';
 import SectionThreeSolution from '../Questionnaire/SectionThreeSolution/SectionThreeSolution';
 import SectionFourTraction from '../Questionnaire/SectionFourTraction/SectionFourTraction';
+import SectionFiveMarket from '../Questionnaire/SectionFiveMarket/SectionFiveMarket';
 import SectionSixRisksAndHurdles from '../Questionnaire/SectionSixRisksAndHurdles/SectionSixRisksAndHurdles';
 import SectionSevenNextSteps from '../Questionnaire/SectionSevenNextSteps/SectionSevenNextSteps';
 
@@ -43,6 +44,7 @@ function App() {
   }, [dispatch]);
 
   return (
+    
     <Router>
       <div>
         <Nav />
@@ -147,7 +149,11 @@ function App() {
               <SectionFourTraction/>
           </Route>
 
-
+          <Route
+            exact
+            path="/market">
+              <SectionFiveMarket />
+          </Route>
 
           <Route
             exact
