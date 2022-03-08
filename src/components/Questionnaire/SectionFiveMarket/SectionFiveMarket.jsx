@@ -7,6 +7,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Grid from '@mui/material/Grid';
 
 import '../Questionnaire.css'
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
@@ -45,8 +46,30 @@ function SectionFiveMarket() {
                 <h5>
                     Tell us a little about why this market size is realistic
                 </h5>
-                <TextField id="outlined-basic" label="Long Answer Text" variant="outlined" multiline rows={5} fullWidth />
-
+                
+                <Grid
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justifyContent="center"
+                >
+                <Box
+                    sx={{
+                        width: 600,
+                        maxWidth: '100%',
+                    }}
+                >
+                <TextField 
+                    id="outlined-basic" 
+                    label="Long Answer Text" 
+                    variant="outlined" 
+                    multiline rows={5} 
+                    fullWidth 
+                />
+                </Box>
+                </Grid>
+            
 
 
             </form>
