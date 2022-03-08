@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 
 import '../Questionnaire.css';
-import SectionTwoNoHunger from "../SectionTwoNoPoverty/SectionTwoNoPoverty";
 
 import { 
     Table, 
@@ -24,27 +23,90 @@ import {
     Checkbox,
 } 
 from '@mui/material';
-import SectionTwoNoPoverty from "../SectionTwoNoPoverty/SectionTwoNoPoverty";
-import SectionTwoZeroHunger from "../SectionTwoZeroHunger/SectionTwoZeroHunger";
 
+function SectionTwoNoPoverty() {
 
-function SectionTwoImpactOpportunity() {
-
-    
 
     return(
         <Box className="questionnaireForm">
-            <form>
-                <h1><b>Section 2 - Impact Opportunity</b></h1>
-                <p>Select the characteristics that support the efficacy of your solution</p>
-                <FormControl>
-                    <FormControlLabel control={<Checkbox />} label={'Research-backed'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Proven outside of Target Market'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Internal Measurement shows effectiveness'}/>
-                    <FormControlLabel control={<Checkbox />} label={'None of the above - Innovative approach'}/>
-                </FormControl>
-                <br></br>
-                <p>Which Sustainable Development Goal best aligns best with your impact objective?</p>
+            <img src="images/SDGs/E-WEB-Goal-01.png" width="200px" height="200px"/>
+            <h1><b>SDG - No Poverty</b></h1>
+            <p>What Indicators do you use/intend to use to track change?</p>
+            <FormControl>
+                    <FormControlLabel control={<Checkbox />} label={'Poverty Levels'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Change In Poverty'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Access To Resources'}/>
+            </FormControl>
+            <p> Please elaborate on the progress shown in the indicators that you use
+            </p>
+            <TextField
+                label="Please Elaborate"
+                className="elaborateOnProgress"
+                variant="outlined"
+                type="text"
+                placeholder="Please Elaborate"
+            ></TextField>
+            <p>How do you segment your stakeholders?</p>
+            <FormControl>
+                <FormControlLabel control={<Checkbox />} label={'Age'}/>
+                <FormControlLabel control={<Checkbox />} label={'Gender / Gender Identity'}/>
+                <FormControlLabel control={<Checkbox />} label={'Race'}/>
+                <FormControlLabel control={<Checkbox />} label={'Income'}/>
+                <FormControlLabel control={<Checkbox />} label={'Region'}/>
+                <FormControlLabel control={<Checkbox />} label={'Ethnicity'}/>
+                <FormControlLabel control={<Checkbox />} label={'Sexual Preference'}/>
+                <FormControlLabel control={<Checkbox />} label={'Income'}/>
+            </FormControl>
+            <p> Where is your organization based?
+            </p>
+            <TextField
+                label="Location"
+                className="location"
+                variant="outlined"
+                type="text"
+                placeholder="Location"
+            ></TextField>
+            <p> Where specifically is your impact targeted?
+            </p>
+            <p>In what regions, states or cities are you focusing your efforts today?</p>
+            <TextField
+                label="Impact target"
+                className="impactTarget"
+                variant="outlined"
+                type="text"
+                placeholder="Impact Target"
+            ></TextField>
+            <p> What are the specific changes you would like to see for your stakeholder?
+            </p>
+            <TextField
+                label="Specific Changes"
+                className="specificChanges"
+                variant="outlined"
+                type="text"
+                placeholder="Specific Changes"
+            ></TextField>
+            <p>Have you measured the outcomes for your primary beneficiaries?</p>
+            <RadioGroup className="centerHelp">
+                <FormControlLabel 
+                    control={<Radio/>} 
+                    labelPlacement="end"
+                    value="Yes"
+                    label="Yes"
+                />
+                <FormControlLabel 
+                    control={<Radio/>} 
+                    labelPlacement="end"
+                    value="No"
+                    label="No"
+                />
+                <FormControlLabel 
+                    control={<Radio/>} 
+                    labelPlacement="end"
+                    value="Sometimes - not consistently"
+                    label="Sometimes - not consistently"
+                />
+            </RadioGroup>
+            <p>If applicable, please select any secondary Sustainable Development Goals that align with your organization's mission. </p>
                 <RadioGroup className="centerHelp">
                     <FormControlLabel 
                         control={<Radio/>} 
@@ -150,14 +212,9 @@ function SectionTwoImpactOpportunity() {
                     />
             
                 </RadioGroup>
-            </form>
-            <SectionTwoNoPoverty/>
-            <SectionTwoZeroHunger />
-
         </Box>
-    )
 
+    )
 }
 
-
-export default SectionTwoImpactOpportunity;
+export default SectionTwoNoPoverty;
