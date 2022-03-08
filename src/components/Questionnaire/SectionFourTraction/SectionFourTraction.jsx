@@ -19,6 +19,8 @@ function SectionFourTraction() {
         'Series C'
     ]
 
+    const [generatedRevenue, setGeneratedRevenue] = useState(false);
+
     return (
         <>
             <QuestionnaireNav />
@@ -128,13 +130,17 @@ function SectionFourTraction() {
                     row
                     name="radio-buttons-group"
                     className='centerHelp'
+                    onChange={(evt) => setGeneratedRevenue(!generatedRevenue)}
                 >
 
                 <FormControlLabel labelPlacement="top" value="Yes" control={<Radio />} label="Yes" />
                 <FormControlLabel labelPlacement="top" value="No" control={<Radio />} label="No" />
-
+                    
+                   
+                
                 </RadioGroup>
-
+                 {/* Questions below are generated if the user chooses yes. */}
+                {generatedRevenue ? <>
                 <h5>
                     What is your average growth in monthly revenue over the past 6 months?
                 </h5>
@@ -155,6 +161,7 @@ function SectionFourTraction() {
                     row
                     name="radio-buttons-group"
                     className='centerHelp'
+                    
                 >
 
                 <FormControlLabel labelPlacement="top" value="Yes" control={<Radio />} label="Yes" />
@@ -162,7 +169,7 @@ function SectionFourTraction() {
 
                 </RadioGroup>
 
-                {/* Questions below are generated if the user chooses yes. */}
+                
                 
                 <h5>
                     If yes, what is your net profit margin (%)?
@@ -208,6 +215,10 @@ function SectionFourTraction() {
                 </h5>
 
                 <TextField id="outlined-basic" label="New Customers" variant="outlined" />
+
+                </> : <> </>
+
+}
                 
                 </form>
         </>
