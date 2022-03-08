@@ -12,7 +12,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 
 import '../Questionnaire.css'
-import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
+import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav'
 
 function SectionSevenNextSteps () {
 
@@ -76,15 +76,19 @@ function SectionSevenNextSteps () {
     ];
 
     return (
-    <form className='questionnaireForm'>
-        <h1>Section 7 - Next Steps</h1>
-        <p>
+        <>
+        <QuestionnaireNav/>
+
+        <h1 className='questionnaireForm'>Section 7 - Next Steps</h1>
+        <p className='questionnaireForm'>
             Where do you go from here?
         </p>
-        <p>In this section you have the opportunity to detail 
+        <p className='questionnaireForm'>In this section you have the opportunity to detail 
             the amount of funding you require, how you plan to 
             use it, and what your next priorities are. 
         </p>
+
+    <form className='questionnaireForm'>
 
         <h5>Are you currently raising funds?</h5>
         <RadioGroup
@@ -221,6 +225,7 @@ function SectionSevenNextSteps () {
         </RadioGroup>
 
     </form>
+    </>
     )
 };
 
