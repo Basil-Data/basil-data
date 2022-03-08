@@ -31,7 +31,6 @@ import SectionSixRisksAndHurdles from '../Questionnaire/SectionSixRisksAndHurdle
 import SectionSevenNextSteps from '../Questionnaire/SectionSevenNextSteps/SectionSevenNextSteps';
 
 
-
 import './App.css';
 
 function App() {
@@ -123,7 +122,7 @@ function App() {
           </Route>
 
             <Route
-             exact
+              exact
             path="/impact"
           >
               <SectionTwoImpact/>

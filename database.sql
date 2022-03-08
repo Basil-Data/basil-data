@@ -3,20 +3,18 @@
 -- You must use double quotes in every query that user is in:
 -- ex. SELECT * FROM "user";
 -- Otherwise you will have errors!
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
+
+-- database name: basil_data
 
 DROP TABLE "user";
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
-    "enterpriseName" VARCHAR (255) NOT NULL,
+    "enterpriseName" VARCHAR (255),
     "email" VARCHAR (255) NOT NULL,
-    "logoURL" VARCHAR (80),
+    "logoUrl" VARCHAR (80),
+    "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
-    "authLevel" VARCHAR (255)
+    "authLevel" VARCHAR (255) DEFAULT 'guest'
 );
 
 DROP TABLE "answers";
