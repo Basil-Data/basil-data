@@ -30,18 +30,33 @@ function SectionFiveMarket() {
                 <h5>
                     What is the size of the Total Addressable Market (TAM) in US dollars?
                 </h5>
-                <TextField id="outlined-basic" label="Short Answer Text" variant="outlined" />
+
+                <h6>
+                    This is the total market demand for your product.
+                </h6>
+
+                <TextField id="outlined-basic" label="TAM $" variant="outlined" />
 
                 <h5>
                     What is the size of the Serviceable Available Market (SAM) in US dollars?
                 </h5>
-                <TextField id="outlined-basic" label="Short Answer Text" variant="outlined" />
+
+                <h6>
+                    This is the portion of the market you can reach based on your business Market
+                    and target consumer group.
+                </h6>
+                <TextField id="outlined-basic" label="SAM $" variant="outlined" />
 
                 <h5>
                     What is the size of the market realistically obtainable to your organization (SOM)
                     in US dollars?
                 </h5>
-                <TextField id="outlined-basic" label="Short Answer Text" variant="outlined" />
+
+                <h6>
+                    This is the portion of your Serviceable Available Market that you can realistically capture at this point.
+                </h6>
+
+                <TextField id="outlined-basic" label="SOM $" variant="outlined" />
 
                 <h5>
                     Tell us a little about why this market size is realistic
