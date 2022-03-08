@@ -7,6 +7,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Grid from '@mui/material/Grid';
 
 import '../Questionnaire.css'
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
@@ -76,6 +77,33 @@ function SectionFourTraction() {
                     </FormControl>
                 </Box>
 
+                <h5>
+                Tell us more about the progress shown from each of these indicators and/or any other unique traction you may have gained.
+                </h5>
+
+                <Grid
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justifyContent="center"
+                >
+                <Box
+                    sx={{
+                        width: 600,
+                        maxWidth: '100%',
+                    }}
+                >
+                <TextField 
+                    id="outlined-basic" 
+                    label="Long Answer Text" 
+                    variant="outlined" 
+                    multiline rows={5} 
+                    fullWidth 
+                />
+                </Box>
+                </Grid>
+
                 <h5>How much have you received in funding to date?</h5>
 
                 <TextField id="outlined-basic" label="Short Answer Text" variant="outlined" />
@@ -83,6 +111,10 @@ function SectionFourTraction() {
                 <h5>
                     What is your customer growth rate over the last 6 months?
                 </h5>
+
+                <h6>
+                    Please provide a percentage
+                </h6>
 
                 <TextField id="outlined-basic" label="Growth Percentage" variant="outlined" />
 
@@ -106,8 +138,12 @@ function SectionFourTraction() {
                 <h5>
                     What is your average growth in monthly revenue over the past 6 months?
                 </h5>
+
+                <h6>
+                    Please provide a percentage
+                </h6>
                 
-                <TextField id="outlined-basic" label="Short Answer Text" variant="outlined" />
+                <TextField id="outlined-basic" label="Percentage" variant="outlined" />
 
                 <h5>
                     Are you making a profit?
@@ -132,7 +168,11 @@ function SectionFourTraction() {
                     If yes, what is your net profit margin (%)?
                 </h5>
 
-                <TextField id="outlined-basic" label="Short Answer Text" variant="outlined" />
+                <h6>
+                    (Total Revenue - Total Costs)/ Total Revenue
+                </h6>
+
+                <TextField id="outlined-basic" label="Net Profit Margin %" variant="outlined" />
 
                 <h5>
                     Customer Acquisition Cost (CAC)
@@ -151,7 +191,7 @@ function SectionFourTraction() {
                     If known, provide below. If unknown, answer "N/A" and proceed to answer the further questions.
                 </h6>
 
-                <TextField id="outlined-basic" label="Short Answer Text" variant="outlined" />
+                <TextField id="outlined-basic" label="CAC $" variant="outlined" />
 
                 <h5>
                     What are your total marketing expenses during one sales/marketing cycle? (in dollars)
@@ -161,13 +201,13 @@ function SectionFourTraction() {
                     This includes campaigns, marketing salary expenses, overhead expenses, etc.
                 </h6>
 
-                <TextField id="outlined-basic" label="Short Answer Text" variant="outlined" />
+                <TextField id="outlined-basic" label="Marketing Expenses" variant="outlined" />
 
                 <h5>
                     How many new customers have you acquired in your most recent sales/marketing cycle?
                 </h5>
 
-                <TextField id="outlined-basic" label="Short Answer Text" variant="outlined" />
+                <TextField id="outlined-basic" label="New Customers" variant="outlined" />
                 
                 </form>
         </>
