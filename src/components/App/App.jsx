@@ -125,9 +125,9 @@ function App() {
             <Route
              exact
             path="/impact"
-            >
+          >
               <SectionTwoImpact/>
-            </Route>
+          </Route>
 
 
             <Route
