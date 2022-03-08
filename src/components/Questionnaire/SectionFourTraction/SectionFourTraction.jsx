@@ -14,7 +14,7 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 function SectionFourTraction() {
 
-    const investmentStage = [
+    const progressIndicators = [
         'Bootstrap', 'Family/Friends', 'Seed', 'Series A', 'Series B',
         'Series C'
     ]
@@ -60,6 +60,8 @@ function SectionFourTraction() {
                     className='centerHelp'
                 >
 
+                
+
                 <FormControlLabel labelPlacement="top" value="Bootstrap" control={<Radio />} label="Bootstrap" />
                 <FormControlLabel labelPlacement="top" value="Family/Friends" control={<Radio />} label="Family/Friends" />
                 <FormControlLabel labelPlacement="top" value="Seed" control={<Radio />} label="Seed" />
@@ -67,13 +69,20 @@ function SectionFourTraction() {
                 <FormControlLabel labelPlacement="top" value="Series B" control={<Radio />} label="Series B" />
                 <FormControlLabel labelPlacement="top" value="Series C" control={<Radio />} label="Series C" />
                 </RadioGroup>
+
+                <h5>
+                    How much have you received in funding to date?
+                </h5>
+
+                <TextField id="outlined-basic" label="Amount Funded $" variant="outlined" />
+
                 <h5>
                     What indicators other than sales show your progress since inception?
                 </h5>
                 <Box>
                     <FormControl className='questionnaireForm centerHelp'>
-                        {investmentStage.map(stage => (
-                            <FormControlLabel control={<Checkbox />} label= {stage} />
+                        {progressIndicators.map(indicators => (
+                            <FormControlLabel control={<Checkbox />} label= {indicators} />
                         ))}
 
                     </FormControl>
@@ -106,10 +115,6 @@ function SectionFourTraction() {
                 </Box>
                 </Grid>
 
-                <h5>How much have you received in funding to date?</h5>
-
-                <TextField id="outlined-basic" label="Short Answer Text" variant="outlined" />
-
                 <h5>
                     What is your customer growth rate over the last 6 months?
                 </h5>
@@ -130,11 +135,10 @@ function SectionFourTraction() {
                     row
                     name="radio-buttons-group"
                     className='centerHelp'
-                    onChange={(evt) => setGeneratedRevenue(!generatedRevenue)}
                 >
 
-                <FormControlLabel labelPlacement="top" value="Yes" control={<Radio />} label="Yes" />
-                <FormControlLabel labelPlacement="top" value="No" control={<Radio />} label="No" />
+                <FormControlLabel labelPlacement="top" control={<Radio />} label="Yes" onClick={(evt) => setGeneratedRevenue(true)}/>
+                <FormControlLabel labelPlacement="top" control={<Radio />} label="No" onClick={(evt) => setGeneratedRevenue(false)}/>
                     
                    
                 
