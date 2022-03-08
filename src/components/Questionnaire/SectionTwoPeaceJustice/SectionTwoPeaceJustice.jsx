@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 
 import '../Questionnaire.css';
-import SectionTwoNoHunger from "../SectionTwoNoPoverty/SectionTwoNoPoverty";
 
 import { 
     Table, 
@@ -24,43 +23,88 @@ import {
     Checkbox,
 } 
 from '@mui/material';
-import SectionTwoNoPoverty from "../SectionTwoNoPoverty/SectionTwoNoPoverty";
-import SectionTwoZeroHunger from "../SectionTwoZeroHunger/SectionTwoZeroHunger";
-import SectionTwoHealth from "../SectionTwoHealth/SectionTwoHealth";
-import SectionTwoEducation from "../SectionTwoEducation/SectionTwoEducation";
-import SectionTwoGenderEquality from "../SectionTwoGenderEquality/SectionTwoGenderEquality";
-import SectionTwoCleanWater from "../SectionTwoCleanWater/SectionTwoCleanWater";
-import SectionTwoCleanEnergy from "../SectionTwoCleanEnergy/SectionTwoCleanEnergy";
-import SectionTwoWorkGrowth from "../SectionTwoWorkGrowth/SectionTwoWorkGrowth";
-import SectionTwoInfrastructure from "../SectionTwoInfrastructure/SectionTwoInfrastructure";
-import SectionTwoReducingInequality from "../SectionTwoReducingInequality/SectionTwoReducingInequality";
-import SectionTwoSustainableCities from "../SectionTwoSustainableCities/SectionTwoSustainableCities";
-import SectionTwoResponsibleConsumption from "../SectionTwoResponsibleConsumption/SectionTwoResponsibleConsumption";
-import SectionTwoClimateAction from "../SectionTwoClimateAction/SectionTwoClimateAction";
-import SectionTwoLifeBelowWater from "../SectionTwoLifeBelowWater/SectionTwoLifeBelowWater";
-import SectionTwoLifeOnLand from "../SectionTwoLifeOnLand/SectionTwoLifeOnLand";
-import SectionTwoPeaceJustice from "../SectionTwoPeaceJustice/SectionTwoPeaceJustice";
-import SectionTwoPartnerships from "../SectionTwoPartnerships/SectionTwoPartnerships";
 
+function SectionTwoPeaceJustice() {
 
-
-function SectionTwoImpactOpportunity() {
-
-    
 
     return(
         <Box className="questionnaireForm">
             <form>
-                <h1><b>Section 2 - Impact Opportunity</b></h1>
-                <p>Select the characteristics that support the efficacy of your solution</p>
+                <img src="images/SDGs/E-WEB-Goal-16.png" width="200px" height="200px"/>
+                <h1><b>SDG - Peace, Justice & Strong Institutions</b></h1>
+                <p>What Indicators do you use/intend to use to track change?</p>
                 <FormControl>
-                    <FormControlLabel control={<Checkbox />} label={'Research-backed'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Proven outside of Target Market'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Internal Measurement shows effectiveness'}/>
-                    <FormControlLabel control={<Checkbox />} label={'None of the above - Innovative approach'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Intentional homicide rates'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Conflict related deaths'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Violence rates'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Proportion who feel safe walking'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Child abuse rates'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Human trafficking proportion'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Sexual abuse rates'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Reporting violence by victim'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Unsentenced Detainees'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Seized illicit arms'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Paid bribes'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Government expenditures'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Voting Rights'}/>
                 </FormControl>
-                <br></br>
-                <p>Which Sustainable Development Goal best aligns best with your impact objective?</p>
+                <p> Please elaborate on the progress shown in the indicators that you use
+                </p>
+                <TextField
+                    label="Please Elaborate"
+                    variant="outlined"
+                    type="text"
+                    placeholder="Please Elaborate"
+                ></TextField>
+                <p>How do you segment your stakeholders?</p>
+                <FormControl>
+                    <FormControlLabel control={<Checkbox />} label={'Age'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Gender / Gender Identity'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Race'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Income'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Region'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Ethnicity'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Sexual Preference'}/>
+                </FormControl>
+                <p> Where specifically is your current target population located?</p>
+                <p>In what regions, states or cities are you focusing your efforts today?</p>
+                <TextField
+                    label="Location"
+                    variant="outlined"
+                    type="text"
+                    placeholder="Location"
+                ></TextField>
+                <p> What are the specific changes you would like to see for your stakeholder?
+                </p>
+                <TextField
+                    label="Specific Changes"
+                    className="specificChanges"
+                    variant="outlined"
+                    type="text"
+                    placeholder="Specific Changes"
+                ></TextField>
+                <p>Have you measured your outcomes?</p>
+                <RadioGroup className="centerHelp">
+                    <FormControlLabel 
+                        control={<Radio/>} 
+                        labelPlacement="end"
+                        value="Yes"
+                        label="Yes"
+                    />
+                    <FormControlLabel 
+                        control={<Radio/>} 
+                        labelPlacement="end"
+                        value="No"
+                        label="No"
+                    />
+                    <FormControlLabel 
+                        control={<Radio/>} 
+                        labelPlacement="end"
+                        value="Sometimes - not consistently"
+                        label="Sometimes - not consistently"
+                    />
+                </RadioGroup>
+                <p>If applicable, please select any secondary Sustainable Development Goals that align with your organization's mission. </p>
                 <RadioGroup className="centerHelp">
                     <FormControlLabel 
                         control={<Radio/>} 
@@ -166,29 +210,11 @@ function SectionTwoImpactOpportunity() {
                     />
             
                 </RadioGroup>
+                <Button variant='contained'>Submit</Button>
             </form>
-            <SectionTwoNoPoverty />
-            <SectionTwoZeroHunger />
-            <SectionTwoHealth />
-            <SectionTwoEducation />
-            <SectionTwoGenderEquality />
-            <SectionTwoCleanWater />
-            <SectionTwoCleanEnergy />
-            <SectionTwoWorkGrowth />
-            <SectionTwoInfrastructure />
-            <SectionTwoReducingInequality />
-            <SectionTwoSustainableCities />
-            <SectionTwoResponsibleConsumption />
-            <SectionTwoClimateAction />
-            <SectionTwoLifeBelowWater />
-            <SectionTwoLifeOnLand />
-            <SectionTwoPeaceJustice />
-            <SectionTwoPartnerships />
-
         </Box>
-    )
 
+    )
 }
 
-
-export default SectionTwoImpactOpportunity;
+export default SectionTwoPeaceJustice;
