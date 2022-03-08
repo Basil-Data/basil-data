@@ -27,6 +27,22 @@ from '@mui/material';
 import SectionTwoNoPoverty from "../SectionTwoNoPoverty/SectionTwoNoPoverty";
 import SectionTwoZeroHunger from "../SectionTwoZeroHunger/SectionTwoZeroHunger";
 import SectionTwoHealth from "../SectionTwoHealth/SectionTwoHealth";
+import SectionTwoEducation from "../SectionTwoEducation/SectionTwoEducation";
+import SectionTwoGenderEquality from "../SectionTwoGenderEquality/SectionTwoGenderEquality";
+import SectionTwoCleanWater from "../SectionTwoCleanWater/SectionTwoCleanWater";
+import SectionTwoCleanEnergy from "../SectionTwoCleanEnergy/SectionTwoCleanEnergy";
+import SectionTwoWorkGrowth from "../SectionTwoWorkGrowth/SectionTwoWorkGrowth";
+import SectionTwoInfrastructure from "../SectionTwoInfrastructure/SectionTwoInfrastructure";
+import SectionTwoReducingInequality from "../SectionTwoReducingInequality/SectionTwoReducingInequality";
+import SectionTwoSustainableCities from "../SectionTwoSustainableCities/SectionTwoSustainableCities";
+import SectionTwoResponsibleConsumption from "../SectionTwoResponsibleConsumption/SectionTwoResponsibleConsumption";
+import SectionTwoClimateAction from "../SectionTwoClimateAction/SectionTwoClimateAction";
+import SectionTwoLifeBelowWater from "../SectionTwoLifeBelowWater/SectionTwoLifeBelowWater";
+import SectionTwoLifeOnLand from "../SectionTwoLifeOnLand/SectionTwoLifeOnLand";
+import SectionTwoPeaceJustice from "../SectionTwoPeaceJustice/SectionTwoPeaceJustice";
+import SectionTwoPartnerships from "../SectionTwoPartnerships/SectionTwoPartnerships";
+
+
 
 function SectionTwoImpactOpportunity() {
 
@@ -154,6 +170,20 @@ function SectionTwoImpactOpportunity() {
             <SectionTwoNoPoverty />
             <SectionTwoZeroHunger />
             <SectionTwoHealth />
+            <SectionTwoEducation />
+            <SectionTwoGenderEquality />
+            <SectionTwoCleanWater />
+            <SectionTwoCleanEnergy />
+            <SectionTwoWorkGrowth />
+            <SectionTwoInfrastructure />
+            <SectionTwoReducingInequality />
+            <SectionTwoSustainableCities />
+            <SectionTwoResponsibleConsumption />
+            <SectionTwoClimateAction />
+            <SectionTwoLifeBelowWater />
+            <SectionTwoLifeOnLand />
+            <SectionTwoPeaceJustice />
+            <SectionTwoPartnerships />
 
         </Box>
     )
