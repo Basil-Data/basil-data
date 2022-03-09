@@ -1,10 +1,10 @@
-const section6 = (state = [], action) => {
+const section7 = (state = [], action) => {
     switch (action.type) {
-        case 'SET_RISKS_AND_HURDLES':
+        case 'SET_NEXT_STEPS':
             return action.payload;
         default:
             return state;
     }
 };
 
-export default section6;
+export default section7;

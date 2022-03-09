@@ -17,43 +17,15 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 function SectionSixRisksAndHurdles () {
 
     const dispatch = useDispatch();
-
-    const anticipatedRisks = useSelector((store) => store.section6);
+    // store.section6 contains all of the selections for
+    // this page of the questionnaire
+    const section6 = useSelector((store) => store.section6);
 
     useEffect(() => {
         dispatch({
-            type: "FETCH_ANTICIPATED_RISKS",
+            type: "FETCH_RISKS_AND_HURDLES",
         });
     }, []);
-
-    const startupBarriers = [
-        'Capital Requirements', 
-        'Technical Knowledge Base', 
-        'Customer Cost of Switching', 
-        'Educating Your Market', 
-        'Access to Materials', 
-        'Access to Distribution Channels', 
-        'Patents', 
-        'Government Regulation',
-        'Economies of Scale',
-        'Product Differentiation',
-        'Other'
-    ];
-
-    const growthFactors = [
-        'Seasonal trends', 
-        'Close proximity to industry fluctuations', 
-        'Commodity price/availability fluctuations', 
-        'Economic cycle', 
-        'Competition', 
-        'Laws and Regulations', 
-        'Customer Taste & Preferences', 
-        'Natural Disasters',
-        'Technological Evolution',
-        'International Markets & Foreign Exchange Markets',
-        'Political/Social Momentum',
-        'Other'
-    ];
 
     return (
         <>
@@ -74,7 +46,7 @@ function SectionSixRisksAndHurdles () {
             </p>
             <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
-                    {anticipatedRisks?.map(risk => (
+                    {section6.results1?.map(risk => (
                             <FormControlLabel key={risk.id} control={<Checkbox />} label={risk.risk} />
                     ))}
                 </FormControl>
@@ -111,8 +83,8 @@ function SectionSixRisksAndHurdles () {
             </p>
             <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
-                    {startupBarriers.map(barrier => (
-                            <FormControlLabel control={<Checkbox />} label={barrier} />
+                    {section6.results2?.map(barrier => (
+                            <FormControlLabel key={barrier.id} control={<Checkbox />} label={barrier.barrier} />
                     ))}
                 </FormControl>
             </Box>
@@ -153,8 +125,8 @@ function SectionSixRisksAndHurdles () {
             </p>
             <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
-                    {growthFactors.map(factor => (
-                            <FormControlLabel control={<Checkbox />} label={factor} />
+                    {section6.results3?.map(factor => (
+                            <FormControlLabel key={factor.id} control={<Checkbox />} label={factor.factor} />
                     ))}
                 </FormControl>
             </Box>
