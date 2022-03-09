@@ -110,17 +110,15 @@ function SectionTwoImpactOpportunity() {
 
     return(
         <Box className="questionnaireForm">
-            <form>
                 <h1><b>Impact Opportunity</b></h1>
                 <p>Select the characteristics that support the efficacy of your solution</p>
                 <FormControl>
                     {supportiveCharacteristics?.map(characteristic => {
                         return(
-                            <FormControlLabel control={<Checkbox />} label={characteristic.characteristic}/>
+                            <FormControlLabel key={characteristic.id} control={<Checkbox />} label={characteristic.characteristic}/>
                         )
                     })}
                 </FormControl>
-                <br></br>
                 <p>Which Sustainable Development Goal best aligns best with your impact objective?</p>
                 <RadioGroup 
                     className="centerHelp"
@@ -133,11 +131,11 @@ function SectionTwoImpactOpportunity() {
                             labelPlacement="end"
                             value={goal.sdg}
                             label={goal.sdg}
+                            key={goal.id}
                             />
                         )
                     })}
                 </RadioGroup>
-            </form>
             <div>
                 {component}
             </div>
