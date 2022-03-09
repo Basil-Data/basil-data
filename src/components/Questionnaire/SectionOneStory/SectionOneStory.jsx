@@ -1,6 +1,7 @@
 import react from 'react';
-import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 // MUI
 import Box from '@mui/material/Box';
@@ -18,11 +19,16 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 function SectionOneStory () {
     const history = useHistory();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_SECTION_ONE' })
+    }, []);
 
     const competitiveAdvantages = [
         'Patent', 'Brand License', 'Regulation', 'Trademark', 'Copyrights', 
         'Software', 'Customer Lists', 'Personal accreditation'
-    ]
+    ];
 
     return (
         <>
