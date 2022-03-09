@@ -24,25 +24,28 @@ import {
 } 
 from '@mui/material';
 
-function LifeBelowWater() {
+function ReducedInequality() {
 
     const sdg = useSelector(store => store.section2.sdg);
+    const stakeholderSegments = useSelector(store => store.section2.stakeholderSegments);
 
     return(
         <Box className="questionnaireForm">
-                <img src="images/SDGs/E-WEB-Goal-14.png" width="200px" height="200px"/>
-                <h1><b>SDG - Life Below Water</b></h1>
+                <img src="images/SDGs/E-WEB-Goal-10.png" width="200px" height="200px"/>
+                <h1><b>SDG - Reduced Inequalities</b></h1>
                 <p>What Indicators do you use/intend to use to track change?</p>
                 <FormControl>
-                    <FormControlLabel control={<Checkbox />} label={'Plastic debris density'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Eutrophication rates'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Marine Acidity levels'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Fish stocks'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Protected areas'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Government policy implementation'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Sustainable fisheries proportion'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Budget allocation'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Protection policies'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Income growth'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Household expenditures'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Low-income population (below 50% of median)'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Discrimination rates'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Labour share of GDP'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Fiscal policy measures'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Financial wellness indicators'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Migration rates'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Migration policies'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Refugee proportions'}/>
+                    <FormControlLabel control={<Checkbox />} label={'Access to resources'}/>
                 </FormControl>
                 <p> Please elaborate on the progress shown in the indicators that you use
                 </p>
@@ -52,7 +55,13 @@ function LifeBelowWater() {
                     type="text"
                     placeholder="Please Elaborate"
                 ></TextField>
-                <p>Where specifically is your current target ecosystem?</p>
+                <p>How do you segment your stakeholders?</p>
+                <FormControl>
+                    {stakeholderSegments?.map(segment => (
+                        <FormControlLabel control={<Checkbox />} label={segment.segment} key={segment.id}/>
+                    ))}  
+                </FormControl>
+                <p> Where specifically is your current target population located?</p>
                 <p>In what regions, states or cities are you focusing your efforts today?</p>
                 <TextField
                     label="Location"
@@ -60,7 +69,7 @@ function LifeBelowWater() {
                     type="text"
                     placeholder="Location"
                 ></TextField>
-                <p>What are the specific changes you would like to see for your target ecosystem?
+                <p> What are the specific changes you would like to see for your stakeholder?
                 </p>
                 <TextField
                     label="Specific Changes"
@@ -101,10 +110,11 @@ function LifeBelowWater() {
                             key={sdg.id}
                         />
                         ))}
+            
                 </RadioGroup>
         </Box>
 
     )
 }
 
-export default LifeBelowWater;
+export default ReducedInequality;
