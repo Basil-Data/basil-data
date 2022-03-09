@@ -14,13 +14,21 @@ router.get('/', async (req, res) => {
 
     let sqlText = `
         SELECT *
-        FROM "competitiveAdvantages"
+        FROM "operatingSector"
+    `;
+
+    let sqlText2 = `
+        SELECT *
+        FROM "painPoints"
     `;
 
     const results1 = await pool.query(sqlText);
+    const results2 = await pool.query(sqlText2);
+
 
     const results = {
-        competitiveAdvantages: results1.rows,
+        operatingSector: results1.rows,
+        painPoints: results2.rows
     };
 
     res.send(results);
