@@ -32,7 +32,7 @@ import CleanWaterAndSanitation from "../SDGs/6_CleanWaterAndSanitation/CleanWate
 import AffordableAndCleanEnergy from "../SDGs/7_AffordableAndCleanEnergy/AffordableAndCleanEnergy";
 import DecentWorkAndEconomicGrowth from "../SDGs/8_DecentWorkAndEconomicGrowth/DecentWorkAndEconomicGrowth";
 import IndustryInnovationAndInfrastructure from "../SDGs/9_IndustryInnovationAndInfrastructure/IndustryInnovationAndInfrastructure";
-import ReducingInequality from "../SDGs/10_ReducingInequality/ReducingInequality";
+import ReducedInequality from "../SDGs/10_ReducedInequality/ReducedInequality";
 import SustainableCitiesAndCommunities from "../SDGs/11_SustainableCitiesAndCommunities/SustainableCitiesAndCommunities";
 import ResponsibleConsumptionAndProduction from "../SDGs/12_ResponsibleConsumptionAndProduction/ResponsibleConsumptionAndProduction";
 import ClimateAction from "../SDGs/13_ClimateAction/ClimateAction";
@@ -81,7 +81,7 @@ function SectionTwoImpactOpportunity() {
             component = <IndustryInnovationAndInfrastructure />
             break;
         case "Reduced Inequality":
-            component = <ReducingInequality />
+            component = <ReducedInequality />
             break;
         case "Sustainable Cities and Communities":
             component = <SustainableCitiesAndCommunities />
