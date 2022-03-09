@@ -22,11 +22,49 @@ function SectionSevenNextSteps () {
     // this page of the questionnaire
     const section7 = useSelector((store) => store.section7);
 
+    const [fundraisingSelection, setFundraisingSelection] = useState('');
+    const [targetAmount, setTargetAmount] = useState('');
+    const [investmentSelection, setInvestmentSelection] = useState([]);
+    const [fundingUse, setFundingUse] = useState([]);
+    const [nextSteps, setNextSteps] = useState('');
+    const [wayAhead, setWayAhead] = useState([]);
+    const [societalImpact, setSocietalImpact] = useState('');
+    const [environmentalImpact, setEnvironmentalImpact] = useState('');
+    const [economicImpact, setEconomicImpact] = useState('');
+    const [understanding, setUnderstanding] = useState('');
+
     useEffect(() => {
         dispatch({
             type: "FETCH_NEXT_STEPS",
         });
     }, []);
+
+    const handleInvestmentType = (event) => {
+        const index = investmentSelection.indexOf(event.target.value)
+        if (index === -1) {
+            setInvestmentSelection([...investmentSelection, event.target.value])
+        } else {
+            setInvestmentSelection(investmentSelection.filter((investmentSelection) => investmentSelection !== event.target.value))
+        }
+    }
+
+    const handleFundraising = (event) => {
+        const index = fundingUse.indexOf(event.target.value)
+        if (index === -1) {
+            setFundingUse([...fundingUse, event.target.value])
+        } else {
+            setFundingUse(fundingUse.filter((fundingUse) => fundingUse !== event.target.value))
+        }
+    }
+
+    const handleWayAhead = (event) => {
+        const index = fundingUse.indexOf(event.target.value)
+        if (index === -1) {
+            setWayAhead([...wayAhead, event.target.value])
+        } else {
+            setWayAhead(wayAhead.filter((wayAhead) => wayAhead !== event.target.value))
+        }
+    }
 
     return (
         <>
@@ -45,25 +83,49 @@ function SectionSevenNextSteps () {
 
         <h5>Are you currently raising funds?</h5>
         <RadioGroup
-            aria-labelledby="raising-funds"
-            defaultValue=""
+            aria-labelledby = "raising-funds"
+            defaultValue = ""
             row
-            name="radio-buttons-group"
-            className='centerHelp'
+            name = "radio-buttons-group"
+            className = 'centerHelp'
+            value = {fundraisingSelection}
+            onChange = {(event) =>
+                { setFundraisingSelection(event.target.value) }
+            }
         >
             <FormControlLabel labelPlacement="top" value="yes" control={<Radio />} label="Yes" />
             <FormControlLabel labelPlacement="top" value="no" control={<Radio />} label="No" />
             <FormControlLabel labelPlacement="top" value="maybe" control={<Radio />} label="Maybe" />
         </RadioGroup>
 
-        <h5>If Yes, what is your target amount? (in dollars)?</h5>
-        <TextField id="outlined-basic" label="Fundraising Target" variant="outlined" />
+        {fundraisingSelection === 'yes' &&
+            <>
+            <h5>What is your target amount? (in dollars)?</h5>
+            <TextField 
+                id="outlined-basic" 
+                label="Fundraising Target" 
+                variant="outlined"
+                value={targetAmount}
+                onChange={(event) =>
+                    { setTargetAmount(event.target.value) }
+                }
+            />
+            </>
+        }
 
         <h5>What type of investment vehicle are you looking for?</h5>
         <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
             <FormControl className='questionnaireForm' sx={{ m : 3}}>
                 {section7.results1?.map(type => (
-                        <FormControlLabel key={type.id} control={<Checkbox />} label={type.investmentVehicle} />
+                        <FormControlLabel 
+                            key={type.id} 
+                            control={
+                                <Checkbox
+                                    value={type.id}
+                                    onChange={handleInvestmentType}
+                                />} 
+                            label={type.investmentVehicle} 
+                        />
                 ))}
             </FormControl>
         </Box>
@@ -72,7 +134,16 @@ function SectionSevenNextSteps () {
         <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
             <FormControl className='questionnaireForm' sx={{ m : 3}}>
                 {section7.results2?.map(use => (
-                        <FormControlLabel key={use.id} control={<Checkbox />} label={use.fundingUse} />
+                        <FormControlLabel 
+                            key={use.id} 
+                            control={
+                                <Checkbox
+                                    value={use.id}
+                                    onChange={handleFundraising}
+                                />} 
+                            label={use.fundingUse}
+                            
+                        />
                 ))}
             </FormControl>
         </Box>
@@ -96,7 +167,11 @@ function SectionSevenNextSteps () {
                     label="Next Steps" 
                     variant="outlined" 
                     multiline rows={5} 
-                    fullWidth 
+                    fullWidth
+                    value={nextSteps}
+                    onChange={(event) =>
+                        { setNextSteps(event.target.value) }
+                    }
                 />
             </Box>
         </Grid>
@@ -105,7 +180,16 @@ function SectionSevenNextSteps () {
         <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
             <FormControl className='questionnaireForm' sx={{ m : 3}}>
                 {section7.results3?.map(approach => (
-                        <FormControlLabel key={approach.id} control={<Checkbox />} label={approach.assistance} />
+                        <FormControlLabel 
+                            key={approach.id} 
+                            control={
+                                <Checkbox
+                                    value={approach.id}
+                                    onChange={handleWayAhead} 
+                                />
+                            } 
+                            label={approach.assistance} 
+                        />
                 ))}
             </FormControl>
         </Box>
@@ -123,13 +207,23 @@ function SectionSevenNextSteps () {
             aria-labelledby="social-impact"
             defaultValue=""
             name="radio-buttons-group"
+            value = {societalImpact}
+            onChange = {(event) =>
+                { setSocietalImpact(event.target.value) }
+            }
         >
             {section7.results4?.map(impact => (
-                        <FormControlLabel key={impact.id} control={<Radio />} label={impact.impact} className='centerHelp' />
-                ))}
+                <FormControlLabel 
+                    key={impact.id}
+                    value={impact.id}
+                    control={<Radio />} 
+                    label={impact.impact} 
+                    className='centerHelp' 
+                />
+            ))}
         </RadioGroup>
 
-        <h5>Classify your impact on Society.</h5>
+        <h5>Classify your impact on the environment.</h5>
         <p>This question refers to how your organization avoids of the depletion of natural 
             resources in order to maintain an ecological balance.
         </p>
@@ -137,10 +231,19 @@ function SectionSevenNextSteps () {
             aria-labelledby="environmental-impact"
             defaultValue=""
             name="radio-buttons-group"
+            value = {environmentalImpact}
+            onChange = {(event) =>
+                { setEnvironmentalImpact(event.target.value) }
+            }
         >
             {section7.results5?.map(impact => (
-                        <FormControlLabel key={impact.id} control={<Radio />} label={impact.impact} className='centerHelp' />
-                ))}
+                <FormControlLabel 
+                    key={impact.id} 
+                    control={<Radio />} 
+                    label={impact.impact} 
+                    className='centerHelp' 
+                />
+            ))}
         </RadioGroup>
 
         <h5>Classify your impact on economic development.</h5>
@@ -151,10 +254,19 @@ function SectionSevenNextSteps () {
             aria-labelledby="economic-impact"
             defaultValue=""
             name="radio-buttons-group"
+            value = {economicImpact}
+            onChange = {(event) =>
+                { setEconomicImpact(event.target.value) }
+            }
         >
             {section7.results6?.map(impact => (
-                        <FormControlLabel key={impact.id} control={<Radio />} label={impact.impact} className='centerHelp' />
-                ))}
+                <FormControlLabel 
+                    key={impact.id} 
+                    control={<Radio />} 
+                    label={impact.impact} 
+                    className='centerHelp' 
+                />
+            ))}
         </RadioGroup>
 
         <h5>How well do you understand the problem?</h5>
@@ -164,6 +276,10 @@ function SectionSevenNextSteps () {
             row
             name="radio-buttons-group"
             className='centerHelp'
+            value = {understanding}
+            onChange = {(event) =>
+                { setUnderstanding(event.target.value) }
+            }
         >
             <FormControlLabel labelPlacement="top" value="1" control={<Radio />} label="1" />
             <FormControlLabel labelPlacement="top" value="2" control={<Radio />} label="2" />
