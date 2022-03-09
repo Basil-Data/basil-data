@@ -1,6 +1,7 @@
-import react from 'react';
-import {useState} from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+// MUI Imports
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
@@ -8,24 +9,22 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 
+// Internal Imports
 import '../Questionnaire.css'
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 
 function SectionSixRisksAndHurdles () {
 
-    const anticipatedRisks = [
-        'Evidence Risk - insufficient high-quality data exists', 
-        'External Risk - external factors disrupt ability to deliver impact', 
-        'Stakeholder Participation Risk - misunderstanding of stakeholder experiences/expectations', 
-        'Drop-off Risk - the positive impact doesn\'t endure or the negative impact is no longer mitigated', 
-        'Efficiency Risk - impact could be achieved with fewer resources or at a lower cost', 
-        'Execution Risk - activities are not delivered as planned and do not result in desired outcomes', 
-        'Alignment Risk - impact is not aligned into the enterprise model', 
-        'Endurance Risk - required activities are not delivered for a long enough period',
-        'Unexpected Impact Risk - significant unexpected impact is experienced by stakeholders',
-        'None at this stage'
-    ];
+    const dispatch = useDispatch();
+
+    const anticipatedRisks = useSelector((store) => store.section6);
+
+    useEffect(() => {
+        dispatch({
+            type: "FETCH_ANTICIPATED_RISKS",
+        });
+    }, []);
 
     const startupBarriers = [
         'Capital Requirements', 
@@ -75,8 +74,8 @@ function SectionSixRisksAndHurdles () {
             </p>
             <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
-                    {anticipatedRisks.map(risk => (
-                            <FormControlLabel control={<Checkbox />} label={risk} />
+                    {anticipatedRisks?.map(risk => (
+                            <FormControlLabel key={risk.id} control={<Checkbox />} label={risk.risk} />
                     ))}
                 </FormControl>
             </Box>

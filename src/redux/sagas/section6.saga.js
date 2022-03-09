@@ -5,7 +5,7 @@ import axios from 'axios';
 function* fetchAnticipatedRisks() {
 
     try {
-        let risks = yield axios.get('/api/risksAndHurdles');
+        let risks = yield axios.get('/api/section6');
         yield put({
             type: 'SET_ANTICIPATED_RISKS',
             payload: risks.data
