@@ -1,5 +1,6 @@
 import react from 'react';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 // MUI
 import Box from '@mui/material/Box';
@@ -10,12 +11,13 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link'
+import Link from '@mui/material/Link';
 
 import '../Questionnaire.css';
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 function SectionOneStory () {
+    const history = useHistory();
 
     const competitiveAdvantages = [
         'Patent', 'Brand License', 'Regulation', 'Trademark', 'Copyrights', 
@@ -114,9 +116,8 @@ function SectionOneStory () {
             </Grid>
             <br/>
             <br/>
-            <Link to=""></Link><button className="btn">Back</button>
             <button className="btn">Submit</button>
-            <button className="btn">Next</button>
+            <Link to="/impact"><button className="btn">Next</button></Link>
         </form>
         </>
     )
