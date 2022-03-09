@@ -223,6 +223,9 @@ function SectionSevenNextSteps () {
             <FormControlLabel labelPlacement="top" value="9" control={<Radio />} label="9" />
             <FormControlLabel labelPlacement="top" value="10" control={<Radio />} label="10" />
         </RadioGroup>
+        <button className="btn">Back</button>
+        <button className="btn">Submit</button>
+        <button className="btn">Next</button>
 
     </form>
     </>

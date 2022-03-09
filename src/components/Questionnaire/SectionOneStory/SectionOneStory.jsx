@@ -1,5 +1,7 @@
 import react from 'react';
-import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 // MUI
 import Box from '@mui/material/Box';
@@ -10,16 +12,23 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
 
 import '../Questionnaire.css';
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 function SectionOneStory () {
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_SECTION_ONE' })
+    }, []);
 
     const competitiveAdvantages = [
         'Patent', 'Brand License', 'Regulation', 'Trademark', 'Copyrights', 
         'Software', 'Customer Lists', 'Personal accreditation'
-    ]
+    ];
 
     return (
         <>
@@ -112,7 +121,9 @@ function SectionOneStory () {
                 </Box>
             </Grid>
             <br/>
-            <br/><button>Submit</button>
+            <br/>
+            <button className="btn">Submit</button>
+            <Link to="/impact"><button className="btn">Next</button></Link>
         </form>
         </>
     )

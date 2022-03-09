@@ -210,7 +210,6 @@ function PeaceJusticeAndStrongInstitutions() {
                     />
             
                 </RadioGroup>
-                <Button variant='contained'>Submit</Button>
             </form>
         </Box>
 

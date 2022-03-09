@@ -189,7 +189,9 @@ function SectionSixRisksAndHurdles () {
                 </Box>
             </Grid>
 
-            <button>Submit</button>
+            <button className="btn">Back</button>
+            <button className="btn">Submit</button>
+            <button className="btn">Next</button>
 
         </form>
         </>

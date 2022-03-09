@@ -202,7 +202,6 @@ function ZeroHunger() {
                     />
             
                 </RadioGroup>
-                <Button variant='contained'>Submit</Button>
             </form>
         </Box>
     )

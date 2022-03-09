@@ -2,6 +2,8 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
+import section1Saga from './section1.saga';
+import sectionTwoSaga from './section2.saga';
 import section6Saga from './section6.saga';
 
 // rootSaga is the primary saga.
@@ -16,6 +18,8 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
+    section1Saga(), // Section one's sagas for going to the router
+    sectionTwoSaga(),
     section6Saga(),
   ]);
 }

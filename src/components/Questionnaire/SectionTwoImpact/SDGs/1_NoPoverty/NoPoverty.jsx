@@ -211,7 +211,6 @@ function NoPoverty() {
                     />
             
                 </RadioGroup>
-                <Button variant='contained'>Submit</Button>
         </Box>
 
     )

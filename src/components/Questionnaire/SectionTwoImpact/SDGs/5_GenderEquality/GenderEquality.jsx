@@ -205,7 +205,6 @@ function GenderEquality() {
                     />
             
                 </RadioGroup>
-                <Button variant='contained'>Submit</Button>
             </form>
         </Box>
 
