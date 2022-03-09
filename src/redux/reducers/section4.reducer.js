@@ -1,6 +1,6 @@
 const section4Reducer = (state = [], action) => {
     switch (action.type) {
-        case 'SET_ANSWERS':
+        case 'SET_SECTION_TRACTION':
             return action.payload;
         }
     
