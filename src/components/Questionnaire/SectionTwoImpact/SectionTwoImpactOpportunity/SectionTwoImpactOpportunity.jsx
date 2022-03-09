@@ -47,7 +47,6 @@ function SectionTwoImpactOpportunity() {
     const [sdgPrimary, setSdgPrimary] = useState('');
     console.log(sdgPrimary);
 
-    const stakeholderSegments = useSelector(store => store.section2.stakeholderSegments);
     const sdg = useSelector(store => store.section2.sdg);
     const supportiveCharacteristics = useSelector(store => store.section2.supportiveCharacteristics);
 
@@ -116,7 +115,11 @@ function SectionTwoImpactOpportunity() {
                 <FormControl>
                     {supportiveCharacteristics?.map(characteristic => {
                         return(
-                            <FormControlLabel control={<Checkbox />} label={characteristic.characteristic}/>
+                            <FormControlLabel 
+                                key={characteristic.id}
+                                control={<Checkbox />} 
+                                label={characteristic.characteristic}
+                            />
                         )
                     })}
                 </FormControl>
@@ -129,6 +132,7 @@ function SectionTwoImpactOpportunity() {
                     {sdg?.map(goal => {
                         return(
                             <FormControlLabel 
+                            key={goal.id}
                             control={<Radio/>} 
                             labelPlacement="end"
                             value={goal.sdg}
