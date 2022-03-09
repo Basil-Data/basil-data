@@ -1,5 +1,6 @@
 import react from 'react';
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 // MUI
 import Box from '@mui/material/Box';
@@ -14,51 +15,14 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 
 function SectionThreeSolution () {
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log('in use effect', painPointList)
-    }, [painPointList]);
+        dispatch({ type: 'FETCH_SECTION_THREE'})
+    }, []);
 
-    const [painPointList, setPainPointList] = useState([]);
-
-    const operatingSector = [
-    'Consumer Goods',
-	'Extractives & Minerals Processing',
-	'Financials',
-	'Food & Beverage',
-	'Health Care',
-	'Infrastructure',
-	'Renewable Resources & Alternative Energy',
-	'Resource Transformation',
-	'Services',
-	'Technology & Communications',
-	'Transportation'
-    ];
-
-    const painPoints = [
-        { name: 'Financial - areas where your customers are spending too much money', status: false},
-        { name: 'Productivity - areas where your customer wants to be more efficient or productive', status: false},
-        { name: 'Process - areas where you could provide more convenient processes for your customers', status: false},
-        { name: 'Support - areas where customers are not receiving the support they need', status: false}
-    ];
-
-
-
-    const handleCheck = (event) => {
-        console.log('box has been checked', event)
-
-        for (let point of painPoints) {
-            if (event === point.name)
-        setPainPointList({
-            ...painPoints,
-            name: event,
-            status: true
-        });
-        }
-
-
-        console.log(painPointList)
-    }
+    const painPoints = useSelector(store => store.section3.painPoints);
+    const operatingSector = useSelector(store => store.section3.operatingSector);
 
     return (
         <>
@@ -70,11 +34,11 @@ function SectionThreeSolution () {
                 <h5>What sector do you operate in?</h5>
                 <Box className='centerHelp' sx={{ display: 'flex' }}>
                     <FormControl sx={{ m : 3}}>
-                        {operatingSector.map(sector => (
+                        {operatingSector?.map(sector => (
                                 <FormControlLabel 
                                     control={<Checkbox />} 
-                                    label={sector}
-                                    key={sector} />
+                                    label={sector.sector}
+                                    key={sector.sector} />
                         ))}
                     </FormControl>
                 </Box>
@@ -148,12 +112,11 @@ function SectionThreeSolution () {
                 <h5>What customer pain points does your product/service seek to solve?</h5>
                 <Box className='centerHelp' sx={{ display: 'flex' }}>
                     <FormControl sx={{ m : 3}}>
-                        {painPoints.map(point => (
+                        {painPoints?.map(point => (
                                 <FormControlLabel 
                                     control={<Checkbox />} 
-                                    onChange={() => handleCheck(point)}
-                                    label={point.name}
-                                    key={point.name} />
+                                    label={point.painPoint}
+                                    key={point.painPoint} />
                         ))}
                     </FormControl>
                 </Box>
