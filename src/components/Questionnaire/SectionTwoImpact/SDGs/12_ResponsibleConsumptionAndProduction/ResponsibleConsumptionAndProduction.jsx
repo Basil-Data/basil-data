@@ -30,7 +30,6 @@ function ResponsibleConsumptionAndProduction() {
 
     return(
         <Box className="questionnaireForm">
-            <form>
                 <img src="images/SDGs/E-WEB-Goal-12.png" width="200px" height="200px"/>
                 <h1><b>SDG - Responsible Consumption & Production</b></h1>
                 <p>What Indicators do you use/intend to use to track change?</p>
@@ -106,7 +105,6 @@ function ResponsibleConsumptionAndProduction() {
                         ))}
             
                 </RadioGroup>
-            </form>
         </Box>
 
     )
