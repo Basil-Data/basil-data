@@ -1,5 +1,8 @@
 import react from 'react';
 import {useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
@@ -13,6 +16,20 @@ import '../Questionnaire.css'
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 function SectionFiveMarket() {
+
+    const dispatch = useDispatch();
+    const response = useSelector((store) => store.section5EnterpriseReducer)
+
+    console.log('response is', response);
+
+    const [TAM, setTAM] = useState('');
+    const [SAM, setSAM] = useState('');
+    const [SOM, setSOM] = useState('');
+    const [marketReason, setMarketReason] = useState('');
+
+    function handleSubmit () {
+
+    }
 
     return (
         <>
@@ -35,7 +52,10 @@ function SectionFiveMarket() {
                     This is the total market demand for your product.
                 </h6>
 
-                <TextField id="outlined-basic" label="TAM $" variant="outlined" />
+                <TextField id="outlined-basic" 
+                            label="TAM $" 
+                            variant="outlined"
+                            onChange={(evt => setTAM(evt.target.value))}  />
 
                 <h5>
                     What is the size of the Serviceable Available Market (SAM) in US dollars?
@@ -45,7 +65,7 @@ function SectionFiveMarket() {
                     This is the portion of the market you can reach based on your business Market
                     and target consumer group.
                 </h6>
-                <TextField id="outlined-basic" label="SAM $" variant="outlined" />
+                <TextField id="outlined-basic" label="SAM $" variant="outlined" onChange={(evt => setSAM(evt.target.value))} />
 
                 <h5>
                     What is the size of the market realistically obtainable to your organization (SOM)
@@ -56,7 +76,7 @@ function SectionFiveMarket() {
                     This is the portion of your Serviceable Available Market that you can realistically capture at this point.
                 </h6>
 
-                <TextField id="outlined-basic" label="SOM $" variant="outlined" />
+                <TextField id="outlined-basic" label="SOM $" variant="outlined" onChange={(evt => setSOM(evt.target.value))} />
 
                 <h5>
                     Tell us a little about why this market size is realistic
@@ -81,13 +101,23 @@ function SectionFiveMarket() {
                     variant="outlined" 
                     multiline rows={5} 
                     fullWidth 
+                    onChange={(evt => setMarketReason(evt.target.value))}
                 />
                 </Box>
                 </Grid>
-            
-                <button className="btn">Back</button>
+                
+                <br />
+                <br />
+
+                <Link to="/traction">
+                    <button className="btn">Back</button>
+                </Link>
+                
                 <button className="btn">Submit</button>
-                <button className="btn">Next</button>
+                
+                <Link to="/risks-and-hurdles">
+                    <button className="btn">Next</button>
+                </Link>
 
             </form>
 

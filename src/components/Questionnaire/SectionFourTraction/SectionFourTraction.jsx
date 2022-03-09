@@ -25,7 +25,7 @@ function SectionFourTraction() {
     }, []);
 
  
-
+    
     const [generatedRevenue, setGeneratedRevenue] = useState(false);
 
     return (
