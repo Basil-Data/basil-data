@@ -73,6 +73,13 @@ INSERT INTO "competitiveAdvantages"
 VALUES
 	('Patent'), ('Brand License'), ('Regulation'), ('Trademark'), ('Copyrights'), ('Software'), ('Customer Lists'), ('Personal Accreditation');
 
+DROP TABLE "competitiveAdvantagesJunction";
+CREATE TABLE "competitiveAdvantagesJunction" (
+	"id" SERIAL PRIMARY KEY,
+	"enterpriseId" INTEGER,
+	"advantageId" INTEGER
+);
+
 DROP TABLE "impactSectors";
 CREATE TABLE "impactSectors" (
 	"id" SERIAL PRIMARY KEY,

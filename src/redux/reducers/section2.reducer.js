@@ -1,4 +1,4 @@
-const sectionTwoReducer = (state = [], action) => {
+const section2 = (state = [], action) => {
     switch (action.type) {
         case 'SET_IMPACT_SECTORS':
             return action.payload;
@@ -6,4 +6,4 @@ const sectionTwoReducer = (state = [], action) => {
     return state;
 }
 
-export default sectionTwoReducer;
+export default section2;
