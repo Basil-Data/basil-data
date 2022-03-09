@@ -1,5 +1,5 @@
 import react from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -12,13 +12,11 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 
 import '../Questionnaire.css';
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 function SectionOneStory () {
-    const history = useHistory();
     const dispatch = useDispatch();
 
     const competitiveAdvantages = useSelector(store => store.section1.competitiveAdvantages);
@@ -26,6 +24,7 @@ function SectionOneStory () {
     useEffect(() => {
         dispatch({ type: 'FETCH_SECTION_ONE' })
     }, []);
+
 
 
     return (

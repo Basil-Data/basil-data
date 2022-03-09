@@ -1,6 +1,8 @@
 import react from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, Link } from 'react-router-dom';
+
 
 // MUI
 import Box from '@mui/material/Box';
@@ -23,6 +25,8 @@ function SectionThreeSolution () {
 
     const painPoints = useSelector(store => store.section3.painPoints);
     const operatingSector = useSelector(store => store.section3.operatingSector);
+
+  
 
     return (
         <>
@@ -144,9 +148,9 @@ function SectionThreeSolution () {
                 </Grid>
                 <br/>
                 <br/>
-                <button className="btn">Back</button>
+                <Link to="/impact"><button className="btn">Back</button></Link>
                 <button className="btn">Submit</button>
-                <button className="btn">Next</button>
+                <Link to="/traction"><button className="btn">Next</button></Link>
             </form>
         </>
     )
