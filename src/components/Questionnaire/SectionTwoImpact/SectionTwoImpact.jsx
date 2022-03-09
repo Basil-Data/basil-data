@@ -33,7 +33,9 @@ function SectionTwoImpact() {
         fetchImpactSectors();
     }, [])
 
-    const impactSectors = useSelector(store => store.section2);
+    const impactSectors = useSelector(store => store.section2.impactSectors);
+
+
     console.log('impact sectors are:', impactSectors);
 
     const fetchImpactSectors = () => {
@@ -77,7 +79,7 @@ function SectionTwoImpact() {
                     placeholder="IMPACT Sector Category"
                 >
                     <MenuItem></MenuItem>
-                    {impactSectors.map(sector => {
+                    {impactSectors?.map(sector => {
                         return(
                             <MenuItem key={sector.id}>{sector.impactSector}</MenuItem>
                         )
