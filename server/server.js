@@ -26,7 +26,7 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
-app.use('/api/traction', section4Router);
+app.use('/api/section4', section4Router);
 app.use('/api/sectionTwo', sectionTwoRouter);
 app.use('/api/section1', section1Router);
 
