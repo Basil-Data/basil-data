@@ -9,6 +9,7 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+const sectionTwoRouter = require('./routes/sectionTwo.router');
 const section1Router = require('./routes/section1.router');
 const section3Router = require('./routes/section3.router');
 
@@ -25,11 +26,13 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/api/sectionTwo', sectionTwoRouter);
 app.use('/api/section1', section1Router);
 app.use('/api/section3', section3Router);
 
 // Serve static files
 app.use(express.static('build'));
+
 
 // App Set //
 const PORT = process.env.PORT || 5000;

@@ -3,6 +3,7 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import section1Saga from './section1.saga';
+import sectionTwoSaga from './section2.saga';
 import section3Saga from './section3.saga';
 
 // rootSaga is the primary saga.
@@ -18,6 +19,7 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     section1Saga(), // Section one's sagas for going to the router
+    sectionTwoSaga(), // Section two's sagas for going to the router
     section3Saga(), // Section three's sagas for going to the router
   ]);
 }
