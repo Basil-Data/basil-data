@@ -5,10 +5,10 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   
   let sqlText = `
-    SELECT * FROM "developmentStage
+    SELECT * FROM "developmentStage"
   `;
 
   let sqlText2 =`
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
   `;
 
   let sqlText3 =`
-    SELECT * FROM "progressIndicators
+    SELECT * FROM "progressIndicators"
   `;
 
   const results1 = await pool.query(sqlText);

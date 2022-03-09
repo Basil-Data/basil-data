@@ -1,7 +1,5 @@
-import react from 'react';
-import {useState} from 'react';
-
-import { useSelector } from 'react-redux'
+import { React, useState, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -16,6 +14,14 @@ import '../Questionnaire.css'
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 function SectionFourTraction() {
+    const dispatch = useDispatch();
+    const section4 = useSelector((store) => store.section4);
+
+    useEffect(() => {
+        dispatch({
+            type: "FETCH_SECTION_FOUR",
+        });
+    }, []);
 
     const progressIndicators = [
         'Leads Generated/Converted',
