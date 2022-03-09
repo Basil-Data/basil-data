@@ -1,5 +1,5 @@
 import react from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -12,21 +12,21 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 
 import '../Questionnaire.css';
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 function SectionOneStory () {
-    const history = useHistory();
     const dispatch = useDispatch();
 
     const competitiveAdvantages = useSelector(store => store.section1.competitiveAdvantages);
+    const section1Enterprise = useSelector(store => store.section1Enterprise)
+
+    console.log(section1Enterprise);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SECTION_ONE' })
     }, []);
-
 
     return (
         <>
@@ -38,9 +38,27 @@ function SectionOneStory () {
                 Make sure to be enthusiastic and show investors why they should go with you!</p>
         <form className='questionnaireForm'>
             <h5>What is the size of your enterprise? (people)</h5>
-            <TextField id="outlined-basic" label="Number of people" variant="outlined" />
+            <TextField 
+                id="outlined-basic" 
+                label="Number of people" 
+                variant="outlined" 
+                value={section1Enterprise.enterpriseSize1}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_ONE_ENTERPRISE',
+                    payload: { enterpriseSize1: event.target.value }
+                })}
+            />
             <h5>When was the organization founded?</h5>
-            <TextField id="outlined-basic" label="Date founded" variant="outlined" />
+            <TextField 
+                id="outlined-basic" 
+                label="Date founded" 
+                variant="outlined" 
+                value={section1Enterprise.dateFounded1}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_ONE_ENTERPRISE',
+                    payload: { dateFounded1: event.target.value }
+                })}
+            />
             <h5>What is your Mission Statement?</h5>
             <Grid
                 container
@@ -60,7 +78,9 @@ function SectionOneStory () {
                         label="Mission Statement" 
                         variant="outlined" 
                         multiline rows={5}
-                        fullWidth/>
+                        fullWidth
+                        onChange={() => updateSection1()}
+                    />
                 </Box>
             </Grid>
             <h5>How well do you understand the problem?</h5>
