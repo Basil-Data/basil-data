@@ -1,5 +1,7 @@
 import react from 'react';
-import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 // MUI
 import Box from '@mui/material/Box';
@@ -10,23 +12,31 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
 
-import '../Questionnaire.css'
+import '../Questionnaire.css';
+import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 function SectionOneStory () {
+    const history = useHistory();
+    const dispatch = useDispatch();
 
-    const competitiveAdvantages = [
-        'Patent', 'Brand License', 'Regulation', 'Trademark', 'Copyrights', 
-        'Software', 'Customer Lists', 'Personal accreditation'
-    ]
+    const competitiveAdvantages = useSelector(store => store.section1.competitiveAdvantages);
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_SECTION_ONE' })
+    }, []);
+
 
     return (
-        <form className='questionnaireForm'>
-            <h1>Section 1 - Story</h1>
-            <p>This section is about you and your team, your motivation for the problem, <br/>
-                the special make-up of your organization and most importantly a chance to <br/>
-                introduce yourself and your exciting solution to a potential investor!  <br/>
+        <>
+        <QuestionnaireNav/>
+            <h1 className='questionnaireForm'>Section 1 - Story</h1>
+            <p className='questionnaireForm'>This section is about you and your team, your motivation for the problem, 
+                the special make-up of your organization and most importantly a chance to
+                introduce yourself and your exciting solution to a potential investor!  
                 Make sure to be enthusiastic and show investors why they should go with you!</p>
+        <form className='questionnaireForm'>
             <h5>What is the size of your enterprise? (people)</h5>
             <TextField id="outlined-basic" label="Number of people" variant="outlined" />
             <h5>When was the organization founded?</h5>
@@ -81,8 +91,8 @@ function SectionOneStory () {
             <h5>Select from the list of tangible competitive advantages that apply to your organization</h5>
             <Box className='centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
-                    {competitiveAdvantages.map(advantage => (
-                            <FormControlLabel control={<Checkbox />} label={advantage} />
+                    {competitiveAdvantages?.map(advantage => (
+                            <FormControlLabel key = {advantage.advantage} control={<Checkbox />} label={advantage.advantage} />
                     ))}
                 </FormControl>
             </Box>
@@ -109,8 +119,11 @@ function SectionOneStory () {
                 </Box>
             </Grid>
             <br/>
-            <br/><button>Submit</button>
+            <br/>
+            <button className="btn">Submit</button>
+            <Link to="/impact"><button className="btn">Next</button></Link>
         </form>
+        </>
     )
 };
 

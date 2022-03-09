@@ -22,9 +22,14 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 
 // Sections for forms
 import SectionOneStory from '../Questionnaire/SectionOneStory/SectionOneStory';
+import SectionTwoImpact from '../Questionnaire/SectionTwoImpact/SectionTwoImpact';
+import SectionTwoImpactOpportunity from '../Questionnaire/SectionTwoImpact/SectionTwoImpactOpportunity/SectionTwoImpactOpportunity';
 import SectionThreeSolution from '../Questionnaire/SectionThreeSolution/SectionThreeSolution';
+import SectionFourTraction from '../Questionnaire/SectionFourTraction/SectionFourTraction';
+import SectionFiveMarket from '../Questionnaire/SectionFiveMarket/SectionFiveMarket';
 import SectionSixRisksAndHurdles from '../Questionnaire/SectionSixRisksAndHurdles/SectionSixRisksAndHurdles';
 import SectionSevenNextSteps from '../Questionnaire/SectionSevenNextSteps/SectionSevenNextSteps';
+
 
 import './App.css';
 
@@ -38,6 +43,7 @@ function App() {
   }, [dispatch]);
 
   return (
+    
     <Router>
       <div>
         <Nav />
@@ -111,9 +117,34 @@ function App() {
 
           <Route
             exact
+            path="/traction">
+              <SectionFourTraction />
+          </Route>
+
+          <Route
+              exact
+              path="/impact"
+          >
+              <SectionTwoImpact/>
+          </Route>
+
+          <Route
+            exact
             path="/solution"
           >
             <SectionThreeSolution/>
+          </Route>
+
+          <Route
+            exact    
+            path="/traction">
+              <SectionFourTraction/>
+          </Route>
+
+          <Route
+            exact
+            path="/market">
+              <SectionFiveMarket />
           </Route>
 
           <Route

@@ -1,5 +1,5 @@
-import react from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 // MUI
 import Box from '@mui/material/Box';
@@ -12,78 +12,35 @@ import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 
 import '../Questionnaire.css'
+import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav'
 
 function SectionSevenNextSteps () {
 
-    const investmentType = [
-        'Debt', 
-        'Equity', 
-        'Convertible Debt', 
-        'Convertible Equity', 
-        'Grant', 
-        'Government Funding', 
-        'Incubator/Accelerator Funding', 
-        'Angel Investment',
-        'Open to all offers',
-        'Other'
-    ];
+    const dispatch = useDispatch();
+    // store.section6 contains all of the selections for
+    // this page of the questionnaire
+    const section7 = useSelector((store) => store.section7);
 
-    const fundingUse = [
-        'Operating expenses', 
-        'Asset Management', 
-        'Inventory Development', 
-        'Long-Term Expenditures', 
-        'Supplies & Materials', 
-        'Market Research', 
-        'Liquidity Management', 
-        'Product Development',
-        'Team Scaling',
-        'Sales & Marketing',
-        'Market Expansion',
-        'Other'
-    ];
-
-    const assistance = [
-        'Data Measurement Techniques', 
-        'Develop Impact Research', 
-        'Data Analysis and Visualization', 
-        'Theory of Change and Strategy Development', 
-        'Networking with others in the social impact/investing space', 
-        'Other'
-    ];
-
-    const societyImpact = [
-        'Currently not considering/May cause harm', 
-        'Actively avoiding harm with internal policies', 
-        `Our product or service benefits the individual or community
-        stakeholder's social wellbeing`, 
-        'Our product or service directly contributes to a solution to a social problem'
-    ];
-
-    const environmentImpact = [
-        'Currently not considering/May cause harm', 
-        'Actively avoiding harm with internal policies', 
-        'Our product or service benefits the environment',
-        'Our product or service directly contributes to a solution to an environmental problem'
-    ];
-
-    const economicImpact = [
-        'Currently not considering/May cause harm', 
-        'Actively avoiding harm with internal policies', 
-        'Our product or service benefits the individual or community stakeholder economically',
-        'Our product or service directly contributes to a solution to economic and wealth problems'
-    ];
+    useEffect(() => {
+        dispatch({
+            type: "FETCH_NEXT_STEPS",
+        });
+    }, []);
 
     return (
-    <form className='questionnaireForm'>
-        <h1>Section 7 - Next Steps</h1>
-        <p>
+        <>
+        <QuestionnaireNav/>
+
+        <h1 className='questionnaireForm'>Section 7 - Next Steps</h1>
+        <p className='questionnaireForm'>
             Where do you go from here?
         </p>
-        <p>In this section you have the opportunity to detail 
+        <p className='questionnaireForm'>In this section you have the opportunity to detail 
             the amount of funding you require, how you plan to 
             use it, and what your next priorities are. 
         </p>
+
+    <form className='questionnaireForm'>
 
         <h5>Are you currently raising funds?</h5>
         <RadioGroup
@@ -104,8 +61,8 @@ function SectionSevenNextSteps () {
         <h5>What type of investment vehicle are you looking for?</h5>
         <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
             <FormControl className='questionnaireForm' sx={{ m : 3}}>
-                {investmentType.map(type => (
-                        <FormControlLabel control={<Checkbox />} label={type} />
+                {section7.results1?.map(type => (
+                        <FormControlLabel key={type.id} control={<Checkbox />} label={type.investmentVehicle} />
                 ))}
             </FormControl>
         </Box>
@@ -113,8 +70,8 @@ function SectionSevenNextSteps () {
         <h5>How will you use the funding received?</h5>
         <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
             <FormControl className='questionnaireForm' sx={{ m : 3}}>
-                {fundingUse.map(use => (
-                        <FormControlLabel control={<Checkbox />} label={use} />
+                {section7.results2?.map(use => (
+                        <FormControlLabel key={use.id} control={<Checkbox />} label={use.fundingUse} />
                 ))}
             </FormControl>
         </Box>
@@ -146,8 +103,8 @@ function SectionSevenNextSteps () {
         <h5>How else can we help you move forward?</h5>
         <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
             <FormControl className='questionnaireForm' sx={{ m : 3}}>
-                {assistance.map(approach => (
-                        <FormControlLabel control={<Checkbox />} label={approach} />
+                {section7.results3?.map(approach => (
+                        <FormControlLabel key={approach.id} control={<Checkbox />} label={approach.assistance} />
                 ))}
             </FormControl>
         </Box>
@@ -166,8 +123,8 @@ function SectionSevenNextSteps () {
             defaultValue=""
             name="radio-buttons-group"
         >
-            {societyImpact.map(impact => (
-                        <FormControlLabel control={<Radio />} label={impact} className='centerHelp' />
+            {section7.results4?.map(impact => (
+                        <FormControlLabel key={impact.id} control={<Radio />} label={impact.impact} className='centerHelp' />
                 ))}
         </RadioGroup>
 
@@ -180,8 +137,8 @@ function SectionSevenNextSteps () {
             defaultValue=""
             name="radio-buttons-group"
         >
-            {environmentImpact.map(impact => (
-                        <FormControlLabel control={<Radio />} label={impact} className='centerHelp' />
+            {section7.results5?.map(impact => (
+                        <FormControlLabel key={impact.id} control={<Radio />} label={impact.impact} className='centerHelp' />
                 ))}
         </RadioGroup>
 
@@ -194,8 +151,8 @@ function SectionSevenNextSteps () {
             defaultValue=""
             name="radio-buttons-group"
         >
-            {economicImpact.map(impact => (
-                        <FormControlLabel control={<Radio />} label={impact} className='centerHelp' />
+            {section7.results6?.map(impact => (
+                        <FormControlLabel key={impact.id} control={<Radio />} label={impact.impact} className='centerHelp' />
                 ))}
         </RadioGroup>
 
@@ -218,8 +175,12 @@ function SectionSevenNextSteps () {
             <FormControlLabel labelPlacement="top" value="9" control={<Radio />} label="9" />
             <FormControlLabel labelPlacement="top" value="10" control={<Radio />} label="10" />
         </RadioGroup>
+        <button className="btn">Back</button>
+        <button className="btn">Submit</button>
+        <button className="btn">Next</button>
 
     </form>
+    </>
     )
 };
 

@@ -1,6 +1,7 @@
-import react from 'react';
-import {useState} from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+// MUI Imports
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
@@ -8,53 +9,27 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 
+// Internal Imports
 import '../Questionnaire.css'
+import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
+
 
 function SectionSixRisksAndHurdles () {
 
-    const anticipatedRisks = [
-        'Evidence Risk - insufficient high-quality data exists', 
-        'External Risk - external factors disrupt ability to deliver impact', 
-        'Stakeholder Participation Risk - misunderstanding of stakeholder experiences/expectations', 
-        'Drop-off Risk - the positive impact doesn\'t endure or the negative impact is no longer mitigated', 
-        'Efficiency Risk - impact could be achieved with fewer resources or at a lower cost', 
-        'Execution Risk - activities are not delivered as planned and do not result in desired outcomes', 
-        'Alignment Risk - impact is not aligned into the enterprise model', 
-        'Endurance Risk - required activities are not delivered for a long enough period',
-        'Unexpected Impact Risk - significant unexpected impact is experienced by stakeholders',
-        'None at this stage'
-    ];
+    const dispatch = useDispatch();
+    // store.section6 contains all of the selections for
+    // this page of the questionnaire
+    const section6 = useSelector((store) => store.section6);
 
-    const startupBarriers = [
-        'Capital Requirements', 
-        'Technical Knowledge Base', 
-        'Customer Cost of Switching', 
-        'Educating Your Market', 
-        'Access to Materials', 
-        'Access to Distribution Channels', 
-        'Patents', 
-        'Government Regulation',
-        'Economies of Scale',
-        'Product Differentiation',
-        'Other'
-    ];
-
-    const growthFactors = [
-        'Seasonal trends', 
-        'Close proximity to industry fluctuations', 
-        'Commodity price/availability fluctuations', 
-        'Economic cycle', 
-        'Competition', 
-        'Laws and Regulations', 
-        'Customer Taste & Preferences', 
-        'Natural Disasters',
-        'Technological Evolution',
-        'International Markets & Foreign Exchange Markets',
-        'Political/Social Momentum',
-        'Other'
-    ];
+    useEffect(() => {
+        dispatch({
+            type: "FETCH_RISKS_AND_HURDLES",
+        });
+    }, []);
 
     return (
+        <>
+        <QuestionnaireNav/>
         <form className='questionnaireForm'>
             <h1>Section 6 - Risks and Hurdles</h1>
             <p>Enhancing your Transparency by providing insight into current and future factors 
@@ -71,8 +46,8 @@ function SectionSixRisksAndHurdles () {
             </p>
             <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
-                    {anticipatedRisks.map(risk => (
-                            <FormControlLabel control={<Checkbox />} label={risk} />
+                    {section6.results1?.map(risk => (
+                            <FormControlLabel key={risk.id} control={<Checkbox />} label={risk.risk} />
                     ))}
                 </FormControl>
             </Box>
@@ -108,8 +83,8 @@ function SectionSixRisksAndHurdles () {
             </p>
             <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
-                    {startupBarriers.map(barrier => (
-                            <FormControlLabel control={<Checkbox />} label={barrier} />
+                    {section6.results2?.map(barrier => (
+                            <FormControlLabel key={barrier.id} control={<Checkbox />} label={barrier.barrier} />
                     ))}
                 </FormControl>
             </Box>
@@ -150,8 +125,8 @@ function SectionSixRisksAndHurdles () {
             </p>
             <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
-                    {growthFactors.map(factor => (
-                            <FormControlLabel control={<Checkbox />} label={factor} />
+                    {section6.results3?.map(factor => (
+                            <FormControlLabel key={factor.id} control={<Checkbox />} label={factor.factor} />
                     ))}
                 </FormControl>
             </Box>
@@ -186,9 +161,12 @@ function SectionSixRisksAndHurdles () {
                 </Box>
             </Grid>
 
-            <button>Submit</button>
+            <button className="btn">Back</button>
+            <button className="btn">Submit</button>
+            <button className="btn">Next</button>
 
         </form>
+        </>
     )
 };
 
