@@ -1,7 +1,7 @@
 import react from 'react';
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // MUI
 import Box from '@mui/material/Box';
@@ -21,14 +21,12 @@ function SectionOneStory () {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const competitiveAdvantages = useSelector(store => store.section1.competitiveAdvantages);
+
     useEffect(() => {
         dispatch({ type: 'FETCH_SECTION_ONE' })
     }, []);
 
-    const competitiveAdvantages = [
-        'Patent', 'Brand License', 'Regulation', 'Trademark', 'Copyrights', 
-        'Software', 'Customer Lists', 'Personal accreditation'
-    ];
 
     return (
         <>
@@ -93,8 +91,8 @@ function SectionOneStory () {
             <h5>Select from the list of tangible competitive advantages that apply to your organization</h5>
             <Box className='centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
-                    {competitiveAdvantages.map(advantage => (
-                            <FormControlLabel key = {advantage} control={<Checkbox />} label={advantage} />
+                    {competitiveAdvantages?.map(advantage => (
+                            <FormControlLabel key = {advantage.id} control={<Checkbox />} label={advantage.advantage} />
                     ))}
                 </FormControl>
             </Box>
