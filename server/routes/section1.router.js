@@ -6,7 +6,27 @@ const axios = require('axios');
 /**
  * GET route template
  */
+
+// Router to get the arrays for Section One
 router.get('/', async (req, res) => {
+    // GET route code here
+    console.log('in get router for section 1')
+
+    let sqlText = `
+        SELECT *
+        FROM "competitiveAdvantages"
+    `;
+
+    const results1 = await pool.query(sqlText);
+
+    const results = {
+        competitiveAdvantages: results1.rows,
+    };
+
+    res.send(results);
+});
+
+router.get('/:id', async (req, res) => {
   // GET route code here
     console.log('in get router for section 1')
 
