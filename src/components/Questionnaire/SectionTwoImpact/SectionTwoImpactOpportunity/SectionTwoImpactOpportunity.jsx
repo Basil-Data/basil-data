@@ -119,7 +119,6 @@ function SectionTwoImpactOpportunity() {
                                 control={<Checkbox />} 
                                 label={characteristic.characteristic}
                             />
-                            <FormControlLabel key={characteristic.id} control={<Checkbox />} label={characteristic.characteristic}/>
                         )
                     })}
                 </FormControl>
