@@ -23,7 +23,6 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 // Sections for forms
 import SectionOneStory from '../Questionnaire/SectionOneStory/SectionOneStory';
 import SectionTwoImpact from '../Questionnaire/SectionTwoImpact/SectionTwoImpact';
-import SectionTwoImpactOpportunity from '../Questionnaire/SectionTwoImpact/SectionTwoImpactOpportunity/SectionTwoImpactOpportunity';
 import SectionThreeSolution from '../Questionnaire/SectionThreeSolution/SectionThreeSolution';
 import SectionFourTraction from '../Questionnaire/SectionFourTraction/SectionFourTraction';
 import SectionFiveMarket from '../Questionnaire/SectionFiveMarket/SectionFiveMarket';

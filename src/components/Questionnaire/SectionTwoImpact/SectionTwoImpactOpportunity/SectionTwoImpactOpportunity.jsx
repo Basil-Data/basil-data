@@ -47,6 +47,10 @@ function SectionTwoImpactOpportunity() {
     const [sdgPrimary, setSdgPrimary] = useState('');
     console.log(sdgPrimary);
 
+    const stakeholderSegments = useSelector(store => store.section2.stakeholderSegments);
+    const sdg = useSelector(store => store.section2.sdg);
+    const supportiveCharacteristics = useSelector(store => store.section2.supportiveCharacteristics);
+
     let component;
     switch(sdgPrimary) {
         case "No Poverty":
@@ -76,7 +80,7 @@ function SectionTwoImpactOpportunity() {
         case "Industry, Innovation and Infrastructure":
             component = <IndustryInnovationAndInfrastructure />
             break;
-        case "Reduced Inequalities":
+        case "Reduced Inequality":
             component = <ReducingInequality />
             break;
         case "Sustainable Cities and Communities":
@@ -110,10 +114,11 @@ function SectionTwoImpactOpportunity() {
                 <h1><b>Impact Opportunity</b></h1>
                 <p>Select the characteristics that support the efficacy of your solution</p>
                 <FormControl>
-                    <FormControlLabel control={<Checkbox />} label={'Research-backed'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Proven outside of Target Market'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Internal Measurement shows effectiveness'}/>
-                    <FormControlLabel control={<Checkbox />} label={'None of the above - Innovative approach'}/>
+                    {supportiveCharacteristics?.map(characteristic => {
+                        return(
+                            <FormControlLabel control={<Checkbox />} label={characteristic.characteristic}/>
+                        )
+                    })}
                 </FormControl>
                 <br></br>
                 <p>Which Sustainable Development Goal best aligns best with your impact objective?</p>
@@ -121,109 +126,16 @@ function SectionTwoImpactOpportunity() {
                     className="centerHelp"
                     onChange={event => setSdgPrimary(event.target.value)}
                 >
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="No Poverty"
-                        label="No Poverty"
-                    />
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="Zero Hunger"
-                        label="Zero Hunger"
-                    />
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="Good Health and Well-being"
-                        label="Good Health and Well-being"
-                    />
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="Quality Education"
-                        label="Quality Education"
-                    />
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="Gender Equality"
-                        label="Gender Equality"
-                    />
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="Clean Water and Sanitation"
-                        label="Clean Water and Sanitation"
-                    />
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="Affordable and Clean Energy"
-                        label="Affordable and Clean Energy"
-                    />
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="Decent Work and Economic Growth"
-                        label="Decent Work and Economic Growth"
-                    />
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="Industry, Innovation and Infrastructure"
-                        label="Industry, Innovation and Infrastructure"
-                    />
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="Reduced Inequalities"
-                        label="Reduced Inequalities"
-                    />
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="Sustainable Cities and Communities"
-                        label="Sustainable Cities and Communities"
-                    />
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="Responsible Consumption and Production"
-                        label="Responsible Consumption and Production"
-                    />
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="Climate Action"
-                        label="Climate Action"
-                    />
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="Life Below Water"
-                        label="Life Below Water"
-                    />
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="Life on Land"
-                        label="Life on Land"
-                    />
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="Peace, Justice and Strong Institutions"
-                        label="Peace, Justice and Strong Institutions"
-                    />
-                    <FormControlLabel 
-                        control={<Radio/>} 
-                        labelPlacement="end"
-                        value="Partnerships for the Goals"
-                        label="Partnerships for the Goals"
-                    />
-            
+                    {sdg?.map(goal => {
+                        return(
+                            <FormControlLabel 
+                            control={<Radio/>} 
+                            labelPlacement="end"
+                            value={goal.sdg}
+                            label={goal.sdg}
+                            />
+                        )
+                    })}
                 </RadioGroup>
             </form>
             <div>
