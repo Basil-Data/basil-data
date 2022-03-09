@@ -3,7 +3,34 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+
 router.get('/', async (req, res) => {
+
+    const sqlText = 'SELECT * FROM "impactSectors"';
+    const sqlText2 = 'SELECT * FROM "supportiveCharacteristics"';
+    const sqlText3 = 'SELECT * FROM "sdg" ORDER BY "sdg"."id" ASC';
+    const sqlText4 = 'SELECT * FROM "stakeholderSegments"';
+
+    const results1 = await pool.query(sqlText);
+    const results2 = await pool.query(sqlText2);
+    const results3 = await pool.query(sqlText3);
+    const results4 = await pool.query(sqlText4);
+
+    const results = {
+        impactSectors: results1.rows,
+        supportiveCharacteristics: results2.rows,
+        sdg: results3.rows,
+        stakeholderSegments: results4.rows
+    }
+
+    res.send(results);
+})
+
+
+
+
+
+router.get('/:id', async (req, res) => {
     console.log('in GET router for section 2');
 
     const sqlText = `
