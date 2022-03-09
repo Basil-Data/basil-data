@@ -17,16 +17,30 @@ import {
     FormGroup,
     InputLabel,
     TextField,
+    Link,
 } 
 from '@mui/material';
 
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
+import SectionTwoImpactOpportunity from "./SectionTwoImpactOpportunity/SectionTwoImpactOpportunity";
 
 
 function SectionTwoImpact() {
+    const dispatch = useDispatch();
+    const history = useHistory();
 
+    useEffect(() => {
+        fetchImpactSectors();
+    }, [])
 
+    const impactSectors = useSelector(store => store.section2);
+    console.log('impact sectors are:', impactSectors);
 
+    const fetchImpactSectors = () => {
+        dispatch({
+            type: 'FETCH_IMPACT_SECTORS'
+        });
+    }
 
     return(
         <>
@@ -63,16 +77,11 @@ function SectionTwoImpact() {
                     placeholder="IMPACT Sector Category"
                 >
                     <MenuItem></MenuItem>
-                    <MenuItem>Animal</MenuItem>
-                    <MenuItem>Arts  Culture</MenuItem>
-                    <MenuItem>Environmental</MenuItem>
-                    <MenuItem>Community Improvement</MenuItem>
-                    <MenuItem>Education</MenuItem>
-                    <MenuItem>Health</MenuItem>
-                    <MenuItem>Human Services</MenuItem>
-                    <MenuItem>Religious</MenuItem>
-                    <MenuItem>Social Advocacy</MenuItem>
-                    <MenuItem>Youth Development</MenuItem>
+                    {impactSectors.map(sector => {
+                        return(
+                            <MenuItem key={sector.id}>{sector.impactSector}</MenuItem>
+                        )
+                    })}
                     
                 </Select>
                 <br></br>
@@ -116,6 +125,10 @@ function SectionTwoImpact() {
                 >
 
                 </TextField>
+                <SectionTwoImpactOpportunity />
+                <Link to="story"><button className="btn">Back</button></Link>
+                <button className="btn">Submit</button>
+                <button className="btn">Next</button>
             </form>
         </Box>
         </>

@@ -211,7 +211,6 @@ function DecentWorkAndEconomicGrowth() {
                     />
             
                 </RadioGroup>
-                <Button variant='contained'>Submit</Button>
             </form>
         </Box>
 
