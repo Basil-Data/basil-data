@@ -1,6 +1,9 @@
 import react from 'react';
 import {useState} from 'react';
-import {Link} from 'react-router-dom';
+import { React, useState, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
@@ -14,15 +17,16 @@ import '../Questionnaire.css'
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 function SectionFourTraction() {
+    const dispatch = useDispatch();
+    const section4 = useSelector((store) => store.section4);
 
-    const progressIndicators = [
-        'Leads Generated/Converted',
-        'Website Traffic Volume',
-        'Social Media Interaction',
-        'Cash Flow Forecasts',
-        'Customer Acquisition',
-        'None of the Above'
-    ]
+    useEffect(() => {
+        dispatch({
+            type: "FETCH_SECTION_FOUR",
+        });
+    }, []);
+
+ 
 
     const [generatedRevenue, setGeneratedRevenue] = useState(false);
 
@@ -46,34 +50,28 @@ function SectionFourTraction() {
                         name="radio-buttons-group"
                         className='centerHelp'
                     >
-                        <FormControlLabel labelPlacement="top" value="Concept/Research" control={<Radio />} label="Concept/Research" />
-                        <FormControlLabel labelPlacement="top" value="Initial Prototype" control={<Radio />} label="Initial Prototype" />
-                        <FormControlLabel labelPlacement="top" value="Validation" control={<Radio />} label="Validation" />
-                        <FormControlLabel labelPlacement="top" value="Refinement" control={<Radio />} label="Refinement" />
-                        <FormControlLabel labelPlacement="top" value="Scaling" control={<Radio />} label="Scaling" />
-                        <FormControlLabel labelPlacement="top" value="Established Loyal Customer Base" control={<Radio />} label="Established Loyal Customer Base" />
+                        {section4.results1?.map(development => (
+                            <FormControlLabel key={development.id} value={development.id} control={<Radio />} label={development.stage} className='centerHelp' />
+                        ))}
+                        
                     </RadioGroup>
                 <h5>
                     What stage of investment is your ORGANIZATION in?
                 </h5>
                 
-                <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue=""
-                    row
-                    name="radio-buttons-group"
-                    className='centerHelp'
-                >
+                    <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        defaultValue=""
+                        row
+                        name="radio-buttons-group"
+                        className='centerHelp'
+                    >
 
+                        {section4.results2?.map(investment => (
+                            <FormControlLabel key={investment.id} value={investment.stage} control={<Radio/>} label={investment.stage} className='centerhelp'/>
+                        ))}
                 
-
-                <FormControlLabel labelPlacement="top" value="Bootstrap" control={<Radio />} label="Bootstrap" />
-                <FormControlLabel labelPlacement="top" value="Family/Friends" control={<Radio />} label="Family/Friends" />
-                <FormControlLabel labelPlacement="top" value="Seed" control={<Radio />} label="Seed" />
-                <FormControlLabel labelPlacement="top" value="Series A" control={<Radio />} label="Series A" />
-                <FormControlLabel labelPlacement="top" value="Series B" control={<Radio />} label="Series B" />
-                <FormControlLabel labelPlacement="top" value="Series C" control={<Radio />} label="Series C" />
-                </RadioGroup>
+                    </RadioGroup>
 
                 <h5>
                     How much have you received in funding to date?
@@ -86,8 +84,8 @@ function SectionFourTraction() {
                 </h5>
                 <Box>
                     <FormControl className='questionnaireForm centerHelp'>
-                        {progressIndicators.map(name => (
-                            <FormControlLabel control={<Checkbox />} label= {name} />
+                        {section4.results3?.map(use => (
+                            <FormControlLabel  key={use.id} control={<Checkbox />} label= {use.indicator} />
                         ))}
 
                     </FormControl>
@@ -142,8 +140,8 @@ function SectionFourTraction() {
                     className='centerHelp'
                 >
 
-                <FormControlLabel labelPlacement="top" control={<Radio />} label="Yes" onClick={(evt) => setGeneratedRevenue(true)}/>
-                <FormControlLabel labelPlacement="top" control={<Radio />} label="No" onClick={(evt) => setGeneratedRevenue(false)}/>
+                <FormControlLabel labelPlacement="top" control={<Radio />} label="Yes" value="Yes" onClick={(evt) => setGeneratedRevenue(true)}/>
+                <FormControlLabel labelPlacement="top" control={<Radio />} label="No" value="No" onClick={(evt) => setGeneratedRevenue(false)}/>
                     
                    
                 
@@ -228,10 +226,23 @@ function SectionFourTraction() {
                 </> : <> </>
 
 }
-                <Link to="/solution"><button className="btn">Back</button></Link>
+                <br />
+                <br />
+                <Link to="/solution">
+                    <button className="btn">Back</button>
+                </Link>
+                
+
                 <button className="btn">Submit</button>
-                <Link to="/market"><button className="btn">Next</button></Link>
+
+                <Link to="/market">
+                    <button className="btn">Next</button>
+                </Link>
+                
                 </form>
+            
+                
+            
         </>
     )
 }
