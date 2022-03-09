@@ -1,5 +1,6 @@
 import { React, useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -223,13 +224,23 @@ function SectionFourTraction() {
                 </> : <> </>
 
 }
+                <br />
+                <br />
+                <Link to="/solution">
+                    <button className="btn">Back</button>
+                </Link>
+                
+
+                <button className="btn">Submit</button>
+
+                <Link to="/market">
+                    <button className="btn">Next</button>
+                </Link>
                 
                 </form>
-            <div className="centerHelp">
-                <button className="btn">Back</button>
-                <button className="btn">Submit</button>
-                <button className="btn">Next</button>
-            </div>
+            
+                
+            
         </>
     )
 }
