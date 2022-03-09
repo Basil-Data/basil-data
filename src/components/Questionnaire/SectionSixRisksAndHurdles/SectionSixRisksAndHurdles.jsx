@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 // MUI Imports
 import Box from '@mui/material/Box';
@@ -161,9 +162,9 @@ function SectionSixRisksAndHurdles () {
                 </Box>
             </Grid>
 
-            <button className="btn">Back</button>
+            <Link to="/market"><button className="btn">Back</button></Link>
             <button className="btn">Submit</button>
-            <button className="btn">Next</button>
+            <Link to="/next-steps"><button className="btn">Next</button></Link>
 
         </form>
         </>

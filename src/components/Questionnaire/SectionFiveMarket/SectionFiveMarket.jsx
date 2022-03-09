@@ -1,5 +1,6 @@
 import react from 'react';
 import {useState} from 'react';
+import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
@@ -85,9 +86,9 @@ function SectionFiveMarket() {
                 </Box>
                 </Grid>
             
-                <button className="btn">Back</button>
+                <Link to="/traction"><button className="btn">Back</button></Link>
                 <button className="btn">Submit</button>
-                <button className="btn">Next</button>
+                <Link to="/risks-and-hurdles"><button className="btn">Next</button></Link>
 
             </form>
 

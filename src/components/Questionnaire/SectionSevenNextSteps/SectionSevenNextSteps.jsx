@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {Link} from 'react-router-dom';
 
 // MUI
 import Box from '@mui/material/Box';
@@ -175,9 +176,9 @@ function SectionSevenNextSteps () {
             <FormControlLabel labelPlacement="top" value="9" control={<Radio />} label="9" />
             <FormControlLabel labelPlacement="top" value="10" control={<Radio />} label="10" />
         </RadioGroup>
-        <button className="btn">Back</button>
+        <Link to="/risks-and-hurdles"><button className="btn">Back</button></Link>
         <button className="btn">Submit</button>
-        <button className="btn">Next</button>
+        <Link to="/story"><button className="btn">Next</button></Link>
 
     </form>
     </>
