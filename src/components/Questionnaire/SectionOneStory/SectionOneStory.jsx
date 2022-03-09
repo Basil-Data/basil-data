@@ -79,7 +79,11 @@ function SectionOneStory () {
                         variant="outlined" 
                         multiline rows={5}
                         fullWidth
-                        onChange={() => updateSection1()}
+                        value={section1Enterprise.missionStatement1}
+                        onChange={(event) => dispatch({
+                            type: 'SET_SECTION_ONE_ENTERPRISE',
+                            payload: { missionStatement1: event.target.value }
+                        })}
                     />
                 </Box>
             </Grid>
@@ -90,6 +94,10 @@ function SectionOneStory () {
                 row
                 name="radio-buttons-group"
                 className='centerHelp'
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_ONE_ENTERPRISE',
+                    payload: {understandProblem1: event.target.value}
+                })}
             >
                 <FormControlLabel labelPlacement="top" value="1" control={<Radio />} label="1" />
                 <FormControlLabel labelPlacement="top" value="2" control={<Radio />} label="2" />
@@ -103,11 +111,38 @@ function SectionOneStory () {
                 <FormControlLabel labelPlacement="top" value="10" control={<Radio />} label="10" />
             </RadioGroup>
             <h5>How many years of collective experience within the impact problem space?</h5>
-            <TextField id="outlined-basic" label="Number of years" variant="outlined" />
+            <TextField 
+                id="outlined-basic" 
+                label="Number of years" 
+                variant="outlined" 
+                value={section1Enterprise.yearsCollectiveExperience1}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_ONE_ENTERPRISE',
+                    payload: { yearsCollectiveExperience1: event.target.value }
+                })}
+            />
             <h5>What percentage of your founding team is BIPOC (Black, Indigenous, Person of Color)?</h5>
-            <TextField id="outlined-basic" label="Percentage BIPOC" variant="outlined" />
+            <TextField 
+                id="outlined-basic" 
+                label="Percentage BIPOC" 
+                variant="outlined" 
+                value={section1Enterprise.percentageBIPOC1}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_ONE_ENTERPRISE',
+                    payload: { percentageBIPOC1: event.target.value }
+                })}
+            />
             <h5>What percentage of your founding team is female?</h5>
-            <TextField id="outlined-basic" label="Percentage female" variant="outlined" />
+            <TextField 
+                id="outlined-basic" 
+                label="Percentage female" 
+                variant="outlined"
+                value={section1Enterprise.percentageFemale1}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_ONE_ENTERPRISE',
+                    payload: { percentageFemale1: event.target.value }
+                })} 
+            />
             <h5>Select from the list of tangible competitive advantages that apply to your organization</h5>
             <Box className='centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
@@ -135,7 +170,13 @@ function SectionOneStory () {
                         label="Introduction" 
                         variant="outlined" 
                         multiline rows={5}
-                        fullWidth/>
+                        fullWidth
+                        value={section1Enterprise.investorIntroduction1}
+                        onChange={(event) => dispatch({
+                            type: 'SET_SECTION_ONE_ENTERPRISE',
+                            payload: { investorIntroduction1: event.target.value }
+                        })} 
+                    />
                 </Box>
             </Grid>
             <br/>
