@@ -28,6 +28,10 @@ function NoPoverty() {
 
     const stakeholderSegments = useSelector(store => store.section2.stakeholderSegments);
     const sdg = useSelector(store => store.section2.sdg);
+    const section2Enterprise = useSelector(store => store.section2Enterprise)
+
+    console.log('section2Enterprise:', section2Enterprise);
+
 
     return(
         <Box className="questionnaireForm">
@@ -47,6 +51,11 @@ function NoPoverty() {
                 variant="outlined"
                 type="text"
                 placeholder="Please Elaborate"
+                value={section2Enterprise.problemBeingSolved2}
+                onChange={(event) => dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: { problemBeingSolved2: event.target.value }
+                })}
             ></TextField>
             <p>How do you segment your stakeholders?</p>
             <FormControl>

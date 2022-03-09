@@ -32,9 +32,12 @@ function SectionTwoImpact() {
     }, [])
 
     const impactSectors = useSelector(store => store.section2.impactSectors);
+    const section2Enterprise = useSelector(store => store.section2Enterprise)
+
 
 
     console.log('impact sectors are:', impactSectors);
+    console.log('section2Enterprise:', section2Enterprise);
 
     const fetchImpactSectors = () => {
         dispatch({
@@ -67,6 +70,11 @@ function SectionTwoImpact() {
                     variant="outlined"
                     type="text"
                     placeholder="Social/Environmental Problem"
+                    value={section2Enterprise.problemBeingSolved2}
+                    onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: { problemBeingSolved2: event.target.value }
+                    })}
                 >
 
                 </TextField>
@@ -98,6 +106,11 @@ function SectionTwoImpact() {
                     variant="outlined"
                     type="text"
                     placeholder="COST of The Problem"
+                    value={section2Enterprise.costOfProblem2}
+                    onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: { costOfProblem2: event.target.value }
+                    })}
                 >
 
                 </TextField>
@@ -111,6 +124,11 @@ function SectionTwoImpact() {
                     variant="outlined"
                     type="text"
                     placeholder="Solution"
+                    value={section2Enterprise.howTheySolve2}
+                    onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: { howTheySolve2: event.target.value }
+                    })}
                 >
 
                 </TextField>
@@ -124,6 +142,11 @@ function SectionTwoImpact() {
                     variant="outlined"
                     type="text"
                     placeholder="Who Benefits"
+                    value={section2Enterprise.whoBenefits2}
+                    onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: { whoBenefits2: event.target.value }
+                    })}
                 >
 
                 </TextField>
