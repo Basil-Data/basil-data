@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import '../Questionnaire.css';
 
@@ -17,7 +17,6 @@ import {
     FormGroup,
     InputLabel,
     TextField,
-    Link,
 } 
 from '@mui/material';
 
@@ -27,7 +26,6 @@ import SectionTwoImpactOpportunity from "./SectionTwoImpactOpportunity/SectionTw
 
 function SectionTwoImpact() {
     const dispatch = useDispatch();
-    const history = useHistory();
 
     useEffect(() => {
         fetchImpactSectors();
@@ -43,6 +41,8 @@ function SectionTwoImpact() {
             type: 'FETCH_IMPACT_SECTORS'
         });
     }
+
+
 
     return(
         <>
@@ -128,9 +128,9 @@ function SectionTwoImpact() {
 
                 </TextField>
                 <SectionTwoImpactOpportunity />
-                <Link to="story"><button className="btn">Back</button></Link>
+                <Link to="/story"><button className="btn">Back</button></Link>
                 <button className="btn">Submit</button>
-                <button className="btn">Next</button>
+                <Link to="/solution"><button className="btn">Next</button></Link>
             </form>
         </Box>
         </>

@@ -1,5 +1,6 @@
 import react from 'react';
 import {useState} from 'react';
+import {Link} from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
@@ -227,9 +228,9 @@ function SectionFourTraction() {
                 </> : <> </>
 
 }
-                <button className="btn">Back</button>
+                <Link to="/solution"><button className="btn">Back</button></Link>
                 <button className="btn">Submit</button>
-                <button className="btn">Next</button>
+                <Link to="/market"><button className="btn">Next</button></Link>
                 </form>
         </>
     )
