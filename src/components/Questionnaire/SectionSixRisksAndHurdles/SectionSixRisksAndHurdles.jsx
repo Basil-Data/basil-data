@@ -21,6 +21,18 @@ function SectionSixRisksAndHurdles () {
     // this page of the questionnaire
     const section6 = useSelector((store) => store.section6);
 
+    const [riskSelection, setRiskSelection] = useState([]);
+    const [riskPreparedness, setRiskPreparedness] = useState('');
+
+    const handleRisk = (event) => {
+        const index = riskSelection.indexOf(event.target.value)
+        if (index === -1) {
+            setRiskSelection([...riskSelection, event.target.value])
+        } else {
+            setRiskSelection(riskSelection.filter((riskSelection) => riskSelection !== event.target.value))
+        }
+    }
+
     useEffect(() => {
         dispatch({
             type: "FETCH_RISKS_AND_HURDLES",
@@ -47,7 +59,16 @@ function SectionSixRisksAndHurdles () {
             <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
                     {section6.results1?.map(risk => (
-                            <FormControlLabel key={risk.id} control={<Checkbox />} label={risk.risk} />
+                            <FormControlLabel 
+                                key={risk.id} 
+                                control={
+                                    <Checkbox
+                                        value={risk.id}
+                                        onChange={handleRisk}
+                                    />
+                                } 
+                                label={risk.risk} 
+                            />
                     ))}
                 </FormControl>
             </Box>
@@ -72,7 +93,11 @@ function SectionSixRisksAndHurdles () {
                         label="Impact Risk Planning" 
                         variant="outlined" 
                         multiline rows={5} 
-                        fullWidth 
+                        fullWidth
+                        value={riskPreparedness}
+                        onChange={(event) =>
+                            { setRiskPreparedness(event.target.value) }
+                        }
                     />
                 </Box>
             </Grid>
@@ -84,7 +109,16 @@ function SectionSixRisksAndHurdles () {
             <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
                     {section6.results2?.map(barrier => (
-                            <FormControlLabel key={barrier.id} control={<Checkbox />} label={barrier.barrier} />
+                            <FormControlLabel 
+                                key={barrier.id} 
+                                control={
+                                    <Checkbox
+                                        value={barrier.id}
+                                        onChange={handleBarriers}
+                                    />
+                                } 
+                                label={barrier.barrier} 
+                            />
                     ))}
                 </FormControl>
             </Box>
@@ -110,7 +144,7 @@ function SectionSixRisksAndHurdles () {
                         label="Planning for Startup Barriers" 
                         variant="outlined" 
                         multiline rows={5} 
-                        fullWidth 
+                        fullWidth
                     />
                 </Box>
             </Grid>
