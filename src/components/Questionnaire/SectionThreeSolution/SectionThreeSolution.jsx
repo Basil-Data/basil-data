@@ -38,7 +38,7 @@ function SectionThreeSolution () {
                                 <FormControlLabel 
                                     control={<Checkbox />} 
                                     label={sector.sector}
-                                    key={sector.sector} />
+                                    key={sector.id} />
                         ))}
                     </FormControl>
                 </Box>
@@ -116,7 +116,7 @@ function SectionThreeSolution () {
                                 <FormControlLabel 
                                     control={<Checkbox />} 
                                     label={point.painPoint}
-                                    key={point.painPoint} />
+                                    key={point.id} />
                         ))}
                     </FormControl>
                 </Box>
