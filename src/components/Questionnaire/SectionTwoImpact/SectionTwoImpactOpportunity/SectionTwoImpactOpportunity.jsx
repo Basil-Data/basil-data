@@ -107,7 +107,7 @@ function SectionTwoImpactOpportunity() {
     return(
         <Box className="questionnaireForm">
             <form>
-                <h1><b>Section 2 - Impact Opportunity</b></h1>
+                <h1><b>Impact Opportunity</b></h1>
                 <p>Select the characteristics that support the efficacy of your solution</p>
                 <FormControl>
                     <FormControlLabel control={<Checkbox />} label={'Research-backed'}/>

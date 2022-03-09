@@ -121,19 +121,12 @@ function App() {
               <SectionFourTraction />
           </Route>
 
-            <Route
+          <Route
               exact
-            path="/impact"
+              path="/impact"
           >
               <SectionTwoImpact/>
           </Route>
-
-
-            <Route
-              exact
-              path="/impact-opportunity">
-                <SectionTwoImpactOpportunity/>
-              </Route>
 
           <Route
             exact

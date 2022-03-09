@@ -180,7 +180,10 @@ function SectionThreeSolution () {
                     </Box>
                 </Grid>
                 <br/>
-                <br/><button>Submit</button>
+                <br/>
+                <button className="btn">Back</button>
+                <button className="btn">Submit</button>
+                <button className="btn">Next</button>
             </form>
         </>
     )

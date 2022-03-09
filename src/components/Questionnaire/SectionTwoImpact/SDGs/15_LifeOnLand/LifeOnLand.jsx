@@ -194,7 +194,6 @@ function LifeOnLand() {
                     />
             
                 </RadioGroup>
-                <Button variant='contained'>Submit</Button>
             </form>
         </Box>
 

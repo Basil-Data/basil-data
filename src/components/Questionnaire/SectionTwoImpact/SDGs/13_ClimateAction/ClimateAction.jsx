@@ -201,7 +201,6 @@ function ClimateAction() {
                     />
             
                 </RadioGroup>
-                <Button variant='contained'>Submit</Button>
             </form>
         </Box>
 
