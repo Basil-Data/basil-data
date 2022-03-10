@@ -1,4 +1,6 @@
-const section4Enterprise = (state = {}, action) => {
+const section4Enterprise = (state = {
+    progressIndicatorId: [],
+}, action) => {
     switch (action.type) {
         case 'SET_SECTION4_RESPONSES':
             return {...state, ...action.payload };

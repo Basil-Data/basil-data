@@ -17,6 +17,8 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 function SectionFourTraction() {
     const dispatch = useDispatch();
     const section4 = useSelector((store) => store.section4);
+    const response = useSelector((store) => store.section4Enterprise);
+    const progressIndicator = useSelector((store) => store.section4Enterprise.progressIndicatorId)
     const user = useSelector((store) => store.user);
 
     useEffect(() => {
@@ -32,7 +34,7 @@ function SectionFourTraction() {
         dispatch({
             type: 'SET_SECTION4_RESPONSES',
             payload: {
-                generatingRevenue4: True
+                generatingRevenue4: true
             }
         })
     }
@@ -42,9 +44,24 @@ function SectionFourTraction() {
         dispatch({
             type: 'SET_SECTION4_RESPONSES',
             payload: {
-                generatingRevenue4: False
+                generatingRevenue4: true
             }
         })
+    }
+
+    const handleProgress = (event) => {
+        const index = progressIndicator.indexOf(event.target.value)
+        if (index === -1) {
+            dispatch({
+                type: "SET_SECTION4_RESPONSES",
+                payload: {progressIndicatorId: [...progressIndicator, event.target.value]}
+            });
+        } else {
+            dispatch({
+                type: "SET_SECTION4_RESPONSES",
+                payload: {progressIndicatorId: progressIndicator.filter((progressIndicator) => progressIndicator !== event.target.value)}
+            });
+        }
     }
  
 
@@ -79,8 +96,7 @@ function SectionFourTraction() {
                                 onChange={(evt => 
                                     dispatch({
                                         type: 'SET_SECTION4_RESPONSES',
-                                        payload: { 
-                                            developmentStageId: development.id}
+                                        payload: { developmentStageId: development.id}
                                     }))} 
                                 className='centerHelp' />
                         ))}
@@ -140,7 +156,11 @@ function SectionFourTraction() {
                         {section4.results3?.map(use => (
                             <FormControlLabel  
                                 key={use.id} 
-                                control={<Checkbox />} 
+                                control={
+                                    <Checkbox
+                                        value={use.id}
+                                        onChange={handleProgress} 
+                                    />} 
                                 label= {use.indicator} />
                         ))}
 
@@ -186,7 +206,7 @@ function SectionFourTraction() {
                     id="outlined-basic" 
                     label="Growth Percentage" 
                     variant="outlined"
-                    value={section4.customerGrowth4}
+                    value={response.customerGrowth4}
                     onChange={(evt => 
                         dispatch({
                             type: 'SET_SECTION4_RESPONSES',
@@ -235,7 +255,7 @@ function SectionFourTraction() {
                     id="outlined-basic" 
                     label="Percentage" 
                     variant="outlined"
-                    value={section4.averageGrowth4}
+                    value={response.averageGrowth4}
                     onChange={(evt => dispatch({
                         type: 'SET_SECTION4_RESPONSES',
                         payload: {
@@ -262,22 +282,22 @@ function SectionFourTraction() {
                     labelPlacement="top" 
                     control={<Radio />} 
                     label="Yes"
-                    value={section4.makingProfit4}
+                    value='Yes'
                     onChange={(evt => 
                         dispatch({
                             type: 'SET_SECTION4_RESPONSES',
-                            payload: { makingProfit4: True }
+                            payload: { makingProfit4: true }
                         }))} />
                 
                 <FormControlLabel 
                     labelPlacement="top"  
                     control={<Radio />} 
                     label="No"
-                    value={section4.makingProfit4}
+                    value='No'
                     onChange={(evt => 
                         dispatch({
                             type: 'SET_SECTION4_RESPONSES',
-                            payload: { makingProfit4: False }
+                            payload: { makingProfit4: false }
                         }))} />
 
                 </RadioGroup>
@@ -296,7 +316,7 @@ function SectionFourTraction() {
                     id="outlined-basic" 
                     label="Net Profit Margin %" 
                     variant="outlined"
-                    value={section4.netProfitMargin4}
+                    value={response.netProfitMargin4}
                     onChange={(evt => 
                         dispatch({
                             type: 'SET_SECTION4_RESPONSES',
@@ -326,7 +346,7 @@ function SectionFourTraction() {
                     id="outlined-basic" 
                     label="CAC $" 
                     variant="outlined"
-                    value={section4.customerAcquisitionCost4}
+                    value={response.customerAcquisitionCost4}
                     onChange={(evt => 
                         dispatch({
                             type: 'SET_SECTION4_RESPONSES',
@@ -347,7 +367,7 @@ function SectionFourTraction() {
                     id="outlined-basic" 
                     label="Marketing Expenses" 
                     variant="outlined"
-                    value={section4.marketingExpenses4}
+                    value={response.marketingExpenses4}
                     onChange={(evt => 
                         dispatch({
                             type: 'SET_SECTION4_RESPONSES',
@@ -364,7 +384,7 @@ function SectionFourTraction() {
                     id="outlined-basic" 
                     label="New Customers" 
                     variant="outlined"
-                    value={section4.newCustomers4}
+                    value={response.newCustomers4}
                     onChange={(evt => 
                         dispatch({
                             type: 'SET_SECTION4_RESPONSES',
