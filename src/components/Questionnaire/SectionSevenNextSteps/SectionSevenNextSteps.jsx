@@ -21,17 +21,10 @@ function SectionSevenNextSteps () {
     // store.section6 contains all of the selections for
     // this page of the questionnaire
     const section7 = useSelector((store) => store.section7);
-
-    const [fundraisingSelection, setFundraisingSelection] = useState('');
-    const [targetAmount, setTargetAmount] = useState('');
-    const [investmentSelection, setInvestmentSelection] = useState([]);
-    const [fundingUse, setFundingUse] = useState([]);
-    const [nextSteps, setNextSteps] = useState('');
-    const [wayAhead, setWayAhead] = useState([]);
-    const [societalImpact, setSocietalImpact] = useState('');
-    const [environmentalImpact, setEnvironmentalImpact] = useState('');
-    const [economicImpact, setEconomicImpact] = useState('');
-    const [understanding, setUnderstanding] = useState('');
+    const section7Enterprise = useSelector((store) => store.section7Enterprise);
+    const investmentSelection = useSelector((store) => store.section7Enterprise.investmentVehicleId);
+    const fundingUse = useSelector((store) => store.section7Enterprise.fundingUseId);
+    const wayAhead = useSelector((store) => store.section7Enterprise.assistanceId);
 
     useEffect(() => {
         dispatch({
@@ -42,27 +35,45 @@ function SectionSevenNextSteps () {
     const handleInvestmentType = (event) => {
         const index = investmentSelection.indexOf(event.target.value)
         if (index === -1) {
-            setInvestmentSelection([...investmentSelection, event.target.value])
+            dispatch({
+                type: "SET_NEXT_STEPS_ENTERPRISE",
+                payload: {investmentVehicleId: [...investmentSelection, event.target.value]}
+            });
         } else {
-            setInvestmentSelection(investmentSelection.filter((investmentSelection) => investmentSelection !== event.target.value))
+            dispatch({
+                type: "SET_NEXT_STEPS_ENTERPRISE",
+                payload: {investmentVehicleId: investmentSelection.filter((investmentSelection) => investmentSelection !== event.target.value)}
+            });
         }
     }
 
     const handleFundraising = (event) => {
         const index = fundingUse.indexOf(event.target.value)
         if (index === -1) {
-            setFundingUse([...fundingUse, event.target.value])
+            dispatch({
+                type: "SET_NEXT_STEPS_ENTERPRISE",
+                payload: {fundingUseId: [...fundingUse, event.target.value]}
+            });
         } else {
-            setFundingUse(fundingUse.filter((fundingUse) => fundingUse !== event.target.value))
+            dispatch({
+                type: "SET_NEXT_STEPS_ENTERPRISE",
+                payload: {fundingUseId: fundingUse.filter((fundingUse) => fundingUse !== event.target.value)}
+            });
         }
     }
 
     const handleWayAhead = (event) => {
-        const index = fundingUse.indexOf(event.target.value)
+        const index = wayAhead.indexOf(event.target.value)
         if (index === -1) {
-            setWayAhead([...wayAhead, event.target.value])
+            dispatch({
+                type: "SET_NEXT_STEPS_ENTERPRISE",
+                payload: {assistanceId: [...wayAhead, event.target.value]}
+            });
         } else {
-            setWayAhead(wayAhead.filter((wayAhead) => wayAhead !== event.target.value))
+            dispatch({
+                type: "SET_NEXT_STEPS_ENTERPRISE",
+                payload: {assistanceId: wayAhead.filter((wayAhead) => wayAhead !== event.target.value)}
+            });
         }
     }
 
@@ -88,9 +99,12 @@ function SectionSevenNextSteps () {
             row
             name = "radio-buttons-group"
             className = 'centerHelp'
-            value = {fundraisingSelection}
+            value = {section7Enterprise.raisingFunds7}
             onChange = {(event) =>
-                { setFundraisingSelection(event.target.value) }
+                { dispatch({
+                    type: "SET_NEXT_STEPS_ENTERPRISE",
+                    payload: {raisingFunds7: event.target.value}
+                }); }
             }
         >
             <FormControlLabel labelPlacement="top" value="yes" control={<Radio />} label="Yes" />
@@ -98,16 +112,19 @@ function SectionSevenNextSteps () {
             <FormControlLabel labelPlacement="top" value="maybe" control={<Radio />} label="Maybe" />
         </RadioGroup>
 
-        {fundraisingSelection === 'yes' &&
+        {section7Enterprise.raisingFunds7 === 'yes' &&
             <>
             <h5>What is your target amount? (in dollars)?</h5>
             <TextField 
                 id="outlined-basic" 
                 label="Fundraising Target" 
                 variant="outlined"
-                value={targetAmount}
-                onChange={(event) =>
-                    { setTargetAmount(event.target.value) }
+                value={section7Enterprise.targetAmount7}
+                onChange = {(event) =>
+                    { dispatch({
+                        type: "SET_NEXT_STEPS_ENTERPRISE",
+                        payload: {targetAmount7: event.target.value}
+                    }); }
                 }
             />
             </>
@@ -168,9 +185,12 @@ function SectionSevenNextSteps () {
                     variant="outlined" 
                     multiline rows={5} 
                     fullWidth
-                    value={nextSteps}
-                    onChange={(event) =>
-                        { setNextSteps(event.target.value) }
+                    value={section7Enterprise.nextSteps7}
+                    onChange = {(event) =>
+                        { dispatch({
+                            type: "SET_NEXT_STEPS_ENTERPRISE",
+                            payload: {nextSteps7: event.target.value}
+                        }); }
                     }
                 />
             </Box>
@@ -207,9 +227,12 @@ function SectionSevenNextSteps () {
             aria-labelledby="social-impact"
             defaultValue=""
             name="radio-buttons-group"
-            value = {societalImpact}
+            value = {section7Enterprise.societalImpactId}
             onChange = {(event) =>
-                { setSocietalImpact(event.target.value) }
+                { dispatch({
+                    type: "SET_NEXT_STEPS_ENTERPRISE",
+                    payload: {societalImpactId: event.target.value}
+                }); }
             }
         >
             {section7.results4?.map(impact => (
@@ -231,15 +254,19 @@ function SectionSevenNextSteps () {
             aria-labelledby="environmental-impact"
             defaultValue=""
             name="radio-buttons-group"
-            value = {environmentalImpact}
+            value = {section7Enterprise.environmentalImpactId}
             onChange = {(event) =>
-                { setEnvironmentalImpact(event.target.value) }
+                { dispatch({
+                    type: "SET_NEXT_STEPS_ENTERPRISE",
+                    payload: {environmentalImpactId: event.target.value}
+                }); }
             }
         >
             {section7.results5?.map(impact => (
                 <FormControlLabel 
                     key={impact.id} 
-                    control={<Radio />} 
+                    control={<Radio />}
+                    value={impact.id} 
                     label={impact.impact} 
                     className='centerHelp' 
                 />
@@ -254,15 +281,19 @@ function SectionSevenNextSteps () {
             aria-labelledby="economic-impact"
             defaultValue=""
             name="radio-buttons-group"
-            value = {economicImpact}
+            value = {section7Enterprise.economicImpactId}
             onChange = {(event) =>
-                { setEconomicImpact(event.target.value) }
+                { dispatch({
+                    type: "SET_NEXT_STEPS_ENTERPRISE",
+                    payload: {economicImpactId: event.target.value}
+                }); }
             }
         >
             {section7.results6?.map(impact => (
                 <FormControlLabel 
                     key={impact.id} 
-                    control={<Radio />} 
+                    control={<Radio />}
+                    value={impact.id} 
                     label={impact.impact} 
                     className='centerHelp' 
                 />
@@ -276,9 +307,12 @@ function SectionSevenNextSteps () {
             row
             name="radio-buttons-group"
             className='centerHelp'
-            value = {understanding}
+            value = {section7Enterprise.understandProblem7}
             onChange = {(event) =>
-                { setUnderstanding(event.target.value) }
+                { dispatch({
+                    type: "SET_NEXT_STEPS_ENTERPRISE",
+                    payload: {understandProblem7: event.target.value}
+                }); }
             }
         >
             <FormControlLabel labelPlacement="top" value="1" control={<Radio />} label="1" />

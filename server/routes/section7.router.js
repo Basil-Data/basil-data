@@ -3,8 +3,6 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    // GET route code here
-    console.log('in get router for section 1')
 
     let sqlText1 = `
         SELECT * FROM "investmentVehicles";

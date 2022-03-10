@@ -31,7 +31,6 @@ router.get('/', async (req, res) => {
 
 
 router.get('/:id', async (req, res) => {
-    console.log('in GET router for section 2');
 
     const sqlText = `
         SELECT

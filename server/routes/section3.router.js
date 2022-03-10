@@ -9,8 +9,6 @@ const axios = require('axios');
 
 // Router to get the arrays for Section One
 router.get('/', async (req, res) => {
-    // GET route code here
-    console.log('in get router for section 1')
 
     let sqlText = `
         SELECT *
@@ -35,8 +33,6 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  // GET route code here
-    console.log('in get router for section 1')
 
     let sqlText = `
         SELECT 
