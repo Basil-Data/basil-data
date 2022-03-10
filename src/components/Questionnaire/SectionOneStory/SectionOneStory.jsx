@@ -22,12 +22,12 @@ function SectionOneStory () {
     // get the user.id from the store to send with everything else
     const user = useSelector((store) => store.user);
     const competitiveAdvantages = useSelector(store => store.section1.competitiveAdvantages);
-    const section1Enterprise = useSelector(store => store.section1Enterprise)
+    const section1Enterprise = useSelector(store => store.section1Enterprise);
     const advantageSelection = useSelector(store => store.section1Enterprise.competitiveAdvantagesId);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SECTION_ONE' });
-        dispatch({ type: 'FETCH_ENTERPRISE_SECTION_ONE'})
+        // dispatch({ type: 'FETCH_ENTERPRISE_SECTION_ONE'})
     }, []);
 
     const handleCompetitiveAdvantages = (event) => {
@@ -43,8 +43,12 @@ function SectionOneStory () {
                 type: 'SET_SECTION_ONE_ENTERPRISE',
                 payload: {competitiveAdvantagesId: advantageSelection.filter((advantageSelection) => advantageSelection !== event.target.value)}
             })
+            dispatch({
+                type: 'DELETE_COMPETITIVE_ADVANTAGE',
+                payload: event.target.value
+            })
         }
-    }
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -181,10 +185,12 @@ function SectionOneStory () {
                     {competitiveAdvantages?.map(advantage => (
                             <FormControlLabel 
                                 key = {advantage.id} 
+                                // checked={advantageSelection.includes(advantage.id)}
+                                value={advantage.id}
+                                onChange={handleCompetitiveAdvantages}
                                 control={
                                     <Checkbox 
-                                        value={advantage.id}
-                                        onChange={handleCompetitiveAdvantages}
+                                        
                                     />} 
                                 label={advantage.advantage} />
                     ))}
