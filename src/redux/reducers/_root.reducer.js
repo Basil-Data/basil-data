@@ -10,6 +10,7 @@ import section3Enterprise from './section3Enterprise.reducer';
 import section4 from './section4.reducer';
 import section6 from './section6.reducer';
 import section7 from './section7.reducer';
+import section7Enterprise from './section7Enterprise.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   section4,
   section6,
   section7,
+  section7Enterprise,
 });
 
 export default rootReducer;

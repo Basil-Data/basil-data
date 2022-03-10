@@ -19,14 +19,46 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 function SectionOneStory () {
     const dispatch = useDispatch();
 
+    // get the user.id from the store to send with everything else
+    const user = useSelector((store) => store.user);
     const competitiveAdvantages = useSelector(store => store.section1.competitiveAdvantages);
     const section1Enterprise = useSelector(store => store.section1Enterprise)
-
-    console.log(section1Enterprise);
+    const advantageSelection = useSelector(store => store.section1Enterprise.competitiveAdvantagesId);
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_SECTION_ONE' })
+        dispatch({ type: 'FETCH_SECTION_ONE' });
+        dispatch({ type: 'FETCH_ENTERPRISE_SECTION_ONE'})
     }, []);
+
+    const handleCompetitiveAdvantages = (event) => {
+        const index = advantageSelection.indexOf(event.target.value)
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_ONE_ENTERPRISE',
+                payload: {competitiveAdvantagesId: [...advantageSelection, event.target.value]}
+            })
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_ONE_ENTERPRISE',
+                payload: {competitiveAdvantagesId: advantageSelection.filter((advantageSelection) => advantageSelection !== event.target.value)}
+            })
+        }
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        dispatch({
+            type: 'UPDATE_SECTION_ONE',
+            // Make sure to send the enterpriseID (which is the same as 
+            // the user id from the store) as part of the payload
+            // this was the way I was able to figure it out
+            payload: {
+                id: user.id,
+                data: section1Enterprise
+        }})
+    };
 
     return (
         <>
@@ -147,7 +179,14 @@ function SectionOneStory () {
             <Box className='centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
                     {competitiveAdvantages?.map(advantage => (
-                            <FormControlLabel key = {advantage.id} control={<Checkbox />} label={advantage.advantage} />
+                            <FormControlLabel 
+                                key = {advantage.id} 
+                                control={
+                                    <Checkbox 
+                                        value={advantage.id}
+                                        onChange={handleCompetitiveAdvantages}
+                                    />} 
+                                label={advantage.advantage} />
                     ))}
                 </FormControl>
             </Box>
@@ -181,8 +220,20 @@ function SectionOneStory () {
             </Grid>
             <br/>
             <br/>
-            <button className="btn">Submit</button>
-            <Link to="/impact"><button className="btn">Next</button></Link>
+            <button 
+                className="btn"
+                onClick={(event) => handleSubmit(event)}
+            >
+                Submit
+            </button>
+            <Link to="/impact">
+                <button 
+                    className="btn"
+                    onClick={(event) => handleSubmit(event)}
+                >
+                    Next
+                </button>
+            </Link>
         </form>
         </>
     )

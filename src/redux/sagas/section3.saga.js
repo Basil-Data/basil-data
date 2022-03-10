@@ -23,7 +23,7 @@ function* postSectionThree (action) {
         yield axios.put(`/api/section3/${action.payload.id}`, action.payload.data)
     }
     catch {
-        console.log('failed to post section three');
+        console.log('failed to put section three');
     }
 }
 

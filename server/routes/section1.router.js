@@ -9,8 +9,6 @@ const axios = require('axios');
 
 // Router to get the arrays for Section One
 router.get('/', async (req, res) => {
-    // GET route code here
-    console.log('in get router for section 1')
 
     let sqlText = `
         SELECT *
@@ -27,13 +25,10 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  // GET route code here
-    console.log('in get router for section 1')
 
     let sqlText = `
         SELECT 
-            "competitiveAdvantages"."id",
-            "competitiveAdvantages"."advantage"
+            ARRAY_AGG("competitiveAdvantages"."id")
         FROM "user"
         JOIN "competitiveAdvantagesJunction"
             ON "user"."id" = "competitiveAdvantagesJunction"."enterpriseId"
@@ -42,50 +37,79 @@ router.get('/:id', async (req, res) => {
         WHERE "user"."id" = $1;
     `;
 
-    let sqlText2 = `
-        SELECT 
-            "anticipatedRisks"."id",
-            "anticipatedRisks"."risk"
-        FROM "user"
-        JOIN "anticipatedRisksJunction"
-            ON "user"."id" = "anticipatedRisksJunction"."enterpriseId"
-        JOIN "anticipatedRisks"
-            ON "anticipatedRisksJunction"."riskId" = "anticipatedRisks"."id"
-        WHERE "user"."id" = $1;
-    `;
-
     let sqlParams = [
         req.user.id
     ];
 
-    const results1 = await pool.query(sqlText, sqlParams);
-    const results2 = await pool.query(sqlText2, sqlParams);
+    const competitiveAdvantagesId = await pool.query(sqlText, sqlParams);
 
     const results = {
-        results1: results1.rows,
-        results2: results2.rows
+        competitiveAdvantagesId: competitiveAdvantagesId.rows[0].array_agg,
     }
 
     res.send(results);
 });
 
-/**
- * POST route template
- */
+// Post router for posting to joiner table for check boxes
 router.post('/', (req, res) => {
-  // POST route code here
+
+    console.log(req.body)
+
+    for (let individual of req.body.competitiveAdvantagesId) {
+
     let sqlText = `
-        INSERT INTO "answers"
-            ("enterpriseId")
+        INSERT INTO "competitiveAdvantagesJunction"
+            ("enterpriseId", "advantageId")
         VALUES
-            ($1)
+            ($1, $2)
     `;
 
+    let sqlParams = [
+        req.user.id,
+        individual
+    ];
+
+    pool.query(sqlText, sqlParams)
+    }
+
+    res.sendStatus(200);
+
+})
+
+// Router for putting/updating answers into table
+router.put('/', (req, res) => {
+
+    let sqlText = `
+        UPDATE "answers"
+        SET 
+            "enterpriseSize1" = $1,
+            "dateFounded1" = $2,
+            "missionStatement1" = $3,
+            "understandProblem1" = $4,
+            "yearsCollectiveExperience1" = $5,
+            "percentageBIPOC1" = $6,
+            "percentageFemale1" = $7,
+            "investorIntroduction1" = $8
+        WHERE "answers"."enterpriseId" = $9;
+    `;
+
+    let sqlParams = [
+        req.body.enterpriseSize1,
+        req.body.dateFounded1,
+        req.body.missionStatement1,
+        req.body.understandProblem1,
+        req.body.yearsCollectiveExperience1,
+        req.body.percentageBIPOC1,
+        req.body.percentageFemale1,
+        req.body.investorIntroduction1,
+        req.user.id
+    ];
+
     pool
-        .query(sqlText, [req.user.id])
+        .query(sqlText, sqlParams)
         .then(res.sendStatus(200))
         .catch(error => {
-            console.log('error posting answers', error)
+            console.log('error posting answers section 1', error)
             res.sendStatus(500);
         })
 });

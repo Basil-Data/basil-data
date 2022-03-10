@@ -1,5 +1,4 @@
-import react from 'react';
-import { useState, useEffect} from 'react';
+import { React, useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -24,8 +23,6 @@ function SectionFourTraction() {
             type: "FETCH_SECTION_FOUR",
         });
     }, []);
-
- 
 
     const [generatedRevenue, setGeneratedRevenue] = useState(false);
 
