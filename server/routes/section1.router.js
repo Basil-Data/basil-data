@@ -47,25 +47,37 @@ router.get('/:id', async (req, res) => {
 });
 
 // Post router for posting to joiner table for check boxes
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
 
-    console.log(req.body)
+    console.log(req.body);
+
+    let sqlText = `
+    DELETE FROM "competitiveAdvantagesJunction"
+    WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlParams = [
+        req.user.id
+    ];
+
+    await pool.query(sqlText, sqlParams);
 
     for (let individual of req.body.competitiveAdvantagesId) {
 
-    let sqlText = `
+
+    let sqlText2 = `
         INSERT INTO "competitiveAdvantagesJunction"
             ("enterpriseId", "advantageId")
         VALUES
             ($1, $2)
     `;
 
-    let sqlParams = [
+    let sqlParams2 = [
         req.user.id,
         individual
     ];
 
-    pool.query(sqlText, sqlParams)
+    await pool.query(sqlText2, sqlParams2);
     }
 
     res.sendStatus(200);
