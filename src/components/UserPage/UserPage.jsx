@@ -1,9 +1,16 @@
 import React from 'react';
+import {useEffect} from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {Link} from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 function UserPage() {
+  const dispatch = useDispatch();
+
+  useEffect(() => { 
+    dispatch({ type: 'CREATE_ANSWER'})
+  }, []);
+
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   return (

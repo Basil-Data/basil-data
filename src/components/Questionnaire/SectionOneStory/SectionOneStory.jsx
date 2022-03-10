@@ -19,13 +19,28 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 function SectionOneStory () {
     const dispatch = useDispatch();
 
+    // get the user.id from the store to send with everything else
+    const user = useSelector((store) => store.user);
     const competitiveAdvantages = useSelector(store => store.section1.competitiveAdvantages);
+    const section1Enterprise = useSelector(store => store.section1Enterprise)
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SECTION_ONE' })
     }, []);
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
 
+        dispatch({
+            type: 'POST_SECTION_ONE',
+            // Make sure to send the enterpriseID (which is the same as 
+            // the user id from the store) as part of the payload
+            // this was the way I was able to figure it out
+            payload: {
+                id: user.id,
+                data: section1Enterprise
+        }})
+    };
 
     return (
         <>
@@ -37,9 +52,27 @@ function SectionOneStory () {
                 Make sure to be enthusiastic and show investors why they should go with you!</p>
         <form className='questionnaireForm'>
             <h5>What is the size of your enterprise? (people)</h5>
-            <TextField id="outlined-basic" label="Number of people" variant="outlined" />
+            <TextField 
+                id="outlined-basic" 
+                label="Number of people" 
+                variant="outlined" 
+                value={section1Enterprise.enterpriseSize1}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_ONE_ENTERPRISE',
+                    payload: { enterpriseSize1: event.target.value }
+                })}
+            />
             <h5>When was the organization founded?</h5>
-            <TextField id="outlined-basic" label="Date founded" variant="outlined" />
+            <TextField 
+                id="outlined-basic" 
+                label="Date founded" 
+                variant="outlined" 
+                value={section1Enterprise.dateFounded1}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_ONE_ENTERPRISE',
+                    payload: { dateFounded1: event.target.value }
+                })}
+            />
             <h5>What is your Mission Statement?</h5>
             <Grid
                 container
@@ -59,7 +92,13 @@ function SectionOneStory () {
                         label="Mission Statement" 
                         variant="outlined" 
                         multiline rows={5}
-                        fullWidth/>
+                        fullWidth
+                        value={section1Enterprise.missionStatement1}
+                        onChange={(event) => dispatch({
+                            type: 'SET_SECTION_ONE_ENTERPRISE',
+                            payload: { missionStatement1: event.target.value }
+                        })}
+                    />
                 </Box>
             </Grid>
             <h5>How well do you understand the problem?</h5>
@@ -69,6 +108,10 @@ function SectionOneStory () {
                 row
                 name="radio-buttons-group"
                 className='centerHelp'
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_ONE_ENTERPRISE',
+                    payload: {understandProblem1: event.target.value}
+                })}
             >
                 <FormControlLabel labelPlacement="top" value="1" control={<Radio />} label="1" />
                 <FormControlLabel labelPlacement="top" value="2" control={<Radio />} label="2" />
@@ -82,11 +125,38 @@ function SectionOneStory () {
                 <FormControlLabel labelPlacement="top" value="10" control={<Radio />} label="10" />
             </RadioGroup>
             <h5>How many years of collective experience within the impact problem space?</h5>
-            <TextField id="outlined-basic" label="Number of years" variant="outlined" />
+            <TextField 
+                id="outlined-basic" 
+                label="Number of years" 
+                variant="outlined" 
+                value={section1Enterprise.yearsCollectiveExperience1}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_ONE_ENTERPRISE',
+                    payload: { yearsCollectiveExperience1: event.target.value }
+                })}
+            />
             <h5>What percentage of your founding team is BIPOC (Black, Indigenous, Person of Color)?</h5>
-            <TextField id="outlined-basic" label="Percentage BIPOC" variant="outlined" />
+            <TextField 
+                id="outlined-basic" 
+                label="Percentage BIPOC" 
+                variant="outlined" 
+                value={section1Enterprise.percentageBIPOC1}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_ONE_ENTERPRISE',
+                    payload: { percentageBIPOC1: event.target.value }
+                })}
+            />
             <h5>What percentage of your founding team is female?</h5>
-            <TextField id="outlined-basic" label="Percentage female" variant="outlined" />
+            <TextField 
+                id="outlined-basic" 
+                label="Percentage female" 
+                variant="outlined"
+                value={section1Enterprise.percentageFemale1}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_ONE_ENTERPRISE',
+                    payload: { percentageFemale1: event.target.value }
+                })} 
+            />
             <h5>Select from the list of tangible competitive advantages that apply to your organization</h5>
             <Box className='centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
@@ -114,13 +184,31 @@ function SectionOneStory () {
                         label="Introduction" 
                         variant="outlined" 
                         multiline rows={5}
-                        fullWidth/>
+                        fullWidth
+                        value={section1Enterprise.investorIntroduction1}
+                        onChange={(event) => dispatch({
+                            type: 'SET_SECTION_ONE_ENTERPRISE',
+                            payload: { investorIntroduction1: event.target.value }
+                        })} 
+                    />
                 </Box>
             </Grid>
             <br/>
             <br/>
-            <button className="btn">Submit</button>
-            <Link to="/impact"><button className="btn">Next</button></Link>
+            <button 
+                className="btn"
+                onClick={(event) => handleSubmit(event)}
+            >
+                Submit
+            </button>
+            <Link to="/impact">
+                <button 
+                    className="btn"
+                    onClick={(event) => handleSubmit(event)}
+                >
+                    Next
+                </button>
+            </Link>
         </form>
         </>
     )

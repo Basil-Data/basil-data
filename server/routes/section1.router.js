@@ -65,11 +65,46 @@ router.get('/:id', async (req, res) => {
     res.send(results);
 });
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-  // POST route code here
+// Router for putting/updating answers into table
+router.put('/:id', (req, res) => {
+  // PUT route code here
+
+    // Console log so you can see what is coming
+    console.log(req.body)
+
+    let sqlText = `
+        UPDATE "answers"
+        SET 
+            "enterpriseSize1" = $1,
+            "dateFounded1" = $2,
+            "missionStatement1" = $3,
+            "understandProblem1" = $4,
+            "yearsCollectiveExperience1" = $5,
+            "percentageBIPOC1" = $6,
+            "percentageFemale1" = $7,
+            "investorIntroduction1" = $8
+        WHERE "answers"."enterpriseId" = $9;
+    `;
+
+    let sqlParams = [
+        req.body.enterpriseSize1,
+        req.body.dateFounded1,
+        req.body.missionStatement1,
+        req.body.understandProblem1,
+        req.body.yearsCollectiveExperience1,
+        req.body.percentageBIPOC1,
+        req.body.percentageFemale1,
+        req.body.investorIntroduction1,
+        req.params.id
+    ];
+
+    pool
+        .query(sqlText, sqlParams)
+        .then(res.sendStatus(200))
+        .catch(error => {
+            console.log('error posting answers section 1', error)
+            res.sendStatus(500);
+        })
 });
 
 module.exports = router;
