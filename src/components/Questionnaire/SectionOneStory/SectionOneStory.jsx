@@ -125,28 +125,28 @@ function SectionOneStory () {
                 </Box>
             </Grid>
             <h5>How well do you understand the problem?</h5>
-            <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue=""
-                row
-                name="radio-buttons-group"
-                className='centerHelp'
-                onChange={(event) => dispatch({
-                    type: 'SET_SECTION_ONE_ENTERPRISE',
-                    payload: {understandProblem1: event.target.value}
-                })}
-            >
-                <FormControlLabel labelPlacement="top" value="1" control={<Radio />} label="1" />
-                <FormControlLabel labelPlacement="top" value="2" control={<Radio />} label="2" />
-                <FormControlLabel labelPlacement="top" value="3" control={<Radio />} label="3" />
-                <FormControlLabel labelPlacement="top" value="4" control={<Radio />} label="4" />
-                <FormControlLabel labelPlacement="top" value="5" control={<Radio />} label="5" />
-                <FormControlLabel labelPlacement="top" value="6" control={<Radio />} label="6" />
-                <FormControlLabel labelPlacement="top" value="7" control={<Radio />} label="7" />
-                <FormControlLabel labelPlacement="top" value="8" control={<Radio />} label="8" />
-                <FormControlLabel labelPlacement="top" value="9" control={<Radio />} label="9" />
-                <FormControlLabel labelPlacement="top" value="10" control={<Radio />} label="10" />
-            </RadioGroup>
+                <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue={section1Enterprise.understandProblem1}
+                    row
+                    name="radio-buttons-group"
+                    className='centerHelp'
+                    onChange={(event) => dispatch({
+                        type: 'SET_SECTION_ONE_ENTERPRISE',
+                        payload: {understandProblem1: event.target.value}
+                    })}
+                >
+                    <FormControlLabel labelPlacement="top" value="1" control={<Radio />} label="1" />
+                    <FormControlLabel labelPlacement="top" value="2" control={<Radio />} label="2" />
+                    <FormControlLabel labelPlacement="top" value="3" control={<Radio />} label="3" />
+                    <FormControlLabel labelPlacement="top" value="4" control={<Radio />} label="4" />
+                    <FormControlLabel labelPlacement="top" value="5" control={<Radio />} label="5" />
+                    <FormControlLabel labelPlacement="top" value="6" control={<Radio />} label="6" />
+                    <FormControlLabel labelPlacement="top" value="7" control={<Radio />} label="7" />
+                    <FormControlLabel labelPlacement="top" value="8" control={<Radio />} label="8" />
+                    <FormControlLabel labelPlacement="top" value="9" control={<Radio />} label="9" />
+                    <FormControlLabel labelPlacement="top" value="10" control={<Radio />} label="10" />
+                </RadioGroup>
             <h5>How many years of collective experience within the impact problem space?</h5>
             <TextField 
                 id="outlined-basic" 

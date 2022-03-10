@@ -22,6 +22,7 @@ function SectionThreeSolution () {
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SECTION_THREE'});
+        dispatch({ type: 'FETCH_ENTERPRISE_SECTION_THREE'})
     }, []);
 
     // get the user.id from the store to send with everything else

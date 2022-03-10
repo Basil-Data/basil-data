@@ -42,36 +42,57 @@ router.get('/:id', async (req, res) => {
 
     let sqlText = `
         SELECT 
-            "competitiveAdvantages"."id",
-            "competitiveAdvantages"."advantage"
-        FROM "competitiveAdvantagesJunction"
+            ARRAY_AGG("sectorId")
+        FROM "operatingSectorJunction"
         WHERE "enterpriseId" = $1;
     `;
 
     let sqlText2 = `
         SELECT 
-            "anticipatedRisks"."id",
-        FROM "anticipatedRisksJunction"
+            ARRAY_AGG("painPointId")
+        FROM "painPointsJunction"
         WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText3 = `
+        SELECT 
+            ARRAY_AGG("technologyId")
+        FROM "technologiesJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText4 = `
+        SELECT
+            "payingCustomerProfile3",
+            "mainCompetitors3",
+            "differFromCompetitors3",
+            "testimonial3",
+            "businessModel3"
+        FROM "answers"
+        WHERE "enterpriseId" = $1
     `;
 
     let sqlParams = [
         req.user.id
     ];
 
-    const results1 = await pool.query(sqlText, sqlParams);
-    const results2 = await pool.query(sqlText2, sqlParams);
+    const operatingSectorId = await pool.query(sqlText, sqlParams);
+    const paintPointsId = await pool.query(sqlText2, sqlParams);
+    const technologiesId = await pool.query(sqlText3, sqlParams);
+    const answers = await pool.query(sqlText4, sqlParams);
 
     const results = {
-        results1: results1.rows,
-        results2: results2.rows
+        operatingSectorId: Array.isArray(operatingSectorId.rows[0].array_agg) ? operatingSectorId.rows[0].array_agg : [],
+        paintPointsId: Array.isArray(paintPointsId.rows[0].array_agg) ? paintPointsId.rows[0].array_agg : [],
+        technologiesId: Array.isArray(technologiesId.rows[0].array_agg) ? technologiesId.rows[0].array_agg : [],
+        ...answers.rows[0]
     }
 
     res.send(results);
 });
 
 // Post router for posting to joiner table for check boxes
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
 
     console.log(req.body)
 
@@ -89,7 +110,7 @@ router.post('/', (req, res) => {
         sector
     ];
 
-    pool.query(sqlText, sqlParams)
+    await pool.query(sqlText, sqlParams)
     }
 
     for (let point of req.body.paintPointsId) {
@@ -106,7 +127,7 @@ router.post('/', (req, res) => {
             point
         ];
     
-        pool.query(sqlText, sqlParams)
+        await pool.query(sqlText, sqlParams)
     }
 
     for (let tech of req.body.technologiesId) {
@@ -123,7 +144,7 @@ router.post('/', (req, res) => {
             tech
         ];
     
-        pool.query(sqlText, sqlParams)
+        await pool.query(sqlText, sqlParams)
     }
 
     res.sendStatus(200);
