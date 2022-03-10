@@ -34,9 +34,11 @@ function* fetchSectionTwo() {
 
 
 function* postSectionTwo (action) {
-
+    console.log('action.payload', action.payload);
+    
     try{
-        yield axios.put(`/api/section2/${action.payload.id}`, action.payload.data)
+        yield axios.put(`/api/section2`, action.payload.data);
+        yield axios.post(`/api/section2`, action.payload.data);
     }
     catch {
         console.log('POST section2 error');
@@ -48,6 +50,6 @@ function* section2Saga() {
     // handle all incoming 'FETCH_IMPACT_SECTORS' requests
     yield takeEvery('FETCH_IMPACT_SECTORS', fetchImpactSectors);
     yield takeEvery('FETCH_SECTION_TWO', fetchSectionTwo);
-    yield takeEvery('POST_SECTION_TWO', postSectionTwo);
+    yield takeEvery('UPDATE_SECTION_TWO', postSectionTwo);
 }
 export default section2Saga

@@ -11,9 +11,11 @@ import {
     TableBody,
     Button, 
     Box, 
+    Checkbox,
     Select,
     MenuItem,
     FormControl,
+    FormControlLabel,
     FormGroup,
     InputLabel,
     TextField,
@@ -28,42 +30,54 @@ function SectionTwoImpact() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchImpactSectors();
-        fetchSectionTwo();
+        dispatch({type: 'FETCH_SECTION_TWO'});
+        dispatch({type: 'FETCH_IMPACT_SECTORS'});
+        dispatch({type: 'FETCH_ENTERPRISE_SECTION_TWO'});
     }, [])
 
     const user = useSelector(store => store.user);
     const impactSectors = useSelector(store => store.section2.impactSectors);
     const section2Enterprise = useSelector(store => store.section2Enterprise);
-
+    const selectedImpactSector = useSelector(store => store.section2Enterprise.impactSectorId);
 
 
     console.log('impact sectors are:', impactSectors);
     console.log('section2Enterprise:', section2Enterprise);
     console.log('user', user);
 
-    const fetchImpactSectors = () => {
-        dispatch({
-            type: 'FETCH_IMPACT_SECTORS'
-        });
-    }
 
-    const fetchSectionTwo = () => {
-        dispatch({
-            type: 'FETCH_SECTION_TWO'
-        })
-    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
         dispatch({
-            type: 'POST_SECTION_TWO',
+            type: 'UPDATE_SECTION_TWO',
             payload: {
                 id: user.id,
                 data: section2Enterprise
             }
         })
+    }
+
+    const handleImpactSector = (event) => {
+        console.log('in handleImpactSector');
+        const index = selectedImpactSector.indexOf(event.target.value)
+        console.log('index:', index);
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    impactSectorId: [...selectedImpactSector, event.target.value]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    impactSectorId: selectedImpactSector.filter((selectedImpactSector) => selectedImpactSector !== event.target.value)
+                }
+            });
+        }
     }
 
 
@@ -104,21 +118,21 @@ function SectionTwoImpact() {
                 </TextField>
                 <br></br>
                 <p>What category best describes your IMPACT Sector?</p>
-                <Select
-                    className="impactCategory"
-                    variant="outlined"
-                    type="text"
-                    sx={{width: 200}}
-                    placeholder="IMPACT Sector Category"
-                >
-                    <MenuItem></MenuItem>
+                <FormControl>
                     {impactSectors?.map(sector => {
                         return(
-                            <MenuItem key={sector.id}>{sector.impactSector}</MenuItem>
+                            <FormControlLabel 
+                                key={sector.id}
+                                control={
+                                    <Checkbox 
+                                        value={sector.id}
+                                        onChange={handleImpactSector}
+                                    />} 
+                                label={sector.impactSector}
+                            />
                         )
                     })}
-                    
-                </Select>
+                </FormControl>
                 <br></br>
                 <p>
                     Please tell us about the economic, 
