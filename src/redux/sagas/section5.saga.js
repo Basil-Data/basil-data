@@ -27,7 +27,7 @@ function* postSectionFive (action) {
 
 function* updateSectionFive (action) {
     try {
-        yield axios.put(`/api/section5/${action.payload.id}`, action.payload.data)
+        yield axios.put(`/api/section5/:id`, action.payload.data)
     }
     catch {
         console.error('Section 5 PUT saga failed');

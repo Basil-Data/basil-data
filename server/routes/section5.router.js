@@ -81,7 +81,7 @@ router.put('/:id', async (req, res) => {
     req.body.serviceableMarket5,
     req.body.obtainableMarket5,
     req.body.whyRealistic5,
-    req.params.id
+    req.user.id
   ]
 
   pool.query(sqlText, sqlParams)

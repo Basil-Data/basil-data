@@ -1,5 +1,4 @@
-import react from 'react';
-import { useState, useEffect} from 'react';
+import { React, useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -26,6 +25,27 @@ function SectionFourTraction() {
         });
     }, []);
 
+    // These two functions toggle local state and dispatch the result of the boolean to the server
+    function generatingRevenue() {
+
+        setGeneratedRevenue(true)
+        dispatch({
+            type: 'SET_SECTION4_RESPONSES',
+            payload: {
+                generatingRevenue4: True
+            }
+        })
+    }
+
+    function notGeneratingRevenue() {
+        setGeneratedRevenue(false)
+        dispatch({
+            type: 'SET_SECTION4_RESPONSES',
+            payload: {
+                generatingRevenue4: False
+            }
+        })
+    }
  
 
     const [generatedRevenue, setGeneratedRevenue] = useState(false);
@@ -99,7 +119,18 @@ function SectionFourTraction() {
                     How much have you received in funding to date?
                 </h5>
 
-                <TextField id="outlined-basic" label="Amount Funded $" variant="outlined" />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Amount Funded $" 
+                    variant="outlined"
+                    value={section4.fundingReceived4}
+                    onChange={(evt =>
+                        dispatch({
+                            type: 'SET_SECTION4_RESPONSES',
+                            payload: {
+                                fundingReceived4: evt.target.value
+                            }
+                        }))} />
 
                 <h5>
                     What indicators other than sales show your progress since inception?
@@ -138,7 +169,7 @@ function SectionFourTraction() {
                     label="Long Answer Text" 
                     variant="outlined" 
                     multiline rows={5} 
-                    fullWidth 
+                    fullWidth
                 />
                 </Box>
                 </Grid>
@@ -151,7 +182,16 @@ function SectionFourTraction() {
                     Please provide a percentage
                 </h6>
 
-                <TextField id="outlined-basic" label="Growth Percentage" variant="outlined" />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Growth Percentage" 
+                    variant="outlined"
+                    value={section4.customerGrowth4}
+                    onChange={(evt => 
+                        dispatch({
+                            type: 'SET_SECTION4_RESPONSES',
+                            payload: { customerGrowth4: evt.target.value }
+                        }))} />
 
                 <h5>
                     Are you generating revenue?
@@ -169,14 +209,14 @@ function SectionFourTraction() {
                     labelPlacement="top" 
                     control={<Radio />} 
                     label="Yes" 
-                    value="Yes" 
-                    onClick={(evt) => setGeneratedRevenue(true)}/>
+                    value="True" 
+                    onClick={(evt) => generatingRevenue()}/>
                 
                 <FormControlLabel 
                     labelPlacement="top" 
                     control={<Radio />} 
                     label="No" value="No" 
-                    onClick={(evt) => setGeneratedRevenue(false)}/>
+                    onClick={(evt) => notGeneratingRevenue()}/>
                     
                    
                 
@@ -191,7 +231,19 @@ function SectionFourTraction() {
                     Please provide a percentage
                 </h6>
                 
-                <TextField id="outlined-basic" label="Percentage" variant="outlined" />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Percentage" 
+                    variant="outlined"
+                    value={section4.averageGrowth4}
+                    onChange={(evt => dispatch({
+                        type: 'SET_SECTION4_RESPONSES',
+                        payload: {
+                            averageGrowth4: evt.target.value
+                        }
+
+                    })
+                    )} />
 
                 <h5>
                     Are you making a profit?
@@ -208,15 +260,25 @@ function SectionFourTraction() {
 
                 <FormControlLabel 
                     labelPlacement="top" 
-                    value="Yes" 
                     control={<Radio />} 
-                    label="Yes" />
+                    label="Yes"
+                    value={section4.makingProfit4}
+                    onChange={(evt => 
+                        dispatch({
+                            type: 'SET_SECTION4_RESPONSES',
+                            payload: { makingProfit4: True }
+                        }))} />
                 
                 <FormControlLabel 
-                    labelPlacement="top" 
-                    value="No" 
+                    labelPlacement="top"  
                     control={<Radio />} 
-                    label="No" />
+                    label="No"
+                    value={section4.makingProfit4}
+                    onChange={(evt => 
+                        dispatch({
+                            type: 'SET_SECTION4_RESPONSES',
+                            payload: { makingProfit4: False }
+                        }))} />
 
                 </RadioGroup>
 
@@ -233,7 +295,15 @@ function SectionFourTraction() {
                 <TextField 
                     id="outlined-basic" 
                     label="Net Profit Margin %" 
-                    variant="outlined" />
+                    variant="outlined"
+                    value={section4.netProfitMargin4}
+                    onChange={(evt => 
+                        dispatch({
+                            type: 'SET_SECTION4_RESPONSES',
+                            payload: {
+                                netProfitMargin4: evt.target.value
+                            }
+                        }))} />
 
                 <h5>
                     Customer Acquisition Cost (CAC)
@@ -255,7 +325,15 @@ function SectionFourTraction() {
                 <TextField 
                     id="outlined-basic" 
                     label="CAC $" 
-                    variant="outlined" />
+                    variant="outlined"
+                    value={section4.customerAcquisitionCost4}
+                    onChange={(evt => 
+                        dispatch({
+                            type: 'SET_SECTION4_RESPONSES',
+                            payload: {
+                                customerAcquisitionCost4: evt.target.value
+                            }
+                        }))} />
 
                 <h5>
                     What are your total marketing expenses during one sales/marketing cycle? (in dollars)
@@ -268,7 +346,15 @@ function SectionFourTraction() {
                 <TextField 
                     id="outlined-basic" 
                     label="Marketing Expenses" 
-                    variant="outlined" />
+                    variant="outlined"
+                    value={section4.marketingExpenses4}
+                    onChange={(evt => 
+                        dispatch({
+                            type: 'SET_SECTION4_RESPONSES',
+                            payload: {
+                                customerAcquisitionCost4: evt.target.value
+                            }
+                        }))}  />
 
                 <h5>
                     How many new customers have you acquired in your most recent sales/marketing cycle?
@@ -277,7 +363,15 @@ function SectionFourTraction() {
                 <TextField 
                     id="outlined-basic" 
                     label="New Customers" 
-                    variant="outlined" />
+                    variant="outlined"
+                    value={section4.newCustomers4}
+                    onChange={(evt => 
+                        dispatch({
+                            type: 'SET_SECTION4_RESPONSES',
+                            payload: {
+                                newCustomers4: evt.target.value
+                            }
+                        }))} />
 
                 </> : <> </>
 
