@@ -456,7 +456,7 @@ VALUES
 	('Networking with others in the social impact/investing space');
 	
 DROP TABLE "helpMoveForwardJunction";
-CREATE TABLE "helpMoveForwardJunction" (
+CREATE TABLE "societalImpactJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"assistanceId" INTEGER
@@ -465,10 +465,10 @@ CREATE TABLE "helpMoveForwardJunction" (
 DROP TABLE "societalImpact";
 CREATE TABLE "societalImpact" (
 	"id" SERIAL PRIMARY KEY,
-	"impact" VARCHAR (255)
+	"societalImpact" VARCHAR (255)
 );
 INSERT INTO "societalImpact"
-	("impact")
+	("societalImpact")
 VALUES
 	('Currently not considering/May cause harm'),
 	('Actively avoiding harm with internal policies'),
@@ -479,7 +479,7 @@ DROP TABLE "societalImpactJunction";
 CREATE TABLE "societalImpactJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
-	"impactId" INTEGER
+	"societalImpactId" INTEGER
 );
 
 DROP TABLE "environmentalImpact";
@@ -499,7 +499,7 @@ DROP TABLE "environmentalImpactJunction";
 CREATE TABLE "environmentalImpactJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
-	"impactId" INTEGER
+	"environmentalImpactId" INTEGER
 );
 
 DROP TABLE "economicImpact";
@@ -519,5 +519,5 @@ DROP TABLE "economicImpactJunction";
 CREATE TABLE "economicImpactJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
-	"impactId" INTEGER
+	"economicImpactId" INTEGER
 );
