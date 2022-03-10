@@ -46,13 +46,18 @@ function PartnershipsForTheGoals() {
                     <FormControlLabel control={<Checkbox />} label={'Policies in favor or sustainable development'}/>
                     <FormControlLabel control={<Checkbox />} label={'Spending and policies on statistical measurement strategies'}/>
                 </FormControl>
-                <p> Please elaborate on the progress shown in the indicators that you use
+                <p> 
+                    Please elaborate on the progress shown in 
+                    the indicators that you use
                 </p>
                 <TextField
                     label="Please Elaborate"
                     variant="outlined"
                     type="text"
                     placeholder="Please Elaborate"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                 ></TextField>
                 <p>What level does your impact operate on?</p>
                 <RadioGroup className="centerHelp">
@@ -87,14 +92,23 @@ function PartnershipsForTheGoals() {
                     variant="outlined"
                     type="text"
                     placeholder="Location"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                 ></TextField>
-                <p>What are the specific changes you would like to see due to your efforts?</p>
+                <p>
+                    What are the specific changes you would like 
+                    to see due to your efforts?
+                </p>
                 <TextField
                     label="Specific Changes"
                     className="specificChanges"
                     variant="outlined"
                     type="text"
                     placeholder="Specific Changes"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                 ></TextField>
                 <p>Have you measured your outcomes?</p>
                 <RadioGroup className="centerHelp">
@@ -117,7 +131,11 @@ function PartnershipsForTheGoals() {
                         label="Sometimes - not consistently"
                     />
                 </RadioGroup>
-                <p>If applicable, please select any secondary Sustainable Development Goals that align with your organization's mission. </p>
+                <p>
+                    If applicable, please select any secondary 
+                    Sustainable Development Goals that align with 
+                    your organization's mission. 
+                </p>
                 <RadioGroup className="centerHelp">
                     {sdg?.map(sdg => (
                         <FormControlLabel 
