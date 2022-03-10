@@ -28,8 +28,7 @@ router.get('/:id', async (req, res) => {
 
     let sqlText = `
         SELECT 
-            "competitiveAdvantages"."id",
-            "competitiveAdvantages"."advantage"
+            ARRAY_AGG("competitiveAdvantages"."id")
         FROM "user"
         JOIN "competitiveAdvantagesJunction"
             ON "user"."id" = "competitiveAdvantagesJunction"."enterpriseId"
@@ -38,39 +37,47 @@ router.get('/:id', async (req, res) => {
         WHERE "user"."id" = $1;
     `;
 
-    let sqlText2 = `
-        SELECT 
-            "anticipatedRisks"."id",
-            "anticipatedRisks"."risk"
-        FROM "user"
-        JOIN "anticipatedRisksJunction"
-            ON "user"."id" = "anticipatedRisksJunction"."enterpriseId"
-        JOIN "anticipatedRisks"
-            ON "anticipatedRisksJunction"."riskId" = "anticipatedRisks"."id"
-        WHERE "user"."id" = $1;
-    `;
-
     let sqlParams = [
         req.user.id
     ];
 
-    const results1 = await pool.query(sqlText, sqlParams);
-    const results2 = await pool.query(sqlText2, sqlParams);
+    const competitiveAdvantagesId = await pool.query(sqlText, sqlParams);
 
     const results = {
-        results1: results1.rows,
-        results2: results2.rows
+        competitiveAdvantagesId: competitiveAdvantagesId.rows[0].array_agg,
     }
 
     res.send(results);
 });
 
-// Router for putting/updating answers into table
-router.put('/:id', (req, res) => {
-  // PUT route code here
+// Post router for posting to joiner table for check boxes
+router.post('/', (req, res) => {
 
-    // Console log so you can see what is coming
     console.log(req.body)
+
+    for (let individual of req.body.competitiveAdvantagesId) {
+
+    let sqlText = `
+        INSERT INTO "competitiveAdvantagesJunction"
+            ("enterpriseId", "advantageId")
+        VALUES
+            ($1, $2)
+    `;
+
+    let sqlParams = [
+        req.user.id,
+        individual
+    ];
+
+    pool.query(sqlText, sqlParams)
+    }
+
+    res.sendStatus(200);
+
+})
+
+// Router for putting/updating answers into table
+router.put('/', (req, res) => {
 
     let sqlText = `
         UPDATE "answers"
@@ -95,7 +102,7 @@ router.put('/:id', (req, res) => {
         req.body.percentageBIPOC1,
         req.body.percentageFemale1,
         req.body.investorIntroduction1,
-        req.params.id
+        req.user.id
     ];
 
     pool
