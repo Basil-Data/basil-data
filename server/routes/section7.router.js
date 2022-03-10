@@ -47,4 +47,101 @@ router.get('/', async (req, res) => {
     res.send(results);
 });
 
+router.get('/:id', async (req, res) => {
+
+    let sqlText1 = `
+        SELECT 
+            ARRAY_AGG("investmentVehicleId")
+        FROM "investmentVehiclesJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText2 = `
+        SELECT 
+            ARRAY_AGG("fundingUseId")
+        FROM "fundingUseJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText3 = `
+        SELECT 
+            ARRAY_AGG("assistanceId")
+        FROM "helpMoveForwardJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlParams = [
+        req.user.id
+    ];
+
+    const investmentVehicleId = await pool.query(sqlText1, sqlParams);
+    const fundingUseId = await pool.query(sqlText2, sqlParams);
+    const assistanceId = await pool.query(sqlText3, sqlParams);
+
+    const results = {        
+        investmentVehicleId: investmentVehicleId.rows[0].array_agg,
+        fundingUseId: fundingUseId.rows[0].array_agg,
+        assistanceId: assistanceId.rows[0].array_agg,
+    }
+
+    res.send(results);
+});
+
+// Router for putting/updating answers into table
+router.put('/', (req, res) => {
+
+    // Console log so you can see what is coming
+    console.log('req.body is:', req.body, 'req.user is:', req.user)
+
+    let sqlText = `
+        UPDATE "answers"
+        SET 
+            "raisingFunds7" = $1,
+            "targetAmount7" = $2,
+            "nextSteps7" = $3,
+            "understandProblem7" = $4
+        WHERE "answers"."enterpriseId" = $5;
+    `;
+
+    let sqlParams = [
+        req.body.raisingFunds7,
+        Number(req.body.targetAmount7),
+        req.body.nextSteps7,
+        Number(req.body.understandProblem7),
+        req.user.id
+    ];
+
+    pool
+        .query(sqlText, sqlParams)
+        .then(res.sendStatus(200))
+        .catch(error => {
+            console.log('error putting answers section 7', error)
+            res.sendStatus(500);
+        })
+});
+
+// Post router for posting to junction table for checkboxes
+router.post('/', (req, res) => {
+
+    for (let vehicle of req.body.investmentVehicleId) {
+
+    let sqlText = `
+        INSERT INTO "investmentVehiclesJunction"
+            ("enterpriseId", "investmentVehicleId")
+        VALUES
+            ($1, $2)
+    `;
+
+    let sqlParams = [
+        req.user.id,
+        vehicle
+    ];
+
+    pool.query(sqlText, sqlParams)
+    }
+
+    res.sendStatus(200);
+
+});
+
 module.exports = router;

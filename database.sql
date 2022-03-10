@@ -57,7 +57,7 @@ CREATE TABLE "answers" (
 	"serviceableMarket5" INTEGER DEFAULT NULL,
 	"obtainableMarket5" INTEGER DEFAULT NULL,
 	"whyRealistic5" VARCHAR (1024) DEFAULT NULL,
-	"raisingFunds7" BOOLEAN DEFAULT NULL,
+	"raisingFunds7" VARCHAR (255) DEFAULT NULL,
 	"targetAmount7" INTEGER DEFAULT NULL,
 	"nextSteps7" VARCHAR (1024) DEFAULT NULL,
 	"understandProblem7" INTEGER DEFAULT NULL

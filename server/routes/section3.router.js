@@ -42,48 +42,116 @@ router.get('/:id', async (req, res) => {
 
     let sqlText = `
         SELECT 
-            "competitiveAdvantages"."id",
-            "competitiveAdvantages"."advantage"
-        FROM "user"
-        JOIN "competitiveAdvantagesJunction"
-            ON "user"."id" = "competitiveAdvantagesJunction"."enterpriseId"
-        JOIN "competitiveAdvantages"
-            ON "competitiveAdvantagesJunction"."advantageId" = "competitiveAdvantages"."id"
-        WHERE "user"."id" = $1;
+            ARRAY_AGG("sectorId")
+        FROM "operatingSectorJunction"
+        WHERE "enterpriseId" = $1;
     `;
 
     let sqlText2 = `
         SELECT 
-            "anticipatedRisks"."id",
-            "anticipatedRisks"."risk"
-        FROM "user"
-        JOIN "anticipatedRisksJunction"
-            ON "user"."id" = "anticipatedRisksJunction"."enterpriseId"
-        JOIN "anticipatedRisks"
-            ON "anticipatedRisksJunction"."riskId" = "anticipatedRisks"."id"
-        WHERE "user"."id" = $1;
+            ARRAY_AGG("painPointId")
+        FROM "painPointsJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText3 = `
+        SELECT 
+            ARRAY_AGG("technologyId")
+        FROM "technologiesJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText4 = `
+        SELECT
+            "payingCustomerProfile3",
+            "mainCompetitors3",
+            "differFromCompetitors3",
+            "testimonial3",
+            "businessModel3"
+        FROM "answers"
+        WHERE "enterpriseId" = $1
     `;
 
     let sqlParams = [
         req.user.id
     ];
 
-    const results1 = await pool.query(sqlText, sqlParams);
-    const results2 = await pool.query(sqlText2, sqlParams);
+    const operatingSectorId = await pool.query(sqlText, sqlParams);
+    const paintPointsId = await pool.query(sqlText2, sqlParams);
+    const technologiesId = await pool.query(sqlText3, sqlParams);
+    const answers = await pool.query(sqlText4, sqlParams);
 
     const results = {
-        results1: results1.rows,
-        results2: results2.rows
+        operatingSectorId: Array.isArray(operatingSectorId.rows[0].array_agg) ? operatingSectorId.rows[0].array_agg : [],
+        paintPointsId: Array.isArray(paintPointsId.rows[0].array_agg) ? paintPointsId.rows[0].array_agg : [],
+        technologiesId: Array.isArray(technologiesId.rows[0].array_agg) ? technologiesId.rows[0].array_agg : [],
+        ...answers.rows[0]
     }
 
     res.send(results);
 });
 
-/**
- * PUT route template
- */
+// Post router for posting to joiner table for check boxes
+router.post('/', async (req, res) => {
+
+    console.log(req.body)
+
+    for (let sector of req.body.operatingSectorId) {
+
+    let sqlText = `
+        INSERT INTO "operatingSectorJunction"
+            ("enterpriseId", "sectorId")
+        VALUES
+            ($1, $2)
+    `;
+
+    let sqlParams = [
+        req.user.id,
+        sector
+    ];
+
+    await pool.query(sqlText, sqlParams)
+    }
+
+    for (let point of req.body.paintPointsId) {
+
+        let sqlText = `
+            INSERT INTO "painPointsJunction"
+                ("enterpriseId", "painPointId")
+            VALUES
+                ($1, $2)
+        `;
+    
+        let sqlParams = [
+            req.user.id,
+            point
+        ];
+    
+        await pool.query(sqlText, sqlParams)
+    }
+
+    for (let tech of req.body.technologiesId) {
+
+        let sqlText = `
+            INSERT INTO "technologiesJunction"
+                ("enterpriseId", "technologyId")
+            VALUES
+                ($1, $2)
+        `;
+    
+        let sqlParams = [
+            req.user.id,
+            tech
+        ];
+    
+        await pool.query(sqlText, sqlParams)
+    }
+
+    res.sendStatus(200);
+
+});
+
 router.put('/:id', (req, res) => {
-  // PUT route code here
     // Console log so you can see what is coming
     console.log(req.body)
 

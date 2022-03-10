@@ -1,4 +1,8 @@
-const section3Enterprise = (state = {}, action) => {
+const section3Enterprise = (state = {
+    operatingSectorId: [],
+    painPointsId: [],
+    technologiesId: []
+}, action) => {
     switch (action.type) {
         case 'SET_SECTION_THREE_ENTERPRISE':
             return {...state, ...action.payload};

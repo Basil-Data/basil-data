@@ -16,6 +16,21 @@ function* getSectionThree () {
     }
 };
 
+function* getSectionThreeEnterprise () {
+    try {
+        const response = yield axios.get(`/api/section3/:id`);
+        console.log(response.data);
+        yield put({
+            type: 'SET_SECTION_THREE_ENTERPRISE',
+            payload: response.data
+        })
+    }
+    catch (error) {
+        console.log('failed to get section three enterprise responses', error);
+
+    }
+}
+
 function* postSectionThree (action) {
 
     try {
@@ -25,11 +40,13 @@ function* postSectionThree (action) {
     catch {
         console.log('failed to put section three');
     }
-}
+};
+
 
 function* section3Saga() {
     yield takeLatest('FETCH_SECTION_THREE', getSectionThree);
     yield takeLatest('POST_SECTION_THREE', postSectionThree);
+    yield takeLatest('FETCH_ENTERPRISE_SECTION_THREE', getSectionThreeEnterprise);
 }
 
 export default section3Saga;
