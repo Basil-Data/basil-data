@@ -33,6 +33,22 @@ function* fetchSectionTwo() {
 }
 
 
+function* fetchSectionTwoEnterprise() {
+
+    try {
+        const response = yield axios.get(`/api/section2/:id`)
+        console.log('response.data:', response.data);
+        yield put({
+            type: 'SET_SECTION_TWO_ENTERPRISE',
+            payload: response.data
+        }) 
+    }
+    catch (error) {
+        console.log('section2 Enterprise GET failed', error); 
+    }
+}
+
+
 function* postSectionTwo (action) {
     console.log('action.payload', action.payload);
     
@@ -51,5 +67,6 @@ function* section2Saga() {
     yield takeEvery('FETCH_IMPACT_SECTORS', fetchImpactSectors);
     yield takeEvery('FETCH_SECTION_TWO', fetchSectionTwo);
     yield takeEvery('UPDATE_SECTION_TWO', postSectionTwo);
+    yield takeEvery('FETCH_SECTION_TWO_ENTERPRISE', fetchSectionTwoEnterprise)
 }
 export default section2Saga
