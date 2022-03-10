@@ -30,7 +30,6 @@ function* getSectionOneEnterprise () {
     }
     catch (error) {
         console.log('failed to get section one enterprise responses', error);
-
     }
 }
 

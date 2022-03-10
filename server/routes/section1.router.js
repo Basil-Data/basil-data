@@ -55,7 +55,7 @@ router.get('/:id', async (req, res) => {
     const answers = await pool.query(sqlText2, sqlParams);
 
     const results = {
-        competitiveAdvantagesId: competitiveAdvantagesId.rows[0].array_agg,
+        competitiveAdvantagesId: Array.isArray(competitiveAdvantagesId.rows[0].array_agg) ? competitiveAdvantagesId.rows[0].array_agg : [],
         ...answers.rows[0]
     }
 
