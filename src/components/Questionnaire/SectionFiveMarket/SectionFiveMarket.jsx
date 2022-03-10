@@ -11,24 +11,23 @@ import QuestionnaireNav from "../QuestionnaireNav/QuestionnaireNav";
 
 function SectionFiveMarket() {
   const dispatch = useDispatch();
-  const response = useSelector((store) => store.section5EnterpriseReducer);
+  const section5 = useSelector((store) => store.section5EnterpriseReducer);
+  const user = useSelector((store) => store.user)
 
-  console.log("response is", response);
 
   const [marketReason, setMarketReason] = useState("");
 
+  // Update Function
   function handleSubmit(evt) {
     evt.preventDefault();
 
+    
     dispatch({
-      type: "SET_SECTION5_RESPONSES",
+      type: "UPDATE_SECTION_FIVE",
       payload: {
-        addressableMarket5: evt.target.value,
-        serviceableMarket5: evt.target.value,
-        obtainableMarket5: evt.target.value,
-        whyRealistic5: evt.target.value,
-      },
-    });
+        id: user.id,
+        data: section5
+      }});
   }
 
   return (
@@ -53,7 +52,7 @@ function SectionFiveMarket() {
           id="outlined-basic"
           label="TAM $"
           variant="outlined"
-          value={response.addressableMarket5}
+          value={section5.addressableMarket5}
           onChange={(evt) =>
             dispatch({
               type: "SET_SECTION5_RESPONSES",
@@ -75,7 +74,7 @@ function SectionFiveMarket() {
           id="outlined-basic"
           label="SAM $"
           variant="outlined"
-          value={response.serviceableMarket5}
+          value={section5.serviceableMarket5}
           onChange={(evt) =>
             dispatch({
               type: "SET_SECTION5_RESPONSES",
@@ -98,7 +97,7 @@ function SectionFiveMarket() {
           id="outlined-basic"
           label="SOM $"
           variant="outlined"
-          value={response.obtainableMarket5}
+          value={section5.obtainableMarket5}
           onChange={(evt) =>
             dispatch({
               type: "SET_SECTION5_RESPONSES",
@@ -129,7 +128,7 @@ function SectionFiveMarket() {
               multiline
               rows={5}
               fullWidth
-              value={response.whyRealistic}
+              value={section5.whyRealistic}
               onChange={(evt) =>
                 dispatch({
                   type: "SET_SECTION5_RESPONSES",
@@ -144,13 +143,21 @@ function SectionFiveMarket() {
         <br />
 
         <Link to="/traction">
-          <button className="btn">Back</button>
+          <button 
+            onClick={handleSubmit}
+            className="btn">Back</button>
         </Link>
 
-        <button onClick={handleSubmit} className="btn">Submit</button>
+        <button 
+            onClick={(evt) => handleSubmit(evt)} 
+            className="btn">
+            Submit
+        </button>
 
         <Link to="/risks-and-hurdles">
-          <button className="btn">Next</button>
+          <button
+            onClick={(evt) => handleSubmit(evt)} 
+            className="btn">Next</button>
         </Link>
       </form>
     </>

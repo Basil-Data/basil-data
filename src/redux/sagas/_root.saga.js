@@ -6,6 +6,7 @@ import section1Saga from './section1.saga';
 import section2Saga from './section2.saga';
 import section3Saga from './section3.saga';
 import section4Saga from './section4.saga';
+import section5Saga from './section5.saga';
 import section6Saga from './section6.saga';
 import section7Saga from './section7.saga';
 
@@ -25,6 +26,7 @@ export default function* rootSaga() {
     section2Saga(), // Section two's sagas for going to the router
     section3Saga(), // Section three's sagas for going to the router
     section4Saga(),
+    section5Saga(),
     section6Saga(),
     section7Saga(),
   ]);

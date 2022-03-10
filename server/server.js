@@ -13,7 +13,7 @@ const section2Router = require('./routes/section2.router');
 const section1Router = require('./routes/section1.router');
 const section3Router = require('./routes/section3.router');
 const section4Router = require('./routes/section4.router');
-const section5Router = require('/routes/section5.router');
+const section5Router = require('./routes/section5.router');
 const section6Router = require('./routes/section6.router');
 const section7Router = require('./routes/section7.router');
 
