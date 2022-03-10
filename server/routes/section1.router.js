@@ -28,13 +28,9 @@ router.get('/:id', async (req, res) => {
 
     let sqlText = `
         SELECT 
-            ARRAY_AGG("competitiveAdvantages"."id")
-        FROM "user"
-        JOIN "competitiveAdvantagesJunction"
-            ON "user"."id" = "competitiveAdvantagesJunction"."enterpriseId"
-        JOIN "competitiveAdvantages"
-            ON "competitiveAdvantagesJunction"."advantageId" = "competitiveAdvantages"."id"
-        WHERE "user"."id" = $1;
+            ARRAY_AGG("advantageId")
+        FROM "competitiveAdvantagesJunction"
+        WHERE "enterpriseId" = $1;
     `;
 
     let sqlParams = [
