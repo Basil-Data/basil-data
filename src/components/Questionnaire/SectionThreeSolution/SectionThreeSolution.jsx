@@ -25,8 +25,17 @@ function SectionThreeSolution () {
 
     const painPoints = useSelector(store => store.section3.painPoints);
     const operatingSector = useSelector(store => store.section3.operatingSector);
+    const technologies = useSelector(store => store.section3.technologies);
+    const section3Enterprise = useSelector(store => store.section3Enterprise);
 
-  
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        dispatch({
+            type: 'POST_SECTION_THREE',
+            payload: section3Enterprise
+        })
+    };
 
     return (
         <>
@@ -66,7 +75,13 @@ function SectionThreeSolution () {
                             label="Customer characteristics" 
                             variant="outlined" 
                             multiline rows={5}
-                            fullWidth/>
+                            fullWidth
+                            value={section3Enterprise.payingCustomerProfile3}
+                            onChange={(event) => dispatch({
+                                type: 'SET_SECTION_THREE_ENTERPRISE',
+                                payload: {payingCustomerProfile3: event.target.value}
+                            })}
+                        />
                     </Box>
                 </Grid>
                 <h5>Who are your main competitors?</h5>
@@ -88,7 +103,13 @@ function SectionThreeSolution () {
                             label="Main competitors" 
                             variant="outlined" 
                             multiline rows={5}
-                            fullWidth/>
+                            fullWidth
+                            value={section3Enterprise.mainCompetitors3}
+                            onChange={(event) => dispatch({
+                                type: 'SET_SECTION_THREE_ENTERPRISE',
+                                payload: {mainCompetitors3: event.target.value}
+                            })}
+                        />
                     </Box>
                 </Grid>
                 <h5>How does your product/service differ from your competitors?</h5>
@@ -110,7 +131,15 @@ function SectionThreeSolution () {
                             label="Differing competitive factors" 
                             variant="outlined" 
                             multiline rows={5}
-                            fullWidth/>
+                            fullWidth
+                            value={section3Enterprise.differFromCompetitors3}
+                            onChange={(event) => {
+                                dispatch({
+                                    type: 'SET_SECTION_THREE_ENTERPRISE',
+                                    payload: {differFromCompetitors3: event.target.value}
+                                })
+                            }}
+                        />
                     </Box>
                 </Grid>
                 <h5>What customer pain points does your product/service seek to solve?</h5>
@@ -143,14 +172,81 @@ function SectionThreeSolution () {
                             label="Testimonial" 
                             variant="outlined" 
                             multiline rows={5}
-                            fullWidth/>
+                            fullWidth
+                            value={section3Enterprise.testimonial3}
+                            onChange={(event) => dispatch({
+                                type: 'SET_SECTION_THREE_ENTERPRISE',
+                                payload: {testimonial3: event.target.value}
+                            })}
+                        />
                     </Box>
                 </Grid>
+                <h5>Describe your business model</h5>
+                <p>Things to focus on: Description of the solution from a 
+                    business standpoint;  Is the product an SaaS solution? 
+                    What is the pricing model? How will your product/service 
+                    generate revenue? What achievements do you have that can 
+                    mark your progress to-date?</p>
+                <Grid
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justifyContent="center"
+                >
+                    <Box
+                        sx={{
+                            width: 600,
+                            maxWidth: '100%',
+                        }}
+                    >
+                        <TextField 
+                            id="outlined-basic" 
+                            label="Business Model" 
+                            variant="outlined" 
+                            multiline rows={5}
+                            fullWidth
+                            value={section3Enterprise.businessModel3}
+                            onChange={(event) => dispatch({
+                                type: 'SET_SECTION_THREE_ENTERPRISE',
+                                payload: {businessModel3: event.target.value}
+                            })}
+                        />
+                    </Box>
+                </Grid>
+                <h5>Please select the top three technology applications that apply 
+                    to your organization.</h5>
+                <Box className='centerHelp' sx={{ display: 'flex' }}>
+                    <FormControl sx={{ m : 3}}>
+                        {technologies?.map(technology => (
+                                <FormControlLabel 
+                                    control={<Checkbox />} 
+                                    label={technology.technology}
+                                    key={technology.id} />
+                        ))}
+                    </FormControl>
+                </Box>
                 <br/>
                 <br/>
-                <Link to="/impact"><button className="btn">Back</button></Link>
-                <button className="btn">Submit</button>
-                <Link to="/traction"><button className="btn">Next</button></Link>
+                <Link to="/impact">
+                    <button 
+                        className="btn" 
+                        onClick={(event) => handleSubmit(event)}>
+                        Back
+                    </button>
+                </Link>
+                <button 
+                    className="btn"
+                    onClick={(event) => handleSubmit(event)}>
+                        Submit
+                    </button>
+                <Link to="/traction">
+                    <button 
+                        className="btn"
+                        onClick={(event) => handleSubmit(event)}>
+                        Next
+                    </button>
+                </Link>
             </form>
         </>
     )

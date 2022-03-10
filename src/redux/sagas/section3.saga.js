@@ -16,8 +16,19 @@ function* getSectionThree () {
     }
 };
 
+function* postSectionThree (action) {
+
+    try {
+        yield axios.post(`/api/section3`, action.payload)
+    }
+    catch {
+        console.log('failed to post section three');
+    }
+}
+
 function* section3Saga() {
     yield takeLatest('FETCH_SECTION_THREE', getSectionThree);
+    yield takeLatest('POST_SECTION_THREE', postSectionThree);
 }
 
 export default section3Saga;

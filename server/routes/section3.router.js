@@ -22,13 +22,19 @@ router.get('/', async (req, res) => {
         FROM "painPoints"
     `;
 
+    let sqlText3 = `
+        SELECT *
+        FROM "technologies"
+    `;
+
     const results1 = await pool.query(sqlText);
     const results2 = await pool.query(sqlText2);
-
+    const results3 = await pool.query(sqlText3);
 
     const results = {
         operatingSector: results1.rows,
-        painPoints: results2.rows
+        painPoints: results2.rows,
+        technologies: results3.rows
     };
 
     res.send(results);
@@ -82,6 +88,21 @@ router.get('/:id', async (req, res) => {
  */
 router.post('/', (req, res) => {
   // POST route code here
+
+  let sqlText = `
+    INSERT INTO "answers"
+        ("payingCustomerProfile3")
+    VALUES
+        ($1);
+  `;
+
+  let sqlParams = [
+      req.body.payingCustomerProfile3
+  ];
+
+  pool.query(sqlText, sqlParams)
+    .then(res.sendStatus(200))
+    .catch((err) => console.log('error in section three post', err))
 });
 
 module.exports = router;

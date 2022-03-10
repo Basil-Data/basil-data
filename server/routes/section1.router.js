@@ -74,6 +74,20 @@ router.get('/:id', async (req, res) => {
  */
 router.post('/', (req, res) => {
   // POST route code here
+    let sqlText = `
+        INSERT INTO "answers"
+            ("enterpriseId")
+        VALUES
+            ($1)
+    `;
+
+    pool
+        .query(sqlText, [req.user.id])
+        .then(res.sendStatus(200))
+        .catch(error => {
+            console.log('error posting answers', error)
+            res.sendStatus(500);
+        })
 });
 
 module.exports = router;
