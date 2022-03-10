@@ -6,6 +6,7 @@ import section1Enterprise from './section1Enterprise.reducer';
 import section2Enterprise from './section2Enterprise.reducer';
 import section2 from './section2.reducer';
 import section3 from './section3.reducer';
+import section3Enterprise from './section3Enterprise.reducer';
 import section4 from './section4.reducer';
 import section5EnterpriseReducer from './section5Enterprise.reducer';
 import section6 from './section6.reducer';
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   section2Enterprise, // All the customer's data from section two
   section2, // All the data needed for section two of the form
   section3, // All the data needed for section three of the form
+  section3Enterprise, // All the customer's data from section one
   section4,
   section5EnterpriseReducer,
   section6,
