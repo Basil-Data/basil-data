@@ -18,6 +18,7 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 function SectionFourTraction() {
     const dispatch = useDispatch();
     const section4 = useSelector((store) => store.section4);
+    const user = useSelector((store) => store.user);
 
     useEffect(() => {
         dispatch({
@@ -26,7 +27,7 @@ function SectionFourTraction() {
     }, []);
 
  
-    
+
     const [generatedRevenue, setGeneratedRevenue] = useState(false);
 
     return (
@@ -50,7 +51,18 @@ function SectionFourTraction() {
                         className='centerHelp'
                     >
                         {section4.results1?.map(development => (
-                            <FormControlLabel key={development.id} value={development.id} control={<Radio />} label={development.stage} className='centerHelp' />
+                            <FormControlLabel 
+                                key={development.id} 
+                                value={development.id} // change this
+                                control={<Radio />} 
+                                label={development.stage}
+                                onChange={(evt => 
+                                    dispatch({
+                                        type: 'SET_SECTION4_RESPONSES',
+                                        payload: { 
+                                            developmentStageId: development.id}
+                                    }))} 
+                                className='centerHelp' />
                         ))}
                         
                     </RadioGroup>
@@ -67,7 +79,18 @@ function SectionFourTraction() {
                     >
 
                         {section4.results2?.map(investment => (
-                            <FormControlLabel key={investment.id} value={investment.stage} control={<Radio/>} label={investment.stage} className='centerhelp'/>
+                            <FormControlLabel 
+                                key={investment.id} 
+                                value={investment.id} 
+                                control={<Radio/>} 
+                                label={investment.stage}
+                                onChange={(evt => 
+                                    dispatch({
+                                        type: 'SET_SECTION4_RESPONSES',
+                                        payload: { 
+                                            investmentStageId: investment.id}
+                                    }))}  
+                                className='centerHelp'/>
                         ))}
                 
                     </RadioGroup>
@@ -84,7 +107,10 @@ function SectionFourTraction() {
                 <Box>
                     <FormControl className='questionnaireForm centerHelp'>
                         {section4.results3?.map(use => (
-                            <FormControlLabel  key={use.id} control={<Checkbox />} label= {use.indicator} />
+                            <FormControlLabel  
+                                key={use.id} 
+                                control={<Checkbox />} 
+                                label= {use.indicator} />
                         ))}
 
                     </FormControl>
@@ -139,8 +165,18 @@ function SectionFourTraction() {
                     className='centerHelp'
                 >
 
-                <FormControlLabel labelPlacement="top" control={<Radio />} label="Yes" value="Yes" onClick={(evt) => setGeneratedRevenue(true)}/>
-                <FormControlLabel labelPlacement="top" control={<Radio />} label="No" value="No" onClick={(evt) => setGeneratedRevenue(false)}/>
+                <FormControlLabel 
+                    labelPlacement="top" 
+                    control={<Radio />} 
+                    label="Yes" 
+                    value="Yes" 
+                    onClick={(evt) => setGeneratedRevenue(true)}/>
+                
+                <FormControlLabel 
+                    labelPlacement="top" 
+                    control={<Radio />} 
+                    label="No" value="No" 
+                    onClick={(evt) => setGeneratedRevenue(false)}/>
                     
                    
                 
@@ -170,8 +206,17 @@ function SectionFourTraction() {
                     
                 >
 
-                <FormControlLabel labelPlacement="top" value="Yes" control={<Radio />} label="Yes" />
-                <FormControlLabel labelPlacement="top" value="No" control={<Radio />} label="No" />
+                <FormControlLabel 
+                    labelPlacement="top" 
+                    value="Yes" 
+                    control={<Radio />} 
+                    label="Yes" />
+                
+                <FormControlLabel 
+                    labelPlacement="top" 
+                    value="No" 
+                    control={<Radio />} 
+                    label="No" />
 
                 </RadioGroup>
 
@@ -185,7 +230,10 @@ function SectionFourTraction() {
                     (Total Revenue - Total Costs)/ Total Revenue
                 </h6>
 
-                <TextField id="outlined-basic" label="Net Profit Margin %" variant="outlined" />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Net Profit Margin %" 
+                    variant="outlined" />
 
                 <h5>
                     Customer Acquisition Cost (CAC)
@@ -204,7 +252,10 @@ function SectionFourTraction() {
                     If known, provide below. If unknown, answer "N/A" and proceed to answer the further questions.
                 </h6>
 
-                <TextField id="outlined-basic" label="CAC $" variant="outlined" />
+                <TextField 
+                    id="outlined-basic" 
+                    label="CAC $" 
+                    variant="outlined" />
 
                 <h5>
                     What are your total marketing expenses during one sales/marketing cycle? (in dollars)
@@ -214,13 +265,19 @@ function SectionFourTraction() {
                     This includes campaigns, marketing salary expenses, overhead expenses, etc.
                 </h6>
 
-                <TextField id="outlined-basic" label="Marketing Expenses" variant="outlined" />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Marketing Expenses" 
+                    variant="outlined" />
 
                 <h5>
                     How many new customers have you acquired in your most recent sales/marketing cycle?
                 </h5>
 
-                <TextField id="outlined-basic" label="New Customers" variant="outlined" />
+                <TextField 
+                    id="outlined-basic" 
+                    label="New Customers" 
+                    variant="outlined" />
 
                 </> : <> </>
 

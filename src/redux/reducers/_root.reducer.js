@@ -8,7 +8,8 @@ import section2 from './section2.reducer';
 import section3 from './section3.reducer';
 import section3Enterprise from './section3Enterprise.reducer';
 import section4 from './section4.reducer';
-import section5EnterpriseReducer from './section5Enterprise.reducer';
+import section4Enterprise from './section4Enterprise.reducer';
+import section5Enterprise from './section5Enterprise.reducer';
 import section6 from './section6.reducer';
 import section7 from './section7.reducer';
 
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
   section3, // All the data needed for section three of the form
   section3Enterprise, // All the customer's data from section one
   section4,
-  section5EnterpriseReducer,
+  section4Enterprise,
+  section5Enterprise,
   section6,
   section7,
 });

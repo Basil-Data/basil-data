@@ -11,8 +11,9 @@ import QuestionnaireNav from "../QuestionnaireNav/QuestionnaireNav";
 
 function SectionFiveMarket() {
   const dispatch = useDispatch();
-  const section5 = useSelector((store) => store.section5EnterpriseReducer);
+  const section5 = useSelector((store) => store.section5Enterprise);
   const user = useSelector((store) => store.user)
+  console.log('user.id is', user.id);
 
 
   const [marketReason, setMarketReason] = useState("");
