@@ -29,20 +29,41 @@ function SectionTwoImpact() {
 
     useEffect(() => {
         fetchImpactSectors();
+        fetchSectionTwo();
     }, [])
 
+    const user = useSelector(store => store.user);
     const impactSectors = useSelector(store => store.section2.impactSectors);
-    const section2Enterprise = useSelector(store => store.section2Enterprise)
+    const section2Enterprise = useSelector(store => store.section2Enterprise);
 
 
 
     console.log('impact sectors are:', impactSectors);
     console.log('section2Enterprise:', section2Enterprise);
+    console.log('user', user);
 
     const fetchImpactSectors = () => {
         dispatch({
             type: 'FETCH_IMPACT_SECTORS'
         });
+    }
+
+    const fetchSectionTwo = () => {
+        dispatch({
+            type: 'FETCH_SECTION_TWO'
+        })
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        dispatch({
+            type: 'POST_SECTION_TWO',
+            payload: {
+                id: user.id,
+                data: section2Enterprise
+            }
+        })
     }
 
 
@@ -70,6 +91,9 @@ function SectionTwoImpact() {
                     variant="outlined"
                     type="text"
                     placeholder="Social/Environmental Problem"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                     value={section2Enterprise.problemBeingSolved2}
                     onChange={(event) => dispatch({
                     type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -84,6 +108,7 @@ function SectionTwoImpact() {
                     className="impactCategory"
                     variant="outlined"
                     type="text"
+                    sx={{width: 200}}
                     placeholder="IMPACT Sector Category"
                 >
                     <MenuItem></MenuItem>
@@ -95,7 +120,8 @@ function SectionTwoImpact() {
                     
                 </Select>
                 <br></br>
-                <p>Please tell us about the economic, 
+                <p>
+                    Please tell us about the economic, 
                     environmental or social COST of the problem
                     in your words (dollars lost, people effected, 
                     loss of opportunity, etc.)
@@ -106,6 +132,9 @@ function SectionTwoImpact() {
                     variant="outlined"
                     type="text"
                     placeholder="COST of The Problem"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                     value={section2Enterprise.costOfProblem2}
                     onChange={(event) => dispatch({
                     type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -124,6 +153,9 @@ function SectionTwoImpact() {
                     variant="outlined"
                     type="text"
                     placeholder="Solution"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                     value={section2Enterprise.howTheySolve2}
                     onChange={(event) => dispatch({
                     type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -142,6 +174,9 @@ function SectionTwoImpact() {
                     variant="outlined"
                     type="text"
                     placeholder="Who Benefits"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                     value={section2Enterprise.whoBenefits2}
                     onChange={(event) => dispatch({
                     type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -151,9 +186,28 @@ function SectionTwoImpact() {
 
                 </TextField>
                 <SectionTwoImpactOpportunity />
-                <Link to="/story"><button className="btn">Back</button></Link>
-                <button className="btn">Submit</button>
-                <Link to="/solution"><button className="btn">Next</button></Link>
+                <Link to="/story">
+                    <button 
+                        className="btn"
+                        onClick={(event) => handleSubmit(event)}
+                    >
+                        Back
+                    </button>
+                </Link>
+                <button 
+                    className="btn"
+                    onClick={(event) => handleSubmit(event)}
+                >
+                    Submit
+                </button>
+                <Link to="/solution">
+                    <button 
+                    className="btn"
+                    onClick={(event) => handleSubmit(event)}
+                    >
+                        Next
+                    </button>
+                </Link>
             </form>
         </Box>
         </>
