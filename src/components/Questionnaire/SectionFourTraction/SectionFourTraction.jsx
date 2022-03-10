@@ -27,6 +27,19 @@ function SectionFourTraction() {
         });
     }, []);
 
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        dispatch({
+            type: 'UPDATE_SECTION4_RESPONSES',
+            payload: {
+                id: user.id,
+                data: response
+            }
+        })
+    }
+    
+
     // These two functions toggle local state and dispatch the result of the boolean to the server
     function generatingRevenue() {
 
@@ -50,16 +63,16 @@ function SectionFourTraction() {
     }
 
     const handleProgress = (event) => {
-        const index = progressIndicator.indexOf(event.target.value)
+        const index = progressIndicator.indexOf(Number(event.target.value))
         if (index === -1) {
             dispatch({
                 type: "SET_SECTION4_RESPONSES",
-                payload: {progressIndicatorId: [...progressIndicator, event.target.value]}
+                payload: {progressIndicatorId: [...progressIndicator, (Number(event.target.value))]}
             });
         } else {
             dispatch({
                 type: "SET_SECTION4_RESPONSES",
-                payload: {progressIndicatorId: progressIndicator.filter((progressIndicator) => progressIndicator !== event.target.value)}
+                payload: {progressIndicatorId: progressIndicator.filter((progressIndicator) => progressIndicator !== Number(event.target.value))}
             });
         }
     }

@@ -16,6 +16,15 @@ function* getSectionFour () {
     }
 };
 
+function* updateSectionFive(action) {
+    try {
+        yield axios.put('/api/section4/:id', action.payload.data)
+    }
+    catch(err) {
+        console.error('Section 5 PUT saga failed');
+    }
+}
+
 function* section4Saga(){
     yield takeEvery('FETCH_SECTION_FOUR', getSectionFour);
 }

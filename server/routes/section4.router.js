@@ -39,4 +39,11 @@ router.post('/', (req, res) => {
   // POST route code here
 });
 
+router.put('/:id', (req, res) => {
+  let sqlText = `
+    UPDATE "answers"
+    SET
+      ""`
+});
+
 module.exports = router;
