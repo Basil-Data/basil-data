@@ -24,7 +24,7 @@ function SectionThreeSolution () {
         dispatch({ type: 'FETCH_SECTION_THREE'});
     }, []);
 
-    // get the user.id from the store
+    // get the user.id from the store to send with everything else
     const user = useSelector((store) => store.user);
     const painPoints = useSelector(store => store.section3.painPoints);
     const operatingSector = useSelector(store => store.section3.operatingSector);
