@@ -2,6 +2,7 @@ import react from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
 
 // MUI
 import Box from '@mui/material/Box';
@@ -89,7 +90,7 @@ function SectionOneStory () {
                 id="outlined-basic" 
                 label="Date founded" 
                 variant="outlined" 
-                value={section1Enterprise.dateFounded1}
+                value={moment(section1Enterprise.dateFounded1).format("MMMM DD, YYYY")}
                 onChange={(event) => dispatch({
                     type: 'SET_SECTION_ONE_ENTERPRISE',
                     payload: { dateFounded1: event.target.value }
