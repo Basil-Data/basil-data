@@ -44,24 +44,15 @@ router.get('/:id', async (req, res) => {
         SELECT 
             "competitiveAdvantages"."id",
             "competitiveAdvantages"."advantage"
-        FROM "user"
-        JOIN "competitiveAdvantagesJunction"
-            ON "user"."id" = "competitiveAdvantagesJunction"."enterpriseId"
-        JOIN "competitiveAdvantages"
-            ON "competitiveAdvantagesJunction"."advantageId" = "competitiveAdvantages"."id"
-        WHERE "user"."id" = $1;
+        FROM "competitiveAdvantagesJunction"
+        WHERE "enterpriseId" = $1;
     `;
 
     let sqlText2 = `
         SELECT 
             "anticipatedRisks"."id",
-            "anticipatedRisks"."risk"
-        FROM "user"
-        JOIN "anticipatedRisksJunction"
-            ON "user"."id" = "anticipatedRisksJunction"."enterpriseId"
-        JOIN "anticipatedRisks"
-            ON "anticipatedRisksJunction"."riskId" = "anticipatedRisks"."id"
-        WHERE "user"."id" = $1;
+        FROM "anticipatedRisksJunction"
+        WHERE "enterpriseId" = $1;
     `;
 
     let sqlParams = [
@@ -79,11 +70,67 @@ router.get('/:id', async (req, res) => {
     res.send(results);
 });
 
-/**
- * PUT route template
- */
+// Post router for posting to joiner table for check boxes
+router.post('/', (req, res) => {
+
+    console.log(req.body)
+
+    for (let sector of req.body.operatingSectorId) {
+
+    let sqlText = `
+        INSERT INTO "operatingSectorJunction"
+            ("enterpriseId", "sectorId")
+        VALUES
+            ($1, $2)
+    `;
+
+    let sqlParams = [
+        req.user.id,
+        sector
+    ];
+
+    pool.query(sqlText, sqlParams)
+    }
+
+    for (let point of req.body.paintPointsId) {
+
+        let sqlText = `
+            INSERT INTO "painPointsJunction"
+                ("enterpriseId", "painPointId")
+            VALUES
+                ($1, $2)
+        `;
+    
+        let sqlParams = [
+            req.user.id,
+            point
+        ];
+    
+        pool.query(sqlText, sqlParams)
+    }
+
+    for (let tech of req.body.technologiesId) {
+
+        let sqlText = `
+            INSERT INTO "technologiesJunction"
+                ("enterpriseId", "technologyId")
+            VALUES
+                ($1, $2)
+        `;
+    
+        let sqlParams = [
+            req.user.id,
+            tech
+        ];
+    
+        pool.query(sqlText, sqlParams)
+    }
+
+    res.sendStatus(200);
+
+});
+
 router.put('/:id', (req, res) => {
-  // PUT route code here
     // Console log so you can see what is coming
     console.log(req.body)
 
