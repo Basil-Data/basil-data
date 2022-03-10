@@ -17,12 +17,15 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 
 function SectionThreeSolution () {
+    
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_SECTION_THREE'})
+        dispatch({ type: 'FETCH_SECTION_THREE'});
     }, []);
 
+    // get the user.id from the store
+    const user = useSelector((store) => store.user);
     const painPoints = useSelector(store => store.section3.painPoints);
     const operatingSector = useSelector(store => store.section3.operatingSector);
     const technologies = useSelector(store => store.section3.technologies);
@@ -33,8 +36,13 @@ function SectionThreeSolution () {
 
         dispatch({
             type: 'POST_SECTION_THREE',
-            payload: section3Enterprise
-        })
+            // Make sure to send the enterpriseID (which is the same as 
+            // the user id from the store) as part of the payload
+            // this was the way I was able to figure it out
+            payload: {
+                id: user.id,
+                data: section3Enterprise
+        }})
     };
 
     return (

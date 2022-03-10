@@ -19,7 +19,8 @@ function* getSectionThree () {
 function* postSectionThree (action) {
 
     try {
-        yield axios.post(`/api/section3`, action.payload)
+        // axios put request which includes all the data needing to be updated
+        yield axios.put(`/api/section3/${action.payload.id}`, action.payload.data)
     }
     catch {
         console.log('failed to post section three');
