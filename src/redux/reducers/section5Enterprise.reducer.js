@@ -1,4 +1,4 @@
-const section5EnterpriseReducer = (state = [], action) => {
+const section5EnterpriseReducer = (state = {}, action) => {
     switch (action.type) {
         case 'SET_SECTION5_RESPONSES':
             return {...state, ...action.payload };
