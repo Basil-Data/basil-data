@@ -16,8 +16,20 @@ function* getSectionThree () {
     }
 };
 
+function* postSectionThree (action) {
+
+    try {
+        // axios put request which includes all the data needing to be updated
+        yield axios.put(`/api/section3/${action.payload.id}`, action.payload.data)
+    }
+    catch {
+        console.log('failed to put section three');
+    }
+}
+
 function* section3Saga() {
     yield takeLatest('FETCH_SECTION_THREE', getSectionThree);
+    yield takeLatest('POST_SECTION_THREE', postSectionThree);
 }
 
 export default section3Saga;

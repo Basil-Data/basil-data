@@ -22,8 +22,19 @@ function* registerUser(action) {
   }
 }
 
+// When the user logs in, it creates a row in the answers table
+function* createAnswer () {
+  try {
+    yield axios.post('/api/section1');
+  }
+  catch (error) {
+    console.log('error create answer in saga', error)
+  }
+}
+
 function* registrationSaga() {
   yield takeLatest('REGISTER', registerUser);
+  yield takeLatest('CREATE_ANSWER', createAnswer);
 }
 
 export default registrationSaga;

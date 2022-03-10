@@ -50,6 +50,9 @@ function SectionTwoImpactOpportunity() {
     const sdg = useSelector(store => store.section2.sdg);
     const supportiveCharacteristics = useSelector(store => store.section2.supportiveCharacteristics);
 
+    const section2Enterprise = useSelector(store => store.section2Enterprise)
+    console.log('section2Enterprise:', section2Enterprise);
+
     let component;
     switch(sdgPrimary) {
         case "No Poverty":
