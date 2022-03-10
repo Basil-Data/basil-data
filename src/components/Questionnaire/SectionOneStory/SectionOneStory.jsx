@@ -27,25 +27,25 @@ function SectionOneStory () {
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SECTION_ONE' });
-        // dispatch({ type: 'FETCH_ENTERPRISE_SECTION_ONE'})
+        dispatch({ type: 'FETCH_ENTERPRISE_SECTION_ONE'})
     }, []);
 
     const handleCompetitiveAdvantages = (event) => {
-        const index = advantageSelection.indexOf(event.target.value)
+        const index = advantageSelection.indexOf(Number(event.target.value))
         if (index === -1) {
             dispatch({
                 type: 'SET_SECTION_ONE_ENTERPRISE',
-                payload: {competitiveAdvantagesId: [...advantageSelection, event.target.value]}
+                payload: {competitiveAdvantagesId: [...advantageSelection, Number(event.target.value)]}
             })
         }
         else {
             dispatch({
                 type: 'SET_SECTION_ONE_ENTERPRISE',
-                payload: {competitiveAdvantagesId: advantageSelection.filter((advantageSelection) => advantageSelection !== event.target.value)}
+                payload: {competitiveAdvantagesId: advantageSelection.filter((advantageSelection) => advantageSelection !== Number(event.target.value))}
             })
             dispatch({
                 type: 'DELETE_COMPETITIVE_ADVANTAGE',
-                payload: event.target.value
+                payload: Number(event.target.value)
             })
         }
     };
@@ -185,7 +185,7 @@ function SectionOneStory () {
                     {competitiveAdvantages?.map(advantage => (
                             <FormControlLabel 
                                 key = {advantage.id} 
-                                // checked={advantageSelection.includes(advantage.id)}
+                                checked={advantageSelection.includes(advantage.id)}
                                 value={advantage.id}
                                 onChange={handleCompetitiveAdvantages}
                                 control={
