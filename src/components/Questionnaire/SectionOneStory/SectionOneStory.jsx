@@ -22,7 +22,7 @@ function SectionOneStory () {
     // get the user.id from the store to send with everything else
     const user = useSelector((store) => store.user);
     const competitiveAdvantages = useSelector(store => store.section1.competitiveAdvantages);
-    const section1Enterprise = useSelector(store => store.section1Enterprise)
+    const section1Enterprise = useSelector(store => store.section1Enterprise);
     const advantageSelection = useSelector(store => store.section1Enterprise.competitiveAdvantagesId);
 
     useEffect(() => {
@@ -31,20 +31,24 @@ function SectionOneStory () {
     }, []);
 
     const handleCompetitiveAdvantages = (event) => {
-        const index = advantageSelection.indexOf(event.target.value)
+        const index = advantageSelection.indexOf(Number(event.target.value))
         if (index === -1) {
             dispatch({
                 type: 'SET_SECTION_ONE_ENTERPRISE',
-                payload: {competitiveAdvantagesId: [...advantageSelection, event.target.value]}
+                payload: {competitiveAdvantagesId: [...advantageSelection, Number(event.target.value)]}
             })
         }
         else {
             dispatch({
                 type: 'SET_SECTION_ONE_ENTERPRISE',
-                payload: {competitiveAdvantagesId: advantageSelection.filter((advantageSelection) => advantageSelection !== event.target.value)}
+                payload: {competitiveAdvantagesId: advantageSelection.filter((advantageSelection) => advantageSelection !== Number(event.target.value))}
+            })
+            dispatch({
+                type: 'DELETE_COMPETITIVE_ADVANTAGE',
+                payload: Number(event.target.value)
             })
         }
-    }
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -181,10 +185,12 @@ function SectionOneStory () {
                     {competitiveAdvantages?.map(advantage => (
                             <FormControlLabel 
                                 key = {advantage.id} 
+                                checked={advantageSelection.includes(advantage.id)}
+                                value={advantage.id}
+                                onChange={handleCompetitiveAdvantages}
                                 control={
                                     <Checkbox 
-                                        value={advantage.id}
-                                        onChange={handleCompetitiveAdvantages}
+                                        
                                     />} 
                                 label={advantage.advantage} />
                     ))}
