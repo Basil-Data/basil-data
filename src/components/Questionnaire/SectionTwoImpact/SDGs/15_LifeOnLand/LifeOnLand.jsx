@@ -49,6 +49,9 @@ function LifeOnLand() {
                     variant="outlined"
                     type="text"
                     placeholder="Please Elaborate"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                 ></TextField>
                 <p> Where specifically is your current target ecosystem?</p>
                 <p>In what regions, states or cities are you focusing your efforts today?</p>
@@ -57,6 +60,9 @@ function LifeOnLand() {
                     variant="outlined"
                     type="text"
                     placeholder="Location"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                 ></TextField>
                 <p> What are the specific changes you would like to see for your target ecosystem?
                 </p>
@@ -66,6 +72,9 @@ function LifeOnLand() {
                     variant="outlined"
                     type="text"
                     placeholder="Specific Changes"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                 ></TextField>
                 <p>Have you measured your outcomes?</p>
                 <RadioGroup className="centerHelp">

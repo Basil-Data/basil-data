@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
     }
 
     res.send(results);
-})
+});
 
 
 
@@ -72,5 +72,38 @@ router.get('/:id', async (req, res) => {
     res.send(results);
 
 });
+
+
+router.put('/:id', (req, res) => {
+    console.log('PUT section2');
+    console.log('req.body:', req.body);
+    console.log('req.params.id', req.params.id);
+    
+    
+
+    const sqlText = `
+        UPDATE "answers"
+        SET
+            "problemBeingSolved2" = $1, 
+            "costOfProblem2" = $2,
+            "howTheySolve2" = $3,
+            "whoBenefits2" = $4
+        WHERE "answers"."enterpriseId" = $5;
+    `;  
+
+    const sqlParams = [
+        req.body.problemBeingSolved2,
+        req.body.costOfProblem2,
+        req.body.howTheySolve2,
+        req.body.whoBenefits2,
+        req.params.id
+    ];
+
+    pool.query(sqlText, sqlParams)
+        .then(res.sendStatus(200))
+        .catch((error) => {
+            console.log('POST section2 error', error); 
+        })
+})
 
 module.exports = router;
