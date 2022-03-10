@@ -1,14 +1,14 @@
 const section7Enterprise = (state = {
-        raisingFunds7: null,
-        targetAmount7: '',
+        // raisingFunds7: null,
+        // targetAmount7: '',
         investmentVehicleId: [],
         fundingUseId: [],
-        nextSteps7: '',
+        // nextSteps7: '',
         assistanceId: [],
-        societalImpactId: null,
-        environmentalImpactId: null,
-        economicImpactId: null,
-        understandProblem7: null
+        // societalImpactId: null,
+        // environmentalImpactId: null,
+        // economicImpactId: null,
+        // understandProblem7: null
     }, action) => {
     switch (action.type) {
         case 'SET_NEXT_STEPS_ENTERPRISE':
