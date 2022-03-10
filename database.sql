@@ -11,7 +11,7 @@ CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "enterpriseName" VARCHAR (255),
     "email" VARCHAR (255) NOT NULL,
-    "logoUrl" VARCHAR (80),
+    "logoUrl" VARCHAR (1024),
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL,
     "authLevel" VARCHAR (255) DEFAULT 'guest'
@@ -20,47 +20,47 @@ CREATE TABLE "user" (
 DROP TABLE "answers";
 CREATE TABLE "answers" (
     "id" SERIAL PRIMARY KEY,
-    "enterpriseId" INTEGER NOT NULL,
-    "enterpriseSize1" INTEGER NOT NULL,
-    "dateFounded1" DATE NOT NULL,
-    "missionStatement1" VARCHAR (1024) NOT NULL,
-    "understandProblem1" INTEGER NOT NULL,
-    "yearsCollectiveExperience1" INTEGER NOT NULL,
-    "percentageBIPOC1" INTEGER NOT NULL,
-    "percentageFemale1" INTEGER NOT NULL,
-    "investorIntroduction1" VARCHAR (1024) NOT NULL,
-    "problemBeingSolved2" VARCHAR (1024) NOT NULL,
-    "costOfProblem2" VARCHAR (1024) NOT NULL,
-    "howTheySolve2" VARCHAR (1024) NOT NULL,
-    "whoBenefits2" VARCHAR (1024) NOT NULL,
-    "stakeholderSegments2" VARCHAR (1024) NOT NULL,
-    "organizationLocation2" VARCHAR (1024) NOT NULL,
-    "targetPopulationLocation2" VARCHAR (1024) NOT NULL,
-    "specificChanges2" VARCHAR (1024) NOT NULL,
-    "measuredOutcome2" BOOLEAN NOT NULL,
-	"payingCustomerProfile3" VARCHAR (1024) NOT NULL,
-	"mainCompetitors3" VARCHAR (1024) NOT NULL,
-	"differFromCompetitors3" VARCHAR (1024) NOT NULL,
-	"providingSolution3" VARCHAR (1024) NOT NULL,
-	"testimonial3" VARCHAR (1024) NOT NULL,
-	"businessModel3" VARCHAR (1024) NOT NULL,
-	"fundingReceived3" INTEGER NOT NULL,
-	"customerGrowth3" INTEGER NOT NULL,
-	"generatingRevenue3" BOOLEAN NOT NULL,
-	"averageGrowth3" INTEGER DEFAULT NULL,
-	"makingProfit3" BOOLEAN DEFAULT NULL,
-	"netProfitMargin3" INTEGER DEFAULT NULL,
-	"customerAcquisitionCost3" INTEGER DEFAULT NULL,
-	"marketingExpenses3" INTEGER DEFAULT NULL,
-	"newCustomers3" INTEGER DEFAULT NULL,
-	"addressableMarket4" INTEGER NOT NULL,
-	"serviceableMarket4" INTEGER NOT NULL,
-	"obtainableMarket4" INTEGER NOT NULL,
-	"whyRealistic4" VARCHAR (1024) NOT NULL,
-	"raisingFunds7" BOOLEAN NOT NULL,
-	"targetAmount7" INTEGER NOT NULL,
-	"nextSteps7" VARCHAR (1024) NOT NULL,
-	"understandProblem7" INTEGER NOT NULL
+    "enterpriseId" INTEGER DEFAULT NULL,
+    "enterpriseSize1" INTEGER DEFAULT NULL,
+    "dateFounded1" DATE DEFAULT NULL,
+    "missionStatement1" VARCHAR (1024) DEFAULT NULL,
+    "understandProblem1" INTEGER DEFAULT NULL,
+    "yearsCollectiveExperience1" INTEGER DEFAULT NULL,
+    "percentageBIPOC1" INTEGER DEFAULT NULL,
+    "percentageFemale1" INTEGER DEFAULT NULL,
+    "investorIntroduction1" VARCHAR (1024) DEFAULT NULL,
+    "problemBeingSolved2" VARCHAR (1024) DEFAULT NULL,
+    "costOfProblem2" VARCHAR (1024) DEFAULT NULL,
+    "howTheySolve2" VARCHAR (1024) DEFAULT NULL,
+    "whoBenefits2" VARCHAR (1024) DEFAULT NULL,
+    "stakeholderSegments2" VARCHAR (1024) DEFAULT NULL,
+    "organizationLocation2" VARCHAR (1024) DEFAULT NULL,
+    "targetPopulationLocation2" VARCHAR (1024) DEFAULT NULL,
+    "specificChanges2" VARCHAR (1024) DEFAULT NULL,
+    "measuredOutcome2" BOOLEAN DEFAULT NULL,
+	"payingCustomerProfile3" VARCHAR (1024) DEFAULT NULL,
+	"mainCompetitors3" VARCHAR (1024) DEFAULT NULL,
+	"differFromCompetitors3" VARCHAR (1024) DEFAULT NULL,
+	"providingSolution3" VARCHAR (1024) DEFAULT NULL,
+	"testimonial3" VARCHAR (1024) DEFAULT NULL,
+	"businessModel3" VARCHAR (1024) DEFAULT NULL,
+	"fundingReceived4" INTEGER DEFAULT NULL,
+	"customerGrowth4" INTEGER DEFAULT NULL,
+	"generatingRevenue4" BOOLEAN DEFAULT NULL,
+	"averageGrowth4" INTEGER DEFAULT NULL,
+	"makingProfit4" BOOLEAN DEFAULT NULL,
+	"netProfitMargin4" INTEGER DEFAULT NULL,
+	"customerAcquisitionCost4" INTEGER DEFAULT NULL,
+	"marketingExpenses4" INTEGER DEFAULT NULL,
+	"newCustomers4" INTEGER DEFAULT NULL,
+	"addressableMarket5" INTEGER DEFAULT NULL,
+	"serviceableMarket5" INTEGER DEFAULT NULL,
+	"obtainableMarket5" INTEGER DEFAULT NULL,
+	"whyRealistic5" VARCHAR (1024) DEFAULT NULL,
+	"raisingFunds7" BOOLEAN DEFAULT NULL,
+	"targetAmount7" INTEGER DEFAULT NULL,
+	"nextSteps7" VARCHAR (1024) DEFAULT NULL,
+	"understandProblem7" INTEGER DEFAULT NULL
 );
 
 DROP TABLE "competitiveAdvantages";
@@ -456,7 +456,7 @@ VALUES
 	('Networking with others in the social impact/investing space');
 	
 DROP TABLE "helpMoveForwardJunction";
-CREATE TABLE "helpMoveForwardJunction" (
+CREATE TABLE "societalImpactJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"assistanceId" INTEGER
@@ -465,10 +465,10 @@ CREATE TABLE "helpMoveForwardJunction" (
 DROP TABLE "societalImpact";
 CREATE TABLE "societalImpact" (
 	"id" SERIAL PRIMARY KEY,
-	"impact" VARCHAR (255)
+	"societalImpact" VARCHAR (255)
 );
 INSERT INTO "societalImpact"
-	("impact")
+	("societalImpact")
 VALUES
 	('Currently not considering/May cause harm'),
 	('Actively avoiding harm with internal policies'),
@@ -479,7 +479,7 @@ DROP TABLE "societalImpactJunction";
 CREATE TABLE "societalImpactJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
-	"impactId" INTEGER
+	"societalImpactId" INTEGER
 );
 
 DROP TABLE "environmentalImpact";
@@ -499,7 +499,7 @@ DROP TABLE "environmentalImpactJunction";
 CREATE TABLE "environmentalImpactJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
-	"impactId" INTEGER
+	"environmentalImpactId" INTEGER
 );
 
 DROP TABLE "economicImpact";
@@ -519,5 +519,5 @@ DROP TABLE "economicImpactJunction";
 CREATE TABLE "economicImpactJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
-	"impactId" INTEGER
+	"economicImpactId" INTEGER
 );
