@@ -39,11 +39,37 @@ router.post('/', (req, res) => {
   // POST route code here
 });
 
+// Sending answers to answers table
 router.put('/:id', (req, res) => {
   let sqlText = `
     UPDATE "answers"
     SET
-      ""`
+      "fundingReceived4" = $1,
+      "customerGrowth4" = $2,
+      "generatingRevenue4" = $3,
+      "averageGrowth4" = $4,
+      "makingProfit4" = $5,
+      "netProfitMargin4" = $6,
+      "customerAcquisitionCost4" = $7,
+      "newCustomers4" = $8
+    WHERE "answers"."enterpriseId" = $9;
+      `;
+    
+    let sqlParams = [
+      req.body.fundingReceived4,
+      req.body.customerGrowth4,
+      req.body.generatingRevenue4,
+      req.body.averageGrowth4,
+      req.body.makingProfit4,
+      req.body.netProfitMargin4,
+      req.body.customerAcquisitionCost4,
+      req.body.newCustomers4,
+      req.user.id
+    ]
+
+    pool.query(sqlText, sqlParams)
+      .then(res.sendStatus(200))
+      .catch((err) => console.error(err))
 });
 
 module.exports = router;

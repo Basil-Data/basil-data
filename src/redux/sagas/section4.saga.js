@@ -27,6 +27,7 @@ function* updateSectionFive(action) {
 
 function* section4Saga(){
     yield takeEvery('FETCH_SECTION_FOUR', getSectionFour);
+    yield takeEvery('UPDATE_SECTION4_RESPONSES', updateSectionFive)
 }
 
 export default section4Saga;
