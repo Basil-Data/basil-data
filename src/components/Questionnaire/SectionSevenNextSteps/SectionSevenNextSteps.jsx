@@ -30,34 +30,37 @@ function SectionSevenNextSteps () {
         dispatch({
             type: "FETCH_NEXT_STEPS",
         });
+        dispatch({ 
+            type: "FETCH_ENTERPRISE_SECTION_SEVEN"
+        })
     }, []);
 
     const handleInvestmentType = (event) => {
-        const index = investmentSelection.indexOf(event.target.value)
+        const index = investmentSelection.indexOf(Number(event.target.value))
         if (index === -1) {
             dispatch({
                 type: "SET_NEXT_STEPS_ENTERPRISE",
-                payload: {investmentVehicleId: [...investmentSelection, event.target.value]}
+                payload: {investmentVehicleId: [...investmentSelection, Number(event.target.value)]}
             });
         } else {
             dispatch({
                 type: "SET_NEXT_STEPS_ENTERPRISE",
-                payload: {investmentVehicleId: investmentSelection.filter((investmentSelection) => investmentSelection !== event.target.value)}
+                payload: {investmentVehicleId: investmentSelection.filter((investmentSelection) => investmentSelection !== Number(event.target.value))}
             });
         }
     }
 
     const handleFundraising = (event) => {
-        const index = fundingUse.indexOf(event.target.value)
+        const index = fundingUse.indexOf(Number(event.target.value))
         if (index === -1) {
             dispatch({
                 type: "SET_NEXT_STEPS_ENTERPRISE",
-                payload: {fundingUseId: [...fundingUse, event.target.value]}
+                payload: {fundingUseId: [...fundingUse, Number(event.target.value)]}
             });
         } else {
             dispatch({
                 type: "SET_NEXT_STEPS_ENTERPRISE",
-                payload: {fundingUseId: fundingUse.filter((fundingUse) => fundingUse !== event.target.value)}
+                payload: {fundingUseId: fundingUse.filter((fundingUse) => fundingUse !== Number(event.target.value))}
             });
         }
     }
@@ -76,6 +79,15 @@ function SectionSevenNextSteps () {
             });
         }
     }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        dispatch({
+            type: 'PUT_SECTION_SEVEN',
+            payload: {data: section7Enterprise}
+        })
+    };
 
     return (
         <>
@@ -135,7 +147,8 @@ function SectionSevenNextSteps () {
             <FormControl className='questionnaireForm' sx={{ m : 3}}>
                 {section7.results1?.map(type => (
                         <FormControlLabel 
-                            key={type.id} 
+                            key={type.id}
+                            checked={investmentSelection.includes(type.id)}
                             control={
                                 <Checkbox
                                     value={type.id}
@@ -152,7 +165,8 @@ function SectionSevenNextSteps () {
             <FormControl className='questionnaireForm' sx={{ m : 3}}>
                 {section7.results2?.map(use => (
                         <FormControlLabel 
-                            key={use.id} 
+                            key={use.id}
+                            // checked={fundingUse.includes(use.id)} 
                             control={
                                 <Checkbox
                                     value={use.id}
@@ -201,7 +215,8 @@ function SectionSevenNextSteps () {
             <FormControl className='questionnaireForm' sx={{ m : 3}}>
                 {section7.results3?.map(approach => (
                         <FormControlLabel 
-                            key={approach.id} 
+                            key={approach.id}
+                            // checked={wayAhead.includes(approach.id)}  
                             control={
                                 <Checkbox
                                     value={approach.id}
@@ -326,9 +341,35 @@ function SectionSevenNextSteps () {
             <FormControlLabel labelPlacement="top" value="9" control={<Radio />} label="9" />
             <FormControlLabel labelPlacement="top" value="10" control={<Radio />} label="10" />
         </RadioGroup>
-        <Link to="/risks-and-hurdles"><button className="btn">Back</button></Link>
-        <button className="btn">Submit</button>
-        <Link to="/story"><button className="btn">Next</button></Link>
+
+        <Link to="/risks-and-hurdles">
+            <button 
+                className="btn"
+                onClick={(event) => handleSubmit(event)}
+            >
+                Back
+            </button>
+        </Link>
+        
+        <button 
+            className="btn"
+            onClick={(event) => handleSubmit(event)}
+        >
+            Save
+        </button>
+
+        {/* 
+            Below should link should change from story to 
+            whatever comes after last step in questionnaire 
+        */}
+        <Link to="/story">
+            <button 
+                className="btn"
+                onClick={(event) => handleSubmit(event)}
+            >
+                Next
+            </button>
+        </Link>
 
     </form>
     </>
