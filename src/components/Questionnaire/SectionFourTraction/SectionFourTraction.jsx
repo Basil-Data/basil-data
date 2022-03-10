@@ -73,7 +73,7 @@ function SectionFourTraction() {
                         {section4.results1?.map(development => (
                             <FormControlLabel 
                                 key={development.id} 
-                                value={development.id} // change this
+                                value={development.id}
                                 control={<Radio />} 
                                 label={development.stage}
                                 onChange={(evt => 
