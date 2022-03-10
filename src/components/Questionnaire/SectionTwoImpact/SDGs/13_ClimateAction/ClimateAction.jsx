@@ -47,6 +47,9 @@ function ClimateAction() {
                     variant="outlined"
                     type="text"
                     placeholder="Please Elaborate"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                 ></TextField>
                 <p>How do you segment your stakeholders?</p>
                 <FormControl>
@@ -61,6 +64,9 @@ function ClimateAction() {
                     variant="outlined"
                     type="text"
                     placeholder="Location"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                 ></TextField>
                 <p> What are the specific changes you would like to see for your region / environment?
                 </p>
@@ -70,6 +76,9 @@ function ClimateAction() {
                     variant="outlined"
                     type="text"
                     placeholder="Specific Changes"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                 ></TextField>
                 <p>Have you measured your outcomes?</p>
                 <RadioGroup className="centerHelp">

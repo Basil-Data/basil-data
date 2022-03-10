@@ -51,6 +51,9 @@ function NoPoverty() {
                 variant="outlined"
                 type="text"
                 placeholder="Please Elaborate"
+                multiline rows={5}
+                id="outlined-basic" 
+                sx={{width: 600}}
                 value={section2Enterprise.problemBeingSolved2}
                 onChange={(event) => dispatch({
                 type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -76,6 +79,9 @@ function NoPoverty() {
                 className="location"
                 variant="outlined"
                 type="text"
+                multiline rows={5}
+                id="outlined-basic" 
+                sx={{width: 600}}
                 placeholder="Location"
             ></TextField>
             <p> Where specifically is your impact targeted?
@@ -87,6 +93,9 @@ function NoPoverty() {
                 variant="outlined"
                 type="text"
                 placeholder="Impact Target"
+                multiline rows={5}
+                id="outlined-basic" 
+                sx={{width: 600}}
             ></TextField>
             <p> What are the specific changes you would like to see for your stakeholder?
             </p>
@@ -96,6 +105,9 @@ function NoPoverty() {
                 variant="outlined"
                 type="text"
                 placeholder="Specific Changes"
+                multiline rows={5}
+                id="outlined-basic" 
+                sx={{width: 600}}
             ></TextField>
             <p>Have you measured the outcomes for your primary beneficiaries?</p>
             <RadioGroup className="centerHelp">
