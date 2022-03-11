@@ -79,9 +79,9 @@ router.get('/:id', async (req, res) => {
     const assistanceId = await pool.query(sqlText3, sqlParams);
 
     const results = {        
-        investmentVehicleId: investmentVehicleId.rows[0].array_agg,
-        fundingUseId: fundingUseId.rows[0].array_agg,
-        assistanceId: assistanceId.rows[0].array_agg,
+        investmentVehicleId: Array.isArray(investmentVehicleId.rows[0].array_agg) ? investmentVehicleId.rows[0].array_agg : [],
+        fundingUseId: Array.isArray(fundingUseId.rows[0].array_agg) ? fundingUseId.rows[0].array_agg : [],
+        assistanceId: Array.isArray(assistanceId.rows[0].array_agg) ? assistanceId.rows[0].array_agg : [],
     }
 
     res.send(results);
@@ -121,26 +121,110 @@ router.put('/', (req, res) => {
 });
 
 // Post router for posting to junction table for checkboxes
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
+    try {
+        let sqlText1 = `
+        DELETE FROM "investmentVehiclesJunction"
+        WHERE "enterpriseId" = $1;
+        `;
 
-    for (let vehicle of req.body.investmentVehicleId) {
+        let sqlParams1 = [
+            req.user.id
+        ];
 
-    let sqlText = `
-        INSERT INTO "investmentVehiclesJunction"
-            ("enterpriseId", "investmentVehicleId")
-        VALUES
-            ($1, $2)
-    `;
+        await pool.query(
+            sqlText1, 
+            sqlParams1
+        );
 
-    let sqlParams = [
-        req.user.id,
-        vehicle
-    ];
+        let sqlText1a = `
+        DELETE FROM "fundingUseJunction"
+        WHERE "enterpriseId" = $1;
+        `;
 
-    pool.query(sqlText, sqlParams)
+        let sqlParams1a = [
+            req.user.id
+        ];
+
+        await pool.query(
+            sqlText1a, 
+            sqlParams1a
+        );
+
+        let sqlText1b = `
+        DELETE FROM "helpMoveForwardJunction"
+        WHERE "enterpriseId" = $1;
+        `;
+
+        let sqlParams1b = [
+            req.user.id
+        ];
+
+        await pool.query(
+            sqlText1b, 
+            sqlParams1b
+        );
+
+        for (let vehicle of req.body.investmentVehicleId) {
+
+            let sqlText2 = `
+                INSERT INTO "investmentVehiclesJunction"
+                    ("enterpriseId", "investmentVehicleId")
+                VALUES
+                    ($1, $2)
+            `;
+
+            let sqlParams2 = [
+                req.user.id,
+                vehicle
+            ];
+
+            await pool.query(sqlText2, sqlParams2)
+        
+        }
+
+        for (let use of req.body.fundingUseId) {
+
+            let sqlText3 = `
+                INSERT INTO "fundingUseJunction"
+                    ("enterpriseId", "fundingUseId")
+                VALUES
+                    ($1, $2)
+            `;
+    
+            let sqlParams3 = [
+                req.user.id,
+                use
+            ];
+    
+            await pool.query(sqlText3, sqlParams3)
+
+        }
+
+        for (let help of req.body.assistanceId) {
+
+            let sqlText4 = `
+                INSERT INTO "helpMoveForwardJunction"
+                    ("enterpriseId", "assistanceId")
+                VALUES
+                    ($1, $2)
+            `;
+    
+            let sqlParams4 = [
+                req.user.id,
+                help
+            ];
+    
+            await pool.query(sqlText4, sqlParams4)
+
+        }
+
+        res.sendStatus(200);
     }
-
-    res.sendStatus(200);
+    catch (error){
+        console.log('error in details edit router,', error);
+        res.sendStatus(500);
+    }
 
 });
 
