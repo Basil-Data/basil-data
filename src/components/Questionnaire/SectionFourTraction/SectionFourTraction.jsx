@@ -390,7 +390,7 @@ function SectionFourTraction() {
                         dispatch({
                             type: 'SET_SECTION4_ENTERPRISE',
                             payload: {
-                                customerAcquisitionCost4: evt.target.value
+                                marketingExpenses4: Number(evt.target.value)
                             }
                         }))}  />
 

@@ -43,10 +43,31 @@ router.get('/:id', async (req,res) => {
       req.user.id
     ];
 
+    let sqlText2 =`
+      SELECT
+        "fundingReceived4",
+        "customerGrowth4",
+        "generatingRevenue4",
+        "averageGrowth4",
+        "makingProfit4",
+        "netProfitMargin4",
+        "customerAcquisitionCost4",
+        "marketingExpenses4",
+        "newCustomers4"
+      FROM "answers"
+      WHERE "enterpriseId" = $1;
+        `;
+      
+    let sqlParams2 = [
+      req.user.id
+    ]
+
     const progressIndicatorId = await pool.query(sqlText, sqlParams);
+    const answers = await pool.query(sqlText2, sqlParams);
 
     const results = {
-      progressIndicatorId: Array.isArray(progressIndicatorId.rows[0].array_agg) ? progressIndicatorId.rows[0].array_agg : []
+      progressIndicatorId: Array.isArray(progressIndicatorId.rows[0].array_agg) ? progressIndicatorId.rows[0].array_agg : [],
+      ...answers.rows[0]
     }
 
     res.send(results)
