@@ -3,6 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+// Router to get the multiple choice arrays for Section Three
 router.get('/', rejectUnauthenticated, async (req, res) => {
 
     let sqlText1 = `

@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-// This get is for the checkboxes on section 4
+// Router to get the multiple choice arrays for Section Three
 router.get('/', rejectUnauthenticated, async (req, res) => {
   
   let sqlText = `
@@ -31,6 +31,8 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
   res.send(results);
 });
 
+// Gets the individual enterprise's previous answers for the 
+// answers
 router.get('/:id', rejectUnauthenticated, async (req,res) => {
 
   let sqlText =`
@@ -74,7 +76,7 @@ router.get('/:id', rejectUnauthenticated, async (req,res) => {
     res.send(results)
 });
 
-// Posts to junction table for checkboxes
+// Post router for posting to joiner table for check boxes
 router.post('/', rejectUnauthenticated, async (req, res) => {
 try {
   let sqlText1 =`
@@ -116,7 +118,8 @@ catch (err){
 }
 });
 
-// Sending answers to answers table
+// Router for putting/updating answers into table as the
+// individual enterprise changes their answers
 router.put('/', rejectUnauthenticated, (req, res) => {
   console.log('req.body is', req.body);
   let sqlText = `

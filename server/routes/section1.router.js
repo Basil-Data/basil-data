@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-// Router to get the arrays for Section One
+// Router to get the multiple choice arrays for Section One
 router.get('/', rejectUnauthenticated, async (req, res) => {
 
     let sqlText = `
@@ -20,6 +20,8 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     res.send(results);
 });
 
+// Gets the individual enterprise's previous answers for the 
+// answers
 router.get('/:id', rejectUnauthenticated, async (req, res) => {
 
     let sqlText = `
@@ -63,6 +65,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
     console.log(req.body);
 
+    // deletes all the existing rows 
     let sqlText = `
     DELETE FROM "competitiveAdvantagesJunction"
     WHERE "enterpriseId" = $1;
@@ -74,6 +77,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
     await pool.query(sqlText, sqlParams);
 
+    // loops through the array and adds them anew to the table
     if (req.body.competitiveAdvantagesId) {
     for (let individual of req.body.competitiveAdvantagesId) {
             
@@ -96,7 +100,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
 })
 
-// Router for putting/updating answers into table
+// Router for putting/updating answers into table as the
+// individual enterprise changes their answers
 router.put('/', rejectUnauthenticated, (req, res) => {
 
     let sqlText = `

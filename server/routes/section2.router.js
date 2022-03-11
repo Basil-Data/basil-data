@@ -3,6 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+// Router to get the multiple choice arrays for Section Two
 router.get('/', rejectUnauthenticated, async (req, res) => {
 
     const sqlText = 'SELECT * FROM "impactSectors"';
@@ -25,10 +26,8 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     res.send(results);
 });
 
-
-
-
-
+// Gets the individual enterprise's previous answers for the 
+// answers
 router.get('/:id', rejectUnauthenticated, async (req, res) => {
 
     const sqlText = `
@@ -68,13 +67,12 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
 
 });
 
-
+// Router for putting/updating answers into table as the
+// individual enterprise changes their answers
 router.put('/', rejectUnauthenticated, (req, res) => {
     console.log('PUT section2');
     console.log('req.body:', req.body);
     console.log('req.user.id', req.user.id);
-    
-    
 
     const sqlText = `
         UPDATE "answers"
