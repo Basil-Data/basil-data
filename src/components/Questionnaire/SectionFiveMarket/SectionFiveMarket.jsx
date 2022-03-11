@@ -16,7 +16,11 @@ function SectionFiveMarket() {
   console.log('user.id is', user.id);
 
 
-  const [marketReason, setMarketReason] = useState("");
+  useEffect(() => {
+    dispatch({
+        type: "FETCH_ENTERPRISE_SECTION_FIVE",
+    });
+}, []);
 
   // Update Function
   function handleSubmit(evt) {
