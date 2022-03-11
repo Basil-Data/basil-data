@@ -310,19 +310,19 @@ function SectionThreeSolution () {
                 <Link to="/impact">
                     <button 
                         className="btn" 
-                        onClick={(event) => handleSubmit(event)}>
+                        onClick={handleSubmit}>
                         Back
                     </button>
                 </Link>
                 <button 
                     className="btn"
-                    onClick={(event) => handleSubmit(event)}>
+                    onClick={handleSubmit}>
                         Submit
                     </button>
                 <Link to="/traction">
                     <button 
                         className="btn"
-                        onClick={(event) => handleSubmit(event)}>
+                        onClick={handleSubmit}>
                         Next
                     </button>
                 </Link>
