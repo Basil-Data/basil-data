@@ -8,5 +8,4 @@ const section4Reducer = (state = [], action) => {
     
 }
 
-
 export default section4Reducer;
