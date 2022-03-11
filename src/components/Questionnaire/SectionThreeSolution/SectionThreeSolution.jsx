@@ -39,49 +39,49 @@ function SectionThreeSolution () {
     const selectedTechnologies = useSelector(store => store.section3Enterprise.technologiesId);
 
     const handleOperatingSectors = (event) => {
-        const index = selectedOperatingSector.indexOf(event.target.value)
+        const index = selectedOperatingSector.indexOf(Number(event.target.value))
         if (index === -1) {
             dispatch({
                 type: 'SET_SECTION_THREE_ENTERPRISE',
-                payload: {operatingSectorId: [...selectedOperatingSector, event.target.value]}
+                payload: {operatingSectorId: [...selectedOperatingSector, Number(event.target.value)]}
             })
         }
         else {
             dispatch({
                 type: 'SET_SECTION_THREE_ENTERPRISE',
-                payload: {operatingSectorId: selectedOperatingSector.filter((selectedOperatingSector) => selectedOperatingSector !== event.target.value)}
+                payload: {operatingSectorId: selectedOperatingSector.filter((selectedOperatingSector) => selectedOperatingSector !== Number(event.target.value))}
             })
         }
     };
 
     const handlePainPoints = (event) => {
-        const index = selectedPainPoints.indexOf(event.target.value)
+        const index = selectedPainPoints.indexOf(Number(event.target.value))
         if (index === -1) {
             dispatch({
                 type: 'SET_SECTION_THREE_ENTERPRISE',
-                payload: {painPointsId: [...selectedPainPoints, event.target.value]}
+                payload: {painPointsId: [...selectedPainPoints, Number(event.target.value)]}
             })
         }
         else {
             dispatch({
                 type: 'SET_SECTION_THREE_ENTERPRISE',
-                payload: {painPointsId: selectedPainPoints.filter((selectedPainPoints) => selectedPainPoints !== event.target.value)}
+                payload: {painPointsId: selectedPainPoints.filter((selectedPainPoints) => selectedPainPoints !== Number(event.target.value))}
             })
         }
     };
 
     const handleTechnologies = (event) => {
-        const index = selectedTechnologies.indexOf(event.target.value)
+        const index = selectedTechnologies.indexOf(Number(event.target.value))
         if (index === -1) {
             dispatch({
                 type: 'SET_SECTION_THREE_ENTERPRISE',
-                payload: {technologiesId: [...selectedTechnologies, event.target.value]}
+                payload: {technologiesId: [...selectedTechnologies, Number(event.target.value)]}
             })
         }
         else {
             dispatch({
                 type: 'SET_SECTION_THREE_ENTERPRISE',
-                payload: {technologiesId: selectedTechnologies.filter((selectedTechnologies) => selectedTechnologies !== event.target.value)}
+                payload: {technologiesId: selectedTechnologies.filter((selectedTechnologies) => selectedTechnologies !== Number(event.target.value))}
             })
         }
     };
@@ -112,7 +112,7 @@ function SectionThreeSolution () {
                     <FormControl sx={{ m : 3}}>
                         {operatingSector?.map(sector => (
                                 <FormControlLabel 
-                                    checked={operatingSector.includes(sector.id)}
+                                    checked={selectedOperatingSector.includes(sector.id)}
                                     value={sector.id}
                                     onChange={handleOperatingSectors}
                                     control={
@@ -215,7 +215,7 @@ function SectionThreeSolution () {
                     <FormControl sx={{ m : 3}}>
                         {painPoints?.map(point => (
                                 <FormControlLabel 
-                                    checked={painPoints.includes(point.id)}
+                                    checked={selectedPainPoints.includes(point.id)}
                                     control={
                                         <Checkbox
                                             value={point.id}
@@ -293,13 +293,14 @@ function SectionThreeSolution () {
                     <FormControl sx={{ m : 3}}>
                         {technologies?.map(technology => (
                                 <FormControlLabel 
-                                    checked={technologies.includes(technology.id)}
+                                    checked={selectedTechnologies.includes(technology.id)}
                                     disabled={!selectedTechnologies.includes(technology.id) && selectedTechnologies.length > 2}
                                     control={
                                     <Checkbox 
-                                        value={technology.id}
-                                        onChange={handleTechnologies}
+
                                     />} 
+                                    value={technology.id}
+                                    onChange={handleTechnologies}
                                     label={technology.technology}
                                     key={technology.id} />
                         ))}

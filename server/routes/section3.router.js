@@ -181,12 +181,12 @@ router.put('/', rejectUnauthenticated, (req, res) => {
         req.body.differFromCompetitors3,
         req.body.testimonial3,
         req.body.businessModel3,
-        req.params.id
+        req.user.id
     ];
     
     pool.query(sqlText, sqlParams)
         .then(res.sendStatus(200))
-        .catch((err) => console.log('error in section three post', err))
+        .catch((err) => console.log('error in section three put', err))
 });
 
 module.exports = router;
