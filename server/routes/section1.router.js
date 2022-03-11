@@ -3,10 +3,6 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const axios = require('axios');
 
-/**
- * GET route template
- */
-
 // Router to get the arrays for Section One
 router.get('/', async (req, res) => {
 
@@ -36,7 +32,7 @@ router.get('/:id', async (req, res) => {
     let sqlText2 = `
         SELECT
             "enterpriseSize1",
-            "dateFounded1",
+            TO_CHAR("dateFounded1", 'MonthDD, YYYY') AS "dateFounded1",
             "missionStatement1",
             "understandProblem1",
             "yearsCollectiveExperience1",
@@ -78,6 +74,7 @@ router.post('/', async (req, res) => {
 
     await pool.query(sqlText, sqlParams);
 
+    if (req.body.competitiveAdvantagesId) {
     for (let individual of req.body.competitiveAdvantagesId) {
             
         let sqlText2 = `
@@ -93,7 +90,7 @@ router.post('/', async (req, res) => {
         ];
 
         await pool.query(sqlText2, sqlParams2);
-    }
+    }}
 
     res.sendStatus(200);
 

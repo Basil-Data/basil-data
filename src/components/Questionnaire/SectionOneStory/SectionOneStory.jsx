@@ -89,7 +89,7 @@ function SectionOneStory () {
                 label="Date founded" 
                 variant="outlined" 
                 InputLabelProps={{shrink: true,}}
-                value={moment(section1Enterprise.dateFounded1).format("MMMM DD, YYYY")}
+                value={section1Enterprise.dateFounded1}
                 onChange={(event) => dispatch({
                     type: 'SET_SECTION_ONE_ENTERPRISE',
                     payload: { dateFounded1: event.target.value }
