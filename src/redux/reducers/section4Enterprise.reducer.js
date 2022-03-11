@@ -1,5 +1,6 @@
 const section4Enterprise = (state = {
     progressIndicatorId: [],
+    customerGrowth4: '',
 }, action) => {
     switch (action.type) {
         case 'SET_SECTION4_ENTERPRISE':

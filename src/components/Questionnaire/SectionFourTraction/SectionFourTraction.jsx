@@ -172,6 +172,7 @@ function SectionFourTraction() {
                         {section4.results3?.map(use => (
                             <FormControlLabel  
                                 key={use.id}
+                                disabled={!progressIndicator.includes(use.id) && progressIndicator.length > 2}
                                 checked={progressIndicator.includes(use.id)} 
                                 control={
                                     <Checkbox
