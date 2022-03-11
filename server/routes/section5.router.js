@@ -37,6 +37,31 @@ router.get('/', async (req, res) => {
   res.send(results);
 });
 
+// Router to get results by id
+router.get('/:id', async (req, res) => {
+  let sqlText =`
+    SELECT
+      "addressableMarket5",
+      "serviceableMarket5",
+      "obtainableMarket5",
+      "whyRealistic5"
+    FROM "answers"
+    WHERE "enterpriseId" = $1;
+    `;
+  
+    let sqlParams = [
+      req.user.id
+    ]
+
+    const answers = await pool.query(sqlText, sqlParams);
+
+    const results = {
+      ...answers.rows[0]
+    }
+
+    res.send(results)
+});
+
 /**
  * POST route template
  */
@@ -62,7 +87,7 @@ router.post('/', (req, res) => {
       });
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/', async (req, res) => {
 
   console.log(req.body);
 

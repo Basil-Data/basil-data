@@ -128,8 +128,9 @@ router.put('/', (req, res) => {
       "makingProfit4" = $5,
       "netProfitMargin4" = $6,
       "customerAcquisitionCost4" = $7,
-      "newCustomers4" = $8
-    WHERE "answers"."enterpriseId" = $9;
+      "newCustomers4" = $8,
+      "marketingExpenses4" = $9
+    WHERE "answers"."enterpriseId" = $10;
       `;
     
     let sqlParams = [
@@ -141,6 +142,7 @@ router.put('/', (req, res) => {
       req.body.netProfitMargin4,
       req.body.customerAcquisitionCost4,
       req.body.newCustomers4,
+      req.body.marketingExpenses4,
       req.user.id
     ]
 
