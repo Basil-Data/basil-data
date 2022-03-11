@@ -25,6 +25,7 @@ import {
 from '@mui/material';
 
 function ClimateAction() {
+    const dispatch = useDispatch();
 
     const sdg = useSelector(store => store.section2.sdg);
     const stakeholderSegments = useSelector(store => store.section2.stakeholderSegments);
@@ -44,6 +45,7 @@ function ClimateAction() {
                 </p>
                 <TextField
                     label="Please Elaborate"
+                    InputLabelProps={{ shrink: true }}
                     variant="outlined"
                     type="text"
                     placeholder="Please Elaborate"
@@ -61,6 +63,7 @@ function ClimateAction() {
                 <p>In what regions, states or cities are you focusing your efforts today?</p>
                 <TextField
                     label="Location"
+                    InputLabelProps={{ shrink: true }}
                     variant="outlined"
                     type="text"
                     placeholder="Location"
@@ -72,6 +75,7 @@ function ClimateAction() {
                 </p>
                 <TextField
                     label="Specific Changes"
+                    InputLabelProps={{ shrink: true }}
                     className="specificChanges"
                     variant="outlined"
                     type="text"

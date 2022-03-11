@@ -1,5 +1,7 @@
 const section2Enterprise = (state = {
-    impactSectorId: []
+    impactSectorId: [],
+    characteristicId: [],
+    segmentId: []
 }, action) => {
     switch (action.type) {
         case 'SET_SECTION_TWO_ENTERPRISE':

@@ -32,7 +32,7 @@ function SectionTwoImpact() {
     useEffect(() => {
         dispatch({type: 'FETCH_SECTION_TWO'});
         dispatch({type: 'FETCH_IMPACT_SECTORS'});
-        dispatch({type: 'FETCH_ENTERPRISE_SECTION_TWO'});
+        dispatch({type: 'FETCH_SECTION_TWO_ENTERPRISE'});
     }, [])
 
     const user = useSelector(store => store.user);
@@ -100,8 +100,9 @@ function SectionTwoImpact() {
                 <br></br>
                 <p>What is the social / environmental problem you are trying to solve?</p>
                 <TextField
-                    label="Social/Environmental Problem"
                     className="socialEnviroProblem"
+                    label="Social/Environmental Problem"
+                    InputLabelProps={{ shrink: true }}
                     variant="outlined"
                     type="text"
                     placeholder="Social/Environmental Problem"
@@ -143,6 +144,7 @@ function SectionTwoImpact() {
                 </p>
                 <TextField
                     label="Cost of The Problem"
+                    InputLabelProps={{ shrink: true }}
                     className="costOfProblem"
                     variant="outlined"
                     type="text"
@@ -164,6 +166,7 @@ function SectionTwoImpact() {
                     questions above?</p>
                 <TextField
                     label="Solution"
+                    InputLabelProps={{ shrink: true }}
                     className="solutionToProblem"
                     variant="outlined"
                     type="text"
@@ -185,6 +188,7 @@ function SectionTwoImpact() {
                     solution?</p>
                 <TextField
                     label="Who Benefits?"
+                    InputLabelProps={{ shrink: true }}
                     className="whoBenefits"
                     variant="outlined"
                     type="text"

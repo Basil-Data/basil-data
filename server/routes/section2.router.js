@@ -45,14 +45,23 @@ router.get('/:id', async (req, res) => {
 
     const sqlText2 = `
         SELECT
-            "stakeholderSegments"."id",
-            "stakeholderSegments"."segment"
+            ARRAY_AGG("stakeholderSegments"."id")
         FROM "user"
-        JOIN "stakeholderSegmentsJunction"
+        JOIN "stakeholderSegments"
             ON "user"."id" = "stakeholderSegmentsJunction"."enterpriseId"
         JOIN "stakeholderSegments"
             ON "stakeholderSegmentsJunction"."segmentId" = "stakeholderSegments"."id"
-        WHERE "user"."id" = $1;
+        WHERE "user"."id" = $1    
+    `;
+
+    const sqlText3 = `
+        SELECT
+            "problemBeingSolved2",
+            "costOfProblem2",
+            "howTheySolve2",
+            "whoBenefits2"
+        FROM "answers"
+        WHERE "enterpriseId" = $1
     `;
 
     const sqlParams = [
@@ -60,9 +69,13 @@ router.get('/:id', async (req, res) => {
     ];
 
     const impactSectorId = await pool.query(sqlText, sqlParams);
+    const segmentId = await pool.query(sqlText2, sqlParams);
+    const answers = await pool.query(sqlText3, sqlParams);
 
     const results = {
-        impactSectorId: impactSectorId.rows[0].array_agg,
+        impactSectorId: Array.isArray(impactSectorId.rows[0].array_agg) ? impactSectorId.rows[0].array_agg : [],
+        segmentId: Array.isArray(segmentId.rows[0].array_agg) ? segmentId.rows[0].array_agg : [],
+        ...answers.rows[0]
     }
 
     res.send(results);
@@ -106,7 +119,7 @@ router.put('/', (req, res) => {
 router.post('/', (req, res) => {
     console.log('req.body', req.body);
 
-    for (let individual of req.body.impactSectorId) {
+    for (let impact of req.body.impactSectorId) {
 
         let sqlText = `
             INSERT INTO "impactTableJunction"
@@ -117,10 +130,44 @@ router.post('/', (req, res) => {
 
         let sqlParams = [
             req.user.id,
-            individual
+            impact
         ];
 
         pool.query(sqlText, sqlParams)
+    }
+
+    for (let characteristic of req.body.characteristicId) {
+         let sqlText = `
+            INSERT INTO "supportiveCharacteristicsJunction"
+                ("enterpriseId", "characteristicId")
+            VALUES
+                ($1, $2)
+            `;
+
+        let sqlParams = [
+            req.user.id,
+            characteristic
+        ];
+
+        pool.query(sqlText, sqlParams)
+    }
+
+    if (req.body.segmentId) {
+        for (let segment of req.body.segmentId) {
+            let sqlText = `
+            INSERT INTO "stakeholderSegmentsJunction"
+                ("enterpriseId", "segmentId")
+            VALUES
+                ($1, $2)
+            `;
+
+        let sqlParams = [
+            req.user.id,
+            segment
+        ];
+
+        pool.query(sqlText, sqlParams)
+        }   
     }
         res.sendStatus(200);
 })
