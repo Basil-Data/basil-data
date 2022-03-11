@@ -250,6 +250,20 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         }
 
+        let sqlText5a = `
+        DELETE FROM "societalImpactJunction"
+        WHERE "enterpriseId" = $1;
+        `;
+
+        let sqlParams5a = [
+            req.user.id
+        ];
+
+        await pool.query(
+            sqlText5a, 
+            sqlParams5a
+        );
+
         let sqlText5 = `
                 INSERT INTO "societalImpactJunction"
                     ("enterpriseId", "societalImpactId")
@@ -264,6 +278,20 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         await pool.query(sqlText5, sqlParams5)
 
+        let sqlText6a = `
+        DELETE FROM "environmentalImpactJunction"
+        WHERE "enterpriseId" = $1;
+        `;
+
+        let sqlParams6a = [
+            req.user.id
+        ];
+
+        await pool.query(
+            sqlText6a, 
+            sqlParams6a
+        );
+
         let sqlText6 = `
                 INSERT INTO "environmentalImpactJunction"
                     ("enterpriseId", "environmentalImpactId")
@@ -277,6 +305,20 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         ];
 
         await pool.query(sqlText6, sqlParams6)
+
+        let sqlText7a = `
+        DELETE FROM "economicImpactJunction"
+        WHERE "enterpriseId" = $1;
+        `;
+
+        let sqlParams7a = [
+            req.user.id
+        ];
+
+        await pool.query(
+            sqlText7a, 
+            sqlParams7a
+        );
 
         let sqlText7 = `
                 INSERT INTO "economicImpactJunction"
