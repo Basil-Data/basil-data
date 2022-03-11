@@ -17,7 +17,7 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 function SectionFourTraction() {
     const dispatch = useDispatch();
     const section4 = useSelector((store) => store.section4);
-    const response = useSelector((store) => store.section4Enterprise);
+    const section4Enterprise = useSelector((store) => store.section4Enterprise);
     const progressIndicator = useSelector((store) => store.section4Enterprise.progressIndicatorId)
     const user = useSelector((store) => store.user);
 
@@ -25,16 +25,19 @@ function SectionFourTraction() {
         dispatch({
             type: "FETCH_SECTION_FOUR",
         });
+        dispatch({
+            type: 'FETCH_ENTERPRISE_SECTION_FOUR'
+        })
     }, []);
 
     function handleSubmit(event) {
         event.preventDefault();
 
         dispatch({
-            type: 'UPDATE_SECTION4_RESPONSES',
+            type: 'UPDATE_SECTION4_ENTERPRISE',
             payload: {
                 id: user.id,
-                data: response
+                data: section4Enterprise
             }
         })
     }
@@ -45,7 +48,7 @@ function SectionFourTraction() {
 
         setGeneratedRevenue(true)
         dispatch({
-            type: 'SET_SECTION4_RESPONSES',
+            type: 'SET_SECTION4_ENTERPRISE',
             payload: {
                 generatingRevenue4: true
             }
@@ -55,7 +58,7 @@ function SectionFourTraction() {
     function notGeneratingRevenue() {
         setGeneratedRevenue(false)
         dispatch({
-            type: 'SET_SECTION4_RESPONSES',
+            type: 'SET_SECTION4_ENTERPRISE',
             payload: {
                 generatingRevenue4: true
             }
@@ -66,12 +69,12 @@ function SectionFourTraction() {
         const index = progressIndicator.indexOf(Number(event.target.value))
         if (index === -1) {
             dispatch({
-                type: "SET_SECTION4_RESPONSES",
+                type: "SET_SECTION4_ENTERPRISE",
                 payload: {progressIndicatorId: [...progressIndicator, (Number(event.target.value))]}
             });
         } else {
             dispatch({
-                type: "SET_SECTION4_RESPONSES",
+                type: "SET_SECTION4_ENTERPRISE",
                 payload: {progressIndicatorId: progressIndicator.filter((progressIndicator) => progressIndicator !== Number(event.target.value))}
             });
         }
@@ -108,7 +111,7 @@ function SectionFourTraction() {
                                 label={development.stage}
                                 onChange={(evt => 
                                     dispatch({
-                                        type: 'SET_SECTION4_RESPONSES',
+                                        type: 'SET_SECTION4_ENTERPRISE',
                                         payload: { developmentStageId: development.id}
                                     }))} 
                                 className='centerHelp' />
@@ -135,7 +138,7 @@ function SectionFourTraction() {
                                 label={investment.stage}
                                 onChange={(evt => 
                                     dispatch({
-                                        type: 'SET_SECTION4_RESPONSES',
+                                        type: 'SET_SECTION4_ENTERPRISE',
                                         payload: { 
                                             investmentStageId: investment.id}
                                     }))}  
@@ -155,7 +158,7 @@ function SectionFourTraction() {
                     value={section4.fundingReceived4}
                     onChange={(evt =>
                         dispatch({
-                            type: 'SET_SECTION4_RESPONSES',
+                            type: 'SET_SECTION4_ENTERPRISE',
                             payload: {
                                 fundingReceived4: evt.target.value
                             }
@@ -168,7 +171,8 @@ function SectionFourTraction() {
                     <FormControl className='questionnaireForm centerHelp'>
                         {section4.results3?.map(use => (
                             <FormControlLabel  
-                                key={use.id} 
+                                key={use.id}
+                                checked={progressIndicator.includes(use.id)} 
                                 control={
                                     <Checkbox
                                         value={use.id}
@@ -219,10 +223,10 @@ function SectionFourTraction() {
                     id="outlined-basic" 
                     label="Growth Percentage" 
                     variant="outlined"
-                    value={response.customerGrowth4}
+                    value={section4Enterprise.customerGrowth4}
                     onChange={(evt => 
                         dispatch({
-                            type: 'SET_SECTION4_RESPONSES',
+                            type: 'SET_SECTION4_ENTERPRISE',
                             payload: { customerGrowth4: evt.target.value }
                         }))} />
 
@@ -268,9 +272,9 @@ function SectionFourTraction() {
                     id="outlined-basic" 
                     label="Percentage" 
                     variant="outlined"
-                    value={response.averageGrowth4}
+                    value={section4Enterprise.averageGrowth4}
                     onChange={(evt => dispatch({
-                        type: 'SET_SECTION4_RESPONSES',
+                        type: 'SET_SECTION4_ENTERPRISE',
                         payload: {
                             averageGrowth4: evt.target.value
                         }
@@ -298,7 +302,7 @@ function SectionFourTraction() {
                     value='Yes'
                     onChange={(evt => 
                         dispatch({
-                            type: 'SET_SECTION4_RESPONSES',
+                            type: 'SET_SECTION4_ENTERPRISE',
                             payload: { makingProfit4: true }
                         }))} />
                 
@@ -309,7 +313,7 @@ function SectionFourTraction() {
                     value='No'
                     onChange={(evt => 
                         dispatch({
-                            type: 'SET_SECTION4_RESPONSES',
+                            type: 'SET_SECTION4_ENTERPRISE',
                             payload: { makingProfit4: false }
                         }))} />
 
@@ -329,10 +333,10 @@ function SectionFourTraction() {
                     id="outlined-basic" 
                     label="Net Profit Margin %" 
                     variant="outlined"
-                    value={response.netProfitMargin4}
+                    value={section4Enterprise.netProfitMargin4}
                     onChange={(evt => 
                         dispatch({
-                            type: 'SET_SECTION4_RESPONSES',
+                            type: 'SET_SECTION4_ENTERPRISE',
                             payload: {
                                 netProfitMargin4: evt.target.value
                             }
@@ -359,10 +363,10 @@ function SectionFourTraction() {
                     id="outlined-basic" 
                     label="CAC $" 
                     variant="outlined"
-                    value={response.customerAcquisitionCost4}
+                    value={section4Enterprise.customerAcquisitionCost4}
                     onChange={(evt => 
                         dispatch({
-                            type: 'SET_SECTION4_RESPONSES',
+                            type: 'SET_SECTION4_ENTERPRISE',
                             payload: {
                                 customerAcquisitionCost4: evt.target.value
                             }
@@ -380,10 +384,10 @@ function SectionFourTraction() {
                     id="outlined-basic" 
                     label="Marketing Expenses" 
                     variant="outlined"
-                    value={response.marketingExpenses4}
+                    value={section4Enterprise.marketingExpenses4}
                     onChange={(evt => 
                         dispatch({
-                            type: 'SET_SECTION4_RESPONSES',
+                            type: 'SET_SECTION4_ENTERPRISE',
                             payload: {
                                 customerAcquisitionCost4: evt.target.value
                             }
@@ -397,10 +401,10 @@ function SectionFourTraction() {
                     id="outlined-basic" 
                     label="New Customers" 
                     variant="outlined"
-                    value={response.newCustomers4}
+                    value={section4Enterprise.newCustomers4}
                     onChange={(evt => 
                         dispatch({
-                            type: 'SET_SECTION4_RESPONSES',
+                            type: 'SET_SECTION4_ENTERPRISE',
                             payload: {
                                 newCustomers4: evt.target.value
                             }

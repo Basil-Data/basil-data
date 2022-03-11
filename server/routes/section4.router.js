@@ -30,31 +30,72 @@ router.get('/', async (req, res) => {
   res.send(results);
 });
 
+router.get('/:id', async (req,res) => {
+
+  let sqlText =`
+    SELECT
+      ARRAY_AGG("indicatorId")
+      FROM "progressIndicatorsJunction"
+      WHERE "enterpriseId" = $1;
+    `;
+  
+    let sqlParams = [
+      req.user.id
+    ];
+
+    const progressIndicatorId = await pool.query(sqlText, sqlParams);
+
+    const results = {
+      progressIndicatorId: Array.isArray(progressIndicatorId.rows[0].array_agg) ? progressIndicatorId.rows[0].array_agg : []
+    }
+
+    res.send(results)
+});
+
 // Posts to junction table for checkboxes
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
+try {
+  let sqlText1 =`
+    DELETE FROM "progressIndicatorsJunction"
+      WHERE "enterpriseId" = $1;
+      `;
+    
+      let sqlParams1 = [
+        req.user.id
+      ];
+      
+      await pool.query(
+        sqlText1,
+        sqlParams1
+      )
   
   for (let indicator of req.body.progressIndicatorId) {
-    let sqlText = `
-      INSERT INTO "progressIndicatorJunction"
-        ("enterpriseId", "progressIndicatorId")
+    let sqlText2 = `
+      INSERT INTO "progressIndicatorsJunction"
+        ("enterpriseId", "indicatorId")
       VALUES
         ($1, $2)
     `;
 
-    let sqlParams = [
+    let sqlParams2 = [
       req.user.id,
       indicator
     ];
 
-    pool.query(sqlText, sqlParams)
-  }
+    await pool.query(sqlText2, sqlParams2)
+  };
+
+  
   
   res.sendStatus(200);
-
+}
+catch (err){
+  console.error('POST failed', err);
+}
 });
 
 // Sending answers to answers table
-router.put('/:id', (req, res) => {
+router.put('/', (req, res) => {
   console.log('req.body is', req.body);
   let sqlText = `
     UPDATE "answers"

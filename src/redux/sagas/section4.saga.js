@@ -16,18 +16,34 @@ function* getSectionFour () {
     }
 };
 
+function* getSectionFourEnterprise () {
+    try {
+        const response = yield axios.get('/api/section4/:id');
+        console.log(response.data);
+        yield put({
+            type: 'SET_SECTION4_ENTERPRISE',
+            payload: response.data
+        })
+    }
+    catch (err) {
+        console.error('failed to get sec 4 responses', err);
+    }
+}
+
 function* updateSectionFive(action) {
     try {
-        yield axios.put('/api/section4/:id', action.payload.data)
+        yield axios.put('/api/section4/', action.payload.data)
+        yield axios.post('/api/section4/', action.payload.data)
     }
     catch(err) {
-        console.error('Section 5 PUT saga failed');
+        console.error('Section 4 PUT saga failed');
     }
 }
 
 function* section4Saga(){
     yield takeEvery('FETCH_SECTION_FOUR', getSectionFour);
-    yield takeEvery('UPDATE_SECTION4_RESPONSES', updateSectionFive)
+    yield takeEvery('UPDATE_SECTION4_ENTERPRISE', updateSectionFive);
+    yield takeEvery('FETCH_ENTERPRISE_SECTION_FOUR', getSectionFourEnterprise)
 }
 
 export default section4Saga;
