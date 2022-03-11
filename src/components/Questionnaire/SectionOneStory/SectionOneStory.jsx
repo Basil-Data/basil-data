@@ -2,6 +2,7 @@ import react from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
 
 // MUI
 import Box from '@mui/material/Box';
@@ -23,7 +24,9 @@ function SectionOneStory () {
     const user = useSelector((store) => store.user);
     const competitiveAdvantages = useSelector(store => store.section1.competitiveAdvantages);
     const section1Enterprise = useSelector(store => store.section1Enterprise);
-    const advantageSelection = useSelector(store => store.section1Enterprise.competitiveAdvantagesId);
+    const selectedAdvantages = useSelector(store => store.section1Enterprise.competitiveAdvantagesId);
+    
+
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SECTION_ONE' });
@@ -31,21 +34,17 @@ function SectionOneStory () {
     }, []);
 
     const handleCompetitiveAdvantages = (event) => {
-        const index = advantageSelection.indexOf(Number(event.target.value))
+        const index = selectedAdvantages.indexOf(Number(event.target.value))
         if (index === -1) {
             dispatch({
                 type: 'SET_SECTION_ONE_ENTERPRISE',
-                payload: {competitiveAdvantagesId: [...advantageSelection, Number(event.target.value)]}
+                payload: {competitiveAdvantagesId: [...selectedAdvantages, Number(event.target.value)]}
             })
         }
         else {
             dispatch({
                 type: 'SET_SECTION_ONE_ENTERPRISE',
-                payload: {competitiveAdvantagesId: advantageSelection.filter((advantageSelection) => advantageSelection !== Number(event.target.value))}
-            })
-            dispatch({
-                type: 'DELETE_COMPETITIVE_ADVANTAGE',
-                payload: Number(event.target.value)
+                payload: {competitiveAdvantagesId: selectedAdvantages.filter((selectedAdvantages) => selectedAdvantages !== Number(event.target.value))}
             })
         }
     };
@@ -89,7 +88,7 @@ function SectionOneStory () {
                 id="outlined-basic" 
                 label="Date founded" 
                 variant="outlined" 
-                value={section1Enterprise.dateFounded1}
+                value={moment(section1Enterprise.dateFounded1).format("MMMM DD, YYYY")}
                 onChange={(event) => dispatch({
                     type: 'SET_SECTION_ONE_ENTERPRISE',
                     payload: { dateFounded1: event.target.value }
@@ -124,28 +123,28 @@ function SectionOneStory () {
                 </Box>
             </Grid>
             <h5>How well do you understand the problem?</h5>
-            <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue=""
-                row
-                name="radio-buttons-group"
-                className='centerHelp'
-                onChange={(event) => dispatch({
-                    type: 'SET_SECTION_ONE_ENTERPRISE',
-                    payload: {understandProblem1: event.target.value}
-                })}
-            >
-                <FormControlLabel labelPlacement="top" value="1" control={<Radio />} label="1" />
-                <FormControlLabel labelPlacement="top" value="2" control={<Radio />} label="2" />
-                <FormControlLabel labelPlacement="top" value="3" control={<Radio />} label="3" />
-                <FormControlLabel labelPlacement="top" value="4" control={<Radio />} label="4" />
-                <FormControlLabel labelPlacement="top" value="5" control={<Radio />} label="5" />
-                <FormControlLabel labelPlacement="top" value="6" control={<Radio />} label="6" />
-                <FormControlLabel labelPlacement="top" value="7" control={<Radio />} label="7" />
-                <FormControlLabel labelPlacement="top" value="8" control={<Radio />} label="8" />
-                <FormControlLabel labelPlacement="top" value="9" control={<Radio />} label="9" />
-                <FormControlLabel labelPlacement="top" value="10" control={<Radio />} label="10" />
-            </RadioGroup>
+                <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue={section1Enterprise.understandProblem1}
+                    row
+                    name="radio-buttons-group"
+                    className='centerHelp'
+                    onChange={(event) => dispatch({
+                        type: 'SET_SECTION_ONE_ENTERPRISE',
+                        payload: {understandProblem1: event.target.value}
+                    })}
+                >
+                    <FormControlLabel labelPlacement="top" value="1" control={<Radio />} label="1" />
+                    <FormControlLabel labelPlacement="top" value="2" control={<Radio />} label="2" />
+                    <FormControlLabel labelPlacement="top" value="3" control={<Radio />} label="3" />
+                    <FormControlLabel labelPlacement="top" value="4" control={<Radio />} label="4" />
+                    <FormControlLabel labelPlacement="top" value="5" control={<Radio />} label="5" />
+                    <FormControlLabel labelPlacement="top" value="6" control={<Radio />} label="6" />
+                    <FormControlLabel labelPlacement="top" value="7" control={<Radio />} label="7" />
+                    <FormControlLabel labelPlacement="top" value="8" control={<Radio />} label="8" />
+                    <FormControlLabel labelPlacement="top" value="9" control={<Radio />} label="9" />
+                    <FormControlLabel labelPlacement="top" value="10" control={<Radio />} label="10" />
+                </RadioGroup>
             <h5>How many years of collective experience within the impact problem space?</h5>
             <TextField 
                 id="outlined-basic" 
@@ -185,12 +184,11 @@ function SectionOneStory () {
                     {competitiveAdvantages?.map(advantage => (
                             <FormControlLabel 
                                 key = {advantage.id} 
-                                checked={advantageSelection.includes(advantage.id)}
+                                checked={selectedAdvantages.includes(advantage.id)}
                                 value={advantage.id}
                                 onChange={handleCompetitiveAdvantages}
                                 control={
                                     <Checkbox 
-                                        
                                     />} 
                                 label={advantage.advantage} />
                     ))}

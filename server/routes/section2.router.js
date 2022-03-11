@@ -34,13 +34,12 @@ router.get('/:id', async (req, res) => {
 
     const sqlText = `
         SELECT
-            "impactSectors"."id",
-            "impactSectors"."impactSector"
+            ARRAY_AGG("impactSectors"."id")
         FROM "user"
         JOIN "impactTableJunction"
             ON "user"."id" = "impactTableJunction"."enterpriseId"
         JOIN "impactSectors"
-            ON "impactTableJunction"."impactSectorId" = "impactSector"."id"
+            ON "impactTableJunction"."impactSectorId" = "impactSectors"."id"
         WHERE "user"."id" = $1    
     `;
 
@@ -60,12 +59,10 @@ router.get('/:id', async (req, res) => {
         req.user.id
     ];
 
-    const results1 = await pool.query(sqlText, sqlParams);
-    const results2 = await pool.query(sqlText2, sqlParams);
+    const impactSectorId = await pool.query(sqlText, sqlParams);
 
     const results = {
-        results1: results1.rows,
-        results2: results2.rows
+        impactSectorId: impactSectorId.rows[0].array_agg,
     }
 
     res.send(results);
@@ -73,10 +70,10 @@ router.get('/:id', async (req, res) => {
 });
 
 
-router.put('/:id', (req, res) => {
+router.put('/', (req, res) => {
     console.log('PUT section2');
     console.log('req.body:', req.body);
-    console.log('req.params.id', req.params.id);
+    console.log('req.user.id', req.user.id);
     
     
 
@@ -90,19 +87,42 @@ router.put('/:id', (req, res) => {
         WHERE "answers"."enterpriseId" = $5;
     `;  
 
+
     const sqlParams = [
         req.body.problemBeingSolved2,
         req.body.costOfProblem2,
         req.body.howTheySolve2,
         req.body.whoBenefits2,
-        req.params.id
+        req.user.id
     ];
 
     pool.query(sqlText, sqlParams)
         .then(res.sendStatus(200))
         .catch((error) => {
-            console.log('POST section2 error', error); 
+            console.log('PUT section2 error', error); 
         })
+})
+
+router.post('/', (req, res) => {
+    console.log('req.body', req.body);
+
+    for (let individual of req.body.impactSectorId) {
+
+        let sqlText = `
+            INSERT INTO "impactTableJunction"
+                ("enterpriseId", "impactSectorId")
+            VALUES
+                ($1, $2)
+        `;
+
+        let sqlParams = [
+            req.user.id,
+            individual
+        ];
+
+        pool.query(sqlText, sqlParams)
+    }
+        res.sendStatus(200);
 })
 
 module.exports = router;
