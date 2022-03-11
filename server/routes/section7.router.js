@@ -70,6 +70,12 @@ router.get('/:id', async (req, res) => {
         WHERE "enterpriseId" = $1;
     `;
 
+    let sqlText4 = `
+        SELECT "raisingFunds7", "targetAmount7", "nextSteps7", "understandProblem7"
+        FROM "answers"
+        WHERE "enterpriseId" = $1;
+    `;
+
     let sqlParams = [
         req.user.id
     ];
@@ -77,11 +83,16 @@ router.get('/:id', async (req, res) => {
     const investmentVehicleId = await pool.query(sqlText1, sqlParams);
     const fundingUseId = await pool.query(sqlText2, sqlParams);
     const assistanceId = await pool.query(sqlText3, sqlParams);
+    const answers = await pool.query(sqlText4, sqlParams);
 
     const results = {        
         investmentVehicleId: Array.isArray(investmentVehicleId.rows[0].array_agg) ? investmentVehicleId.rows[0].array_agg : [],
         fundingUseId: Array.isArray(fundingUseId.rows[0].array_agg) ? fundingUseId.rows[0].array_agg : [],
         assistanceId: Array.isArray(assistanceId.rows[0].array_agg) ? assistanceId.rows[0].array_agg : [],
+        raisingFunds7: answers.raisingFunds7,
+        targetAmount7: answers.targetAmount7,
+        nextSteps7: answers.targetAmount7,
+        understandProblem7: answers.understandProblem7
     }
 
     res.send(results);
@@ -91,7 +102,7 @@ router.get('/:id', async (req, res) => {
 router.put('/', (req, res) => {
 
     // Console log so you can see what is coming
-    console.log('req.body is:', req.body, 'req.user is:', req.user)
+    console.log('req.body PUT section 7 is:', req.body, 'req.user is:', req.user)
 
     let sqlText = `
         UPDATE "answers"
@@ -112,12 +123,12 @@ router.put('/', (req, res) => {
     ];
 
     pool
-        .query(sqlText, sqlParams)
-        .then(res.sendStatus(200))
-        .catch(error => {
-            console.log('error putting answers section 7', error)
-            res.sendStatus(500);
-        })
+    .query(sqlText, sqlParams)
+    .then(res.sendStatus(200))
+    .catch(error => {
+        console.log('error putting answers section 7', error)
+        res.sendStatus(500);
+    })
 });
 
 // Post router for posting to junction table for checkboxes
