@@ -3,8 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-
-router.get('/', async (req, res) => {
+router.get('/', rejectUnauthenticated, async (req, res) => {
 
     const sqlText = 'SELECT * FROM "impactSectors"';
     const sqlText2 = 'SELECT * FROM "supportiveCharacteristics"';
@@ -30,7 +29,7 @@ router.get('/', async (req, res) => {
 
 
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', rejectUnauthenticated, async (req, res) => {
 
     const sqlText = `
         SELECT
@@ -70,7 +69,7 @@ router.get('/:id', async (req, res) => {
 });
 
 
-router.put('/', (req, res) => {
+router.put('/', rejectUnauthenticated, (req, res) => {
     console.log('PUT section2');
     console.log('req.body:', req.body);
     console.log('req.user.id', req.user.id);
@@ -103,7 +102,7 @@ router.put('/', (req, res) => {
         })
 })
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('req.body', req.body);
 
     for (let individual of req.body.impactSectorId) {

@@ -1,14 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const axios = require('axios');
-
-/**
- * GET route template
- */
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 // Router to get the arrays for Section One
-router.get('/', async (req, res) => {
+router.get('/', rejectUnauthenticated, async (req, res) => {
 
     let sqlText = `
         SELECT *
@@ -38,7 +34,7 @@ router.get('/', async (req, res) => {
     res.send(results);
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', rejectUnauthenticated, async (req, res) => {
 
     let sqlText = `
         SELECT 
@@ -92,7 +88,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Post router for posting to joiner table for check boxes
-router.post('/', async (req, res) => {
+router.post('/', rejectUnauthenticated, async (req, res) => {
 
     try {
     console.log(req.body)
@@ -157,7 +153,7 @@ router.post('/', async (req, res) => {
 
 });
 
-router.put('/', (req, res) => {
+router.put('/', rejectUnauthenticated, (req, res) => {
     // Console log so you can see what is coming
     console.log('in put :id section 3', req.body)
 
