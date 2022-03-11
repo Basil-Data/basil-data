@@ -76,6 +76,21 @@ router.get('/:id', async (req, res) => {
         WHERE "enterpriseId" = $1;
     `;
 
+    let sqlText5 = `
+        SELECT * FROM "societalImpactJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText6 = `
+        SELECT * FROM "environmentalImpactJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText7 = `
+        SELECT * FROM "economicImpactJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
     let sqlParams = [
         req.user.id
     ];
@@ -84,15 +99,18 @@ router.get('/:id', async (req, res) => {
     const fundingUseId = await pool.query(sqlText2, sqlParams);
     const assistanceId = await pool.query(sqlText3, sqlParams);
     const answers = await pool.query(sqlText4, sqlParams);
+    const societalImpactId = await pool.query(sqlText5, sqlParams);
+    const environmentalImpactId = await pool.query(sqlText6, sqlParams);
+    const economicImpactId = await pool.query(sqlText7, sqlParams);
 
     const results = {        
         investmentVehicleId: Array.isArray(investmentVehicleId.rows[0].array_agg) ? investmentVehicleId.rows[0].array_agg : [],
         fundingUseId: Array.isArray(fundingUseId.rows[0].array_agg) ? fundingUseId.rows[0].array_agg : [],
         assistanceId: Array.isArray(assistanceId.rows[0].array_agg) ? assistanceId.rows[0].array_agg : [],
-        raisingFunds7: answers.raisingFunds7,
-        targetAmount7: answers.targetAmount7,
-        nextSteps7: answers.targetAmount7,
-        understandProblem7: answers.understandProblem7
+        ...answers.rows[0],
+        societalImpactId: societalImpactId.rows[0].societalImpactId,
+        environmentalImpactId: environmentalImpactId.rows[0].environmentalImpactId,
+        economicImpactId: economicImpactId.rows[0].economicImpactId
     }
 
     res.send(results);
@@ -100,9 +118,6 @@ router.get('/:id', async (req, res) => {
 
 // Router for putting/updating answers into table
 router.put('/', (req, res) => {
-
-    // Console log so you can see what is coming
-    console.log('req.body PUT section 7 is:', req.body, 'req.user is:', req.user)
 
     let sqlText = `
         UPDATE "answers"
@@ -230,10 +245,52 @@ router.post('/', async (req, res) => {
 
         }
 
+        let sqlText5 = `
+                INSERT INTO "societalImpactJunction"
+                    ("enterpriseId", "societalImpactId")
+                VALUES
+                    ($1, $2)
+            `;
+
+        let sqlParams5 = [
+            req.user.id,
+            req.body.societalImpactId
+        ];
+
+        await pool.query(sqlText5, sqlParams5)
+
+        let sqlText6 = `
+                INSERT INTO "environmentalImpactJunction"
+                    ("enterpriseId", "environmentalImpactId")
+                VALUES
+                    ($1, $2)
+            `;
+
+        let sqlParams6 = [
+            req.user.id,
+            req.body.environmentalImpactId
+        ];
+
+        await pool.query(sqlText6, sqlParams6)
+
+        let sqlText7 = `
+                INSERT INTO "economicImpactJunction"
+                    ("enterpriseId", "economicImpactId")
+                VALUES
+                    ($1, $2)
+            `;
+
+        let sqlParams7 = [
+            req.user.id,
+            req.body.economicImpactId
+        ];
+
+        await pool.query(sqlText7, sqlParams7)
+
         res.sendStatus(200);
     }
     catch (error){
-        console.log('error in details edit router,', error);
+        console.log('error in section 7 junction post,', error);
         res.sendStatus(500);
     }
 
