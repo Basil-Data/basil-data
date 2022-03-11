@@ -95,6 +95,29 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     try {
     console.log(req.body)
 
+    let sqlTextDelete = `
+    DELETE FROM "operatingSectorJunction"
+    WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlTextDelete2 = `
+    DELETE FROM "painPointsJunction"
+    WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlTextDelete3 = `
+    DELETE FROM "technologiesJunction"
+    WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlParamsDelete = [
+        req.user.id
+    ];
+
+    await pool.query(sqlTextDelete, sqlParamsDelete);
+    await pool.query(sqlTextDelete2, sqlParamsDelete);
+    await pool.query(sqlTextDelete3, sqlParamsDelete);
+
     for (let sector of req.body.operatingSectorId) {
 
     let sqlText = `
