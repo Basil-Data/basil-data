@@ -41,7 +41,6 @@ CREATE TABLE "answers" (
 	"payingCustomerProfile3" VARCHAR (1024) DEFAULT NULL,
 	"mainCompetitors3" VARCHAR (1024) DEFAULT NULL,
 	"differFromCompetitors3" VARCHAR (1024) DEFAULT NULL,
-	"providingSolution3" VARCHAR (1024) DEFAULT NULL,
 	"testimonial3" VARCHAR (1024) DEFAULT NULL,
 	"businessModel3" VARCHAR (1024) DEFAULT NULL,
 	"fundingReceived4" INTEGER DEFAULT NULL,
