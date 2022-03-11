@@ -46,20 +46,10 @@ function* postSectionOne (action) {
     }
 };
 
-function* deleteCompetitiveAdvantage (action) {
-    try {
-        console.log(action.payload);
-    }
-    catch (error) {
-        console.log('failed to delete within section one', error);
-    }
-}
-
 function* section1Saga() {
     yield takeLatest('FETCH_SECTION_ONE', getSectionOne);
     yield takeLatest('UPDATE_SECTION_ONE', postSectionOne);
     yield takeLatest('FETCH_ENTERPRISE_SECTION_ONE', getSectionOneEnterprise)
-    yield takeLatest('DELETE_COMPETITIVE_ADVANTAGE', deleteCompetitiveAdvantage);
 }
 
 export default section1Saga;

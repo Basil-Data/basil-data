@@ -77,13 +77,13 @@ router.get('/:id', async (req, res) => {
     ];
 
     const operatingSectorId = await pool.query(sqlText, sqlParams);
-    const paintPointsId = await pool.query(sqlText2, sqlParams);
+    const painPointsId = await pool.query(sqlText2, sqlParams);
     const technologiesId = await pool.query(sqlText3, sqlParams);
     const answers = await pool.query(sqlText4, sqlParams);
 
     const results = {
         operatingSectorId: Array.isArray(operatingSectorId.rows[0].array_agg) ? operatingSectorId.rows[0].array_agg : [],
-        paintPointsId: Array.isArray(paintPointsId.rows[0].array_agg) ? paintPointsId.rows[0].array_agg : [],
+        painPointsId: Array.isArray(painPointsId.rows[0].array_agg) ? painPointsId.rows[0].array_agg : [],
         technologiesId: Array.isArray(technologiesId.rows[0].array_agg) ? technologiesId.rows[0].array_agg : [],
         ...answers.rows[0]
     }
@@ -94,6 +94,7 @@ router.get('/:id', async (req, res) => {
 // Post router for posting to joiner table for check boxes
 router.post('/', async (req, res) => {
 
+    try {
     console.log(req.body)
 
     for (let sector of req.body.operatingSectorId) {
@@ -113,7 +114,7 @@ router.post('/', async (req, res) => {
     await pool.query(sqlText, sqlParams)
     }
 
-    for (let point of req.body.paintPointsId) {
+    for (let point of req.body.painPointsId) {
 
         let sqlText = `
             INSERT INTO "painPointsJunction"
@@ -146,14 +147,19 @@ router.post('/', async (req, res) => {
     
         await pool.query(sqlText, sqlParams)
     }
+    }
+    catch (error) {
+        console.log('section 3 post error', error);
+        res.sendStatus(500);
+    }
 
     res.sendStatus(200);
 
 });
 
-router.put('/:id', (req, res) => {
+router.put('/', (req, res) => {
     // Console log so you can see what is coming
-    console.log(req.body)
+    console.log('in put :id section 3', req.body)
 
     // Update the database, make sure to include all columns that
     // are coming from the saga
