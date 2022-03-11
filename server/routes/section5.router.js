@@ -35,8 +35,33 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
   res.send(results);
 });
 
+// Router to get results by id
+router.get('/:id', async (req, res) => {
+  let sqlText =`
+    SELECT
+      "addressableMarket5",
+      "serviceableMarket5",
+      "obtainableMarket5",
+      "whyRealistic5"
+    FROM "answers"
+    WHERE "enterpriseId" = $1;
+    `;
+  
+    let sqlParams = [
+      req.user.id
+    ]
+
+    const answers = await pool.query(sqlText, sqlParams);
+
+    const results = {
+      ...answers.rows[0]
+    }
+
+    res.send(results)
+});
 
 router.post('/', rejectUnauthenticated, (req, res) => {
+
   let sqlText = `
     INSERT INTO "answers" ( "addressableMarket5", "serviceableMarket5", "obtainableMarket5", "whyRealistic5")
     VALUES ($1, $2, $3, $4)
