@@ -66,16 +66,16 @@ function SectionSevenNextSteps () {
     }
 
     const handleWayAhead = (event) => {
-        const index = wayAhead.indexOf(event.target.value)
+        const index = wayAhead.indexOf(Number(event.target.value))
         if (index === -1) {
             dispatch({
                 type: "SET_NEXT_STEPS_ENTERPRISE",
-                payload: {assistanceId: [...wayAhead, event.target.value]}
+                payload: {assistanceId: [...wayAhead, Number(event.target.value)]}
             });
         } else {
             dispatch({
                 type: "SET_NEXT_STEPS_ENTERPRISE",
-                payload: {assistanceId: wayAhead.filter((wayAhead) => wayAhead !== event.target.value)}
+                payload: {assistanceId: wayAhead.filter((wayAhead) => wayAhead !== Number(event.target.value))}
             });
         }
     }
@@ -166,7 +166,7 @@ function SectionSevenNextSteps () {
                 {section7.results2?.map(use => (
                         <FormControlLabel 
                             key={use.id}
-                            // checked={fundingUse.includes(use.id)} 
+                            checked={fundingUse.includes(use.id)} 
                             control={
                                 <Checkbox
                                     value={use.id}
@@ -216,7 +216,7 @@ function SectionSevenNextSteps () {
                 {section7.results3?.map(approach => (
                         <FormControlLabel 
                             key={approach.id}
-                            // checked={wayAhead.includes(approach.id)}  
+                            checked={wayAhead.includes(approach.id)}  
                             control={
                                 <Checkbox
                                     value={approach.id}
