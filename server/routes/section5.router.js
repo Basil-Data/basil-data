@@ -1,11 +1,9 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
-router.get('/', async (req, res) => {
+router.get('/', rejectUnauthenticated, async (req, res) => {
   let sqlText =`
     SELECT * FROM "addressableMarket5"
     `;
@@ -62,10 +60,8 @@ router.get('/:id', async (req, res) => {
     res.send(results)
 });
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
+
   let sqlText = `
     INSERT INTO "answers" ( "addressableMarket5", "serviceableMarket5", "obtainableMarket5", "whyRealistic5")
     VALUES ($1, $2, $3, $4)
@@ -87,7 +83,7 @@ router.post('/', (req, res) => {
       });
 });
 
-router.put('/', async (req, res) => {
+router.put('/:id', rejectUnauthenticated, async (req, res) => {
 
   console.log(req.body);
 
