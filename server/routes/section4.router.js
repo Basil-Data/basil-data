@@ -31,7 +31,6 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req,res) => {
-
   let sqlText =`
     SELECT
       ARRAY_AGG("indicatorId")
@@ -56,26 +55,36 @@ router.get('/:id', async (req,res) => {
         "newCustomers4"
       FROM "answers"
       WHERE "enterpriseId" = $1;
-        `;
-      
-    let sqlParams2 = [
-      req.user.id
-    ]
+    `;
 
+    let sqlText3 =`
+      SELECT
+        "developmentStageId"
+      FROM
+        "developmentStageJunction"
+      WHERE "enterpriseId" = $1;
+    `;
+      
     const progressIndicatorId = await pool.query(sqlText, sqlParams);
     const answers = await pool.query(sqlText2, sqlParams);
+    const developmentStageId = await pool.query(sqlText3, sqlParams);
+    
 
     const results = {
       progressIndicatorId: Array.isArray(progressIndicatorId.rows[0].array_agg) ? progressIndicatorId.rows[0].array_agg : [],
-      ...answers.rows[0]
+      ...answers.rows[0],
+      developmentStageId: developmentStageId.rows[0].developmentStageId
     }
+    console.log('developmentStageId is', developmentStageId.rows[0].developmentStageId);
 
     res.send(results)
 });
 
 // Posts to junction table for checkboxes
 router.post('/', async (req, res) => {
+  console.log('posting', req.body.developmentStageId);
 try {
+
   let sqlText1 =`
     DELETE FROM "progressIndicatorsJunction"
       WHERE "enterpriseId" = $1;
@@ -103,7 +112,38 @@ try {
       indicator
     ];
 
-    await pool.query(sqlText2, sqlParams2)
+    await pool.query( sqlText2, sqlParams2)
+
+    let sqlText3 =`
+      DELETE FROM "developmentStageJunction"
+        WHERE "enterpriseId" = $1;
+        `;
+    
+    let sqlParams3 = [
+      req.user.id
+    ]
+
+    await pool.query(
+      sqlText3,
+      sqlParams3
+    )
+    
+
+    let sqlText4 =`
+      INSERT INTO "developmentStageJunction"
+        ( "enterpriseId", "developmentStageId" )
+      VALUES
+        ($1, $2)
+      `;
+    
+    let sqlParams4 = [
+      req.user.id,
+      req.body.developmentStageId
+
+    ]
+      
+
+    await pool.query(sqlText4, sqlParams4)
   };
 
   

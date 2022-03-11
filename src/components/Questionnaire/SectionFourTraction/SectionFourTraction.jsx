@@ -98,7 +98,7 @@ function SectionFourTraction() {
                 </h5>
                     <RadioGroup
                         aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue=""
+                        value={Number(section4Enterprise.developmentStageId)}
                         row
                         name="radio-buttons-group"
                         className='centerHelp'
