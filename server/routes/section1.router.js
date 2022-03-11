@@ -33,14 +33,30 @@ router.get('/:id', async (req, res) => {
         WHERE "enterpriseId" = $1;
     `;
 
+    let sqlText2 = `
+        SELECT
+            "enterpriseSize1",
+            "dateFounded1",
+            "missionStatement1",
+            "understandProblem1",
+            "yearsCollectiveExperience1",
+            "percentageBIPOC1",
+            "percentageFemale1",
+            "investorIntroduction1"
+        FROM "answers"
+        WHERE "enterpriseId" = $1
+    `;
+
     let sqlParams = [
         req.user.id
     ];
 
     const competitiveAdvantagesId = await pool.query(sqlText, sqlParams);
+    const answers = await pool.query(sqlText2, sqlParams);
 
     const results = {
-        competitiveAdvantagesId: competitiveAdvantagesId.rows[0].array_agg,
+        competitiveAdvantagesId: Array.isArray(competitiveAdvantagesId.rows[0].array_agg) ? competitiveAdvantagesId.rows[0].array_agg : [],
+        ...answers.rows[0]
     }
 
     res.send(results);
@@ -63,21 +79,20 @@ router.post('/', async (req, res) => {
     await pool.query(sqlText, sqlParams);
 
     for (let individual of req.body.competitiveAdvantagesId) {
+            
+        let sqlText2 = `
+            INSERT INTO "competitiveAdvantagesJunction"
+                ("enterpriseId", "advantageId")
+            VALUES
+                ($1, $2)
+        `;
 
+        let sqlParams2 = [
+            req.user.id,
+            individual
+        ];
 
-    let sqlText2 = `
-        INSERT INTO "competitiveAdvantagesJunction"
-            ("enterpriseId", "advantageId")
-        VALUES
-            ($1, $2)
-    `;
-
-    let sqlParams2 = [
-        req.user.id,
-        individual
-    ];
-
-    await pool.query(sqlText2, sqlParams2);
+        await pool.query(sqlText2, sqlParams2);
     }
 
     res.sendStatus(200);

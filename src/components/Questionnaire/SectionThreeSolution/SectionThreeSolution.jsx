@@ -22,6 +22,7 @@ function SectionThreeSolution () {
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SECTION_THREE'});
+        dispatch({ type: 'FETCH_ENTERPRISE_SECTION_THREE'});
     }, []);
 
     // get the user.id from the store to send with everything else
@@ -111,11 +112,11 @@ function SectionThreeSolution () {
                     <FormControl sx={{ m : 3}}>
                         {operatingSector?.map(sector => (
                                 <FormControlLabel 
+                                    checked={operatingSector.includes(sector.id)}
+                                    value={sector.id}
+                                    onChange={handleOperatingSectors}
                                     control={
                                     <Checkbox 
-                                        value={sector.id}
-                                        // checked={selectedOperatingSector.includes(sector.id)}
-                                        onChange={handleOperatingSectors}
                                     />} 
                                     label={sector.sector}
                                     key={sector.id} />
@@ -214,6 +215,7 @@ function SectionThreeSolution () {
                     <FormControl sx={{ m : 3}}>
                         {painPoints?.map(point => (
                                 <FormControlLabel 
+                                    checked={painPoints.includes(point.id)}
                                     control={
                                         <Checkbox
                                             value={point.id}
@@ -291,6 +293,8 @@ function SectionThreeSolution () {
                     <FormControl sx={{ m : 3}}>
                         {technologies?.map(technology => (
                                 <FormControlLabel 
+                                    checked={technologies.includes(technology.id)}
+                                    disabled={!selectedTechnologies.includes(technology.id) && selectedTechnologies.length > 2}
                                     control={
                                     <Checkbox 
                                         value={technology.id}
@@ -306,19 +310,19 @@ function SectionThreeSolution () {
                 <Link to="/impact">
                     <button 
                         className="btn" 
-                        onClick={(event) => handleSubmit(event)}>
+                        onClick={handleSubmit}>
                         Back
                     </button>
                 </Link>
                 <button 
                     className="btn"
-                    onClick={(event) => handleSubmit(event)}>
+                    onClick={handleSubmit}>
                         Submit
                     </button>
                 <Link to="/traction">
                     <button 
                         className="btn"
-                        onClick={(event) => handleSubmit(event)}>
+                        onClick={handleSubmit}>
                         Next
                     </button>
                 </Link>

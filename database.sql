@@ -41,7 +41,6 @@ CREATE TABLE "answers" (
 	"payingCustomerProfile3" VARCHAR (1024) DEFAULT NULL,
 	"mainCompetitors3" VARCHAR (1024) DEFAULT NULL,
 	"differFromCompetitors3" VARCHAR (1024) DEFAULT NULL,
-	"providingSolution3" VARCHAR (1024) DEFAULT NULL,
 	"testimonial3" VARCHAR (1024) DEFAULT NULL,
 	"businessModel3" VARCHAR (1024) DEFAULT NULL,
 	"fundingReceived4" INTEGER DEFAULT NULL,
@@ -263,7 +262,7 @@ DROP TABLE "developmentStageJunction";
 CREATE TABLE "developmentStageJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
-	"stageId" INTEGER
+	"developmentStageId" INTEGER
 );
 
 DROP TABLE "investmentStage";
@@ -285,7 +284,7 @@ DROP TABLE "investmentStageJunction";
 CREATE TABLE "investmentStageJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
-	"stageId" INTEGER
+	"investmentStageId" INTEGER
 );
 
 DROP TABLE "progressIndicators";
