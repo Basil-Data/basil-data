@@ -294,6 +294,7 @@ function SectionThreeSolution () {
                         {technologies?.map(technology => (
                                 <FormControlLabel 
                                     checked={technologies.includes(technology.id)}
+                                    disabled={!selectedTechnologies.includes(technology.id) && selectedTechnologies.length > 2}
                                     control={
                                     <Checkbox 
                                         value={technology.id}
