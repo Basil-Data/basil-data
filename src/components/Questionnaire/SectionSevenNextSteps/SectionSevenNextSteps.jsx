@@ -25,6 +25,7 @@ function SectionSevenNextSteps () {
     const investmentSelection = useSelector((store) => store.section7Enterprise.investmentVehicleId);
     const fundingUse = useSelector((store) => store.section7Enterprise.fundingUseId);
     const wayAhead = useSelector((store) => store.section7Enterprise.assistanceId);
+    console.log('section 7:', section7);
 
     useEffect(() => {
         dispatch({
@@ -131,7 +132,7 @@ function SectionSevenNextSteps () {
                 id="outlined-basic" 
                 label="Fundraising Target" 
                 variant="outlined"
-                value={section7Enterprise.targetAmount7}
+                value={section7Enterprise.targetAmount7 ?? ''}
                 onChange = {(event) =>
                     { dispatch({
                         type: "SET_NEXT_STEPS_ENTERPRISE",
@@ -199,7 +200,7 @@ function SectionSevenNextSteps () {
                     variant="outlined" 
                     multiline rows={5} 
                     fullWidth
-                    value={section7Enterprise.nextSteps7}
+                    value={section7Enterprise.nextSteps7 ?? ''}
                     onChange = {(event) =>
                         { dispatch({
                             type: "SET_NEXT_STEPS_ENTERPRISE",
@@ -255,7 +256,7 @@ function SectionSevenNextSteps () {
                     key={impact.id}
                     value={impact.id}
                     control={<Radio />} 
-                    label={impact.impact} 
+                    label={impact.societalImpact}
                     className='centerHelp' 
                 />
             ))}
