@@ -1,8 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-router.get('/', async (req, res) => {
+// Router to get the multiple choice arrays for Section Three
+router.get('/', rejectUnauthenticated, async (req, res) => {
 
     let sqlText1 = `
         SELECT * FROM "investmentVehicles";
@@ -47,7 +49,9 @@ router.get('/', async (req, res) => {
     res.send(results);
 });
 
-router.get('/:id', async (req, res) => {
+// Gets the individual enterprise's previous answers for the 
+// answers
+router.get('/:id', rejectUnauthenticated, async (req, res) => {
 
     let sqlText1 = `
         SELECT 
@@ -116,8 +120,9 @@ router.get('/:id', async (req, res) => {
     res.send(results);
 });
 
-// Router for putting/updating answers into table
-router.put('/', (req, res) => {
+// Router for putting/updating answers into table as the
+// individual enterprise changes their answers
+router.put('/', rejectUnauthenticated, (req, res) => {
 
     let sqlText = `
         UPDATE "answers"
@@ -146,8 +151,8 @@ router.put('/', (req, res) => {
     })
 });
 
-// Post router for posting to junction table for checkboxes
-router.post('/', async (req, res) => {
+// Post router for posting to joiner table for check boxes
+router.post('/', rejectUnauthenticated, async (req, res) => {
     try {
         let sqlText1 = `
         DELETE FROM "investmentVehiclesJunction"

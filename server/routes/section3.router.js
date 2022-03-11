@@ -1,14 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const axios = require('axios');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
-
-// Router to get the arrays for Section One
-router.get('/', async (req, res) => {
+// Router to get the multiple choice arrays for Section Three
+router.get('/', rejectUnauthenticated, async (req, res) => {
 
     let sqlText = `
         SELECT *
@@ -38,7 +34,9 @@ router.get('/', async (req, res) => {
     res.send(results);
 });
 
-router.get('/:id', async (req, res) => {
+// Gets the individual enterprise's previous answers for the 
+// answers
+router.get('/:id', rejectUnauthenticated, async (req, res) => {
 
     let sqlText = `
         SELECT 
@@ -92,7 +90,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Post router for posting to joiner table for check boxes
-router.post('/', async (req, res) => {
+router.post('/', rejectUnauthenticated, async (req, res) => {
 
     try {
     console.log(req.body)
@@ -157,7 +155,9 @@ router.post('/', async (req, res) => {
 
 });
 
-router.put('/', (req, res) => {
+// Router for putting/updating answers into table as the
+// individual enterprise changes their answers
+router.put('/', rejectUnauthenticated, (req, res) => {
     // Console log so you can see what is coming
     console.log('in put :id section 3', req.body)
 
@@ -181,12 +181,12 @@ router.put('/', (req, res) => {
         req.body.differFromCompetitors3,
         req.body.testimonial3,
         req.body.businessModel3,
-        req.params.id
+        req.user.id
     ];
     
     pool.query(sqlText, sqlParams)
         .then(res.sendStatus(200))
-        .catch((err) => console.log('error in section three post', err))
+        .catch((err) => console.log('error in section three put', err))
 });
 
 module.exports = router;

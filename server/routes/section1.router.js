@@ -1,14 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const axios = require('axios');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
-
-// Router to get the arrays for Section One
-router.get('/', async (req, res) => {
+// Router to get the multiple choice arrays for Section One
+router.get('/', rejectUnauthenticated, async (req, res) => {
 
     let sqlText = `
         SELECT *
@@ -24,7 +20,9 @@ router.get('/', async (req, res) => {
     res.send(results);
 });
 
-router.get('/:id', async (req, res) => {
+// Gets the individual enterprise's previous answers for the 
+// answers
+router.get('/:id', rejectUnauthenticated, async (req, res) => {
 
     let sqlText = `
         SELECT 
@@ -36,7 +34,7 @@ router.get('/:id', async (req, res) => {
     let sqlText2 = `
         SELECT
             "enterpriseSize1",
-            "dateFounded1",
+            TO_CHAR("dateFounded1", 'MonthDD, YYYY') AS "dateFounded1",
             "missionStatement1",
             "understandProblem1",
             "yearsCollectiveExperience1",
@@ -63,10 +61,11 @@ router.get('/:id', async (req, res) => {
 });
 
 // Post router for posting to joiner table for check boxes
-router.post('/', async (req, res) => {
+router.post('/', rejectUnauthenticated, async (req, res) => {
 
     console.log(req.body);
 
+    // deletes all the existing rows 
     let sqlText = `
     DELETE FROM "competitiveAdvantagesJunction"
     WHERE "enterpriseId" = $1;
@@ -78,6 +77,8 @@ router.post('/', async (req, res) => {
 
     await pool.query(sqlText, sqlParams);
 
+    // loops through the array and adds them anew to the table
+    if (req.body.competitiveAdvantagesId) {
     for (let individual of req.body.competitiveAdvantagesId) {
             
         let sqlText2 = `
@@ -93,14 +94,15 @@ router.post('/', async (req, res) => {
         ];
 
         await pool.query(sqlText2, sqlParams2);
-    }
+    }}
 
     res.sendStatus(200);
 
 })
 
-// Router for putting/updating answers into table
-router.put('/', (req, res) => {
+// Router for putting/updating answers into table as the
+// individual enterprise changes their answers
+router.put('/', rejectUnauthenticated, (req, res) => {
 
     let sqlText = `
         UPDATE "answers"
