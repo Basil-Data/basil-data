@@ -45,7 +45,7 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
         SELECT
             ARRAY_AGG("stakeholderSegments"."id")
         FROM "user"
-        JOIN "stakeholderSegments"
+        JOIN "stakeholderSegmentsJunction"
             ON "user"."id" = "stakeholderSegmentsJunction"."enterpriseId"
         JOIN "stakeholderSegments"
             ON "stakeholderSegmentsJunction"."segmentId" = "stakeholderSegments"."id"
