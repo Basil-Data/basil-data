@@ -25,8 +25,6 @@ function SectionOneStory () {
     const competitiveAdvantages = useSelector(store => store.section1.competitiveAdvantages);
     const section1Enterprise = useSelector(store => store.section1Enterprise);
     const selectedAdvantages = useSelector(store => store.section1Enterprise.competitiveAdvantagesId);
-    
-
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SECTION_ONE' });
@@ -75,8 +73,10 @@ function SectionOneStory () {
             <h5>What is the size of your enterprise? (people)</h5>
             <TextField 
                 id="outlined-basic" 
-                label="Number of people" 
+                label="Number of people"
+                type="number" 
                 variant="outlined" 
+                InputLabelProps={{shrink: true,}}
                 value={section1Enterprise.enterpriseSize1}
                 onChange={(event) => dispatch({
                     type: 'SET_SECTION_ONE_ENTERPRISE',
@@ -88,6 +88,7 @@ function SectionOneStory () {
                 id="outlined-basic" 
                 label="Date founded" 
                 variant="outlined" 
+                InputLabelProps={{shrink: true,}}
                 value={moment(section1Enterprise.dateFounded1).format("MMMM DD, YYYY")}
                 onChange={(event) => dispatch({
                     type: 'SET_SECTION_ONE_ENTERPRISE',
@@ -111,6 +112,7 @@ function SectionOneStory () {
                     <TextField 
                         id="outlined-basic" 
                         label="Mission Statement" 
+                        InputLabelProps={{shrink: true,}}
                         variant="outlined" 
                         multiline rows={5}
                         fullWidth
@@ -125,7 +127,7 @@ function SectionOneStory () {
             <h5>How well do you understand the problem?</h5>
                 <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue={section1Enterprise.understandProblem1}
+                    value={Number(section1Enterprise.understandProblem1)}
                     row
                     name="radio-buttons-group"
                     className='centerHelp'
@@ -150,6 +152,7 @@ function SectionOneStory () {
                 id="outlined-basic" 
                 label="Number of years" 
                 variant="outlined" 
+                InputLabelProps={{shrink: true,}}
                 value={section1Enterprise.yearsCollectiveExperience1}
                 onChange={(event) => dispatch({
                     type: 'SET_SECTION_ONE_ENTERPRISE',
@@ -161,6 +164,7 @@ function SectionOneStory () {
                 id="outlined-basic" 
                 label="Percentage BIPOC" 
                 variant="outlined" 
+                InputLabelProps={{shrink: true,}}
                 value={section1Enterprise.percentageBIPOC1}
                 onChange={(event) => dispatch({
                     type: 'SET_SECTION_ONE_ENTERPRISE',
@@ -172,6 +176,7 @@ function SectionOneStory () {
                 id="outlined-basic" 
                 label="Percentage female" 
                 variant="outlined"
+                InputLabelProps={{shrink: true,}}
                 value={section1Enterprise.percentageFemale1}
                 onChange={(event) => dispatch({
                     type: 'SET_SECTION_ONE_ENTERPRISE',
@@ -214,6 +219,7 @@ function SectionOneStory () {
                         variant="outlined" 
                         multiline rows={5}
                         fullWidth
+                        InputLabelProps={{shrink: true,}}
                         value={section1Enterprise.investorIntroduction1}
                         onChange={(event) => dispatch({
                             type: 'SET_SECTION_ONE_ENTERPRISE',

@@ -79,21 +79,20 @@ router.post('/', async (req, res) => {
     await pool.query(sqlText, sqlParams);
 
     for (let individual of req.body.competitiveAdvantagesId) {
+            
+        let sqlText2 = `
+            INSERT INTO "competitiveAdvantagesJunction"
+                ("enterpriseId", "advantageId")
+            VALUES
+                ($1, $2)
+        `;
 
+        let sqlParams2 = [
+            req.user.id,
+            individual
+        ];
 
-    let sqlText2 = `
-        INSERT INTO "competitiveAdvantagesJunction"
-            ("enterpriseId", "advantageId")
-        VALUES
-            ($1, $2)
-    `;
-
-    let sqlParams2 = [
-        req.user.id,
-        individual
-    ];
-
-    await pool.query(sqlText2, sqlParams2);
+        await pool.query(sqlText2, sqlParams2);
     }
 
     res.sendStatus(200);
