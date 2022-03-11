@@ -25,6 +25,7 @@ import {
 from '@mui/material';
 
 function IndustryInnovationAndInfrastructure() {
+    const dispatch = useDispatch();
 
     const sdg = useSelector(store => store.section2.sdg);
 
@@ -49,6 +50,7 @@ function IndustryInnovationAndInfrastructure() {
                 </p>
                 <TextField
                     label="Please Elaborate"
+                    InputLabelProps={{ shrink: true }}
                     variant="outlined"
                     type="text"
                     placeholder="Please Elaborate"
@@ -60,6 +62,7 @@ function IndustryInnovationAndInfrastructure() {
                 <p>In what regions, states or cities are you focusing your efforts today?</p>
                 <TextField
                     label="Location"
+                    InputLabelProps={{ shrink: true }}
                     variant="outlined"
                     type="text"
                     placeholder="Location"
@@ -71,6 +74,7 @@ function IndustryInnovationAndInfrastructure() {
                 </p>
                 <TextField
                     label="Specific Changes"
+                    InputLabelProps={{ shrink: true }}
                     className="specificChanges"
                     variant="outlined"
                     type="text"

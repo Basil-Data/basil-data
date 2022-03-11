@@ -25,6 +25,7 @@ import {
 from '@mui/material';
 
 function PartnershipsForTheGoals() {
+    const dispatch = useDispatch();
 
     const sdg = useSelector(store => store.section2.sdg);
 
@@ -52,6 +53,7 @@ function PartnershipsForTheGoals() {
                 </p>
                 <TextField
                     label="Please Elaborate"
+                    InputLabelProps={{ shrink: true }}
                     variant="outlined"
                     type="text"
                     placeholder="Please Elaborate"
@@ -89,6 +91,7 @@ function PartnershipsForTheGoals() {
                 <p>What specific city, state, or region is your current target?</p>
                 <TextField
                     label="Location"
+                    InputLabelProps={{ shrink: true }}
                     variant="outlined"
                     type="text"
                     placeholder="Location"
@@ -102,6 +105,7 @@ function PartnershipsForTheGoals() {
                 </p>
                 <TextField
                     label="Specific Changes"
+                    InputLabelProps={{ shrink: true }}
                     className="specificChanges"
                     variant="outlined"
                     type="text"

@@ -77,7 +77,7 @@ function SectionOneStory () {
                 type="number" 
                 variant="outlined" 
                 InputLabelProps={{shrink: true,}}
-                value={section1Enterprise.enterpriseSize1}
+                value={section1Enterprise.enterpriseSize1 || ''}
                 onChange={(event) => dispatch({
                     type: 'SET_SECTION_ONE_ENTERPRISE',
                     payload: { enterpriseSize1: event.target.value }
@@ -88,6 +88,7 @@ function SectionOneStory () {
                 id="outlined-basic" 
                 label="Date founded" 
                 variant="outlined" 
+                type="date"
                 InputLabelProps={{shrink: true,}}
                 value={section1Enterprise.dateFounded1}
                 onChange={(event) => dispatch({
@@ -191,6 +192,7 @@ function SectionOneStory () {
                                 key = {advantage.id} 
                                 checked={selectedAdvantages.includes(advantage.id)}
                                 value={advantage.id}
+                                defaultValue={0}
                                 onChange={handleCompetitiveAdvantages}
                                 control={
                                     <Checkbox 
@@ -234,7 +236,7 @@ function SectionOneStory () {
                 className="btn"
                 onClick={(event) => handleSubmit(event)}
             >
-                Submit
+                Save
             </button>
             <Link to="/impact">
                 <button 

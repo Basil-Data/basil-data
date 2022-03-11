@@ -1,8 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-router.get('/', async (req, res) => {
+// Router to get the multiple choice arrays for Section Three
+router.get('/', rejectUnauthenticated, async (req, res) => {
 
     let sqlText1 = `
         SELECT * FROM "investmentVehicles";
@@ -47,7 +49,14 @@ router.get('/', async (req, res) => {
     res.send(results);
 });
 
-router.get('/:id', async (req, res) => {
+// Gets the individual enterprise's previous answers for the 
+// answers
+router.get('/:id', rejectUnauthenticated, async (req, res) => {
+
+    let sqlQuery = `
+    INSERT INTO "environmentalImpactJunction"
+        ("enterpriseId", "environmentalImpactId")
+    `
 
     let sqlText1 = `
         SELECT 
@@ -70,6 +79,33 @@ router.get('/:id', async (req, res) => {
         WHERE "enterpriseId" = $1;
     `;
 
+    let sqlText4 = `
+        SELECT "raisingFunds7", "targetAmount7", "nextSteps7", "understandProblem7"
+        FROM "answers"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText5 = `
+        SELECT 
+            "societalImpactId"
+        FROM "societalImpactJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText6 = `
+        SELECT
+            "environmentalImpactId"    
+        FROM "environmentalImpactJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText7 = `
+        SELECT
+            "economicImpactId"
+        FROM "economicImpactJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
     let sqlParams = [
         req.user.id
     ];
@@ -77,21 +113,29 @@ router.get('/:id', async (req, res) => {
     const investmentVehicleId = await pool.query(sqlText1, sqlParams);
     const fundingUseId = await pool.query(sqlText2, sqlParams);
     const assistanceId = await pool.query(sqlText3, sqlParams);
+    const answers = await pool.query(sqlText4, sqlParams);
+    const societalImpactId = await pool.query(sqlText5, sqlParams);
+    const environmentalImpactId = await pool.query(sqlText6, sqlParams);
+    const economicImpactId = await pool.query(sqlText7, sqlParams);
 
     const results = {        
         investmentVehicleId: Array.isArray(investmentVehicleId.rows[0].array_agg) ? investmentVehicleId.rows[0].array_agg : [],
         fundingUseId: Array.isArray(fundingUseId.rows[0].array_agg) ? fundingUseId.rows[0].array_agg : [],
         assistanceId: Array.isArray(assistanceId.rows[0].array_agg) ? assistanceId.rows[0].array_agg : [],
+        ...answers.rows[0],
+        societalImpactId: societalImpactId.rows[0] ?? null,
+        environmentalImpactId: environmentalImpactId.rows[0] ?? null,
+        economicImpactId: economicImpactId.rows[0] ?? null
     }
 
+    console.log('results is:', results);
+    
     res.send(results);
 });
 
-// Router for putting/updating answers into table
-router.put('/', (req, res) => {
-
-    // Console log so you can see what is coming
-    console.log('req.body is:', req.body, 'req.user is:', req.user)
+// Router for putting/updating answers into table as the
+// individual enterprise changes their answers
+router.put('/', rejectUnauthenticated, (req, res) => {
 
     let sqlText = `
         UPDATE "answers"
@@ -112,16 +156,16 @@ router.put('/', (req, res) => {
     ];
 
     pool
-        .query(sqlText, sqlParams)
-        .then(res.sendStatus(200))
-        .catch(error => {
-            console.log('error putting answers section 7', error)
-            res.sendStatus(500);
-        })
+    .query(sqlText, sqlParams)
+    .then(res.sendStatus(200))
+    .catch(error => {
+        console.log('error putting answers section 7', error)
+        res.sendStatus(500);
+    })
 });
 
-// Post router for posting to junction table for checkboxes
-router.post('/', async (req, res) => {
+// Post router for posting to joiner table for check boxes
+router.post('/', rejectUnauthenticated, async (req, res) => {
     try {
         let sqlText1 = `
         DELETE FROM "investmentVehiclesJunction"
@@ -219,10 +263,94 @@ router.post('/', async (req, res) => {
 
         }
 
+        let sqlText5a = `
+        DELETE FROM "societalImpactJunction"
+        WHERE "enterpriseId" = $1;
+        `;
+
+        let sqlParams5a = [
+            req.user.id
+        ];
+
+        await pool.query(
+            sqlText5a, 
+            sqlParams5a
+        );
+
+        let sqlText5 = `
+                INSERT INTO "societalImpactJunction"
+                    ("enterpriseId", "societalImpactId")
+                VALUES
+                    ($1, $2)
+            `;
+
+        let sqlParams5 = [
+            req.user.id,
+            req.body.societalImpactId
+        ];
+
+        await pool.query(sqlText5, sqlParams5)
+
+        let sqlText6a = `
+        DELETE FROM "environmentalImpactJunction"
+        WHERE "enterpriseId" = $1;
+        `;
+
+        let sqlParams6a = [
+            req.user.id
+        ];
+
+        await pool.query(
+            sqlText6a, 
+            sqlParams6a
+        );
+
+        let sqlText6 = `
+                INSERT INTO "environmentalImpactJunction"
+                    ("enterpriseId", "environmentalImpactId")
+                VALUES
+                    ($1, $2)
+            `;
+
+        let sqlParams6 = [
+            req.user.id,
+            req.body.environmentalImpactId
+        ];
+
+        await pool.query(sqlText6, sqlParams6)
+
+        let sqlText7a = `
+        DELETE FROM "economicImpactJunction"
+        WHERE "enterpriseId" = $1;
+        `;
+
+        let sqlParams7a = [
+            req.user.id
+        ];
+
+        await pool.query(
+            sqlText7a, 
+            sqlParams7a
+        );
+
+        let sqlText7 = `
+                INSERT INTO "economicImpactJunction"
+                    ("enterpriseId", "economicImpactId")
+                VALUES
+                    ($1, $2)
+            `;
+
+        let sqlParams7 = [
+            req.user.id,
+            req.body.economicImpactId
+        ];
+
+        await pool.query(sqlText7, sqlParams7)
+
         res.sendStatus(200);
     }
     catch (error){
-        console.log('error in details edit router,', error);
+        console.log('error in section 7 junction post,', error);
         res.sendStatus(500);
     }
 
