@@ -2,9 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
+// This get is for the checkboxes on section 4
 router.get('/', async (req, res) => {
   
   let sqlText = `
@@ -32,15 +30,32 @@ router.get('/', async (req, res) => {
   res.send(results);
 });
 
-/**
- * POST route template
- */
+// Posts to junction table for checkboxes
 router.post('/', (req, res) => {
-  // POST route code here
+  
+  for (let indicator of req.body.progressIndicatorId) {
+    let sqlText = `
+      INSERT INTO "progressIndicatorJunction"
+        ("enterpriseId", "progressIndicatorId")
+      VALUES
+        ($1, $2)
+    `;
+
+    let sqlParams = [
+      req.user.id,
+      indicator
+    ];
+
+    pool.query(sqlText, sqlParams)
+  }
+  
+  res.sendStatus(200);
+
 });
 
 // Sending answers to answers table
 router.put('/:id', (req, res) => {
+  console.log('req.body is', req.body);
   let sqlText = `
     UPDATE "answers"
     SET

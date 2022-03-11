@@ -416,7 +416,7 @@ function SectionFourTraction() {
                 </Link>
                 
 
-                <button className="btn">Submit</button>
+                <button onClick={handleSubmit} className="btn">Submit</button>
 
                 <Link to="/market">
                     <button className="btn">Next</button>
