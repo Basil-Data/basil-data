@@ -123,6 +123,7 @@ function SectionTwoImpact() {
                         return(
                             <FormControlLabel 
                                 key={sector.id}
+                                checked={selectedImpactSector.includes(sector.id)}
                                 control={
                                     <Checkbox 
                                         value={sector.id}
