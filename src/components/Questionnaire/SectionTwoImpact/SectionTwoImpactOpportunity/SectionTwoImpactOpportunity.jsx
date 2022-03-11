@@ -47,8 +47,8 @@ function SectionTwoImpactOpportunity() {
     const [sdgPrimary, setSdgPrimary] = useState('');
     console.log(sdgPrimary);
 
-    const sdg = useSelector(store => store.section2.sdg);
-    const supportiveCharacteristics = useSelector(store => store.section2.supportiveCharacteristics);
+    const sdg = useSelector(store => store.section2.section2main.sdg);
+    const supportiveCharacteristics = useSelector(store => store.section2.section2main.supportiveCharacteristics);
 
     const section2Enterprise = useSelector(store => store.section2Enterprise)
     console.log('section2Enterprise:', section2Enterprise);

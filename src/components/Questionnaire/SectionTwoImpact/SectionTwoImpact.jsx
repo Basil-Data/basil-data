@@ -36,7 +36,7 @@ function SectionTwoImpact() {
     }, [])
 
     const user = useSelector(store => store.user);
-    const impactSectors = useSelector(store => store.section2.impactSectors);
+    const impactSectors = useSelector(store => store.section2.section2main.impactSectors);
     const section2Enterprise = useSelector(store => store.section2Enterprise);
     const selectedImpactSector = useSelector(store => store.section2Enterprise.impactSectorId);
 

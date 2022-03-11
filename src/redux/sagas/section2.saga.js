@@ -46,10 +46,24 @@ function* postSectionTwo (action) {
     }
 }
 
+function* getIndicators (action) {
+    try {
+        const response = yield axios.get(`api/section2/sdg/${action.payload}`);
+        yield put({
+            type: 'SET_SDG_INDICATORS',
+            payload: response.data
+        })
+    }
+    catch (error) {
+        console.log('error fetching indicators')
+    }
+}
+
 function* section2Saga() {
     // handle all incoming 'FETCH_IMPACT_SECTORS' requests
     yield takeEvery('FETCH_IMPACT_SECTORS', fetchImpactSectors);
     yield takeEvery('FETCH_SECTION_TWO', fetchSectionTwo);
     yield takeEvery('UPDATE_SECTION_TWO', postSectionTwo);
+    yield takeEvery('GET_SDG_INDICATORS', getIndicators);
 }
 export default section2Saga

@@ -25,13 +25,19 @@ import {
 from '@mui/material';
 
 function NoPoverty() {
+    const dispatch = useDispatch();
 
-    const stakeholderSegments = useSelector(store => store.section2.stakeholderSegments);
+
+    useEffect(() => {
+        dispatch({ type: 'GET_SDG_INDICATORS', payload: 1})
+    }, []);
+
     const sdg = useSelector(store => store.section2.sdg);
-    const section2Enterprise = useSelector(store => store.section2Enterprise)
+    const stakeholderSegments = useSelector(store => store.section2.stakeholderSegments);
+    const section2Enterprise = useSelector(store => store.section2Enterprise);
+    const indicators = useSelector(store => store.section2.section2SdgIndicators);
 
     console.log('section2Enterprise:', section2Enterprise);
-
 
     return(
         <Box className="questionnaireForm">
@@ -39,9 +45,15 @@ function NoPoverty() {
             <h1><b>SDG - No Poverty</b></h1>
             <p>What Indicators do you use/intend to use to track change?</p>
             <FormControl>
-                    <FormControlLabel control={<Checkbox />} label={'Poverty Levels'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Change In Poverty'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Access To Resources'}/>
+                {indicators?.map(indicator => {
+                        return(
+                            <FormControlLabel 
+                                key={indicator.indicator}
+                                control={<Checkbox />} 
+                                label={indicator.indicator}
+                            />
+                        )
+                    })}
             </FormControl>
             <p> Please elaborate on the progress shown in the indicators that you use
             </p>

@@ -16,6 +16,7 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     const results3 = await pool.query(sqlText3);
     const results4 = await pool.query(sqlText4);
 
+
     const results = {
         impactSectors: results1.rows,
         supportiveCharacteristics: results2.rows,
@@ -25,6 +26,30 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
 
     res.send(results);
 });
+
+router.get('/sdg/:id', rejectUnauthenticated, (req, res) => {
+
+    let sqlText = `
+        SELECT "indicator"
+        FROM "indicators"
+        WHERE "sdgId" = $1
+    `;
+
+    let sqlParams = [
+        req.params.id
+    ];
+
+    pool.query(sqlText, sqlParams)
+        .then(results => {
+            res.send(results.rows)
+        })
+        .catch(error => {
+            console.log('error getting router indicators', error);
+        })
+
+
+});
+
 
 // Gets the individual enterprise's previous answers for the 
 // answers

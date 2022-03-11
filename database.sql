@@ -478,3 +478,29 @@ CREATE TABLE "economicImpactJunction" (
 	"enterpriseId" INTEGER,
 	"economicImpactId" INTEGER
 );
+
+CREATE TABLE "indicators" (
+	"id" SERIAL PRIMARY KEY,
+	"sdgId" INTEGER,
+	"indicator" VARCHAR (1000)
+);
+	
+INSERT INTO "indicators"
+	("sdgId", "indicator")
+VALUES
+	(1, 'Poverty Levels'),
+	(1, 'Change In Poverty'),
+	(1, 'Access To Resources'),
+	(2, 'Nourishment / Undernourishment'),
+	(2, 'Food security level'),
+	(2, 'Food production indicators'),
+	(2, 'Animal protection'),
+	(2, 'Cost of Food'),
+	(3, 'Mortality rate and ratios'),
+	(3, 'Disease rate'),
+	(3, 'Access to healthcare/treatment'),
+	(3, 'Consumption measures'),
+	(3, 'Birth rate'),
+	(3, 'Healthcare coverage'),
+	(3, 'Vaccination levels'),
+	(3, 'Emergency preparedness');
