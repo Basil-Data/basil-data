@@ -36,7 +36,6 @@ function SectionFourTraction() {
         dispatch({
             type: 'UPDATE_SECTION4_ENTERPRISE',
             payload: {
-                id: user.id,
                 data: section4Enterprise
             }
         })
@@ -98,10 +97,16 @@ function SectionFourTraction() {
                 </h5>
                     <RadioGroup
                         aria-labelledby="demo-radio-buttons-group-label"
-                        value={Number(section4Enterprise.developmentStageId)}
-                        row
+                        defaultValue=""
+                        value={section4Enterprise.developmentStageId}
                         name="radio-buttons-group"
                         className='centerHelp'
+                        row
+                        onChange={(event) => 
+                            dispatch({
+                                type: 'SET_SECTION4_ENTERPRISE',
+                                payload: { developmentStageId: event.target.value}
+                            })} 
                     >
                         {section4.results1?.map(development => (
                             <FormControlLabel 
@@ -109,12 +114,8 @@ function SectionFourTraction() {
                                 value={development.id}
                                 control={<Radio />} 
                                 label={development.stage}
-                                onChange={(evt => 
-                                    dispatch({
-                                        type: 'SET_SECTION4_ENTERPRISE',
-                                        payload: { developmentStageId: development.id}
-                                    }))} 
-                                className='centerHelp' />
+                                className='centerHelp'
+                            />
                         ))}
                         
                     </RadioGroup>
@@ -125,6 +126,7 @@ function SectionFourTraction() {
                     <RadioGroup
                         aria-labelledby="demo-radio-buttons-group-label"
                         defaultValue=""
+                        value={section4Enterprise.investmentStageId}
                         row
                         name="radio-buttons-group"
                         className='centerHelp'
@@ -140,7 +142,7 @@ function SectionFourTraction() {
                                     dispatch({
                                         type: 'SET_SECTION4_ENTERPRISE',
                                         payload: { 
-                                            investmentStageId: investment.id}
+                                            investmentStageId: evt.target.value }
                                     }))}  
                                 className='centerHelp'/>
                         ))}
@@ -155,7 +157,8 @@ function SectionFourTraction() {
                     id="outlined-basic" 
                     label="Amount Funded $" 
                     variant="outlined"
-                    value={section4.fundingReceived4}
+                    InputLabelProps={{shrink: true,}}
+                    value={section4Enterprise.fundingReceived4}
                     onChange={(evt =>
                         dispatch({
                             type: 'SET_SECTION4_ENTERPRISE',
