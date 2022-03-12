@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -22,6 +22,7 @@ function SectionFourTraction() {
     (store) => store.section4Enterprise.progressIndicatorId
   );
   const user = useSelector((store) => store.user);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch({
@@ -41,6 +42,32 @@ function SectionFourTraction() {
         data: section4Enterprise,
       },
     });
+  }
+
+  function handleBack(event) {
+    event.preventDefault();
+
+    dispatch({
+      type: "UPDATE_SECTION4_ENTERPRISE",
+      payload: {
+        data: section4Enterprise,
+      },
+    });
+
+    history.push("/solution");
+  }
+
+  function handleNext(event) {
+    event.preventDefault();
+
+    dispatch({
+      type: "UPDATE_SECTION4_ENTERPRISE",
+      payload: {
+        data: section4Enterprise,
+      },
+    });
+
+    history.push("/market");
   }
 
   const handleProgress = (event) => {
@@ -402,17 +429,20 @@ function SectionFourTraction() {
         )}
         <br />
         <br />
-        <Link to="/solution">
-          <button className="btn">Back</button>
-        </Link>
+
+        <button onClick={handleBack} className="btn">
+          Back
+        </button>
 
         <button onClick={handleSubmit} className="btn">
           Submit
         </button>
 
-        <Link to="/market">
-          <button className="btn">Next</button>
-        </Link>
+        
+        <button onClick={handleNext} className="btn">
+            Next
+        </button>
+        
       </form>
     </>
   );
