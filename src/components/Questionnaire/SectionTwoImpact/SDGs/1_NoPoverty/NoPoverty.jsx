@@ -25,12 +25,35 @@ import {
 from '@mui/material';
 
 function NoPoverty() {
+    const dispatch = useDispatch();
 
     const stakeholderSegments = useSelector(store => store.section2.stakeholderSegments);
+    const selectedSegment = useSelector(store => store.section2Enterprise.segmentId); 
     const sdg = useSelector(store => store.section2.sdg);
     const section2Enterprise = useSelector(store => store.section2Enterprise)
 
     console.log('section2Enterprise:', section2Enterprise);
+
+    const handleInvestorSegments = (event) => {
+        console.log('in handleInvestorSegments');
+        const index = selectedSegment.indexOf(event.target.value)
+        console.log('index:', index);
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    segmentId: [...selectedSegment, event.target.value]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    segmentId: selectedSegment.filter((selectedSegment) => selectedSegment !== event.target.value)
+                }
+            });
+        }
+    }
 
 
     return(
@@ -47,6 +70,7 @@ function NoPoverty() {
             </p>
             <TextField
                 label="Please Elaborate"
+                InputLabelProps={{ shrink: true }}
                 className="elaborateOnProgress"
                 variant="outlined"
                 type="text"
@@ -54,11 +78,6 @@ function NoPoverty() {
                 multiline rows={5}
                 id="outlined-basic" 
                 sx={{width: 600}}
-                value={section2Enterprise.problemBeingSolved2}
-                onChange={(event) => dispatch({
-                type: 'SET_SECTION_TWO_ENTERPRISE',
-                payload: { problemBeingSolved2: event.target.value }
-                })}
             ></TextField>
             <p>How do you segment your stakeholders?</p>
             <FormControl>
@@ -66,6 +85,9 @@ function NoPoverty() {
                     return(
                         <FormControlLabel 
                             key={segment.id}
+                            checked={selectedSegment.includes(segment.id)}
+                            value={segment.id}
+                            onChange={handleInvestorSegments}
                             control={<Checkbox />} 
                             label={segment.segment}
                         />
@@ -76,6 +98,7 @@ function NoPoverty() {
             </p>
             <TextField
                 label="Location"
+                InputLabelProps={{ shrink: true }}
                 className="location"
                 variant="outlined"
                 type="text"
@@ -89,6 +112,7 @@ function NoPoverty() {
             <p>In what regions, states or cities are you focusing your efforts today?</p>
             <TextField
                 label="Impact target"
+                InputLabelProps={{ shrink: true }}
                 className="impactTarget"
                 variant="outlined"
                 type="text"
@@ -101,6 +125,7 @@ function NoPoverty() {
             </p>
             <TextField
                 label="Specific Changes"
+                InputLabelProps={{ shrink: true }}
                 className="specificChanges"
                 variant="outlined"
                 type="text"

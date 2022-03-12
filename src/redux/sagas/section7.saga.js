@@ -19,7 +19,6 @@ function* fetchNextSteps() {
 function* getSectionSevenEnterprise () {
     try {
         const response = yield axios.get(`/api/section7/:id`);
-        console.log(response.data);
         yield put({
             type: 'SET_NEXT_STEPS_ENTERPRISE',
             payload: response.data

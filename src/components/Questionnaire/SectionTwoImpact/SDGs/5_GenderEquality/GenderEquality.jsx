@@ -25,6 +25,7 @@ import {
 from '@mui/material';
 
 function GenderEquality() {
+    const dispatch = useDispatch();
 
     const stakeholderSegments = useSelector(store => store.section2.stakeholderSegments);
     const sdg = useSelector(store => store.section2.sdg);
@@ -50,6 +51,7 @@ function GenderEquality() {
             </p>
             <TextField
                 label="Please Elaborate"
+                InputLabelProps={{ shrink: true }}
                 variant="outlined"
                 type="text"
                 placeholder="Please Elaborate"
@@ -73,6 +75,7 @@ function GenderEquality() {
             <p>In what regions, states or cities are you focusing your efforts today?</p>
             <TextField
                 label="Location"
+                InputLabelProps={{ shrink: true }}
                 variant="outlined"
                 type="text"
                 placeholder="Location"
@@ -84,6 +87,7 @@ function GenderEquality() {
             </p>
             <TextField
                 label="Specific Changes"
+                InputLabelProps={{ shrink: true }}
                 className="specificChanges"
                 variant="outlined"
                 type="text"

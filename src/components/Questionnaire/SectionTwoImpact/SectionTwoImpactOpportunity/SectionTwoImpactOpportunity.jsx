@@ -49,9 +49,8 @@ function SectionTwoImpactOpportunity() {
 
     const sdg = useSelector(store => store.section2.sdg);
     const supportiveCharacteristics = useSelector(store => store.section2.supportiveCharacteristics);
+    const selectedCharacteristic = useSelector(store => store.section2Enterprise.characteristicId);
 
-    const section2Enterprise = useSelector(store => store.section2Enterprise)
-    console.log('section2Enterprise:', section2Enterprise);
 
     let component;
     switch(sdgPrimary) {
@@ -110,6 +109,27 @@ function SectionTwoImpactOpportunity() {
 
     }
 
+    const handleSupportiveCharacteristics = (event) => {
+        console.log('in handleSupportiveCharacteristics');
+        const index = selectedCharacteristic.indexOf(event.target.value)
+        console.log('index:', index);
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    characteristicId: [...selectedCharacteristic, event.target.value]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    characteristicId: selectedCharacteristic.filter((selectedCharacteristic) => selectedCharacteristic !== event.target.value)
+                }
+            });
+        }
+    }
+
     return(
         <Box className="questionnaireForm">
                 <h1><b>Impact Opportunity</b></h1>
@@ -119,7 +139,12 @@ function SectionTwoImpactOpportunity() {
                         return(
                             <FormControlLabel 
                                 key={characteristic.id}
-                                control={<Checkbox />} 
+                                checked={selectedCharacteristic.includes(characteristic.id)}
+                                value={characteristic.id}
+                                onChange={handleSupportiveCharacteristics}
+                                control={
+                                    <Checkbox  
+                                    />} 
                                 label={characteristic.characteristic}
                             />
                         )
