@@ -21,6 +21,10 @@ function SectionSixRisksAndHurdles () {
     // store.section6 contains all of the selections for
     // this page of the questionnaire
     const section6 = useSelector((store) => store.section6);
+    // store.section6Enterprise contains all of the responses
+    // for the respective enterprise
+    const section6Enterprise = useSelector((store) => store.section6Enterprise);
+    const anticipatedRisks = useSelector((store) => store.section6Enterprise.riskId);
 
     const [riskSelection, setRiskSelection] = useState([]);
     const [riskPreparedness, setRiskPreparedness] = useState('');
@@ -61,7 +65,8 @@ function SectionSixRisksAndHurdles () {
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
                     {section6.results1?.map(risk => (
                             <FormControlLabel 
-                                key={risk.id} 
+                                key={risk.id}
+                                checked={investmentSelection.includes(type.id)} 
                                 control={
                                     <Checkbox
                                         value={risk.id}
