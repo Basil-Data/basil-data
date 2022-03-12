@@ -235,7 +235,7 @@ INSERT INTO "developmentStage"
 VALUES
 	('Concept & Research'),
 	('Initial Prototype'),
-	('Valiiation'),
+	('Validation'),
 	('Refinement'),
 	('Scaling'),
 	('Established Loyal Customer Base');
