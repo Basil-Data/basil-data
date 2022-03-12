@@ -3,7 +3,9 @@ const section4Enterprise = (state = {
     investmentStageId: [],
     customerGrowth4: '',
     fundingReceived4: '',
-    developmentStageId: null
+    generatingRevenue4: '',
+    developmentStageId: null,
+    makingProfit4: ''
 }, action) => {
     switch (action.type) {
         case 'SET_SECTION4_ENTERPRISE':

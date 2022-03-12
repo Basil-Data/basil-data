@@ -42,28 +42,6 @@ function SectionFourTraction() {
     }
     
 
-    // These two functions toggle local state and dispatch the result of the boolean to the server
-    function generatingRevenue() {
-
-        setGeneratedRevenue(true)
-        dispatch({
-            type: 'SET_SECTION4_ENTERPRISE',
-            payload: {
-                generatingRevenue4: true
-            }
-        })
-    }
-
-    function notGeneratingRevenue() {
-        setGeneratedRevenue(false)
-        dispatch({
-            type: 'SET_SECTION4_ENTERPRISE',
-            payload: {
-                generatingRevenue4: true
-            }
-        })
-    }
-
     const handleProgress = (event) => {
         const index = progressIndicator.indexOf(Number(event.target.value))
         if (index === -1) {
@@ -80,7 +58,6 @@ function SectionFourTraction() {
     }
  
 
-    const [generatedRevenue, setGeneratedRevenue] = useState(false);
 
     return (
         <>
@@ -244,26 +221,32 @@ function SectionFourTraction() {
                     row
                     name="radio-buttons-group"
                     className='centerHelp'
+                    value = {section4Enterprise.generatingRevenue4}
+                    onClick={(evt) =>
+                       { dispatch({
+                            type: 'SET_SECTION4_ENTERPRISE',
+                            payload: {generatingRevenue4: evt.target.value}
+                        })} }
                 >
 
                 <FormControlLabel 
                     labelPlacement="top" 
                     control={<Radio />} 
                     label="Yes" 
-                    value="True" 
-                    onClick={(evt) => generatingRevenue()}/>
+                    value="true" 
+                />
                 
                 <FormControlLabel 
                     labelPlacement="top" 
                     control={<Radio />} 
-                    label="No" value="No" 
-                    onClick={(evt) => notGeneratingRevenue()}/>
+                    label="No" value="false" 
+                />
                     
                    
                 
                 </RadioGroup>
                  {/* Questions below are generated if the user chooses yes. */}
-                {generatedRevenue ? <>
+                {section4Enterprise.generatingRevenue4 === 'true' && <>
                 <h5>
                     What is your average growth in monthly revenue over the past 6 months?
                 </h5>
@@ -296,6 +279,12 @@ function SectionFourTraction() {
                     row
                     name="radio-buttons-group"
                     className='centerHelp'
+                    value={section4Enterprise.makingProfit4}
+                    onChange={(evt) => 
+                        {dispatch({
+                            type: 'SET_SECTION4_ENTERPRISE',
+                            payload: { makingProfit4: evt.target.value }
+                        }) } }
                     
                 >
 
@@ -303,23 +292,15 @@ function SectionFourTraction() {
                     labelPlacement="top" 
                     control={<Radio />} 
                     label="Yes"
-                    value='Yes'
-                    onChange={(evt => 
-                        dispatch({
-                            type: 'SET_SECTION4_ENTERPRISE',
-                            payload: { makingProfit4: true }
-                        }))} />
+                    value="true"
+                />
                 
                 <FormControlLabel 
                     labelPlacement="top"  
                     control={<Radio />} 
                     label="No"
-                    value='No'
-                    onChange={(evt => 
-                        dispatch({
-                            type: 'SET_SECTION4_ENTERPRISE',
-                            payload: { makingProfit4: false }
-                        }))} />
+                    value="false"
+                />
 
                 </RadioGroup>
 
@@ -414,7 +395,7 @@ function SectionFourTraction() {
                             }
                         }))} />
 
-                </> : <> </>
+                </>
 
 }
                 <br />
