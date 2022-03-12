@@ -137,6 +137,7 @@ function SectionFiveMarket() {
               rows={5}
               fullWidth
               value={section5.whyRealistic5}
+              InputLabelProps={{shrink: true,}}
               onChange={(evt) =>
                 dispatch({
                   type: "SET_SECTION5_RESPONSES",
