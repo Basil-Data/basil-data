@@ -64,8 +64,7 @@ router.get('/:id', rejectUnauthenticated, async (req,res) => {
     let sqlText3 =`
       SELECT
         "developmentStageId"
-      FROM
-        "developmentStageJunction"
+      FROM "developmentStageJunction"
       WHERE "enterpriseId" = $1;
     `;
       
@@ -77,9 +76,9 @@ router.get('/:id', rejectUnauthenticated, async (req,res) => {
     const results = {
       progressIndicatorId: Array.isArray(progressIndicatorId.rows[0].array_agg) ? progressIndicatorId.rows[0].array_agg : [],
       ...answers.rows[0],
-      developmentStageId: developmentStageId.rows[0].developmentStageId
+      developmentStageId: developmentStageId.rows[0] ?? null
     }
-    console.log('developmentStageId is', developmentStageId.rows[0].developmentStageId);
+    console.log('developmentStageId is', developmentStageId.rows[0]);
 
     res.send(results)
 });
@@ -161,7 +160,6 @@ catch (err){
 // Router for putting/updating answers into table as the
 // individual enterprise changes their answers
 router.put('/', rejectUnauthenticated, (req, res) => {
-  console.log('req.body is', req.body);
   let sqlText = `
     UPDATE "answers"
     SET
