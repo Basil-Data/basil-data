@@ -16,7 +16,11 @@ function SectionFiveMarket() {
   console.log('user.id is', user.id);
 
 
-  const [marketReason, setMarketReason] = useState("");
+  useEffect(() => {
+    dispatch({
+        type: "FETCH_ENTERPRISE_SECTION_FIVE",
+    });
+}, []);
 
   // Update Function
   function handleSubmit(evt) {
@@ -53,6 +57,7 @@ function SectionFiveMarket() {
           id="outlined-basic"
           label="TAM $"
           variant="outlined"
+          InputLabelProps={{shrink: true,}}
           value={section5.addressableMarket5}
           onChange={(evt) =>
             dispatch({
@@ -75,6 +80,7 @@ function SectionFiveMarket() {
           id="outlined-basic"
           label="SAM $"
           variant="outlined"
+          InputLabelProps={{shrink: true,}}
           value={section5.serviceableMarket5}
           onChange={(evt) =>
             dispatch({
@@ -98,6 +104,7 @@ function SectionFiveMarket() {
           id="outlined-basic"
           label="SOM $"
           variant="outlined"
+          InputLabelProps={{shrink: true,}}
           value={section5.obtainableMarket5}
           onChange={(evt) =>
             dispatch({
@@ -129,7 +136,8 @@ function SectionFiveMarket() {
               multiline
               rows={5}
               fullWidth
-              value={section5.whyRealistic}
+              value={section5.whyRealistic5}
+              InputLabelProps={{shrink: true,}}
               onChange={(evt) =>
                 dispatch({
                   type: "SET_SECTION5_RESPONSES",

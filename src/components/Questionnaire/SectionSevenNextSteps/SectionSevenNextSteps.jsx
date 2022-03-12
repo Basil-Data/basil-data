@@ -25,6 +25,7 @@ function SectionSevenNextSteps () {
     const investmentSelection = useSelector((store) => store.section7Enterprise.investmentVehicleId);
     const fundingUse = useSelector((store) => store.section7Enterprise.fundingUseId);
     const wayAhead = useSelector((store) => store.section7Enterprise.assistanceId);
+    console.log('section 7:', section7);
 
     useEffect(() => {
         dispatch({
@@ -131,11 +132,11 @@ function SectionSevenNextSteps () {
                 id="outlined-basic" 
                 label="Fundraising Target" 
                 variant="outlined"
-                value={section7Enterprise.targetAmount7}
+                value={section7Enterprise.targetAmount7 ?? ''}
                 onChange = {(event) =>
                     { dispatch({
                         type: "SET_NEXT_STEPS_ENTERPRISE",
-                        payload: {targetAmount7: event.target.value}
+                        payload: {targetAmount7: Number(event.target.value)}
                     }); }
                 }
             />
@@ -199,7 +200,7 @@ function SectionSevenNextSteps () {
                     variant="outlined" 
                     multiline rows={5} 
                     fullWidth
-                    value={section7Enterprise.nextSteps7}
+                    value={section7Enterprise.nextSteps7 ?? ''}
                     onChange = {(event) =>
                         { dispatch({
                             type: "SET_NEXT_STEPS_ENTERPRISE",
@@ -255,7 +256,7 @@ function SectionSevenNextSteps () {
                     key={impact.id}
                     value={impact.id}
                     control={<Radio />} 
-                    label={impact.impact} 
+                    label={impact.societalImpact}
                     className='centerHelp' 
                 />
             ))}
@@ -294,7 +295,6 @@ function SectionSevenNextSteps () {
         </p>
         <RadioGroup
             aria-labelledby="economic-impact"
-            defaultValue=""
             name="radio-buttons-group"
             value = {section7Enterprise.economicImpactId}
             onChange = {(event) =>
@@ -318,7 +318,6 @@ function SectionSevenNextSteps () {
         <h5>How well do you understand the problem?</h5>
         <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue=""
             row
             name="radio-buttons-group"
             className='centerHelp'
@@ -326,7 +325,7 @@ function SectionSevenNextSteps () {
             onChange = {(event) =>
                 { dispatch({
                     type: "SET_NEXT_STEPS_ENTERPRISE",
-                    payload: {understandProblem7: event.target.value}
+                    payload: {understandProblem7: Number(event.target.value)}
                 }); }
             }
         >

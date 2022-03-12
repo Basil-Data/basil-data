@@ -1,9 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-// This get is for the checkboxes on section 4
-router.get('/', async (req, res) => {
+// Router to get the multiple choice arrays for Section Three
+router.get('/', rejectUnauthenticated, async (req, res) => {
   
   let sqlText = `
     SELECT * FROM "developmentStage"
@@ -30,7 +31,9 @@ router.get('/', async (req, res) => {
   res.send(results);
 });
 
-router.get('/:id', async (req,res) => {
+// Gets the individual enterprise's previous answers for the 
+// answers
+router.get('/:id', rejectUnauthenticated, async (req,res) => {
 
   let sqlText =`
     SELECT
@@ -56,26 +59,35 @@ router.get('/:id', async (req,res) => {
         "newCustomers4"
       FROM "answers"
       WHERE "enterpriseId" = $1;
-        `;
-      
-    let sqlParams2 = [
-      req.user.id
-    ]
+    `;
 
+    let sqlText3 =`
+      SELECT
+        "developmentStageId"
+      FROM
+        "developmentStageJunction"
+      WHERE "enterpriseId" = $1;
+    `;
+      
     const progressIndicatorId = await pool.query(sqlText, sqlParams);
     const answers = await pool.query(sqlText2, sqlParams);
+    const developmentStageId = await pool.query(sqlText3, sqlParams);
+    
 
     const results = {
       progressIndicatorId: Array.isArray(progressIndicatorId.rows[0].array_agg) ? progressIndicatorId.rows[0].array_agg : [],
-      ...answers.rows[0]
+      ...answers.rows[0],
+      developmentStageId: developmentStageId.rows[0].developmentStageId
     }
+    console.log('developmentStageId is', developmentStageId.rows[0].developmentStageId);
 
     res.send(results)
 });
 
-// Posts to junction table for checkboxes
-router.post('/', async (req, res) => {
+// Post router for posting to joiner table for check boxes
+router.post('/', rejectUnauthenticated, async (req, res) => {
 try {
+
   let sqlText1 =`
     DELETE FROM "progressIndicatorsJunction"
       WHERE "enterpriseId" = $1;
@@ -103,7 +115,38 @@ try {
       indicator
     ];
 
-    await pool.query(sqlText2, sqlParams2)
+    await pool.query( sqlText2, sqlParams2)
+
+    let sqlText3 =`
+      DELETE FROM "developmentStageJunction"
+        WHERE "enterpriseId" = $1;
+        `;
+    
+    let sqlParams3 = [
+      req.user.id
+    ]
+
+    await pool.query(
+      sqlText3,
+      sqlParams3
+    )
+    
+
+    let sqlText4 =`
+      INSERT INTO "developmentStageJunction"
+        ( "enterpriseId", "developmentStageId" )
+      VALUES
+        ($1, $2)
+      `;
+    
+    let sqlParams4 = [
+      req.user.id,
+      req.body.developmentStageId
+
+    ]
+      
+
+    await pool.query(sqlText4, sqlParams4)
   };
 
   
@@ -115,8 +158,9 @@ catch (err){
 }
 });
 
-// Sending answers to answers table
-router.put('/', (req, res) => {
+// Router for putting/updating answers into table as the
+// individual enterprise changes their answers
+router.put('/', rejectUnauthenticated, (req, res) => {
   console.log('req.body is', req.body);
   let sqlText = `
     UPDATE "answers"
@@ -128,8 +172,9 @@ router.put('/', (req, res) => {
       "makingProfit4" = $5,
       "netProfitMargin4" = $6,
       "customerAcquisitionCost4" = $7,
-      "newCustomers4" = $8
-    WHERE "answers"."enterpriseId" = $9;
+      "newCustomers4" = $8,
+      "marketingExpenses4" = $9
+    WHERE "answers"."enterpriseId" = $10;
       `;
     
     let sqlParams = [
@@ -141,6 +186,7 @@ router.put('/', (req, res) => {
       req.body.netProfitMargin4,
       req.body.customerAcquisitionCost4,
       req.body.newCustomers4,
+      req.body.marketingExpenses4,
       req.user.id
     ]
 

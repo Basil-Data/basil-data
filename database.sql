@@ -6,7 +6,6 @@
 
 -- database name: basil_data
 
-DROP TABLE "user";
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "enterpriseName" VARCHAR (255),
@@ -17,7 +16,6 @@ CREATE TABLE "user" (
     "authLevel" VARCHAR (255) DEFAULT 'guest'
 );
 
-DROP TABLE "answers";
 CREATE TABLE "answers" (
     "id" SERIAL PRIMARY KEY,
     "enterpriseId" INTEGER DEFAULT NULL,
@@ -63,7 +61,6 @@ CREATE TABLE "answers" (
 	"understandProblem7" INTEGER DEFAULT NULL
 );
 
-DROP TABLE "competitiveAdvantages";
 CREATE TABLE "competitiveAdvantages" (
 	"id" SERIAL PRIMARY KEY,
 	"advantage" VARCHAR (255)
@@ -73,14 +70,12 @@ INSERT INTO "competitiveAdvantages"
 VALUES
 	('Patent'), ('Brand License'), ('Regulation'), ('Trademark'), ('Copyrights'), ('Software'), ('Customer Lists'), ('Personal Accreditation');
 
-DROP TABLE "competitiveAdvantagesJunction";
 CREATE TABLE "competitiveAdvantagesJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"advantageId" INTEGER
 );
 
-DROP TABLE "impactSectors";
 CREATE TABLE "impactSectors" (
 	"id" SERIAL PRIMARY KEY,
 	"impactSector" VARCHAR (255)
@@ -100,14 +95,12 @@ VALUES
 	('Social Advocacy'),
 	('Youth Development');
 
-DROP TABLE "impactTableJunction";
 CREATE TABLE "impactTableJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"impactSectorId" INTEGER
 );
 
-DROP TABLE "supportiveCharacteristics";
 CREATE TABLE "supportiveCharacteristics" (
 	"id" SERIAL PRIMARY KEY,
 	"characteristic" VARCHAR (255)
@@ -120,14 +113,12 @@ VALUES
 	('Internal Measurement shows effectiveness'), 
 	('None of the above - Innovative approach');
 
-DROP TABLE "supportiveCharacteristicsJunction";
 CREATE TABLE "supportiveCharacteristicsJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"characteristicId" INTEGER
 );
 
-DROP TABLE "sdg";
 CREATE TABLE "sdg" (
 	"id" SERIAL PRIMARY KEY,
 	"sdg" VARCHAR (255),
@@ -155,14 +146,12 @@ VALUES
 	('Partnerships for the Goals', 'public/images/SDGs/E-WEB-Goal-17.png')
 ;
 
-DROP TABLE "sdgJunction";
 CREATE TABLE "sdgJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"sdgId" INTEGER
 );
 
-DROP TABLE "stakeholderSegments";
 CREATE TABLE "stakeholderSegments" (
 	"id" SERIAL PRIMARY KEY,
 	"segment" VARCHAR (255)
@@ -172,14 +161,12 @@ INSERT INTO "stakeholderSegments"
 VALUES
 	('Age'), ('Gender/Gender Identity'), ('Race'), ('Income'), ('Region'), ('Ethnicity'), ('Sexual Preference');
 	
-DROP TABLE "stakeholderSegmentsJunction";
 CREATE TABLE "stakeholderSegmentsJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"segmentId" INTEGER
 );
 
-DROP TABLE "operatingSector";
 CREATE TABLE "operatingSector" (
 	"id" SERIAL PRIMARY KEY,
 	"sector" VARCHAR (255)
@@ -199,14 +186,12 @@ VALUES
 	('Technology & Communications'),
 	('Transportation');
 	
-DROP TABLE "operatingSectorJunction";
 CREATE TABLE "operatingSectorJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"sectorId" INTEGER
 );
 
-DROP TABLE "painPoints";
 CREATE TABLE "painPoints" (
 	"id" SERIAL PRIMARY KEY,
 	"painPoint" VARCHAR (255)
@@ -219,14 +204,12 @@ VALUES
 	('Process - areas where you could provide more convenient processes for your customers'),
 	('Support - areas where customers are not receiving the support they need');
 	
-DROP TABLE "painPointsJunction";
 CREATE TABLE "painPointsJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"painPointId" INTEGER
 );
 
-DROP TABLE "technologies";
 CREATE TABLE "technologies" (
 	"id" SERIAL PRIMARY KEY,
 	"technology" VARCHAR (255)
@@ -237,14 +220,12 @@ VALUES
 	('Hardware'), ('Mobile Application'), ('Web Application'), ('Marketplace'), ('Software'), ('Ad Publishing'), ('Anonymizer'), ('Appilcation Development and Testing'), ('Backup and Recovery'), ('Business Intelligence'), ('Cloud Broker'), ('Cloud Carrier'), ('Cloud Service Provider'), ('Cloud Storage'), ('Collaboration'),
 	('Content Delivery Network (CDN)'), ('Content Management'), ('Customer Relationship Management (CRM)'), ('Database Management'), ('E-Commerce'), ('Education Tech'),	('Enterprise Resource Planning (ERP)'), ('Financial Services'), ('Games'), ('Healthcare'), ('Hosting Services'), ('Human Resources'), ('IT Service Management'), ('Legal'), ('Marketing & Sales'), ('Media'), ('Office Productivity'), ('P2P'), ('Search'), ('Security'), ('Service Management'), ('Shopping'), ('Social Networking'), ('Software Repository'), ('Travel Tech'), ('Web Content'), ('Not a Technology Based Solution');
 	
-DROP TABLE "technologiesJunction";
 CREATE TABLE "technologiesJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"technologyId" INTEGER
 );
 
-DROP TABLE "developmentStage";
 CREATE TABLE "developmentStage" (
 	"id" SERIAL PRIMARY KEY,
 	"stage" VARCHAR (255)
@@ -254,19 +235,17 @@ INSERT INTO "developmentStage"
 VALUES
 	('Concept & Research'),
 	('Initial Prototype'),
-	('Valdiation'),
+	('Validation'),
 	('Refinement'),
 	('Scaling'),
 	('Established Loyal Customer Base');
 	
-DROP TABLE "developmentStageJunction";
 CREATE TABLE "developmentStageJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"developmentStageId" INTEGER
 );
 
-DROP TABLE "investmentStage";
 CREATE TABLE "investmentStage" (
 	"id" SERIAL PRIMARY KEY,
 	"stage" VARCHAR (255)
@@ -281,14 +260,12 @@ VALUES
 	('Series B'),
 	('Series C');
 	
-DROP TABLE "investmentStageJunction";
 CREATE TABLE "investmentStageJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"investmentStageId" INTEGER
 );
 
-DROP TABLE "progressIndicators";
 CREATE TABLE "progressIndicators" (
 	"id" SERIAL PRIMARY KEY,
 	"indicator" VARCHAR (255)
@@ -303,14 +280,12 @@ VALUES
 	('Customer Acquisition'),
 	('None of the above');
 	
-DROP TABLE "progressIndicatorsJunction";
 CREATE TABLE "progressIndicatorsJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"indicatorId" INTEGER
 );
 
-DROP TABLE "anticipatedRisks";
 CREATE TABLE "anticipatedRisks" (
 	"id" SERIAL PRIMARY KEY,
 	"risk" VARCHAR (255)
@@ -329,14 +304,12 @@ VALUES
 	('Unexpected Impact Risk - significant unexpected impact is experienced by stakeholders'),
 	('None at this stage');
 	
-DROP TABLE "anticipatedRisksJunction";
 CREATE TABLE "anticipatedRisksJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"riskId" INTEGER
 );
 
-DROP TABLE "startupBarriers";
 CREATE TABLE "startupBarriers" (
 	"id" SERIAL PRIMARY KEY,
 	"barrier" VARCHAR (255)
@@ -355,14 +328,12 @@ VALUES
 	('Economies of Scale'),
 	('Product Differentiation');
 	
-DROP TABLE "startupBarriersJunction";
 CREATE TABLE "startupBarriersJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"barrierId" INTEGER
 );
 
-DROP TABLE "growthFactors";
 CREATE TABLE "growthFactors" (
 	"id" SERIAL PRIMARY KEY,
 	"factor" VARCHAR (255)
@@ -382,14 +353,12 @@ VALUES
 	('International Markets & Foreign Exchange Markets'),
 	('Political/Social Momentum');
 	
-DROP TABLE "growthFactorsJunction";
 CREATE TABLE "growthFactorsJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"factorId" INTEGER
 );
 
-DROP TABLE "investmentVehicles";
 CREATE TABLE "investmentVehicles" (
 	"id" SERIAL PRIMARY KEY,
 	"investmentVehicle" VARCHAR (255)
@@ -407,14 +376,12 @@ VALUES
 	('Angel Investment'),
 	('Open to all offers');
 	
-DROP TABLE "investmentVehiclesJunction";
 CREATE TABLE "investmentVehiclesJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"investmentVehicleId" INTEGER
 );
 
-DROP TABLE "fundingUse";
 CREATE TABLE "fundingUse" (
 	"id" SERIAL PRIMARY KEY,
 	"fundingUse" VARCHAR (255)
@@ -434,14 +401,12 @@ VALUES
 	('Sales & Marketing'),
 	('Market Expansion');
 	
-DROP TABLE "fundingUseJunction";
 CREATE TABLE "fundingUseJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"fundingUseId" INTEGER
 );
 
-DROP TABLE "helpMoveForward";
 CREATE TABLE "helpMoveForward" (
 	"id" SERIAL PRIMARY KEY,
 	"assistance" VARCHAR (255)
@@ -455,14 +420,12 @@ VALUES
 	('Theory of Change and Strategy Development'),
 	('Networking with others in the social impact/investing space');
 	
-DROP TABLE "helpMoveForwardJunction";
-CREATE TABLE "societalImpactJunction" (
+CREATE TABLE "helpMoveForwardJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"assistanceId" INTEGER
 );
 
-DROP TABLE "societalImpact";
 CREATE TABLE "societalImpact" (
 	"id" SERIAL PRIMARY KEY,
 	"societalImpact" VARCHAR (255)
@@ -475,14 +438,12 @@ VALUES
 	('Our product or service benefits the individual or community stakeholder social wellbeing'),
 	('Our product or service directly contributes to a solution to a social problem');
 	
-DROP TABLE "societalImpactJunction";
 CREATE TABLE "societalImpactJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"societalImpactId" INTEGER
 );
 
-DROP TABLE "environmentalImpact";
 CREATE TABLE "environmentalImpact" (
 	"id" SERIAL PRIMARY KEY,
 	"impact" VARCHAR (255)
@@ -495,14 +456,12 @@ VALUES
 	('Our product or service benefits the environment'),
 	('Our product or service directly contributes to a solution to an environmental problem');
 	
-DROP TABLE "environmentalImpactJunction";
 CREATE TABLE "environmentalImpactJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
 	"environmentalImpactId" INTEGER
 );
 
-DROP TABLE "economicImpact";
 CREATE TABLE "economicImpact" (
 	"id" SERIAL PRIMARY KEY,
 	"impact" VARCHAR (255)
@@ -515,7 +474,6 @@ VALUES
 	('Our product or service benefits the individual or community stakeholder economically'),
 	('Our product or service directly contributes to a solution to economic and wealth problems');
 	
-DROP TABLE "economicImpactJunction";
 CREATE TABLE "economicImpactJunction" (
 	"id" SERIAL PRIMARY KEY,
 	"enterpriseId" INTEGER,
