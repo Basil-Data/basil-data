@@ -1,6 +1,6 @@
 import { react, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -11,6 +11,7 @@ import QuestionnaireNav from "../QuestionnaireNav/QuestionnaireNav";
 
 function SectionFiveMarket() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const section5 = useSelector((store) => store.section5Enterprise);
   const user = useSelector((store) => store.user)
   console.log('user.id is', user.id);
@@ -30,9 +31,34 @@ function SectionFiveMarket() {
     dispatch({
       type: "UPDATE_SECTION_FIVE",
       payload: {
-        id: user.id,
         data: section5
       }});
+  }
+
+  function handleBack(event) {
+    event.preventDefault();
+
+    dispatch({
+      type: "UPDATE_SECTION_FIVE",
+      payload: {
+        data: section5
+      }});
+    
+    history.push('/traction')
+
+  }
+
+  function handleNext(event) {
+    event.preventDefault();
+
+    dispatch({
+      type: "UPDATE_SECTION_FIVE",
+      payload: {
+        data: section5
+      }});
+    
+    history.push('/risks-and-hurdles')
+
   }
 
   return (
@@ -151,11 +177,12 @@ function SectionFiveMarket() {
         <br />
         <br />
 
-        <Link to="/traction">
-          <button 
-            onClick={handleSubmit}
-            className="btn">Back</button>
-        </Link>
+        
+        <button 
+          onClick={(evt) => handleBack(evt)}
+          className="btn">Back
+        </button>
+        
 
         <button 
             onClick={(evt) => handleSubmit(evt)} 
@@ -163,11 +190,12 @@ function SectionFiveMarket() {
             Submit
         </button>
 
-        <Link to="/risks-and-hurdles">
-          <button
-            onClick={(evt) => handleSubmit(evt)} 
-            className="btn">Next</button>
-        </Link>
+        
+        <button
+          onClick={(evt) => handleNext(evt)} 
+          className="btn">Next
+        </button>
+        
       </form>
     </>
   );
