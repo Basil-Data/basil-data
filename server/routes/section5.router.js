@@ -88,7 +88,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 // Router for putting/updating answers into table as the
 // individual enterprise changes their answers
-router.put('/:id', rejectUnauthenticated, async (req, res) => {
+router.put('/', rejectUnauthenticated, async (req, res) => {
 
   console.log(req.body);
 
