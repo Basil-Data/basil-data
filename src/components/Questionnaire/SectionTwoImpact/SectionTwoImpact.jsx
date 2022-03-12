@@ -11,9 +11,11 @@ import {
     TableBody,
     Button, 
     Box, 
+    Checkbox,
     Select,
     MenuItem,
     FormControl,
+    FormControlLabel,
     FormGroup,
     InputLabel,
     TextField,
@@ -28,21 +30,54 @@ function SectionTwoImpact() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchImpactSectors();
+        dispatch({type: 'FETCH_SECTION_TWO'});
+        dispatch({type: 'FETCH_IMPACT_SECTORS'});
+        dispatch({type: 'FETCH_SECTION_TWO_ENTERPRISE'});
     }, [])
 
+    const user = useSelector(store => store.user);
     const impactSectors = useSelector(store => store.section2.impactSectors);
-    const section2Enterprise = useSelector(store => store.section2Enterprise)
-
+    const section2Enterprise = useSelector(store => store.section2Enterprise);
+    const selectedImpactSector = useSelector(store => store.section2Enterprise.impactSectorId);
 
 
     console.log('impact sectors are:', impactSectors);
     console.log('section2Enterprise:', section2Enterprise);
+    console.log('user', user);
 
-    const fetchImpactSectors = () => {
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
         dispatch({
-            type: 'FETCH_IMPACT_SECTORS'
-        });
+            type: 'UPDATE_SECTION_TWO',
+            payload: {
+                id: user.id,
+                data: section2Enterprise
+            }
+        })
+    }
+
+    const handleImpactSector = (event) => {
+        console.log('in handleImpactSector');
+        const index = selectedImpactSector.indexOf(event.target.value)
+        console.log('index:', index);
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    impactSectorId: [...selectedImpactSector, event.target.value]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    impactSectorId: selectedImpactSector.filter((selectedImpactSector) => selectedImpactSector !== event.target.value)
+                }
+            });
+        }
     }
 
 
@@ -65,11 +100,15 @@ function SectionTwoImpact() {
                 <br></br>
                 <p>What is the social / environmental problem you are trying to solve?</p>
                 <TextField
-                    label="Social/Environmental Problem"
                     className="socialEnviroProblem"
+                    label="Social/Environmental Problem"
+                    InputLabelProps={{ shrink: true }}
                     variant="outlined"
                     type="text"
                     placeholder="Social/Environmental Problem"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                     value={section2Enterprise.problemBeingSolved2}
                     onChange={(event) => dispatch({
                     type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -80,32 +119,39 @@ function SectionTwoImpact() {
                 </TextField>
                 <br></br>
                 <p>What category best describes your IMPACT Sector?</p>
-                <Select
-                    className="impactCategory"
-                    variant="outlined"
-                    type="text"
-                    placeholder="IMPACT Sector Category"
-                >
-                    <MenuItem></MenuItem>
+                <FormControl>
                     {impactSectors?.map(sector => {
                         return(
-                            <MenuItem key={sector.id}>{sector.impactSector}</MenuItem>
+                            <FormControlLabel 
+                                key={sector.id}
+                                checked={selectedImpactSector.includes(sector.id)}
+                                control={
+                                    <Checkbox 
+                                        value={sector.id}
+                                        onChange={handleImpactSector}
+                                    />} 
+                                label={sector.impactSector}
+                            />
                         )
                     })}
-                    
-                </Select>
+                </FormControl>
                 <br></br>
-                <p>Please tell us about the economic, 
+                <p>
+                    Please tell us about the economic, 
                     environmental or social COST of the problem
                     in your words (dollars lost, people effected, 
                     loss of opportunity, etc.)
                 </p>
                 <TextField
                     label="Cost of The Problem"
+                    InputLabelProps={{ shrink: true }}
                     className="costOfProblem"
                     variant="outlined"
                     type="text"
                     placeholder="COST of The Problem"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                     value={section2Enterprise.costOfProblem2}
                     onChange={(event) => dispatch({
                     type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -120,10 +166,14 @@ function SectionTwoImpact() {
                     questions above?</p>
                 <TextField
                     label="Solution"
+                    InputLabelProps={{ shrink: true }}
                     className="solutionToProblem"
                     variant="outlined"
                     type="text"
                     placeholder="Solution"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                     value={section2Enterprise.howTheySolve2}
                     onChange={(event) => dispatch({
                     type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -138,10 +188,14 @@ function SectionTwoImpact() {
                     solution?</p>
                 <TextField
                     label="Who Benefits?"
+                    InputLabelProps={{ shrink: true }}
                     className="whoBenefits"
                     variant="outlined"
                     type="text"
                     placeholder="Who Benefits"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                     value={section2Enterprise.whoBenefits2}
                     onChange={(event) => dispatch({
                     type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -151,9 +205,28 @@ function SectionTwoImpact() {
 
                 </TextField>
                 <SectionTwoImpactOpportunity />
-                <Link to="/story"><button className="btn">Back</button></Link>
-                <button className="btn">Submit</button>
-                <Link to="/solution"><button className="btn">Next</button></Link>
+                <Link to="/story">
+                    <button 
+                        className="btn"
+                        onClick={(event) => handleSubmit(event)}
+                    >
+                        Back
+                    </button>
+                </Link>
+                <button 
+                    className="btn"
+                    onClick={(event) => handleSubmit(event)}
+                >
+                    Submit
+                </button>
+                <Link to="/solution">
+                    <button 
+                    className="btn"
+                    onClick={(event) => handleSubmit(event)}
+                    >
+                        Next
+                    </button>
+                </Link>
             </form>
         </Box>
         </>

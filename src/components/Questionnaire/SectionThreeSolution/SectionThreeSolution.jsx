@@ -22,14 +22,69 @@ function SectionThreeSolution () {
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SECTION_THREE'});
+        dispatch({ type: 'FETCH_ENTERPRISE_SECTION_THREE'});
     }, []);
 
     // get the user.id from the store to send with everything else
     const user = useSelector((store) => store.user);
+    // These are the arrays that come from the tables for check boxes
     const painPoints = useSelector(store => store.section3.painPoints);
     const operatingSector = useSelector(store => store.section3.operatingSector);
     const technologies = useSelector(store => store.section3.technologies);
+    // This is the enterprise's revolving answers being updated
     const section3Enterprise = useSelector(store => store.section3Enterprise);
+    // These are the enterprises's selected check boxes
+    const selectedOperatingSector = useSelector(store => store.section3Enterprise.operatingSectorId);
+    const selectedPainPoints = useSelector(store => store.section3Enterprise.painPointsId);
+    const selectedTechnologies = useSelector(store => store.section3Enterprise.technologiesId);
+
+    const handleOperatingSectors = (event) => {
+        const index = selectedOperatingSector.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_THREE_ENTERPRISE',
+                payload: {operatingSectorId: [...selectedOperatingSector, Number(event.target.value)]}
+            })
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_THREE_ENTERPRISE',
+                payload: {operatingSectorId: selectedOperatingSector.filter((selectedOperatingSector) => selectedOperatingSector !== Number(event.target.value))}
+            })
+        }
+    };
+
+    const handlePainPoints = (event) => {
+        const index = selectedPainPoints.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_THREE_ENTERPRISE',
+                payload: {painPointsId: [...selectedPainPoints, Number(event.target.value)]}
+            })
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_THREE_ENTERPRISE',
+                payload: {painPointsId: selectedPainPoints.filter((selectedPainPoints) => selectedPainPoints !== Number(event.target.value))}
+            })
+        }
+    };
+
+    const handleTechnologies = (event) => {
+        const index = selectedTechnologies.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_THREE_ENTERPRISE',
+                payload: {technologiesId: [...selectedTechnologies, Number(event.target.value)]}
+            })
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_THREE_ENTERPRISE',
+                payload: {technologiesId: selectedTechnologies.filter((selectedTechnologies) => selectedTechnologies !== Number(event.target.value))}
+            })
+        }
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -57,7 +112,12 @@ function SectionThreeSolution () {
                     <FormControl sx={{ m : 3}}>
                         {operatingSector?.map(sector => (
                                 <FormControlLabel 
-                                    control={<Checkbox />} 
+                                    checked={selectedOperatingSector.includes(sector.id)}
+                                    value={sector.id}
+                                    onChange={handleOperatingSectors}
+                                    control={
+                                    <Checkbox 
+                                    />} 
                                     label={sector.sector}
                                     key={sector.id} />
                         ))}
@@ -155,7 +215,12 @@ function SectionThreeSolution () {
                     <FormControl sx={{ m : 3}}>
                         {painPoints?.map(point => (
                                 <FormControlLabel 
-                                    control={<Checkbox />} 
+                                    checked={selectedPainPoints.includes(point.id)}
+                                    control={
+                                        <Checkbox
+                                            value={point.id}
+                                            onChange={handlePainPoints}
+                                        />} 
                                     label={point.painPoint}
                                     key={point.id} />
                         ))}
@@ -228,7 +293,14 @@ function SectionThreeSolution () {
                     <FormControl sx={{ m : 3}}>
                         {technologies?.map(technology => (
                                 <FormControlLabel 
-                                    control={<Checkbox />} 
+                                    checked={selectedTechnologies.includes(technology.id)}
+                                    disabled={!selectedTechnologies.includes(technology.id) && selectedTechnologies.length > 2}
+                                    control={
+                                    <Checkbox 
+
+                                    />} 
+                                    value={technology.id}
+                                    onChange={handleTechnologies}
                                     label={technology.technology}
                                     key={technology.id} />
                         ))}
@@ -239,19 +311,19 @@ function SectionThreeSolution () {
                 <Link to="/impact">
                     <button 
                         className="btn" 
-                        onClick={(event) => handleSubmit(event)}>
+                        onClick={handleSubmit}>
                         Back
                     </button>
                 </Link>
                 <button 
                     className="btn"
-                    onClick={(event) => handleSubmit(event)}>
+                    onClick={handleSubmit}>
                         Submit
                     </button>
                 <Link to="/traction">
                     <button 
                         className="btn"
-                        onClick={(event) => handleSubmit(event)}>
+                        onClick={handleSubmit}>
                         Next
                     </button>
                 </Link>

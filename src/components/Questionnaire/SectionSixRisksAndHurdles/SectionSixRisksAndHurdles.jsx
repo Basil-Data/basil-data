@@ -120,7 +120,7 @@ function SectionSixRisksAndHurdles () {
                                 control={
                                     <Checkbox
                                         value={barrier.id}
-                                        onChange={handleBarriers}
+                                        
                                     />
                                 } 
                                 label={barrier.barrier} 

@@ -25,6 +25,7 @@ import {
 from '@mui/material';
 
 function AffordableAndCleanEnergy() {
+    const dispatch = useDispatch();
 
     const sdg = useSelector(store => store.section2.sdg);
     const stakeholderSegments = useSelector(store => store.section2.stakeholderSegments);
@@ -46,9 +47,13 @@ function AffordableAndCleanEnergy() {
                 </p>
                 <TextField
                     label="Please Elaborate"
+                    InputLabelProps={{ shrink: true }}
                     variant="outlined"
                     type="text"
                     placeholder="Please Elaborate"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                 ></TextField>
                 <p>How do you segment your stakeholders?</p>
                 <FormControl>
@@ -60,20 +65,49 @@ function AffordableAndCleanEnergy() {
                 <p>In what regions, states or cities are you focusing your efforts today?</p>
                 <TextField
                     label="Location"
+                    InputLabelProps={{ shrink: true }}
                     variant="outlined"
                     type="text"
                     placeholder="Location"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                 ></TextField>
                 <p> What are the specific changes you would like to see for your stakeholder?
                 </p>
                 <TextField
                     label="Specific Changes"
+                    InputLabelProps={{ shrink: true }}
                     className="specificChanges"
                     variant="outlined"
                     type="text"
                     placeholder="Specific Changes"
+                    multiline rows={5}
+                    id="outlined-basic" 
+                    sx={{width: 600}}
                 ></TextField>
                 <p>Have you measured your outcomes?</p>
+                <RadioGroup className="centerHelp">
+                <FormControlLabel 
+                    control={<Radio/>} 
+                    labelPlacement="end"
+                    value="Yes"
+                    label="Yes"
+                />
+                <FormControlLabel 
+                    control={<Radio/>} 
+                    labelPlacement="end"
+                    value="No"
+                    label="No"
+                />
+                <FormControlLabel 
+                    control={<Radio/>} 
+                    labelPlacement="end"
+                    value="Sometimes - not consistently"
+                    label="Sometimes - not consistently"
+                />
+                </RadioGroup>
+                <p>If applicable, please select any secondary Sustainable Development Goals that align with your organization's mission. </p>
                 <RadioGroup className="centerHelp">
                     {sdg?.map(sdg => (
                             <FormControlLabel 

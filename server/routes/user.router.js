@@ -38,6 +38,27 @@ router.post('/register', (req, res, next) => {
 
 });
 
+router.post('/answers', (req, res) => {
+
+  let sqlText = `
+    INSERT INTO "answers"
+      ("enterpriseId")
+    VALUES
+      ($1)
+  `;
+
+  let sqlParams = [
+    req.user.id
+  ];
+
+  pool.query(sqlText, sqlParams)
+    .then(res.sendStatus(200))
+    .catch(error => {
+      res.sendStatus(500);
+      console.log('error posting to answers', error);
+    })  
+})
+
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
 // this middleware will run our POST if successful

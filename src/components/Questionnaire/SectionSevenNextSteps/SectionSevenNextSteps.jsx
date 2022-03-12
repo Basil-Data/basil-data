@@ -25,57 +25,70 @@ function SectionSevenNextSteps () {
     const investmentSelection = useSelector((store) => store.section7Enterprise.investmentVehicleId);
     const fundingUse = useSelector((store) => store.section7Enterprise.fundingUseId);
     const wayAhead = useSelector((store) => store.section7Enterprise.assistanceId);
+    console.log('section 7:', section7);
 
     useEffect(() => {
         dispatch({
             type: "FETCH_NEXT_STEPS",
         });
+        dispatch({ 
+            type: "FETCH_ENTERPRISE_SECTION_SEVEN"
+        })
     }, []);
 
     const handleInvestmentType = (event) => {
-        const index = investmentSelection.indexOf(event.target.value)
+        const index = investmentSelection.indexOf(Number(event.target.value))
         if (index === -1) {
             dispatch({
                 type: "SET_NEXT_STEPS_ENTERPRISE",
-                payload: {investmentVehicleId: [...investmentSelection, event.target.value]}
+                payload: {investmentVehicleId: [...investmentSelection, Number(event.target.value)]}
             });
         } else {
             dispatch({
                 type: "SET_NEXT_STEPS_ENTERPRISE",
-                payload: {investmentVehicleId: investmentSelection.filter((investmentSelection) => investmentSelection !== event.target.value)}
+                payload: {investmentVehicleId: investmentSelection.filter((investmentSelection) => investmentSelection !== Number(event.target.value))}
             });
         }
     }
 
     const handleFundraising = (event) => {
-        const index = fundingUse.indexOf(event.target.value)
+        const index = fundingUse.indexOf(Number(event.target.value))
         if (index === -1) {
             dispatch({
                 type: "SET_NEXT_STEPS_ENTERPRISE",
-                payload: {fundingUseId: [...fundingUse, event.target.value]}
+                payload: {fundingUseId: [...fundingUse, Number(event.target.value)]}
             });
         } else {
             dispatch({
                 type: "SET_NEXT_STEPS_ENTERPRISE",
-                payload: {fundingUseId: fundingUse.filter((fundingUse) => fundingUse !== event.target.value)}
+                payload: {fundingUseId: fundingUse.filter((fundingUse) => fundingUse !== Number(event.target.value))}
             });
         }
     }
 
     const handleWayAhead = (event) => {
-        const index = wayAhead.indexOf(event.target.value)
+        const index = wayAhead.indexOf(Number(event.target.value))
         if (index === -1) {
             dispatch({
                 type: "SET_NEXT_STEPS_ENTERPRISE",
-                payload: {assistanceId: [...wayAhead, event.target.value]}
+                payload: {assistanceId: [...wayAhead, Number(event.target.value)]}
             });
         } else {
             dispatch({
                 type: "SET_NEXT_STEPS_ENTERPRISE",
-                payload: {assistanceId: wayAhead.filter((wayAhead) => wayAhead !== event.target.value)}
+                payload: {assistanceId: wayAhead.filter((wayAhead) => wayAhead !== Number(event.target.value))}
             });
         }
     }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        dispatch({
+            type: 'PUT_SECTION_SEVEN',
+            payload: {data: section7Enterprise}
+        })
+    };
 
     return (
         <>
@@ -119,11 +132,11 @@ function SectionSevenNextSteps () {
                 id="outlined-basic" 
                 label="Fundraising Target" 
                 variant="outlined"
-                value={section7Enterprise.targetAmount7}
+                value={section7Enterprise.targetAmount7 ?? ''}
                 onChange = {(event) =>
                     { dispatch({
                         type: "SET_NEXT_STEPS_ENTERPRISE",
-                        payload: {targetAmount7: event.target.value}
+                        payload: {targetAmount7: Number(event.target.value)}
                     }); }
                 }
             />
@@ -135,7 +148,8 @@ function SectionSevenNextSteps () {
             <FormControl className='questionnaireForm' sx={{ m : 3}}>
                 {section7.results1?.map(type => (
                         <FormControlLabel 
-                            key={type.id} 
+                            key={type.id}
+                            checked={investmentSelection.includes(type.id)}
                             control={
                                 <Checkbox
                                     value={type.id}
@@ -152,7 +166,8 @@ function SectionSevenNextSteps () {
             <FormControl className='questionnaireForm' sx={{ m : 3}}>
                 {section7.results2?.map(use => (
                         <FormControlLabel 
-                            key={use.id} 
+                            key={use.id}
+                            checked={fundingUse.includes(use.id)} 
                             control={
                                 <Checkbox
                                     value={use.id}
@@ -185,7 +200,7 @@ function SectionSevenNextSteps () {
                     variant="outlined" 
                     multiline rows={5} 
                     fullWidth
-                    value={section7Enterprise.nextSteps7}
+                    value={section7Enterprise.nextSteps7 ?? ''}
                     onChange = {(event) =>
                         { dispatch({
                             type: "SET_NEXT_STEPS_ENTERPRISE",
@@ -201,7 +216,8 @@ function SectionSevenNextSteps () {
             <FormControl className='questionnaireForm' sx={{ m : 3}}>
                 {section7.results3?.map(approach => (
                         <FormControlLabel 
-                            key={approach.id} 
+                            key={approach.id}
+                            checked={wayAhead.includes(approach.id)}  
                             control={
                                 <Checkbox
                                     value={approach.id}
@@ -240,7 +256,7 @@ function SectionSevenNextSteps () {
                     key={impact.id}
                     value={impact.id}
                     control={<Radio />} 
-                    label={impact.impact} 
+                    label={impact.societalImpact}
                     className='centerHelp' 
                 />
             ))}
@@ -279,7 +295,6 @@ function SectionSevenNextSteps () {
         </p>
         <RadioGroup
             aria-labelledby="economic-impact"
-            defaultValue=""
             name="radio-buttons-group"
             value = {section7Enterprise.economicImpactId}
             onChange = {(event) =>
@@ -303,7 +318,6 @@ function SectionSevenNextSteps () {
         <h5>How well do you understand the problem?</h5>
         <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue=""
             row
             name="radio-buttons-group"
             className='centerHelp'
@@ -311,7 +325,7 @@ function SectionSevenNextSteps () {
             onChange = {(event) =>
                 { dispatch({
                     type: "SET_NEXT_STEPS_ENTERPRISE",
-                    payload: {understandProblem7: event.target.value}
+                    payload: {understandProblem7: Number(event.target.value)}
                 }); }
             }
         >
@@ -326,9 +340,35 @@ function SectionSevenNextSteps () {
             <FormControlLabel labelPlacement="top" value="9" control={<Radio />} label="9" />
             <FormControlLabel labelPlacement="top" value="10" control={<Radio />} label="10" />
         </RadioGroup>
-        <Link to="/risks-and-hurdles"><button className="btn">Back</button></Link>
-        <button className="btn">Submit</button>
-        <Link to="/story"><button className="btn">Next</button></Link>
+
+        <Link to="/risks-and-hurdles">
+            <button 
+                className="btn"
+                onClick={(event) => handleSubmit(event)}
+            >
+                Back
+            </button>
+        </Link>
+        
+        <button 
+            className="btn"
+            onClick={(event) => handleSubmit(event)}
+        >
+            Save
+        </button>
+
+        {/* 
+            Below should link should change from story to 
+            whatever comes after last step in questionnaire 
+        */}
+        <Link to="/story">
+            <button 
+                className="btn"
+                onClick={(event) => handleSubmit(event)}
+            >
+                Next
+            </button>
+        </Link>
 
     </form>
     </>

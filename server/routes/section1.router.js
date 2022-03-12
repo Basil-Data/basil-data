@@ -1,14 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const axios = require('axios');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
-
-// Router to get the arrays for Section One
-router.get('/', async (req, res) => {
+// Router to get the multiple choice arrays for Section One
+router.get('/', rejectUnauthenticated, async (req, res) => {
 
     let sqlText = `
         SELECT *
@@ -24,53 +20,89 @@ router.get('/', async (req, res) => {
     res.send(results);
 });
 
-router.get('/:id', async (req, res) => {
+// Gets the individual enterprise's previous answers for the 
+// answers
+router.get('/:id', rejectUnauthenticated, async (req, res) => {
 
     let sqlText = `
         SELECT 
-            "competitiveAdvantages"."id",
-            "competitiveAdvantages"."advantage"
-        FROM "user"
-        JOIN "competitiveAdvantagesJunction"
-            ON "user"."id" = "competitiveAdvantagesJunction"."enterpriseId"
-        JOIN "competitiveAdvantages"
-            ON "competitiveAdvantagesJunction"."advantageId" = "competitiveAdvantages"."id"
-        WHERE "user"."id" = $1;
+            ARRAY_AGG("advantageId")
+        FROM "competitiveAdvantagesJunction"
+        WHERE "enterpriseId" = $1;
     `;
 
     let sqlText2 = `
-        SELECT 
-            "anticipatedRisks"."id",
-            "anticipatedRisks"."risk"
-        FROM "user"
-        JOIN "anticipatedRisksJunction"
-            ON "user"."id" = "anticipatedRisksJunction"."enterpriseId"
-        JOIN "anticipatedRisks"
-            ON "anticipatedRisksJunction"."riskId" = "anticipatedRisks"."id"
-        WHERE "user"."id" = $1;
+        SELECT
+            "enterpriseSize1",
+            TO_CHAR("dateFounded1", 'yyyy-MM-dd') AS "dateFounded1",
+            "missionStatement1",
+            "understandProblem1",
+            "yearsCollectiveExperience1",
+            "percentageBIPOC1",
+            "percentageFemale1",
+            "investorIntroduction1"
+        FROM "answers"
+        WHERE "enterpriseId" = $1
     `;
 
     let sqlParams = [
         req.user.id
     ];
 
-    const results1 = await pool.query(sqlText, sqlParams);
-    const results2 = await pool.query(sqlText2, sqlParams);
+    const competitiveAdvantagesId = await pool.query(sqlText, sqlParams);
+    const answers = await pool.query(sqlText2, sqlParams);
 
     const results = {
-        results1: results1.rows,
-        results2: results2.rows
+        competitiveAdvantagesId: Array.isArray(competitiveAdvantagesId.rows[0].array_agg) ? competitiveAdvantagesId.rows[0].array_agg : [],
+        ...answers.rows[0]
     }
 
     res.send(results);
 });
 
-// Router for putting/updating answers into table
-router.put('/:id', (req, res) => {
-  // PUT route code here
+// Post router for posting to joiner table for check boxes
+router.post('/', rejectUnauthenticated, async (req, res) => {
 
-    // Console log so you can see what is coming
-    console.log(req.body)
+    console.log(req.body);
+
+    // deletes all the existing rows 
+    let sqlText = `
+    DELETE FROM "competitiveAdvantagesJunction"
+    WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlParams = [
+        req.user.id
+    ];
+
+    await pool.query(sqlText, sqlParams);
+
+    // loops through the array and adds them anew to the table
+    if (req.body.competitiveAdvantagesId) {
+    for (let individual of req.body.competitiveAdvantagesId) {
+            
+        let sqlText2 = `
+            INSERT INTO "competitiveAdvantagesJunction"
+                ("enterpriseId", "advantageId")
+            VALUES
+                ($1, $2)
+        `;
+
+        let sqlParams2 = [
+            req.user.id,
+            individual
+        ];
+
+        await pool.query(sqlText2, sqlParams2);
+    }}
+
+    res.sendStatus(200);
+
+})
+
+// Router for putting/updating answers into table as the
+// individual enterprise changes their answers
+router.put('/', rejectUnauthenticated, (req, res) => {
 
     let sqlText = `
         UPDATE "answers"
@@ -95,7 +127,7 @@ router.put('/:id', (req, res) => {
         req.body.percentageBIPOC1,
         req.body.percentageFemale1,
         req.body.investorIntroduction1,
-        req.params.id
+        req.user.id
     ];
 
     pool

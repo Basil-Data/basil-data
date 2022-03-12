@@ -107,58 +107,58 @@ function App() {
             }
           </Route>
 
-          <Route
+          <ProtectedRoute
             exact
             path="/story"
           >
             <SectionOneStory/>
-          </Route>
+          </ProtectedRoute>
 
-          <Route
+          <ProtectedRoute
             exact
             path="/traction">
               <SectionFourTraction />
-          </Route>
+          </ProtectedRoute>
 
-          <Route
+          <ProtectedRoute
               exact
               path="/impact"
           >
               <SectionTwoImpact/>
-          </Route>
+          </ProtectedRoute>
 
-          <Route
+          <ProtectedRoute
             exact
             path="/solution"
           >
             <SectionThreeSolution/>
-          </Route>
+          </ProtectedRoute>
 
-          <Route
+          <ProtectedRoute
             exact    
             path="/traction">
               <SectionFourTraction/>
-          </Route>
+          </ProtectedRoute>
 
-          <Route
+          <ProtectedRoute
             exact
             path="/market">
               <SectionFiveMarket />
-          </Route>
+          </ProtectedRoute>
 
-          <Route
+          <ProtectedRoute
             exact
             path="/risks-and-hurdles"
           >
             <SectionSixRisksAndHurdles/>
-          </Route>
+          </ProtectedRoute>
 
-          <Route
+          <ProtectedRoute
             exact
             path="/next-steps"
           >
             <SectionSevenNextSteps/>
-          </Route>
+          </ProtectedRoute>
 
           <Route
             exact

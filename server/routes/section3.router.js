@@ -1,14 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const axios = require('axios');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
-
-// Router to get the arrays for Section One
-router.get('/', async (req, res) => {
+// Router to get the multiple choice arrays for Section Three
+router.get('/', rejectUnauthenticated, async (req, res) => {
 
     let sqlText = `
         SELECT *
@@ -38,54 +34,155 @@ router.get('/', async (req, res) => {
     res.send(results);
 });
 
-router.get('/:id', async (req, res) => {
+// Gets the individual enterprise's previous answers for the 
+// answers
+router.get('/:id', rejectUnauthenticated, async (req, res) => {
 
     let sqlText = `
         SELECT 
-            "competitiveAdvantages"."id",
-            "competitiveAdvantages"."advantage"
-        FROM "user"
-        JOIN "competitiveAdvantagesJunction"
-            ON "user"."id" = "competitiveAdvantagesJunction"."enterpriseId"
-        JOIN "competitiveAdvantages"
-            ON "competitiveAdvantagesJunction"."advantageId" = "competitiveAdvantages"."id"
-        WHERE "user"."id" = $1;
+            ARRAY_AGG("sectorId")
+        FROM "operatingSectorJunction"
+        WHERE "enterpriseId" = $1;
     `;
 
     let sqlText2 = `
         SELECT 
-            "anticipatedRisks"."id",
-            "anticipatedRisks"."risk"
-        FROM "user"
-        JOIN "anticipatedRisksJunction"
-            ON "user"."id" = "anticipatedRisksJunction"."enterpriseId"
-        JOIN "anticipatedRisks"
-            ON "anticipatedRisksJunction"."riskId" = "anticipatedRisks"."id"
-        WHERE "user"."id" = $1;
+            ARRAY_AGG("painPointId")
+        FROM "painPointsJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText3 = `
+        SELECT 
+            ARRAY_AGG("technologyId")
+        FROM "technologiesJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText4 = `
+        SELECT
+            "payingCustomerProfile3",
+            "mainCompetitors3",
+            "differFromCompetitors3",
+            "testimonial3",
+            "businessModel3"
+        FROM "answers"
+        WHERE "enterpriseId" = $1
     `;
 
     let sqlParams = [
         req.user.id
     ];
 
-    const results1 = await pool.query(sqlText, sqlParams);
-    const results2 = await pool.query(sqlText2, sqlParams);
+    const operatingSectorId = await pool.query(sqlText, sqlParams);
+    const painPointsId = await pool.query(sqlText2, sqlParams);
+    const technologiesId = await pool.query(sqlText3, sqlParams);
+    const answers = await pool.query(sqlText4, sqlParams);
 
     const results = {
-        results1: results1.rows,
-        results2: results2.rows
+        operatingSectorId: Array.isArray(operatingSectorId.rows[0].array_agg) ? operatingSectorId.rows[0].array_agg : [],
+        painPointsId: Array.isArray(painPointsId.rows[0].array_agg) ? painPointsId.rows[0].array_agg : [],
+        technologiesId: Array.isArray(technologiesId.rows[0].array_agg) ? technologiesId.rows[0].array_agg : [],
+        ...answers.rows[0]
     }
 
     res.send(results);
 });
 
-/**
- * PUT route template
- */
-router.put('/:id', (req, res) => {
-  // PUT route code here
-    // Console log so you can see what is coming
+// Post router for posting to joiner table for check boxes
+router.post('/', rejectUnauthenticated, async (req, res) => {
+
+    try {
     console.log(req.body)
+
+    let sqlTextDelete = `
+    DELETE FROM "operatingSectorJunction"
+    WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlTextDelete2 = `
+    DELETE FROM "painPointsJunction"
+    WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlTextDelete3 = `
+    DELETE FROM "technologiesJunction"
+    WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlParamsDelete = [
+        req.user.id
+    ];
+
+    await pool.query(sqlTextDelete, sqlParamsDelete);
+    await pool.query(sqlTextDelete2, sqlParamsDelete);
+    await pool.query(sqlTextDelete3, sqlParamsDelete);
+
+    for (let sector of req.body.operatingSectorId) {
+
+    let sqlText = `
+        INSERT INTO "operatingSectorJunction"
+            ("enterpriseId", "sectorId")
+        VALUES
+            ($1, $2)
+    `;
+
+    let sqlParams = [
+        req.user.id,
+        sector
+    ];
+
+    await pool.query(sqlText, sqlParams)
+    }
+
+    for (let point of req.body.painPointsId) {
+
+        let sqlText = `
+            INSERT INTO "painPointsJunction"
+                ("enterpriseId", "painPointId")
+            VALUES
+                ($1, $2)
+        `;
+    
+        let sqlParams = [
+            req.user.id,
+            point
+        ];
+    
+        await pool.query(sqlText, sqlParams)
+    }
+
+    for (let tech of req.body.technologiesId) {
+
+        let sqlText = `
+            INSERT INTO "technologiesJunction"
+                ("enterpriseId", "technologyId")
+            VALUES
+                ($1, $2)
+        `;
+    
+        let sqlParams = [
+            req.user.id,
+            tech
+        ];
+    
+        await pool.query(sqlText, sqlParams)
+    }
+    }
+    catch (error) {
+        console.log('section 3 post error', error);
+        res.sendStatus(500);
+    }
+
+    res.sendStatus(200);
+
+});
+
+// Router for putting/updating answers into table as the
+// individual enterprise changes their answers
+router.put('/', rejectUnauthenticated, (req, res) => {
+    // Console log so you can see what is coming
+    console.log('in put :id section 3', req.body)
 
     // Update the database, make sure to include all columns that
     // are coming from the saga
@@ -107,12 +204,12 @@ router.put('/:id', (req, res) => {
         req.body.differFromCompetitors3,
         req.body.testimonial3,
         req.body.businessModel3,
-        req.params.id
+        req.user.id
     ];
     
     pool.query(sqlText, sqlParams)
         .then(res.sendStatus(200))
-        .catch((err) => console.log('error in section three post', err))
+        .catch((err) => console.log('error in section three put', err))
 });
 
 module.exports = router;

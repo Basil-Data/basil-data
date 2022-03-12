@@ -17,12 +17,69 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 function SectionFourTraction() {
     const dispatch = useDispatch();
     const section4 = useSelector((store) => store.section4);
+    const section4Enterprise = useSelector((store) => store.section4Enterprise);
+    const progressIndicator = useSelector((store) => store.section4Enterprise.progressIndicatorId)
+    const user = useSelector((store) => store.user);
 
     useEffect(() => {
         dispatch({
             type: "FETCH_SECTION_FOUR",
         });
+        dispatch({
+            type: 'FETCH_ENTERPRISE_SECTION_FOUR'
+        })
     }, []);
+
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        dispatch({
+            type: 'UPDATE_SECTION4_ENTERPRISE',
+            payload: {
+                id: user.id,
+                data: section4Enterprise
+            }
+        })
+    }
+    
+
+    // These two functions toggle local state and dispatch the result of the boolean to the server
+    function generatingRevenue() {
+
+        setGeneratedRevenue(true)
+        dispatch({
+            type: 'SET_SECTION4_ENTERPRISE',
+            payload: {
+                generatingRevenue4: true
+            }
+        })
+    }
+
+    function notGeneratingRevenue() {
+        setGeneratedRevenue(false)
+        dispatch({
+            type: 'SET_SECTION4_ENTERPRISE',
+            payload: {
+                generatingRevenue4: true
+            }
+        })
+    }
+
+    const handleProgress = (event) => {
+        const index = progressIndicator.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: "SET_SECTION4_ENTERPRISE",
+                payload: {progressIndicatorId: [...progressIndicator, (Number(event.target.value))]}
+            });
+        } else {
+            dispatch({
+                type: "SET_SECTION4_ENTERPRISE",
+                payload: {progressIndicatorId: progressIndicator.filter((progressIndicator) => progressIndicator !== Number(event.target.value))}
+            });
+        }
+    }
+ 
 
     const [generatedRevenue, setGeneratedRevenue] = useState(false);
 
@@ -41,13 +98,23 @@ function SectionFourTraction() {
                 </h5>
                     <RadioGroup
                         aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue=""
+                        value={Number(section4Enterprise.developmentStageId)}
                         row
                         name="radio-buttons-group"
                         className='centerHelp'
                     >
                         {section4.results1?.map(development => (
-                            <FormControlLabel key={development.id} value={development.id} control={<Radio />} label={development.stage} className='centerHelp' />
+                            <FormControlLabel 
+                                key={development.id} 
+                                value={development.id}
+                                control={<Radio />} 
+                                label={development.stage}
+                                onChange={(evt => 
+                                    dispatch({
+                                        type: 'SET_SECTION4_ENTERPRISE',
+                                        payload: { developmentStageId: development.id}
+                                    }))} 
+                                className='centerHelp' />
                         ))}
                         
                     </RadioGroup>
@@ -64,7 +131,18 @@ function SectionFourTraction() {
                     >
 
                         {section4.results2?.map(investment => (
-                            <FormControlLabel key={investment.id} value={investment.stage} control={<Radio/>} label={investment.stage} className='centerhelp'/>
+                            <FormControlLabel 
+                                key={investment.id} 
+                                value={investment.id} 
+                                control={<Radio/>} 
+                                label={investment.stage}
+                                onChange={(evt => 
+                                    dispatch({
+                                        type: 'SET_SECTION4_ENTERPRISE',
+                                        payload: { 
+                                            investmentStageId: investment.id}
+                                    }))}  
+                                className='centerHelp'/>
                         ))}
                 
                     </RadioGroup>
@@ -73,7 +151,18 @@ function SectionFourTraction() {
                     How much have you received in funding to date?
                 </h5>
 
-                <TextField id="outlined-basic" label="Amount Funded $" variant="outlined" />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Amount Funded $" 
+                    variant="outlined"
+                    value={section4.fundingReceived4}
+                    onChange={(evt =>
+                        dispatch({
+                            type: 'SET_SECTION4_ENTERPRISE',
+                            payload: {
+                                fundingReceived4: evt.target.value
+                            }
+                        }))} />
 
                 <h5>
                     What indicators other than sales show your progress since inception?
@@ -81,7 +170,16 @@ function SectionFourTraction() {
                 <Box>
                     <FormControl className='questionnaireForm centerHelp'>
                         {section4.results3?.map(use => (
-                            <FormControlLabel  key={use.id} control={<Checkbox />} label= {use.indicator} />
+                            <FormControlLabel  
+                                key={use.id}
+                                disabled={!progressIndicator.includes(use.id) && progressIndicator.length > 2}
+                                checked={progressIndicator.includes(use.id)} 
+                                control={
+                                    <Checkbox
+                                        value={use.id}
+                                        onChange={handleProgress} 
+                                    />} 
+                                label= {use.indicator} />
                         ))}
 
                     </FormControl>
@@ -109,7 +207,7 @@ function SectionFourTraction() {
                     label="Long Answer Text" 
                     variant="outlined" 
                     multiline rows={5} 
-                    fullWidth 
+                    fullWidth
                 />
                 </Box>
                 </Grid>
@@ -122,7 +220,16 @@ function SectionFourTraction() {
                     Please provide a percentage
                 </h6>
 
-                <TextField id="outlined-basic" label="Growth Percentage" variant="outlined" />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Growth Percentage" 
+                    variant="outlined"
+                    value={section4Enterprise.customerGrowth4}
+                    onChange={(evt => 
+                        dispatch({
+                            type: 'SET_SECTION4_ENTERPRISE',
+                            payload: { customerGrowth4: evt.target.value }
+                        }))} />
 
                 <h5>
                     Are you generating revenue?
@@ -136,8 +243,18 @@ function SectionFourTraction() {
                     className='centerHelp'
                 >
 
-                <FormControlLabel labelPlacement="top" control={<Radio />} label="Yes" value="Yes" onClick={(evt) => setGeneratedRevenue(true)}/>
-                <FormControlLabel labelPlacement="top" control={<Radio />} label="No" value="No" onClick={(evt) => setGeneratedRevenue(false)}/>
+                <FormControlLabel 
+                    labelPlacement="top" 
+                    control={<Radio />} 
+                    label="Yes" 
+                    value="True" 
+                    onClick={(evt) => generatingRevenue()}/>
+                
+                <FormControlLabel 
+                    labelPlacement="top" 
+                    control={<Radio />} 
+                    label="No" value="No" 
+                    onClick={(evt) => notGeneratingRevenue()}/>
                     
                    
                 
@@ -152,7 +269,19 @@ function SectionFourTraction() {
                     Please provide a percentage
                 </h6>
                 
-                <TextField id="outlined-basic" label="Percentage" variant="outlined" />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Percentage" 
+                    variant="outlined"
+                    value={section4Enterprise.averageGrowth4}
+                    onChange={(evt => dispatch({
+                        type: 'SET_SECTION4_ENTERPRISE',
+                        payload: {
+                            averageGrowth4: evt.target.value
+                        }
+
+                    })
+                    )} />
 
                 <h5>
                     Are you making a profit?
@@ -167,8 +296,27 @@ function SectionFourTraction() {
                     
                 >
 
-                <FormControlLabel labelPlacement="top" value="Yes" control={<Radio />} label="Yes" />
-                <FormControlLabel labelPlacement="top" value="No" control={<Radio />} label="No" />
+                <FormControlLabel 
+                    labelPlacement="top" 
+                    control={<Radio />} 
+                    label="Yes"
+                    value='Yes'
+                    onChange={(evt => 
+                        dispatch({
+                            type: 'SET_SECTION4_ENTERPRISE',
+                            payload: { makingProfit4: true }
+                        }))} />
+                
+                <FormControlLabel 
+                    labelPlacement="top"  
+                    control={<Radio />} 
+                    label="No"
+                    value='No'
+                    onChange={(evt => 
+                        dispatch({
+                            type: 'SET_SECTION4_ENTERPRISE',
+                            payload: { makingProfit4: false }
+                        }))} />
 
                 </RadioGroup>
 
@@ -182,7 +330,18 @@ function SectionFourTraction() {
                     (Total Revenue - Total Costs)/ Total Revenue
                 </h6>
 
-                <TextField id="outlined-basic" label="Net Profit Margin %" variant="outlined" />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Net Profit Margin %" 
+                    variant="outlined"
+                    value={section4Enterprise.netProfitMargin4}
+                    onChange={(evt => 
+                        dispatch({
+                            type: 'SET_SECTION4_ENTERPRISE',
+                            payload: {
+                                netProfitMargin4: evt.target.value
+                            }
+                        }))} />
 
                 <h5>
                     Customer Acquisition Cost (CAC)
@@ -201,7 +360,18 @@ function SectionFourTraction() {
                     If known, provide below. If unknown, answer "N/A" and proceed to answer the further questions.
                 </h6>
 
-                <TextField id="outlined-basic" label="CAC $" variant="outlined" />
+                <TextField 
+                    id="outlined-basic" 
+                    label="CAC $" 
+                    variant="outlined"
+                    value={section4Enterprise.customerAcquisitionCost4}
+                    onChange={(evt => 
+                        dispatch({
+                            type: 'SET_SECTION4_ENTERPRISE',
+                            payload: {
+                                customerAcquisitionCost4: evt.target.value
+                            }
+                        }))} />
 
                 <h5>
                     What are your total marketing expenses during one sales/marketing cycle? (in dollars)
@@ -211,13 +381,35 @@ function SectionFourTraction() {
                     This includes campaigns, marketing salary expenses, overhead expenses, etc.
                 </h6>
 
-                <TextField id="outlined-basic" label="Marketing Expenses" variant="outlined" />
+                <TextField 
+                    id="outlined-basic" 
+                    label="Marketing Expenses" 
+                    variant="outlined"
+                    value={section4Enterprise.marketingExpenses4}
+                    onChange={(evt => 
+                        dispatch({
+                            type: 'SET_SECTION4_ENTERPRISE',
+                            payload: {
+                                marketingExpenses4: Number(evt.target.value)
+                            }
+                        }))}  />
 
                 <h5>
                     How many new customers have you acquired in your most recent sales/marketing cycle?
                 </h5>
 
-                <TextField id="outlined-basic" label="New Customers" variant="outlined" />
+                <TextField 
+                    id="outlined-basic" 
+                    label="New Customers" 
+                    variant="outlined"
+                    value={section4Enterprise.newCustomers4}
+                    onChange={(evt => 
+                        dispatch({
+                            type: 'SET_SECTION4_ENTERPRISE',
+                            payload: {
+                                newCustomers4: evt.target.value
+                            }
+                        }))} />
 
                 </> : <> </>
 
@@ -229,7 +421,7 @@ function SectionFourTraction() {
                 </Link>
                 
 
-                <button className="btn">Submit</button>
+                <button onClick={handleSubmit} className="btn">Submit</button>
 
                 <Link to="/market">
                     <button className="btn">Next</button>
