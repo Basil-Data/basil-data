@@ -61,20 +61,20 @@ function SectionTwoImpact() {
 
     const handleImpactSector = (event) => {
         console.log('in handleImpactSector');
-        const index = selectedImpactSector.indexOf(event.target.value)
+        const index = selectedImpactSector.indexOf(Number(event.target.value))
         console.log('index:', index);
         if (index === -1) {
             dispatch({
                 type: 'SET_SECTION_TWO_ENTERPRISE',
                 payload: {
-                    impactSectorId: [...selectedImpactSector, event.target.value]}
+                    impactSectorId: [...selectedImpactSector, Number(event.target.value)]}
             }); 
         }
         else {
             dispatch({
                 type: 'SET_SECTION_TWO_ENTERPRISE',
                 payload: {
-                    impactSectorId: selectedImpactSector.filter((selectedImpactSector) => selectedImpactSector !== event.target.value)
+                    impactSectorId: selectedImpactSector.filter((selectedImpactSector) => selectedImpactSector !== Number(event.target.value))
                 }
             });
         }
@@ -125,11 +125,10 @@ function SectionTwoImpact() {
                             <FormControlLabel 
                                 key={sector.id}
                                 checked={selectedImpactSector.includes(sector.id)}
-                                control={
-                                    <Checkbox 
-                                        value={sector.id}
-                                        onChange={handleImpactSector}
-                                    />} 
+                                value={sector.id}
+                                defaultValue={0}
+                                onChange={handleImpactSector}
+                                control={<Checkbox />} 
                                 label={sector.impactSector}
                             />
                         )
