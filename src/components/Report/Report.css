@@ -24,6 +24,23 @@ hr.dotted {
     border-top: 3px dotted #bbb;
 }
 
+/* Table of Contents CSS */
+.tableOfContents{
+    padding: 10px;
+    margin: 30px;
+}
+
+.tocTitle {
+    font-size: 50px;
+}
+
+.tocText{
+    font-size: 20px;
+    margin-bottom: 0px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: #434343;
+}
+
 /* Section One CSS */
 .reportSectionOne {
     display: flex;
@@ -56,6 +73,13 @@ hr.dotted {
 .sectionOneColor {
     height: 4in;
     margin-top: 100px;
+}
+
+.numbersSectionOne {
+    font-size: 45px;
+    margin-bottom: 0px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: #434343;
 }
 
 /* Final Page CSS */

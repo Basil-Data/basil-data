@@ -35,13 +35,13 @@ function ReportSectionOneStory () {
                 </div>
                 <div className="introContainer">
                     <h2>MEET US</h2>
-                    <h3>{enterpriseAnswers.enterpriseSize1}</h3>
+                    <h3 className="numbersSectionOne">{enterpriseAnswers.enterpriseSize1}</h3>
                     <h5>size of enterprise (people)</h5>
-                    <h3>{enterpriseAnswers.yearsCollectiveExperience1}</h3>
+                    <h3 className="numbersSectionOne">{enterpriseAnswers.yearsCollectiveExperience1}</h3>
                     <h5>Years of collective experience within the impact problem space</h5>
-                    <h3>{enterpriseAnswers.percentageBIPOC1}</h3>
+                    <h3 className="numbersSectionOne">{enterpriseAnswers.percentageBIPOC1}</h3>
                     <h5>Percent of founding team is BIPOC (Black, Indigenous, Person of Color)</h5>
-                    <h3>{enterpriseAnswers.percentageFemale1}</h3>
+                    <h3 className="numbersSectionOne">{enterpriseAnswers.percentageFemale1}</h3>
                     <h5>Percent of founding team is female</h5>
                 </div>
                 <div className="sectionColor sectionOneColor">
