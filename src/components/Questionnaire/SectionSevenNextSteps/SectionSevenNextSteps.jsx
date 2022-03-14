@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {Link} from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 // MUI
 import Box from '@mui/material/Box';
@@ -18,8 +18,12 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav'
 function SectionSevenNextSteps () {
 
     const dispatch = useDispatch();
+    const history = useHistory();
     // store.section6 contains all of the selections for
     // this page of the questionnaire
+
+    history.scrollRestoration = 'manual';
+
     const section7 = useSelector((store) => store.section7);
     const section7Enterprise = useSelector((store) => store.section7Enterprise);
     const investmentSelection = useSelector((store) => store.section7Enterprise.investmentVehicleId);
@@ -29,6 +33,7 @@ function SectionSevenNextSteps () {
     console.log('section7Enterprise.societalImpactId.societalImpactId:', section7Enterprise.societalImpactId.societalImpactId);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         dispatch({
             type: "FETCH_NEXT_STEPS",
         });
@@ -90,6 +95,16 @@ function SectionSevenNextSteps () {
             payload: {data: section7Enterprise}
         })
     };
+
+    const onNext = (event) => {
+        handleSubmit(event);
+        history.push('/user');
+    }
+
+    const onBack = (event) => {
+        handleSubmit(event);
+        history.push('/risks-and-hurdles');
+    }
 
     return (
         <>
@@ -346,7 +361,7 @@ function SectionSevenNextSteps () {
         <Link to="/risks-and-hurdles">
             <button 
                 className="btn"
-                onClick={(event) => handleSubmit(event)}
+                onClick={(event) => onBack(event)}
             >
                 Back
             </button>
@@ -366,7 +381,7 @@ function SectionSevenNextSteps () {
         <Link to="/story">
             <button 
                 className="btn"
-                onClick={(event) => handleSubmit(event)}
+                onClick={(event) => onNext(event)}
             >
                 Next
             </button>

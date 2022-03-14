@@ -34,7 +34,7 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
     let sqlText2 = `
         SELECT
             "enterpriseSize1",
-            TO_CHAR("dateFounded1", 'MonthDD, YYYY') AS "dateFounded1",
+            TO_CHAR("dateFounded1", 'yyyy-MM-dd') AS "dateFounded1",
             "missionStatement1",
             "understandProblem1",
             "yearsCollectiveExperience1",

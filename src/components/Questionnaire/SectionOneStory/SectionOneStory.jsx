@@ -19,6 +19,9 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 function SectionOneStory () {
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    history.scrollRestoration = 'manual';
 
     // get the user.id from the store to send with everything else
     const user = useSelector((store) => store.user);
@@ -27,6 +30,7 @@ function SectionOneStory () {
     const selectedAdvantages = useSelector(store => store.section1Enterprise.competitiveAdvantagesId);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         dispatch({ type: 'FETCH_SECTION_ONE' });
         dispatch({ type: 'FETCH_ENTERPRISE_SECTION_ONE'})
     }, []);
@@ -61,6 +65,12 @@ function SectionOneStory () {
         }})
     };
 
+
+    const onNext = (event) => {
+        handleSubmit(event);
+        history.push('/impact')
+    }
+
     return (
         <>
         <QuestionnaireNav/>
@@ -77,7 +87,7 @@ function SectionOneStory () {
                 type="number" 
                 variant="outlined" 
                 InputLabelProps={{shrink: true,}}
-                value={section1Enterprise.enterpriseSize1}
+                value={section1Enterprise.enterpriseSize1 || ''}
                 onChange={(event) => dispatch({
                     type: 'SET_SECTION_ONE_ENTERPRISE',
                     payload: { enterpriseSize1: event.target.value }
@@ -88,6 +98,7 @@ function SectionOneStory () {
                 id="outlined-basic" 
                 label="Date founded" 
                 variant="outlined" 
+                type="date"
                 InputLabelProps={{shrink: true,}}
                 value={section1Enterprise.dateFounded1}
                 onChange={(event) => dispatch({
@@ -191,6 +202,7 @@ function SectionOneStory () {
                                 key = {advantage.id} 
                                 checked={selectedAdvantages.includes(advantage.id)}
                                 value={advantage.id}
+                                defaultValue={0}
                                 onChange={handleCompetitiveAdvantages}
                                 control={
                                     <Checkbox 
@@ -234,12 +246,12 @@ function SectionOneStory () {
                 className="btn"
                 onClick={(event) => handleSubmit(event)}
             >
-                Submit
+                Save
             </button>
             <Link to="/impact">
                 <button 
                     className="btn"
-                    onClick={(event) => handleSubmit(event)}
+                    onClick={(event) => onNext(event)}
                 >
                     Next
                 </button>

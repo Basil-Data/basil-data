@@ -28,22 +28,20 @@ import SectionTwoImpactOpportunity from "./SectionTwoImpactOpportunity/SectionTw
 
 function SectionTwoImpact() {
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    history.scrollRestoration = 'manual';
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         dispatch({type: 'FETCH_SECTION_TWO'});
-        dispatch({type: 'FETCH_IMPACT_SECTORS'});
-        dispatch({type: 'FETCH_ENTERPRISE_SECTION_TWO'});
+        dispatch({type: 'FETCH_SECTION_TWO_ENTERPRISE'});
     }, [])
 
     const user = useSelector(store => store.user);
     const impactSectors = useSelector(store => store.section2.impactSectors);
     const section2Enterprise = useSelector(store => store.section2Enterprise);
     const selectedImpactSector = useSelector(store => store.section2Enterprise.impactSectorId);
-
-
-    console.log('impact sectors are:', impactSectors);
-    console.log('section2Enterprise:', section2Enterprise);
-    console.log('user', user);
 
 
 
@@ -61,23 +59,34 @@ function SectionTwoImpact() {
 
     const handleImpactSector = (event) => {
         console.log('in handleImpactSector');
-        const index = selectedImpactSector.indexOf(event.target.value)
+        const index = selectedImpactSector.indexOf(Number(event.target.value))
         console.log('index:', index);
         if (index === -1) {
             dispatch({
                 type: 'SET_SECTION_TWO_ENTERPRISE',
                 payload: {
-                    impactSectorId: [...selectedImpactSector, event.target.value]}
+                    impactSectorId: [...selectedImpactSector, Number(event.target.value)]}
             }); 
         }
         else {
             dispatch({
                 type: 'SET_SECTION_TWO_ENTERPRISE',
                 payload: {
-                    impactSectorId: selectedImpactSector.filter((selectedImpactSector) => selectedImpactSector !== event.target.value)
+                    impactSectorId: selectedImpactSector.filter((selectedImpactSector) => selectedImpactSector !== Number(event.target.value))
                 }
             });
         }
+    }
+
+
+    const onNext = (event) => {
+        handleSubmit(event);
+        history.push('/solution')
+    }
+
+    const onBack = (event) => {
+        handleSubmit(event);
+        history.push('/story')
     }
 
 
@@ -100,8 +109,9 @@ function SectionTwoImpact() {
                 <br></br>
                 <p>What is the social / environmental problem you are trying to solve?</p>
                 <TextField
-                    label="Social/Environmental Problem"
                     className="socialEnviroProblem"
+                    label="Social/Environmental Problem"
+                    InputLabelProps={{ shrink: true }}
                     variant="outlined"
                     type="text"
                     placeholder="Social/Environmental Problem"
@@ -123,11 +133,11 @@ function SectionTwoImpact() {
                         return(
                             <FormControlLabel 
                                 key={sector.id}
-                                control={
-                                    <Checkbox 
-                                        value={sector.id}
-                                        onChange={handleImpactSector}
-                                    />} 
+                                checked={selectedImpactSector.includes(sector.id)}
+                                value={sector.id}
+                                defaultValue={0}
+                                onChange={handleImpactSector}
+                                control={<Checkbox />} 
                                 label={sector.impactSector}
                             />
                         )
@@ -142,6 +152,7 @@ function SectionTwoImpact() {
                 </p>
                 <TextField
                     label="Cost of The Problem"
+                    InputLabelProps={{ shrink: true }}
                     className="costOfProblem"
                     variant="outlined"
                     type="text"
@@ -163,6 +174,7 @@ function SectionTwoImpact() {
                     questions above?</p>
                 <TextField
                     label="Solution"
+                    InputLabelProps={{ shrink: true }}
                     className="solutionToProblem"
                     variant="outlined"
                     type="text"
@@ -184,6 +196,7 @@ function SectionTwoImpact() {
                     solution?</p>
                 <TextField
                     label="Who Benefits?"
+                    InputLabelProps={{ shrink: true }}
                     className="whoBenefits"
                     variant="outlined"
                     type="text"
@@ -203,7 +216,7 @@ function SectionTwoImpact() {
                 <Link to="/story">
                     <button 
                         className="btn"
-                        onClick={(event) => handleSubmit(event)}
+                        onClick={(event) => onBack(event)}
                     >
                         Back
                     </button>
@@ -217,7 +230,7 @@ function SectionTwoImpact() {
                 <Link to="/solution">
                     <button 
                     className="btn"
-                    onClick={(event) => handleSubmit(event)}
+                    onClick={(event) => onNext(event)}
                     >
                         Next
                     </button>

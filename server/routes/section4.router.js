@@ -59,32 +59,49 @@ router.get('/:id', rejectUnauthenticated, async (req,res) => {
         "newCustomers4"
       FROM "answers"
       WHERE "enterpriseId" = $1;
-        `;
-      
-    let sqlParams2 = [
-      req.user.id
-    ]
+    `;
 
+    let sqlText3 =`
+      SELECT
+        "developmentStageId"
+      FROM "developmentStageJunction"
+      WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText4 = `
+      SELECT
+        "investmentStageId"
+      FROM "investmentStageJunction"
+      WHERE "enterpriseId" = $1;
+    `;
+      
     const progressIndicatorId = await pool.query(sqlText, sqlParams);
     const answers = await pool.query(sqlText2, sqlParams);
+    const developmentStageId = await pool.query(sqlText3, sqlParams);
+    const investmentStageId = await pool.query(sqlText4, sqlParams);
+    
+    
 
     const results = {
       progressIndicatorId: Array.isArray(progressIndicatorId.rows[0].array_agg) ? progressIndicatorId.rows[0].array_agg : [],
-      ...answers.rows[0]
+      ...answers.rows[0],
+      developmentStageId: developmentStageId.rows[0].developmentStageId ?? null,
+      investmentStageId: investmentStageId.rows[0].investmentStageId ?? null
     }
-
+    
     res.send(results)
 });
 
 // Post router for posting to joiner table for check boxes
 router.post('/', rejectUnauthenticated, async (req, res) => {
 try {
+
   let sqlText1 =`
     DELETE FROM "progressIndicatorsJunction"
       WHERE "enterpriseId" = $1;
       `;
     
-      let sqlParams1 = [
+      sqlParams1 = [
         req.user.id
       ];
       
@@ -106,7 +123,63 @@ try {
       indicator
     ];
 
-    await pool.query(sqlText2, sqlParams2)
+    await pool.query( sqlText2, sqlParams2)
+
+    let sqlText3 =`
+      DELETE FROM "developmentStageJunction"
+        WHERE "enterpriseId" = $1;
+        `;
+    
+    let sqlParams3 = [
+      req.user.id
+    ]
+
+    await pool.query(
+      sqlText3,
+      sqlParams3
+    )
+    
+
+    let sqlText4 =`
+      INSERT INTO "developmentStageJunction"
+        ( "enterpriseId", "developmentStageId" )
+      VALUES
+        ($1, $2)
+      `;
+    
+    let sqlParams4 = [
+      req.user.id,
+      req.body.developmentStageId
+
+    ]
+
+    await pool.query(sqlText4, sqlParams4);
+
+    let sqlText5 =`
+      DELETE FROM "investmentStageJunction"
+      WHERE "enterpriseId" = $1;
+      `;
+    
+    sqlParams5 = [
+      req.user.id
+    ]
+    
+    await pool.query(sqlText5, sqlParams5);
+
+    let sqlText6 =`
+      INSERT INTO "investmentStageJunction"
+        ( "enterpriseId", "investmentStageId")
+      VALUES
+        ($1, $2)
+      `;
+    
+    sqlParams6 = [
+      req.user.id,
+      req.body.investmentStageId
+    ]
+
+    await pool.query(sqlText6, sqlParams6);
+
   };
 
   
@@ -121,7 +194,6 @@ catch (err){
 // Router for putting/updating answers into table as the
 // individual enterprise changes their answers
 router.put('/', rejectUnauthenticated, (req, res) => {
-  console.log('req.body is', req.body);
   let sqlText = `
     UPDATE "answers"
     SET

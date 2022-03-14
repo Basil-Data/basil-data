@@ -25,9 +25,57 @@ import {
 from '@mui/material';
 
 function GenderEquality() {
+    const dispatch = useDispatch();
 
     const stakeholderSegments = useSelector(store => store.section2.stakeholderSegments);
+    const selectedSegment = useSelector(store => store.section2Enterprise.segmentId); 
     const sdg = useSelector(store => store.section2.sdg);
+    const section2Enterprise = useSelector(store => store.section2Enterprise)
+    const indicators = useSelector(store => store.section2.indicators);
+    const selectedIndicator = useSelector(store => store.section2Enterprise.indicatorId);
+
+
+
+    const handleInvestorSegments = (event) => {
+        const index = selectedSegment.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    segmentId: [...selectedSegment, Number(event.target.value)]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    segmentId: selectedSegment.filter((selectedSegment) => selectedSegment !== Number(event.target.value))
+                }
+            });
+        }
+    }
+
+
+
+    const handleIndicator = (event) => {
+        const index = selectedIndicator.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: [...selectedIndicator, Number(event.target.value)]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: selectedIndicator.filter((selectedIndicator) => selectedIndicator !== Number(event.target.value))
+                }
+            });
+        }
+    }
+
 
 
 
@@ -37,25 +85,38 @@ function GenderEquality() {
             <h1><b>SDG - Gender Equality</b></h1>
             <p>What Indicators do you use/intend to use to track change?</p>
             <FormControl>
-                <FormControlLabel control={<Checkbox />} label={'Legal frameworks for gender equality'}/>
-                <FormControlLabel control={<Checkbox />} label={'Gender based violence rates'}/>
-                <FormControlLabel control={<Checkbox />} label={'Youth marriage rate'}/>
-                <FormControlLabel control={<Checkbox />} label={'Unpaid or underpaid work'}/>
-                <FormControlLabel control={<Checkbox />} label={'Leadership roles (government)'}/>
-                <FormControlLabel control={<Checkbox />} label={'Leadership roles (private industry)'}/>
-                <FormControlLabel control={<Checkbox />} label={'Decision making opportunities'}/>
-                <FormControlLabel control={<Checkbox />} label={'Ownership of land or business'}/>
+                {indicators?.map(indicator => {
+                    if(indicator.sdgId === 5) {
+                        return (
+                            <FormControlLabel
+                                key={indicator.id}
+                                checked={selectedIndicator.includes(indicator.id)}
+                                value={indicator.id}
+                                defaultValue={0}
+                                onChange={handleIndicator}
+                                control={<Checkbox />}
+                                label={indicator.indicator}
+                            />  
+                        )
+                    }
+                })}
             </FormControl>
             <p> Please elaborate on the progress shown in the indicators that you use
             </p>
             <TextField
                 label="Please Elaborate"
+                InputLabelProps={{ shrink: true }}
                 variant="outlined"
                 type="text"
                 placeholder="Please Elaborate"
                 multiline rows={5}
                 id="outlined-basic" 
                 sx={{width: 600}}
+                value={section2Enterprise.elaborateOnIndicators2 || ''}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: {elaborateOnIndicators2: event.target.value}
+                })}
             ></TextField>
             <p>How do you segment your stakeholders?</p>
             <FormControl>
@@ -65,6 +126,10 @@ function GenderEquality() {
                             key={segment.id}
                             control={<Checkbox />} 
                             label={segment.segment}
+                            checked={selectedSegment.includes(segment.id)}
+                            value={segment.id}
+                            defaultValue={0}
+                            onChange={handleInvestorSegments}
                         />
                     )
                 })}
@@ -73,17 +138,24 @@ function GenderEquality() {
             <p>In what regions, states or cities are you focusing your efforts today?</p>
             <TextField
                 label="Location"
+                InputLabelProps={{ shrink: true }}
                 variant="outlined"
                 type="text"
                 placeholder="Location"
                 multiline rows={5}
                 id="outlined-basic" 
                 sx={{width: 600}}
+                value={section2Enterprise.focusedEfforts2 || ''}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: { focusedEfforts2: event.target.value }
+                })}
             ></TextField>
             <p> What are the specific changes you would like to see for your stakeholder?
             </p>
             <TextField
                 label="Specific Changes"
+                InputLabelProps={{ shrink: true }}
                 className="specificChanges"
                 variant="outlined"
                 type="text"
@@ -91,9 +163,21 @@ function GenderEquality() {
                 multiline rows={5}
                 id="outlined-basic" 
                 sx={{width: 600}}
+                value={section2Enterprise.specificChanges2 || ''}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: { specificChanges2: event.target.value }
+                })}
             ></TextField>
             <p>Have you measured the outcomes for your primary beneficiaries?</p>
-            <RadioGroup className="centerHelp">
+            <RadioGroup 
+                className="centerHelp"
+                value={section2Enterprise.measuredOutcome2}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: {measuredOutcome2: event.target.value}
+                })}
+            >
                 <FormControlLabel 
                     control={<Radio/>} 
                     labelPlacement="end"
@@ -114,7 +198,14 @@ function GenderEquality() {
                 />
             </RadioGroup>
             <p>If applicable, please select any secondary Sustainable Development Goals that align with your organization's mission. </p>
-            <RadioGroup className="centerHelp">
+            <RadioGroup 
+                    className="centerHelp"
+                    value={section2Enterprise.secondarySDG2}
+                    onChange={(event) => dispatch({
+                        type: 'SET_SECTION_TWO_ENTERPRISE',
+                        payload: {secondarySDG2: event.target.value}
+                    })}
+                >
                 {sdg?.map(goal => {
                     return(
                         <FormControlLabel 

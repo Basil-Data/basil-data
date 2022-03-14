@@ -28,7 +28,7 @@ import SectionFourTraction from '../Questionnaire/SectionFourTraction/SectionFou
 import SectionFiveMarket from '../Questionnaire/SectionFiveMarket/SectionFiveMarket';
 import SectionSixRisksAndHurdles from '../Questionnaire/SectionSixRisksAndHurdles/SectionSixRisksAndHurdles';
 import SectionSevenNextSteps from '../Questionnaire/SectionSevenNextSteps/SectionSevenNextSteps';
-
+import Report from '../Report/Report';
 
 import './App.css';
 
@@ -158,6 +158,13 @@ function App() {
             path="/next-steps"
           >
             <SectionSevenNextSteps/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/report"
+          >
+            <Report />
           </ProtectedRoute>
 
           <Route
