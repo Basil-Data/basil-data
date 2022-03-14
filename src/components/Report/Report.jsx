@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 
 // importing sections for report
+import ReportTableOfContents from './ReportTableOfContents';
 import ReportSection1Story from './ReportSection1Story';
 import ReportSection2Impact from './ReportSection2-0Impact';
 import ReportSection2ImpactOpportunity from './ReportSection2-1ImpactOpportunity';
@@ -15,8 +16,10 @@ import ReportSection8StartupBarriers from './ReportSection8StartupBarriers';
 import ReportSection9NextSteps from './ReportSection9NextSteps';
 import ReportFinalPage from './ReportFinalPage';
 
-import './Report.css';
 
+// Styling
+import './Report.css';
+import Box from '@mui/material/Box';
 
 function Report () {
     const dispatch = useDispatch();
@@ -29,7 +32,9 @@ function Report () {
 
 
     return (
+        <Box>
         <div className="report">
+            <ReportTableOfContents />
             <ReportSection1Story />
             <ReportSection2Impact />
             <ReportSection2ImpactOpportunity />
@@ -43,6 +48,7 @@ function Report () {
             <ReportFinalPage />
 
         </div>
+        </Box>
     )
 };
 
