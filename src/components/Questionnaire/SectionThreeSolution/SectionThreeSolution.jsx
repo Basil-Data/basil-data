@@ -19,8 +19,13 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 function SectionThreeSolution () {
     
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    history.scrollRestoration = 'manual';
+
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         dispatch({ type: 'FETCH_SECTION_THREE'});
         dispatch({ type: 'FETCH_ENTERPRISE_SECTION_THREE'});
     }, []);
@@ -100,6 +105,21 @@ function SectionThreeSolution () {
         }})
     };
 
+
+    const onNext = (event) => {
+        console.log('in onNext');
+        handleSubmit(event);
+        history.push('/traction')
+    }
+
+
+    const onBack = (event) => {
+        handleSubmit(event);
+        history.push('/impact')
+    }
+
+
+
     return (
         <>
             <QuestionnaireNav />
@@ -144,6 +164,7 @@ function SectionThreeSolution () {
                             variant="outlined" 
                             multiline rows={5}
                             fullWidth
+                            InputLabelProps={{shrink: true,}}
                             value={section3Enterprise.payingCustomerProfile3}
                             onChange={(event) => dispatch({
                                 type: 'SET_SECTION_THREE_ENTERPRISE',
@@ -172,6 +193,7 @@ function SectionThreeSolution () {
                             variant="outlined" 
                             multiline rows={5}
                             fullWidth
+                            InputLabelProps={{shrink: true,}}
                             value={section3Enterprise.mainCompetitors3}
                             onChange={(event) => dispatch({
                                 type: 'SET_SECTION_THREE_ENTERPRISE',
@@ -199,6 +221,7 @@ function SectionThreeSolution () {
                             label="Differing competitive factors" 
                             variant="outlined" 
                             multiline rows={5}
+                            InputLabelProps={{shrink: true,}}
                             fullWidth
                             value={section3Enterprise.differFromCompetitors3}
                             onChange={(event) => {
@@ -246,6 +269,7 @@ function SectionThreeSolution () {
                             variant="outlined" 
                             multiline rows={5}
                             fullWidth
+                            InputLabelProps={{shrink: true,}}
                             value={section3Enterprise.testimonial3}
                             onChange={(event) => dispatch({
                                 type: 'SET_SECTION_THREE_ENTERPRISE',
@@ -279,6 +303,7 @@ function SectionThreeSolution () {
                             variant="outlined" 
                             multiline rows={5}
                             fullWidth
+                            InputLabelProps={{shrink: true,}}
                             value={section3Enterprise.businessModel3}
                             onChange={(event) => dispatch({
                                 type: 'SET_SECTION_THREE_ENTERPRISE',
@@ -308,10 +333,10 @@ function SectionThreeSolution () {
                 </Box>
                 <br/>
                 <br/>
-                <Link to="/impact">
+                <Link>
                     <button 
                         className="btn" 
-                        onClick={handleSubmit}>
+                        onClick={(event) => onBack(event)}>
                         Back
                     </button>
                 </Link>
@@ -320,10 +345,10 @@ function SectionThreeSolution () {
                     onClick={handleSubmit}>
                         Submit
                     </button>
-                <Link to="/traction">
+                <Link>
                     <button 
                         className="btn"
-                        onClick={handleSubmit}>
+                        onClick={(event) => onNext(event)}>
                         Next
                     </button>
                 </Link>

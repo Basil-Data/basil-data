@@ -30,26 +30,47 @@ function NoPoverty() {
     const stakeholderSegments = useSelector(store => store.section2.stakeholderSegments);
     const selectedSegment = useSelector(store => store.section2Enterprise.segmentId); 
     const sdg = useSelector(store => store.section2.sdg);
-    const section2Enterprise = useSelector(store => store.section2Enterprise)
+    const section2Enterprise = useSelector(store => store.section2Enterprise);
+    const indicators = useSelector(store => store.section2.indicators);
+    const selectedIndicator = useSelector(store => store.section2Enterprise.indicatorId);
 
-    console.log('section2Enterprise:', section2Enterprise);
 
     const handleInvestorSegments = (event) => {
-        console.log('in handleInvestorSegments');
-        const index = selectedSegment.indexOf(event.target.value)
-        console.log('index:', index);
+        const index = selectedSegment.indexOf(Number(event.target.value))
         if (index === -1) {
             dispatch({
                 type: 'SET_SECTION_TWO_ENTERPRISE',
                 payload: {
-                    segmentId: [...selectedSegment, event.target.value]}
+                    segmentId: [...selectedSegment, Number(event.target.value)]}
             }); 
         }
         else {
             dispatch({
                 type: 'SET_SECTION_TWO_ENTERPRISE',
                 payload: {
-                    segmentId: selectedSegment.filter((selectedSegment) => selectedSegment !== event.target.value)
+                    segmentId: selectedSegment.filter((selectedSegment) => selectedSegment !== Number(event.target.value))
+
+                }
+            });
+        }
+    }
+
+
+    const handleIndicator = (event) => {
+        const index = selectedIndicator.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: [...selectedIndicator, Number(event.target.value)]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: selectedIndicator.filter((selectedIndicator) => selectedIndicator !== Number(event.target.value))
+
                 }
             });
         }
@@ -62,9 +83,21 @@ function NoPoverty() {
             <h1><b>SDG - No Poverty</b></h1>
             <p>What Indicators do you use/intend to use to track change?</p>
             <FormControl>
-                    <FormControlLabel control={<Checkbox />} label={'Poverty Levels'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Change In Poverty'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Access To Resources'}/>
+                {indicators?.map(indicator => {
+                    if(indicator.sdgId === 1) {
+                        return (
+                            <FormControlLabel
+                                key={indicator.id}
+                                checked={selectedIndicator.includes(indicator.id)}
+                                value={indicator.id}
+                                defaultValue={0}
+                                onChange={handleIndicator}
+                                control={<Checkbox />}
+                                label={indicator.indicator}
+                            />  
+                        )
+                    }
+                })}
             </FormControl>
             <p> Please elaborate on the progress shown in the indicators that you use
             </p>
@@ -78,6 +111,11 @@ function NoPoverty() {
                 multiline rows={5}
                 id="outlined-basic" 
                 sx={{width: 600}}
+                value={section2Enterprise.elaborateOnIndicators2 || ''}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: {elaborateOnIndicators2: event.target.value}
+                })}
             ></TextField>
             <p>How do you segment your stakeholders?</p>
             <FormControl>
@@ -85,11 +123,12 @@ function NoPoverty() {
                     return(
                         <FormControlLabel 
                             key={segment.id}
-                            checked={selectedSegment.includes(segment.id)}
-                            value={segment.id}
-                            onChange={handleInvestorSegments}
                             control={<Checkbox />} 
                             label={segment.segment}
+                            checked={selectedSegment.includes(segment.id)}
+                            value={segment.id}
+                            defaultValue={0}
+                            onChange={handleInvestorSegments}
                         />
                     )
                 })}
@@ -106,9 +145,13 @@ function NoPoverty() {
                 id="outlined-basic" 
                 sx={{width: 600}}
                 placeholder="Location"
+                value={section2Enterprise.organizationLocation2 || ''}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: { organizationLocation2: event.target.value }
+                })}
             ></TextField>
-            <p> Where specifically is your impact targeted?
-            </p>
+            <p> Where specifically is your impact targeted?</p>
             <p>In what regions, states or cities are you focusing your efforts today?</p>
             <TextField
                 label="Impact target"
@@ -120,6 +163,11 @@ function NoPoverty() {
                 multiline rows={5}
                 id="outlined-basic" 
                 sx={{width: 600}}
+                value={section2Enterprise.focusedEfforts2 || ''}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: { focusedEfforts2: event.target.value }
+                })}
             ></TextField>
             <p> What are the specific changes you would like to see for your stakeholder?
             </p>
@@ -133,9 +181,21 @@ function NoPoverty() {
                 multiline rows={5}
                 id="outlined-basic" 
                 sx={{width: 600}}
+                value={section2Enterprise.specificChanges2 || ''}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: { specificChanges2: event.target.value }
+                })}
             ></TextField>
             <p>Have you measured the outcomes for your primary beneficiaries?</p>
-            <RadioGroup className="centerHelp">
+            <RadioGroup 
+                className="centerHelp"
+                value={section2Enterprise.measuredOutcome2}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: {measuredOutcome2: event.target.value}
+                })}
+            >
                 <FormControlLabel 
                     control={<Radio/>} 
                     labelPlacement="end"
@@ -156,20 +216,27 @@ function NoPoverty() {
                 />
             </RadioGroup>
             <p>If applicable, please select any secondary Sustainable Development Goals that align with your organization's mission. </p>
-                <RadioGroup className="centerHelp">
-                    {sdg?.map(goal => {
-                        return(
-                            <FormControlLabel 
-                            key={goal.id}
-                            control={<Radio/>} 
-                            labelPlacement="end"
-                            value={goal.sdg}
-                            label={goal.sdg}
-                            />
-                        )
-                    })}
+            <RadioGroup 
+                className="centerHelp"
+                value={section2Enterprise.secondarySDG2}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: {secondarySDG2: event.target.value}
+                })}
+            >
+                {sdg?.map(goal => {
+                    return(
+                        <FormControlLabel 
+                        key={goal.id}
+                        control={<Radio/>} 
+                        labelPlacement="end"
+                        value={goal.sdg}
+                        label={goal.sdg}
+                        />
+                    )
+                })}
             
-                </RadioGroup>
+            </RadioGroup>
         </Box>
 
     )

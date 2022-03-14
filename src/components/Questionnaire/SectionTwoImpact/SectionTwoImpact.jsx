@@ -28,10 +28,13 @@ import SectionTwoImpactOpportunity from "./SectionTwoImpactOpportunity/SectionTw
 
 function SectionTwoImpact() {
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    history.scrollRestoration = 'manual';
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         dispatch({type: 'FETCH_SECTION_TWO'});
-        dispatch({type: 'FETCH_IMPACT_SECTORS'});
         dispatch({type: 'FETCH_SECTION_TWO_ENTERPRISE'});
     }, [])
 
@@ -39,11 +42,6 @@ function SectionTwoImpact() {
     const impactSectors = useSelector(store => store.section2.impactSectors);
     const section2Enterprise = useSelector(store => store.section2Enterprise);
     const selectedImpactSector = useSelector(store => store.section2Enterprise.impactSectorId);
-
-
-    console.log('impact sectors are:', impactSectors);
-    console.log('section2Enterprise:', section2Enterprise);
-    console.log('user', user);
 
 
 
@@ -61,23 +59,34 @@ function SectionTwoImpact() {
 
     const handleImpactSector = (event) => {
         console.log('in handleImpactSector');
-        const index = selectedImpactSector.indexOf(event.target.value)
+        const index = selectedImpactSector.indexOf(Number(event.target.value))
         console.log('index:', index);
         if (index === -1) {
             dispatch({
                 type: 'SET_SECTION_TWO_ENTERPRISE',
                 payload: {
-                    impactSectorId: [...selectedImpactSector, event.target.value]}
+                    impactSectorId: [...selectedImpactSector, Number(event.target.value)]}
             }); 
         }
         else {
             dispatch({
                 type: 'SET_SECTION_TWO_ENTERPRISE',
                 payload: {
-                    impactSectorId: selectedImpactSector.filter((selectedImpactSector) => selectedImpactSector !== event.target.value)
+                    impactSectorId: selectedImpactSector.filter((selectedImpactSector) => selectedImpactSector !== Number(event.target.value))
                 }
             });
         }
+    }
+
+
+    const onNext = (event) => {
+        handleSubmit(event);
+        history.push('/solution')
+    }
+
+    const onBack = (event) => {
+        handleSubmit(event);
+        history.push('/story')
     }
 
 
@@ -125,11 +134,10 @@ function SectionTwoImpact() {
                             <FormControlLabel 
                                 key={sector.id}
                                 checked={selectedImpactSector.includes(sector.id)}
-                                control={
-                                    <Checkbox 
-                                        value={sector.id}
-                                        onChange={handleImpactSector}
-                                    />} 
+                                value={sector.id}
+                                defaultValue={0}
+                                onChange={handleImpactSector}
+                                control={<Checkbox />} 
                                 label={sector.impactSector}
                             />
                         )
@@ -208,7 +216,7 @@ function SectionTwoImpact() {
                 <Link to="/story">
                     <button 
                         className="btn"
-                        onClick={(event) => handleSubmit(event)}
+                        onClick={(event) => onBack(event)}
                     >
                         Back
                     </button>
@@ -222,7 +230,7 @@ function SectionTwoImpact() {
                 <Link to="/solution">
                     <button 
                     className="btn"
-                    onClick={(event) => handleSubmit(event)}
+                    onClick={(event) => onNext(event)}
                     >
                         Next
                     </button>

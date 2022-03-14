@@ -1,0 +1,256 @@
+/* All Report CSS */
+.report {
+    margin: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.paper {
+    width: 8.5in;
+    height: 11in;
+    margin-bottom: 10px;
+}
+
+.list {
+    list-style-type: none;
+}
+
+.sectionColor {
+    background-image: linear-gradient(to bottom right, #122445, #2f5a52);
+    width: 100%;
+    color: white;
+}
+
+/* Dotted border */
+hr.dotted {
+    border-top: 3px dotted #bbb;
+}
+
+/* Front page CSS */
+.frontPage{
+    background-image: url('/public/images/Basil\ Data\ Report\ Front\ Page.png');
+    background-size: 8.5in 11in;
+}
+
+.frontPageDate{
+    font-family: cursive;
+    padding-top: 300px;
+    padding-left: 300px;
+}
+
+.frontPageEnterprise {
+    padding-left: 300px;
+    color: #674ea7;
+    font-size: 30px;
+}
+
+.solid {
+    border: 1px solid #434343;
+    text-align: right;
+    margin-left: 240px;
+    margin-right: 40px;
+}
+
+.frontPageImpact{
+    color: gray;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-left: 270px;
+    font-weight: normal;
+}
+
+.frontPageLogo{
+    margin-left: 250px;
+    padding-bottom: 430px;
+}
+
+/* Table of Contents CSS */
+.tableOfContentsBackground{
+    background-image: url('/public/images/Basil\ Data\ Report\ Lower\ Page.png');
+    background-size: 8.5in 11in;
+}
+
+.tableOfContents{
+    margin: 30px 0px 0px 0px;
+    padding: 10px;
+}
+
+.tocTitle {
+    font-size: 50px;
+    margin-left: 30px;
+}
+
+.tocText{
+    font-size: 20px;
+    margin-bottom: 0px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: #434343;
+}
+
+.tableOfContentsContainer {
+    display: flex;
+    height: 11in;
+}
+
+.tableOfContentsColumn {
+    width: 50%;
+    padding-left: 100px;
+}
+
+/* Section One CSS */
+.reportSectionOne {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin: 30px;
+}
+
+.introParagraph {
+    width: 70%;
+}
+
+.introContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;  
+    width: 150px;
+    background-color: #efefee;
+    position: absolute;
+    margin-left: 550px;
+    margin-top: 10px;
+}
+
+.sectionOneText{
+    text-align: center;
+    padding-right: 100px;
+    margin-top: 50px;
+    margin-left: 50px;
+    width: 400px;
+}
+
+.sectionOneColor {
+    height: 4in;
+    margin-top: 100px;
+}
+
+.numbersSectionOne {
+    font-size: 45px;
+    margin-bottom: 0px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color: #434343;
+}
+
+/* Section Three CSS */
+.reportSectionThree{
+    background-image: url('/public/images/Basil\ Data\ Report\ Top\ and\ Bottom.png');
+    background-size: 8.5in 11in;
+    padding-top: 20px;    
+}
+
+.sectionThreeTitle{
+    margin-left: 30px;
+    margin-top: 30px;
+    width: 700px;
+}
+
+.technicalApproach{
+    display: flex;
+    flex-direction: row;
+}
+
+.technicalTitle{
+    font-weight: lighter;
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.sectionThreeColor {
+    height: 615px;
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sectorTitle{
+    width: 30%;
+}
+
+.sectorText{
+    width: 60%;
+    margin-right: 20px;
+}
+
+.differentiatingFactors{
+    text-align: center;
+}
+
+.factor{
+    font-weight: normal;
+    width: 500px;
+    margin-left: 150px;
+}
+
+.testimonial{
+    color: #b4acdc;
+    width: 650px;
+    margin-left: 80px;
+    padding-top: 140px;
+    font-size: 20px;
+    text-align: justify;
+}
+
+.section3Line{
+    border-top: 1px dashed black;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.sectionThreeSecondPart{
+    background-image: url('/public/images/Basil\ Data\ Report\ Top\ and\ Bottom.png');
+    background-size: 8.5in 11in;
+}
+
+.painPoints{
+    font-weight: normal;
+    margin-left: 40px;
+}
+
+.painPointTexts{
+    margin: 0px 20px 0px 40px;
+    padding-bottom: 6in;
+}
+
+/* Final Page CSS */
+.finalPage {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-image: url('/public/images/Basil\ Data\ Report\ Front\ Page.png');
+    background-size: 8.5in 11in;
+}
+
+.finalLogo {
+    margin-top: 350px;
+    margin-left: 70px;
+    width: 100%;
+    text-align: center;
+}
+
+.finalPara {
+    width: 100%;
+    padding-right: 100px;
+    padding-left: 100px;
+    margin-left: 100px;
+    text-align: center;
+}
+
+.contactInfo{
+    text-align: center;
+}
+
+.disclaimer {
+    font-size: 12px;
+    margin-top: 200px;
+    margin-left: 500px;
+    margin-right: 50px;
+    margin-bottom: 10px;
+    text-align: justify;
+}

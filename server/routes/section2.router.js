@@ -10,20 +10,24 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     const sqlText2 = 'SELECT * FROM "supportiveCharacteristics"';
     const sqlText3 = 'SELECT * FROM "sdg" ORDER BY "sdg"."id" ASC';
     const sqlText4 = 'SELECT * FROM "stakeholderSegments"';
+    const sqlText5 = 'SELECT * FROM "indicators" ORDER BY "indicators"."sdgId" ASC';
 
     const results1 = await pool.query(sqlText);
     const results2 = await pool.query(sqlText2);
     const results3 = await pool.query(sqlText3);
     const results4 = await pool.query(sqlText4);
+    const results5 = await pool.query(sqlText5);
 
     const results = {
         impactSectors: results1.rows,
         supportiveCharacteristics: results2.rows,
         sdg: results3.rows,
-        stakeholderSegments: results4.rows
+        stakeholderSegments: results4.rows,
+        indicators: results5.rows
     }
 
     res.send(results);
+    
 });
 
 // Gets the individual enterprise's previous answers for the 
@@ -93,8 +97,15 @@ router.put('/', rejectUnauthenticated, (req, res) => {
             "problemBeingSolved2" = $1, 
             "costOfProblem2" = $2,
             "howTheySolve2" = $3,
-            "whoBenefits2" = $4
-        WHERE "answers"."enterpriseId" = $5;
+            "whoBenefits2" = $4,
+            "elaborateOnIndicators2" = $5,
+            "organizationLocation2" = $6,
+            "focusedEfforts2" = $7,
+            "specificChanges2" = $8,
+            "measuredOutcome2" = $9,
+            "secondarySDG2" = $10,
+            "impactLevel2" = $11
+        WHERE "answers"."enterpriseId" = $12;
     `;  
 
 
@@ -103,6 +114,13 @@ router.put('/', rejectUnauthenticated, (req, res) => {
         req.body.costOfProblem2,
         req.body.howTheySolve2,
         req.body.whoBenefits2,
+        req.body.elaborateOnIndicators2,
+        req.body.organizationLocation2,
+        req.body.focusedEfforts2,
+        req.body.specificChanges2,
+        req.body.measuredOutcome2,
+        req.body.secondarySDG2,
+        req.body.impactLevel2,
         req.user.id
     ];
 
@@ -113,8 +131,46 @@ router.put('/', rejectUnauthenticated, (req, res) => {
         })
 })
 
-router.post('/', rejectUnauthenticated, (req, res) => {
+router.post('/', rejectUnauthenticated, async (req, res) => {
     console.log('req.body', req.body);
+
+    // deletes all the existing rows 
+    let sqlText = `
+        DELETE FROM "impactTableJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText2 = `
+        DELETE FROM "supportiveCharacteristicsJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText3 = `
+        DELETE FROM "stakeholderSegmentsJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText4 = `
+        DELETE FROM "sdgJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText5 = `
+        DELETE FROM "indicatorsJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlParams = [
+        req.user.id
+    ];
+
+
+
+    await pool.query(sqlText, sqlParams);
+    await pool.query(sqlText2, sqlParams);
+    await pool.query(sqlText3, sqlParams);
+    await pool.query(sqlText4, sqlParams);
+    await pool.query(sqlText5, sqlParams);
 
     for (let impact of req.body.impactSectorId) {
 
@@ -130,7 +186,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             impact
         ];
 
-        pool.query(sqlText, sqlParams)
+        pool.query(sqlText, sqlParams);
     }
 
     for (let characteristic of req.body.characteristicId) {
@@ -146,16 +202,16 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             characteristic
         ];
 
-        pool.query(sqlText, sqlParams)
+        pool.query(sqlText, sqlParams);
     }
 
     if (req.body.segmentId) {
         for (let segment of req.body.segmentId) {
             let sqlText = `
-            INSERT INTO "stakeholderSegmentsJunction"
-                ("enterpriseId", "segmentId")
-            VALUES
-                ($1, $2)
+                INSERT INTO "stakeholderSegmentsJunction"
+                    ("enterpriseId", "segmentId")
+                VALUES
+                    ($1, $2)
             `;
 
         let sqlParams = [
@@ -163,9 +219,42 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             segment
         ];
 
-        pool.query(sqlText, sqlParams)
+        pool.query(sqlText, sqlParams);
         }   
     }
+
+    if (req.body.sdgId) {
+        let sqlText = `
+            INSERT INTO "sdgJunction"
+                ("enterpriseId", "sdgId")
+            VALUES
+                ($1, $2)
+        `;
+
+        let sqlParams = [
+            req.user.id,
+            req.body.sdgId
+        ];
+
+        pool.query(sqlText, sqlParams);
+    }
+
+    for (let indicator of req.body.indicatorId) {
+        let sqlText = `
+            INSERT INTO "indicatorsJunction"
+                ("enterpriseId", "indicatorId")
+            VALUES
+                ($1, $2)
+        `;
+
+        let sqlParams = [
+            req.user.id,
+            indicator
+        ];
+
+        pool.query(sqlText, sqlParams);
+    }
+
         res.sendStatus(200);
 })
 

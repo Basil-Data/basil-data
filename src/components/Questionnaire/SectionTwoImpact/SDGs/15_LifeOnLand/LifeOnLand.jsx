@@ -28,6 +28,31 @@ function LifeOnLand() {
     const dispatch = useDispatch();
 
     const sdg = useSelector(store => store.section2.sdg);
+    const section2Enterprise = useSelector(store => store.section2Enterprise)
+    const indicators = useSelector(store => store.section2.indicators);
+    const selectedIndicator = useSelector(store => store.section2Enterprise.indicatorId);
+
+
+    const handleIndicator = (event) => {
+        const index = selectedIndicator.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: [...selectedIndicator, Number(event.target.value)]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: selectedIndicator.filter((selectedIndicator) => selectedIndicator !== Number(event.target.value))
+                }
+            });
+        }
+    }
+
+
 
     return(
         <Box className="questionnaireForm">
@@ -35,13 +60,21 @@ function LifeOnLand() {
                 <h1><b>SDG - Life On Land</b></h1>
                 <p>What Indicators do you use/intend to use to track change?</p>
                 <FormControl>
-                    <FormControlLabel control={<Checkbox />} label={'Forest area'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Protected ecosystem proportion'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Sustainable forest management progress'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Degraded land proportions'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Actions to protect natural habitats and biodiversity'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Protection policies enacted'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Spending on ecosystem conservation'}/>
+                    {indicators?.map(indicator => {
+                        if(indicator.sdgId === 15) {
+                            return (
+                                <FormControlLabel
+                                    key={indicator.id}
+                                    checked={selectedIndicator.includes(indicator.id)}
+                                    value={indicator.id}
+                                    defaultValue={0}
+                                    onChange={handleIndicator}
+                                    control={<Checkbox />}
+                                    label={indicator.indicator}
+                                />  
+                            )
+                        }
+                    })}
                 </FormControl>
                 <p> Please elaborate on the progress shown in the indicators that you use
                 </p>
@@ -54,6 +87,11 @@ function LifeOnLand() {
                     multiline rows={5}
                     id="outlined-basic" 
                     sx={{width: 600}}
+                    value={section2Enterprise.elaborateOnIndicators2 || ''}
+                    onChange={(event) => dispatch({
+                        type: 'SET_SECTION_TWO_ENTERPRISE',
+                        payload: {elaborateOnIndicators2: event.target.value}
+                    })}
                 ></TextField>
                 <p> Where specifically is your current target ecosystem?</p>
                 <p>In what regions, states or cities are you focusing your efforts today?</p>
@@ -66,6 +104,11 @@ function LifeOnLand() {
                     multiline rows={5}
                     id="outlined-basic" 
                     sx={{width: 600}}
+                    value={section2Enterprise.focusedEfforts2 || ''}
+                    onChange={(event) => dispatch({
+                        type: 'SET_SECTION_TWO_ENTERPRISE',
+                        payload: { focusedEfforts2: event.target.value }
+                    })}
                 ></TextField>
                 <p> What are the specific changes you would like to see for your target ecosystem?
                 </p>
@@ -79,9 +122,21 @@ function LifeOnLand() {
                     multiline rows={5}
                     id="outlined-basic" 
                     sx={{width: 600}}
+                    value={section2Enterprise.specificChanges2 || ''}
+                    onChange={(event) => dispatch({
+                        type: 'SET_SECTION_TWO_ENTERPRISE',
+                        payload: { specificChanges2: event.target.value }
+                    })}
                 ></TextField>
                 <p>Have you measured your outcomes?</p>
-                <RadioGroup className="centerHelp">
+                <RadioGroup 
+                    className="centerHelp"
+                    value={section2Enterprise.measuredOutcome2}
+                    onChange={(event) => dispatch({
+                        type: 'SET_SECTION_TWO_ENTERPRISE',
+                        payload: {measuredOutcome2: event.target.value}
+                    })}
+                >
                     <FormControlLabel 
                         control={<Radio/>} 
                         labelPlacement="end"
@@ -102,7 +157,14 @@ function LifeOnLand() {
                     />
                 </RadioGroup>
                 <p>If applicable, please select any secondary Sustainable Development Goals that align with your organization's mission. </p>
-                <RadioGroup className="centerHelp">
+                <RadioGroup 
+                    className="centerHelp"
+                    value={section2Enterprise.secondarySDG2}
+                    onChange={(event) => dispatch({
+                        type: 'SET_SECTION_TWO_ENTERPRISE',
+                        payload: {secondarySDG2: event.target.value}
+                    })}
+                >
                     {sdg?.map(sdg => (
                             <FormControlLabel 
                             control={<Radio/>} 

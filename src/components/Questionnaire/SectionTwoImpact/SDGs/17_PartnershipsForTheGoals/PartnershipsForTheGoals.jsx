@@ -28,6 +28,31 @@ function PartnershipsForTheGoals() {
     const dispatch = useDispatch();
 
     const sdg = useSelector(store => store.section2.sdg);
+    const section2Enterprise = useSelector(store => store.section2Enterprise);
+    const indicators = useSelector(store => store.section2.indicators);
+    const selectedIndicator = useSelector(store => store.section2Enterprise.indicatorId);
+
+
+    const handleIndicator = (event) => {
+        const index = selectedIndicator.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: [...selectedIndicator, Number(event.target.value)]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: selectedIndicator.filter((selectedIndicator) => selectedIndicator !== Number(event.target.value))
+                }
+            });
+        }
+    }
+
+
 
     return(
         <Box className="questionnaireForm">
@@ -35,17 +60,21 @@ function PartnershipsForTheGoals() {
                 <h1><b>SDG - Partnerships for the Goals</b></h1>
                 <p>What Indicators do you use/intend to use to track change?</p>
                 <FormControl>
-                    <FormControlLabel control={<Checkbox />} label={'Government Revenue'}/>
-                    <FormControlLabel control={<Checkbox />} label={'GDP'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Development assistance commitment levels'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Foreign direct investment'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Debt service'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Developing country investment levels'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Tariff policies'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Proportion of internet use'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Share of global exports'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Policies in favor or sustainable development'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Spending and policies on statistical measurement strategies'}/>
+                    {indicators?.map(indicator => {
+                        if(indicator.sdgId === 17) {
+                            return (
+                                <FormControlLabel
+                                    key={indicator.id}
+                                    checked={selectedIndicator.includes(indicator.id)}
+                                    value={indicator.id}
+                                    defaultValue={0}
+                                    onChange={handleIndicator}
+                                    control={<Checkbox />}
+                                    label={indicator.indicator}
+                                />  
+                            )
+                        }
+                    })}
                 </FormControl>
                 <p> 
                     Please elaborate on the progress shown in 
@@ -60,9 +89,21 @@ function PartnershipsForTheGoals() {
                     multiline rows={5}
                     id="outlined-basic" 
                     sx={{width: 600}}
+                    value={section2Enterprise.elaborateOnIndicators2 || ''}
+                    onChange={(event) => dispatch({
+                        type: 'SET_SECTION_TWO_ENTERPRISE',
+                        payload: {elaborateOnIndicators2: event.target.value}
+                    })}
                 ></TextField>
                 <p>What level does your impact operate on?</p>
-                <RadioGroup className="centerHelp">
+                <RadioGroup 
+                    className="centerHelp"
+                    value={section2Enterprise.impactLevel2}
+                    onChange={(event) => dispatch({
+                        type: 'SET_SECTION_TWO_ENTERPRISE',
+                        payload: {impactLevel2: event.target.value}
+                    })}
+                >
                     <FormControlLabel 
                         control={<Radio/>} 
                         labelPlacement="end"
@@ -98,6 +139,11 @@ function PartnershipsForTheGoals() {
                     multiline rows={5}
                     id="outlined-basic" 
                     sx={{width: 600}}
+                    value={section2Enterprise.focusedEfforts2 || ''}
+                    onChange={(event) => dispatch({
+                        type: 'SET_SECTION_TWO_ENTERPRISE',
+                        payload: { focusedEfforts2: event.target.value }
+                    })}
                 ></TextField>
                 <p>
                     What are the specific changes you would like 
@@ -113,9 +159,21 @@ function PartnershipsForTheGoals() {
                     multiline rows={5}
                     id="outlined-basic" 
                     sx={{width: 600}}
+                    value={section2Enterprise.specificChanges2 || ''}
+                    onChange={(event) => dispatch({
+                        type: 'SET_SECTION_TWO_ENTERPRISE',
+                        payload: { specificChanges2: event.target.value }
+                    })}
                 ></TextField>
                 <p>Have you measured your outcomes?</p>
-                <RadioGroup className="centerHelp">
+                <RadioGroup 
+                    className="centerHelp"
+                    value={section2Enterprise.measuredOutcome2}
+                    onChange={(event) => dispatch({
+                        type: 'SET_SECTION_TWO_ENTERPRISE',
+                        payload: {measuredOutcome2: event.target.value}
+                    })}
+                >
                     <FormControlLabel 
                         control={<Radio/>} 
                         labelPlacement="end"
@@ -140,7 +198,14 @@ function PartnershipsForTheGoals() {
                     Sustainable Development Goals that align with 
                     your organization's mission. 
                 </p>
-                <RadioGroup className="centerHelp">
+                <RadioGroup 
+                    className="centerHelp"
+                    value={section2Enterprise.secondarySDG2}
+                    onChange={(event) => dispatch({
+                        type: 'SET_SECTION_TWO_ENTERPRISE',
+                        payload: {secondarySDG2: event.target.value}
+                    })}
+                >
                     {sdg?.map(sdg => (
                         <FormControlLabel 
                         control={<Radio/>} 
