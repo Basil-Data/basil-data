@@ -16,15 +16,21 @@ import QuestionnaireNav from "../QuestionnaireNav/QuestionnaireNav";
 
 function SectionFourTraction() {
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  history.scrollRestoration = 'manual';
+
+
   const section4 = useSelector((store) => store.section4);
   const section4Enterprise = useSelector((store) => store.section4Enterprise);
   const progressIndicator = useSelector(
     (store) => store.section4Enterprise.progressIndicatorId
   );
   const user = useSelector((store) => store.user);
-  const history = useHistory();
+  
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch({
       type: "FETCH_SECTION_FOUR",
     });

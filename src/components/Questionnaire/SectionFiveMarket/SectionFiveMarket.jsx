@@ -16,8 +16,11 @@ function SectionFiveMarket() {
   const user = useSelector((store) => store.user)
   console.log('user.id is', user.id);
 
+  history.scrollRestoration = 'manual';
+
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch({
         type: "FETCH_ENTERPRISE_SECTION_FIVE",
     });

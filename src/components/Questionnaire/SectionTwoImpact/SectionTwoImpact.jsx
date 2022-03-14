@@ -28,8 +28,12 @@ import SectionTwoImpactOpportunity from "./SectionTwoImpactOpportunity/SectionTw
 
 function SectionTwoImpact() {
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    history.scrollRestoration = 'manual';
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         dispatch({type: 'FETCH_SECTION_TWO'});
         dispatch({type: 'FETCH_SECTION_TWO_ENTERPRISE'});
     }, [])
@@ -72,6 +76,17 @@ function SectionTwoImpact() {
                 }
             });
         }
+    }
+
+
+    const onNext = (event) => {
+        handleSubmit(event);
+        history.push('/solution')
+    }
+
+    const onBack = (event) => {
+        handleSubmit(event);
+        history.push('/story')
     }
 
 
@@ -201,7 +216,7 @@ function SectionTwoImpact() {
                 <Link to="/story">
                     <button 
                         className="btn"
-                        onClick={(event) => handleSubmit(event)}
+                        onClick={(event) => onBack(event)}
                     >
                         Back
                     </button>
@@ -215,7 +230,7 @@ function SectionTwoImpact() {
                 <Link to="/solution">
                     <button 
                     className="btn"
-                    onClick={(event) => handleSubmit(event)}
+                    onClick={(event) => onNext(event)}
                     >
                         Next
                     </button>
