@@ -31,3 +31,26 @@
     text-align: center;
     color: white;
 }
+
+.finalPage {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.finalLogo {
+    margin-top: 200px;
+    width: 100%;
+    text-align: center;
+}
+
+.finalPara {
+    width: 100%;
+    padding-right: 300px;
+    padding-left: 300px;
+    text-align: center;
+}
+
+.contactInfo{
+    text-align: center;
+}
