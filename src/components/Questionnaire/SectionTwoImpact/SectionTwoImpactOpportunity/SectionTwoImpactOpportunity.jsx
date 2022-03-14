@@ -44,90 +44,102 @@ import PartnershipsForTheGoals from "../SDGs/17_PartnershipsForTheGoals/Partners
 
 
 function SectionTwoImpactOpportunity() {
+    const dispatch = useDispatch();
     const [sdgPrimary, setSdgPrimary] = useState('');
     console.log(sdgPrimary);
 
     const sdg = useSelector(store => store.section2.sdg);
     const supportiveCharacteristics = useSelector(store => store.section2.supportiveCharacteristics);
     const selectedCharacteristic = useSelector(store => store.section2Enterprise.characteristicId);
+    const selectedSDG = useSelector(store => store.section2Enterprise.sdgId);
 
 
     let component;
     switch(sdgPrimary) {
-        case "No Poverty":
+        case 1:
             component = <NoPoverty />
             break;
-        case "Zero Hunger":
+        case 2:
             component = <ZeroHunger />
             break;
-        case "Good Health and Well-being":
+        case 3:
             component = <GoodHealthAndWellbeing />
             break;
-        case "Quality Education":
+        case 4:
             component = <QualityEducation />
             break;
-        case "Gender Equality":
+        case 5:
             component = <GenderEquality />
             break;
-        case "Clean Water and Sanitation":
+        case 6:
             component = <CleanWaterAndSanitation />
             break;
-        case "Affordable and Clean Energy":
+        case 7:
             component = <AffordableAndCleanEnergy />
             break;
-        case "Decent Work and Economic Growth":
+        case 8:
             component = <DecentWorkAndEconomicGrowth />
             break;
-        case "Industry, Innovation and Infrastructure":
+        case 9:
             component = <IndustryInnovationAndInfrastructure />
             break;
-        case "Reduced Inequality":
+        case 10:
             component = <ReducedInequality />
             break;
-        case "Sustainable Cities and Communities":
+        case 11:
             component = <SustainableCitiesAndCommunities />
             break;
-        case "Responsible Consumption and Production":
+        case 12:
             component = <ResponsibleConsumptionAndProduction />
             break;
-        case "Climate Action":
+        case 13:
             component = <ClimateAction />
             break;
-        case "Life Below Water":
+        case 14:
             component = <LifeBelowWater />
             break;
-        case "Life on Land":
+        case 15:
             component = <LifeOnLand />
             break;
-        case "Peace, Justice and Strong Institutions":
+        case 16:
             component = <PeaceJusticeAndStrongInstitutions />
             break;
-        case "Partnerships for the Goals":
+        case 17:
             component = <PartnershipsForTheGoals />
             break;
-
-
     }
+
+
 
     const handleSupportiveCharacteristics = (event) => {
         console.log('in handleSupportiveCharacteristics');
-        const index = selectedCharacteristic.indexOf(event.target.value)
+        const index = selectedCharacteristic.indexOf(Number(event.target.value))
         console.log('index:', index);
         if (index === -1) {
             dispatch({
                 type: 'SET_SECTION_TWO_ENTERPRISE',
                 payload: {
-                    characteristicId: [...selectedCharacteristic, event.target.value]}
+                    characteristicId: [...selectedCharacteristic, Number(event.target.value)]}
             }); 
         }
         else {
             dispatch({
                 type: 'SET_SECTION_TWO_ENTERPRISE',
                 payload: {
-                    characteristicId: selectedCharacteristic.filter((selectedCharacteristic) => selectedCharacteristic !== event.target.value)
+                    characteristicId: selectedCharacteristic.filter((selectedCharacteristic) => selectedCharacteristic !== Number(event.target.value))
                 }
             });
         }
+    }
+
+
+    const handleSDG = (event) => {
+        setSdgPrimary(Number(event.target.value));
+        dispatch({
+            type: 'SET_SECTION_TWO_ENTERPRISE',
+            payload: {
+                sdgId: Number(event.target.value)
+        }}); 
     }
 
     return(
@@ -142,6 +154,7 @@ function SectionTwoImpactOpportunity() {
                                 checked={selectedCharacteristic.includes(characteristic.id)}
                                 value={characteristic.id}
                                 onChange={handleSupportiveCharacteristics}
+                                defaultValue={0}
                                 control={
                                     <Checkbox  
                                     />} 
@@ -153,7 +166,7 @@ function SectionTwoImpactOpportunity() {
                 <p>Which Sustainable Development Goal best aligns best with your impact objective?</p>
                 <RadioGroup 
                     className="centerHelp"
-                    onChange={event => setSdgPrimary(event.target.value)}
+                    onChange={handleSDG}
                 >
                     {sdg?.map(goal => {
                         return(
@@ -161,7 +174,8 @@ function SectionTwoImpactOpportunity() {
                             key={goal.id}
                             control={<Radio/>} 
                             labelPlacement="end"
-                            value={goal.sdg}
+                            value={goal.id}
+                            defaultValue={0}
                             label={goal.sdg}
                             key={goal.id}
                             />

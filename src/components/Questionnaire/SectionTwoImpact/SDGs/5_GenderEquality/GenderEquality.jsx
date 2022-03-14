@@ -28,7 +28,28 @@ function GenderEquality() {
     const dispatch = useDispatch();
 
     const stakeholderSegments = useSelector(store => store.section2.stakeholderSegments);
+    const selectedSegment = useSelector(store => store.section2Enterprise.segmentId); 
     const sdg = useSelector(store => store.section2.sdg);
+    const section2Enterprise = useSelector(store => store.section2Enterprise)
+
+    const handleInvestorSegments = (event) => {
+        const index = selectedSegment.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    segmentId: [...selectedSegment, Number(event.target.value)]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    segmentId: selectedSegment.filter((selectedSegment) => selectedSegment !== Number(event.target.value))
+                }
+            });
+        }
+    }
 
 
 
@@ -58,6 +79,11 @@ function GenderEquality() {
                 multiline rows={5}
                 id="outlined-basic" 
                 sx={{width: 600}}
+                value={section2Enterprise.elaborateOnIndicators2 || ''}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: {elaborateOnIndicators2: event.target.value}
+                })}
             ></TextField>
             <p>How do you segment your stakeholders?</p>
             <FormControl>
@@ -67,6 +93,10 @@ function GenderEquality() {
                             key={segment.id}
                             control={<Checkbox />} 
                             label={segment.segment}
+                            checked={selectedSegment.includes(segment.id)}
+                            value={segment.id}
+                            defaultValue={0}
+                            onChange={handleInvestorSegments}
                         />
                     )
                 })}
@@ -82,6 +112,11 @@ function GenderEquality() {
                 multiline rows={5}
                 id="outlined-basic" 
                 sx={{width: 600}}
+                value={section2Enterprise.focusedEfforts2 || ''}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: { focusedEfforts2: event.target.value }
+                })}
             ></TextField>
             <p> What are the specific changes you would like to see for your stakeholder?
             </p>
@@ -95,9 +130,21 @@ function GenderEquality() {
                 multiline rows={5}
                 id="outlined-basic" 
                 sx={{width: 600}}
+                value={section2Enterprise.specificChanges2 || ''}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: { specificChanges2: event.target.value }
+                })}
             ></TextField>
             <p>Have you measured the outcomes for your primary beneficiaries?</p>
-            <RadioGroup className="centerHelp">
+            <RadioGroup 
+                className="centerHelp"
+                value={section2Enterprise.measuredOutcome2}
+                onChange={(event) => dispatch({
+                    type: 'SET_SECTION_TWO_ENTERPRISE',
+                    payload: {measuredOutcome2: event.target.value}
+                })}
+            >
                 <FormControlLabel 
                     control={<Radio/>} 
                     labelPlacement="end"
@@ -118,7 +165,14 @@ function GenderEquality() {
                 />
             </RadioGroup>
             <p>If applicable, please select any secondary Sustainable Development Goals that align with your organization's mission. </p>
-            <RadioGroup className="centerHelp">
+            <RadioGroup 
+                    className="centerHelp"
+                    value={section2Enterprise.secondarySDG2}
+                    onChange={(event) => dispatch({
+                        type: 'SET_SECTION_TWO_ENTERPRISE',
+                        payload: {secondarySDG2: event.target.value}
+                    })}
+                >
                 {sdg?.map(goal => {
                     return(
                         <FormControlLabel 

@@ -31,6 +31,7 @@ CREATE TABLE "answers" (
     "costOfProblem2" VARCHAR (1024) DEFAULT NULL,
     "howTheySolve2" VARCHAR (1024) DEFAULT NULL,
     "whoBenefits2" VARCHAR (1024) DEFAULT NULL,
+	"elaborateOnIndicators2" VARCHAR (1024) DEFAULT NULL,
     "organizationLocation2" VARCHAR (1024) DEFAULT NULL,
 	"focusedEfforts2" VARCHAR (1024) DEFAULT NULL,
     "specificChanges2" VARCHAR (1024) DEFAULT NULL,
