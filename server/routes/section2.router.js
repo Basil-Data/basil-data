@@ -155,6 +155,11 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         WHERE "enterpriseId" = $1;
     `;
 
+    let sqlText5 = `
+        DELETE FROM "indicatorsJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
     let sqlParams = [
         req.user.id
     ];
@@ -165,6 +170,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     await pool.query(sqlText2, sqlParams);
     await pool.query(sqlText3, sqlParams);
     await pool.query(sqlText4, sqlParams);
+    await pool.query(sqlText5, sqlParams);
 
     for (let impact of req.body.impactSectorId) {
 
@@ -232,6 +238,23 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
         pool.query(sqlText, sqlParams);
     }
+
+    for (let indicator of req.body.indicatorId) {
+        let sqlText = `
+            INSERT INTO "indicatorsJunction"
+                ("enterpriseId", "indicatorId")
+            VALUES
+                ($1, $2)
+        `;
+
+        let sqlParams = [
+            req.user.id,
+            indicator
+        ];
+
+        pool.query(sqlText, sqlParams);
+    }
+
         res.sendStatus(200);
 })
 
