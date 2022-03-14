@@ -114,7 +114,7 @@ function SectionFourTraction() {
         <h5>What stage of development is your PRODUCT in?</h5>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue=""
+          defaultValue={0}
           value={section4Enterprise.developmentStageId}
           name="radio-buttons-group"
           className="centerHelp"
