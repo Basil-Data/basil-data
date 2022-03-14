@@ -1,0 +1,33 @@
+.report {
+    margin: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.list {
+    list-style-type: none;
+}
+
+.reportSectionOne {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.introParagraph {
+    width: 70%;
+}
+
+.introContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;   
+    margin-left: 40px;
+    width: 20%;
+    background-color: rgb(245, 231, 209);
+}
+
+.sectionColor {
+    background-image: linear-gradient(to bottom right, rgb(40, 53, 172), rgb(29, 107, 42));
+    width: 100%;
+    text-align: center;
+    color: white;
+}
