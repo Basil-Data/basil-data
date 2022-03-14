@@ -165,6 +165,8 @@ function SectionFourTraction() {
           id="outlined-basic"
           label="Amount Funded $"
           variant="outlined"
+          type="number"
+          required
           InputLabelProps={{ shrink: true }}
           value={section4Enterprise.fundingReceived4}
           onChange={(evt) =>
@@ -288,6 +290,8 @@ function SectionFourTraction() {
               label="Percentage"
               variant="outlined"
               value={section4Enterprise.averageGrowth4}
+              type="number"
+              required
               onChange={(evt) =>
                 dispatch({
                   type: "SET_SECTION4_ENTERPRISE",
