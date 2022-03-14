@@ -3,6 +3,7 @@ import {useEffect} from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {Link} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
+import Instructions from '../Instructions/Instructions'
 
 function UserPage() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function UserPage() {
         <img src={user.logoUrl} height={80}/>
         <h3>{user.enterpriseName}!</h3>
       </div>
+      <Instructions />
       <p>To get started, click below!</p>
       <Link to='/story'><button className="btn">Questionnaire</button></Link>
       <Link to='/report'><button className="btn">View Report</button></Link>
