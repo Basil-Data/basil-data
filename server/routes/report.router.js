@@ -71,10 +71,10 @@ router.get('/', rejectUnauthenticated, (req,res) => {
 		ON "user"."id" = "impactTableJunction"."enterpriseId"
 	LEFT JOIN "impactSectors"
 		ON "impactTableJunction"."impactSectorId" = "impactSectors"."id"
-	LEFT JOIN "indicatorJunction" 
-		ON "user"."id" = "indicatorJunction"."enterpriseId"
+	LEFT JOIN "indicatorsJunction" 
+		ON "user"."id" = "indicatorsJunction"."enterpriseId"
 	LEFT JOIN "indicators"
-		ON "indicatorJunction"."indicatorId" = "indicators"."id"
+		ON "indicatorsJunction"."indicatorId" = "indicators"."id"
 	LEFT JOIN "investmentStageJunction" 
 		ON "user"."id" = "investmentStageJunction"."enterpriseId"
 	LEFT JOIN "investmentStage"
@@ -133,6 +133,7 @@ router.get('/', rejectUnauthenticated, (req,res) => {
             res.send(results.rows[0]);
         })
         .catch((error) => {
+			console.log('error getting report answers', error);
             res.sendStatus(500);
         })
 })
