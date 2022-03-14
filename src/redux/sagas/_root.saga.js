@@ -9,6 +9,7 @@ import section4Saga from './section4.saga';
 import section5Saga from './section5.saga';
 import section6Saga from './section6.saga';
 import section7Saga from './section7.saga';
+import reportSaga from './report.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -29,5 +30,6 @@ export default function* rootSaga() {
     section5Saga(),
     section6Saga(),
     section7Saga(),
+    reportSaga(), // Getting all the enterprise details for the report
   ]);
 }

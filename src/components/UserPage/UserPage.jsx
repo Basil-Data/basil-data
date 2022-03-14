@@ -22,6 +22,7 @@ function UserPage() {
       </div>
       <p>To get started, click below!</p>
       <Link to='/story'><button className="btn">Questionnaire</button></Link>
+      <Link to='/report'><button className="btn">View Report</button></Link>
       <LogOutButton className="btn" />
     </div>
   );

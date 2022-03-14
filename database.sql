@@ -641,3 +641,4 @@ CREATE TABLE "economicImpactJunction" (
 	"enterpriseId" INTEGER,
 	"economicImpactId" INTEGER
 );
+
