@@ -19,8 +19,13 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 function SectionThreeSolution () {
     
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    history.scrollRestoration = 'manual';
+
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         dispatch({ type: 'FETCH_SECTION_THREE'});
         dispatch({ type: 'FETCH_ENTERPRISE_SECTION_THREE'});
     }, []);
@@ -99,6 +104,21 @@ function SectionThreeSolution () {
                 data: section3Enterprise
         }})
     };
+
+
+    const onNext = (event) => {
+        console.log('in onNext');
+        handleSubmit(event);
+        history.push('/traction')
+    }
+
+
+    const onBack = (event) => {
+        handleSubmit(event);
+        history.push('/impact')
+    }
+
+
 
     return (
         <>
@@ -308,10 +328,10 @@ function SectionThreeSolution () {
                 </Box>
                 <br/>
                 <br/>
-                <Link to="/impact">
+                <Link>
                     <button 
                         className="btn" 
-                        onClick={handleSubmit}>
+                        onClick={(event) => onBack(event)}>
                         Back
                     </button>
                 </Link>
@@ -320,10 +340,10 @@ function SectionThreeSolution () {
                     onClick={handleSubmit}>
                         Submit
                     </button>
-                <Link to="/traction">
+                <Link>
                     <button 
                         className="btn"
-                        onClick={handleSubmit}>
+                        onClick={(event) => onNext(event)}>
                         Next
                     </button>
                 </Link>
