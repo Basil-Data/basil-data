@@ -24,25 +24,51 @@ function SectionSixRisksAndHurdles () {
     // store.section6Enterprise contains all of the responses
     // for the respective enterprise
     const section6Enterprise = useSelector((store) => store.section6Enterprise);
-    const anticipatedRisks = useSelector((store) => store.section6Enterprise.riskId);
+    const anticipatedRisks = useSelector((store) => store.section6Enterprise.risks);
 
-    const [riskSelection, setRiskSelection] = useState([]);
-    const [riskPreparedness, setRiskPreparedness] = useState('');
+    let regex = /.*(?= - )/gm;
 
     const handleRisk = (event) => {
-        const index = riskSelection.indexOf(event.target.value)
+        const index = anticipatedRisks.indexOf(Number(event.target.value))
         if (index === -1) {
-            setRiskSelection([...riskSelection, event.target.value])
+            dispatch({
+                type: "SET_SECTION6_ENTERPRISE",
+                payload: {riskId: [...anticipatedRisks, Number(event.target.value)]}
+            });
         } else {
-            setRiskSelection(riskSelection.filter((riskSelection) => riskSelection !== event.target.value))
+            dispatch({
+                type: "SET_SECTION6_ENTERPRISE",
+                payload: {riskId: anticipatedRisks.filter((anticipatedRisks) => anticipatedRisks !== Number(event.target.value))}
+            });
         }
+    }
+
+    const replaceRisk = (replacement, anticipatedRisks) => {
+        let newRisk = anticipatedRisks?.filter((obj => obj.riskId === replacement.riskId)[0]);
+        console.log('newRisk is:', newRisk);
+        dispatch({
+            type: "SET_SECTION6_ENTERPRISE",
+            payload: {risks: [...anticipatedRisks, newRisk]}
+        });
     }
 
     useEffect(() => {
         dispatch({
             type: "FETCH_RISKS_AND_HURDLES",
         });
+        dispatch({ 
+            type: "FETCH_ENTERPRISE_SECTION_SIX"
+        })
     }, []);
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        dispatch({
+            type: 'PUT_SECTION_SIX',
+            payload: section6Enterprise
+        })
+    };
 
     return (
         <>
@@ -61,12 +87,12 @@ function SectionSixRisksAndHurdles () {
             <p>We understand these risks may be new to you. If you have not yet considered 
                 any of these risks, please select "None at this stage"
             </p>
-            <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
+            {/* <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
                     {section6.results1?.map(risk => (
                             <FormControlLabel 
                                 key={risk.id}
-                                checked={investmentSelection.includes(type.id)} 
+                                checked={checkContents = anticipatedRisks?.map(({riskId}) => [riskId]).includes(risk.id)} 
                                 control={
                                     <Checkbox
                                         value={risk.id}
@@ -77,10 +103,12 @@ function SectionSixRisksAndHurdles () {
                             />
                     ))}
                 </FormControl>
-            </Box>
+            </Box> */}
 
-            <h5>If applicable, please tell us more about how you've prepared (or plan to prepare) 
-                for each of the selected impact risks.</h5>
+            {anticipatedRisks.length > 0 ? anticipatedRisks?.map (risk =>
+            <>
+            <h5>Please tell us more about how you've prepared (or plan to prepare) 
+                for: {(section6.results1?.filter(value => value.id === risk.riskId))[0].risk.match(regex)}.</h5>
             <Grid
                 container
                 spacing={0}
@@ -100,15 +128,21 @@ function SectionSixRisksAndHurdles () {
                         variant="outlined" 
                         multiline rows={5} 
                         fullWidth
-                        value={riskPreparedness}
-                        onChange={(event) =>
-                            { setRiskPreparedness(event.target.value) }
-                        }
+                        value={risk.riskPreparedness}
+                        onChange = {(event) => replaceRisk({riskId: risk.riskId, riskPreparedness: event.target.value}, anticipatedRisks)}
+                        // onChange = {(event) =>
+                        //     { dispatch({
+                        //         type: "SET_SECTION6_ENTERPRISE",
+                        //         payload: {risks: [...anticipatedRisks, {riskId: risk.riskId, riskPreparedness: event.target.value}]}
+                        //     }); }
+                        // }
                     />
                 </Box>
             </Grid>
+            </>
+            ) : <></> }
 
-            <h5>From the list below, please select the startup barriers that are most applicable to you.</h5>
+            {/* <h5>From the list below, please select the startup barriers that are most applicable to you.</h5>
             <p>The aim of this question is to gain a grasp of how your organization is dealing with/plans to 
                 deal with potential hurdles.
             </p>
@@ -199,10 +233,17 @@ function SectionSixRisksAndHurdles () {
                         fullWidth 
                     />
                 </Box>
-            </Grid>
+            </Grid> */}
 
             <Link to="/market"><button className="btn">Back</button></Link>
-            <button className="btn">Submit</button>
+
+            <button 
+                className="btn"
+                onClick={(event) => handleSubmit(event)}
+            >
+                Save
+            </button>
+            
             <Link to="/next-steps"><button className="btn">Next</button></Link>
 
         </form>
