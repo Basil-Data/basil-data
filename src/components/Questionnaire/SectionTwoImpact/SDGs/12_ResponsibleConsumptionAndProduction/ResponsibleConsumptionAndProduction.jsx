@@ -29,7 +29,28 @@ function ResponsibleConsumptionAndProduction() {
 
     const sdg = useSelector(store => store.section2.sdg);
     const section2Enterprise = useSelector(store => store.section2Enterprise)
+    const indicators = useSelector(store => store.section2.indicators);
+    const selectedIndicator = useSelector(store => store.section2Enterprise.indicatorId);
 
+
+    const handleIndicator = (event) => {
+        const index = selectedIndicator.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: [...selectedIndicator, Number(event.target.value)]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: selectedIndicator.filter((selectedIndicator) => selectedIndicator !== Number(event.target.value))
+                }
+            });
+        }
+    }
 
 
 
@@ -39,17 +60,21 @@ function ResponsibleConsumptionAndProduction() {
                 <h1><b>SDG - Responsible Consumption & Production</b></h1>
                 <p>What Indicators do you use/intend to use to track change?</p>
                 <FormControl>
-                    <FormControlLabel control={<Checkbox />} label={'Sustainable policy instruments'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Material footprint (waste)'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Material consumption'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Food waste index'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Environmental agreements enacted'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Hazardous waste generated'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Recycling rate'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Published sustainability reports'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Sustainability accounting tools implementation'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Renewable energy capacity'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Change to fossil fuel subsidies'}/>
+                    {indicators?.map(indicator => {
+                        if(indicator.sdgId === 12) {
+                            return (
+                                <FormControlLabel
+                                    key={indicator.id}
+                                    checked={selectedIndicator.includes(indicator.id)}
+                                    value={indicator.id}
+                                    defaultValue={0}
+                                    onChange={handleIndicator}
+                                    control={<Checkbox />}
+                                    label={indicator.indicator}
+                                />  
+                            )
+                        }
+                    })}
                 </FormControl>
                 <p> Please elaborate on the progress shown in the indicators that you use
                 </p>

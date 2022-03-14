@@ -29,6 +29,28 @@ function LifeOnLand() {
 
     const sdg = useSelector(store => store.section2.sdg);
     const section2Enterprise = useSelector(store => store.section2Enterprise)
+    const indicators = useSelector(store => store.section2.indicators);
+    const selectedIndicator = useSelector(store => store.section2Enterprise.indicatorId);
+
+
+    const handleIndicator = (event) => {
+        const index = selectedIndicator.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: [...selectedIndicator, Number(event.target.value)]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: selectedIndicator.filter((selectedIndicator) => selectedIndicator !== Number(event.target.value))
+                }
+            });
+        }
+    }
 
 
     return(
@@ -37,13 +59,21 @@ function LifeOnLand() {
                 <h1><b>SDG - Life On Land</b></h1>
                 <p>What Indicators do you use/intend to use to track change?</p>
                 <FormControl>
-                    <FormControlLabel control={<Checkbox />} label={'Forest area'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Protected ecosystem proportion'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Sustainable forest management progress'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Degraded land proportions'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Actions to protect natural habitats and biodiversity'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Protection policies enacted'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Spending on ecosystem conservation'}/>
+                    {indicators?.map(indicator => {
+                        if(indicator.sdgId === 15) {
+                            return (
+                                <FormControlLabel
+                                    key={indicator.id}
+                                    checked={selectedIndicator.includes(indicator.id)}
+                                    value={indicator.id}
+                                    defaultValue={0}
+                                    onChange={handleIndicator}
+                                    control={<Checkbox />}
+                                    label={indicator.indicator}
+                                />  
+                            )
+                        }
+                    })}
                 </FormControl>
                 <p> Please elaborate on the progress shown in the indicators that you use
                 </p>

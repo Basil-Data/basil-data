@@ -31,6 +31,9 @@ function ZeroHunger() {
     const selectedSegment = useSelector(store => store.section2Enterprise.segmentId); 
     const sdg = useSelector(store => store.section2.sdg);
     const section2Enterprise = useSelector(store => store.section2Enterprise)
+    const indicators = useSelector(store => store.section2.indicators);
+    const selectedIndicator = useSelector(store => store.section2Enterprise.indicatorId);
+
 
     const handleInvestorSegments = (event) => {
         const index = selectedSegment.indexOf(Number(event.target.value))
@@ -52,6 +55,26 @@ function ZeroHunger() {
     }
 
 
+    const handleIndicator = (event) => {
+        const index = selectedIndicator.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: [...selectedIndicator, Number(event.target.value)]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: selectedIndicator.filter((selectedIndicator) => selectedIndicator !== Number(event.target.value))
+                }
+            });
+        }
+    }
+
+
 
     return(
         <Box className="questionnaireForm">
@@ -59,11 +82,21 @@ function ZeroHunger() {
             <h1><b>SDG - Zero Hunger</b></h1>
             <p>What Indicators do you use/intend to use to track change?</p>
             <FormControl>
-                <FormControlLabel control={<Checkbox />} label={'Nourishment / Undernourishment'}/>
-                <FormControlLabel control={<Checkbox />} label={'Food security level'}/>
-                <FormControlLabel control={<Checkbox />} label={'Food production indicators'}/>
-                <FormControlLabel control={<Checkbox />} label={'Animal protection'}/>
-                <FormControlLabel control={<Checkbox />} label={'Cost of Food'}/>
+                {indicators?.map(indicator => {
+                    if(indicator.sdgId === 2) {
+                        return (
+                            <FormControlLabel
+                                key={indicator.id}
+                                checked={selectedIndicator.includes(indicator.id)}
+                                value={indicator.id}
+                                defaultValue={0}
+                                onChange={handleIndicator}
+                                control={<Checkbox />}
+                                label={indicator.indicator}
+                            />  
+                        )
+                    }
+                })}
             </FormControl>
             <p> Please elaborate on the progress shown in the indicators that you use
             </p>

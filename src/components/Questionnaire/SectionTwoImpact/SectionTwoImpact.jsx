@@ -31,7 +31,6 @@ function SectionTwoImpact() {
 
     useEffect(() => {
         dispatch({type: 'FETCH_SECTION_TWO'});
-        dispatch({type: 'FETCH_IMPACT_SECTORS'});
         dispatch({type: 'FETCH_SECTION_TWO_ENTERPRISE'});
     }, [])
 
@@ -39,11 +38,6 @@ function SectionTwoImpact() {
     const impactSectors = useSelector(store => store.section2.impactSectors);
     const section2Enterprise = useSelector(store => store.section2Enterprise);
     const selectedImpactSector = useSelector(store => store.section2Enterprise.impactSectorId);
-
-
-    console.log('impact sectors are:', impactSectors);
-    console.log('section2Enterprise:', section2Enterprise);
-    console.log('user', user);
 
 
 

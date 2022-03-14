@@ -10,20 +10,24 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
     const sqlText2 = 'SELECT * FROM "supportiveCharacteristics"';
     const sqlText3 = 'SELECT * FROM "sdg" ORDER BY "sdg"."id" ASC';
     const sqlText4 = 'SELECT * FROM "stakeholderSegments"';
+    const sqlText5 = 'SELECT * FROM "indicators" ORDER BY "indicators"."sdgId" ASC';
 
     const results1 = await pool.query(sqlText);
     const results2 = await pool.query(sqlText2);
     const results3 = await pool.query(sqlText3);
     const results4 = await pool.query(sqlText4);
+    const results5 = await pool.query(sqlText5);
 
     const results = {
         impactSectors: results1.rows,
         supportiveCharacteristics: results2.rows,
         sdg: results3.rows,
-        stakeholderSegments: results4.rows
+        stakeholderSegments: results4.rows,
+        indicators: results5.rows
     }
 
     res.send(results);
+    
 });
 
 // Gets the individual enterprise's previous answers for the 

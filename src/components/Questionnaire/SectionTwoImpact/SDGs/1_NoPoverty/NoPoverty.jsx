@@ -30,9 +30,10 @@ function NoPoverty() {
     const stakeholderSegments = useSelector(store => store.section2.stakeholderSegments);
     const selectedSegment = useSelector(store => store.section2Enterprise.segmentId); 
     const sdg = useSelector(store => store.section2.sdg);
-    const section2Enterprise = useSelector(store => store.section2Enterprise)
+    const section2Enterprise = useSelector(store => store.section2Enterprise);
+    const indicators = useSelector(store => store.section2.indicators);
+    const selectedIndicator = useSelector(store => store.section2Enterprise.indicatorId);
 
-    console.log('section2Enterprise:', section2Enterprise);
 
     const handleInvestorSegments = (event) => {
         const index = selectedSegment.indexOf(Number(event.target.value))
@@ -54,15 +55,47 @@ function NoPoverty() {
     }
 
 
+    const handleIndicator = (event) => {
+        const index = selectedIndicator.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: [...selectedIndicator, Number(event.target.value)]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: selectedIndicator.filter((selectedIndicator) => selectedIndicator !== Number(event.target.value))
+                }
+            });
+        }
+    }
+
+
     return(
         <Box className="questionnaireForm">
             <img src="images/SDGs/E-WEB-Goal-01.png" width="200px" height="200px"/>
             <h1><b>SDG - No Poverty</b></h1>
             <p>What Indicators do you use/intend to use to track change?</p>
             <FormControl>
-                    <FormControlLabel control={<Checkbox />} label={'Poverty Levels'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Change In Poverty'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Access To Resources'}/>
+                {indicators?.map(indicator => {
+                    if(indicator.sdgId === 1) {
+                        return (
+                            <FormControlLabel
+                                key={indicator.id}
+                                checked={selectedIndicator.includes(indicator.id)}
+                                value={indicator.id}
+                                defaultValue={0}
+                                onChange={handleIndicator}
+                                control={<Checkbox />}
+                                label={indicator.indicator}
+                            />  
+                        )
+                    }
+                })}
             </FormControl>
             <p> Please elaborate on the progress shown in the indicators that you use
             </p>
