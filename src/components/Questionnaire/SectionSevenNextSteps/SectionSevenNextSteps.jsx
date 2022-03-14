@@ -29,7 +29,8 @@ function SectionSevenNextSteps () {
     const investmentSelection = useSelector((store) => store.section7Enterprise.investmentVehicleId);
     const fundingUse = useSelector((store) => store.section7Enterprise.fundingUseId);
     const wayAhead = useSelector((store) => store.section7Enterprise.assistanceId);
-    console.log('section 7:', section7);
+
+    console.log('section7Enterprise.societalImpactId.societalImpactId:', section7Enterprise.societalImpactId.societalImpactId);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -256,7 +257,7 @@ function SectionSevenNextSteps () {
         </p>
         <RadioGroup
             aria-labelledby="social-impact"
-            defaultValue=""
+            defaultValue={0}
             name="radio-buttons-group"
             value = {section7Enterprise.societalImpactId}
             onChange = {(event) =>
@@ -283,7 +284,7 @@ function SectionSevenNextSteps () {
         </p>
         <RadioGroup
             aria-labelledby="environmental-impact"
-            defaultValue=""
+            defaultValue={0}
             name="radio-buttons-group"
             value = {section7Enterprise.environmentalImpactId}
             onChange = {(event) =>
@@ -311,6 +312,7 @@ function SectionSevenNextSteps () {
         <RadioGroup
             aria-labelledby="economic-impact"
             name="radio-buttons-group"
+            defaultValue={0}
             value = {section7Enterprise.economicImpactId}
             onChange = {(event) =>
                 { dispatch({
