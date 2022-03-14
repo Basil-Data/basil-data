@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 // MUI Imports
 import Box from '@mui/material/Box';
@@ -18,6 +18,11 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 function SectionSixRisksAndHurdles () {
 
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    history.scrollRestoration = 'manual';
+
+
     // store.section6 contains all of the selections for
     // this page of the questionnaire
     const section6 = useSelector((store) => store.section6);
@@ -35,6 +40,7 @@ function SectionSixRisksAndHurdles () {
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         dispatch({
             type: "FETCH_RISKS_AND_HURDLES",
         });

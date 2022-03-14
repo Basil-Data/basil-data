@@ -16,7 +16,7 @@ function ReportSectionOneStory () {
             <div className="reportSectionOne">
                 <div className="introParagraph">
                     <h1>01. STORY</h1>
-                    <hr class="dotted"></hr>
+                    <hr className="dotted"></hr>
                     <h4>Introduction:</h4>
                     <p>Basil Data began with a simple goal of helping social enterprises
                     meaningfully analyze and understand their impact. Initial workshops

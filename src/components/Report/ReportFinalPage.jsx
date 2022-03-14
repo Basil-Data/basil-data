@@ -28,6 +28,14 @@ function ReportFinalPage () {
                     <p>E: impact@basildata.com</p>
                     <p>S: @basildata</p>
                 </div>
+                <p className="disclaimer">This content must not be copied or disseminated without
+                direct permission from Basil Data. Social and
+                environmental issues are inherently complex and this
+                report is meant for informational purposes only. You
+                should not construe any such information or material as
+                legal, tax, investment, financial, or other advice. All content
+                is information of a general nature and does not address
+                the circumstances of any particular individual or entity.</p>
             </div>
         </Paper>
     )
