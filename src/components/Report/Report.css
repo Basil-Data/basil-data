@@ -43,10 +43,22 @@ hr.dotted {
     font-size: 30px;
 }
 
-.solid{
+.solid {
     border: 1px solid #434343;
     width: 400px;
     text-align: right;
+}
+
+.frontPageImpact{
+    color: gray;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-left: 270px;
+    font-weight: normal;
+}
+
+.frontPageLogo{
+    margin-left: 250px;
+    padding-bottom: 430px;
 }
 
 /* Table of Contents CSS */

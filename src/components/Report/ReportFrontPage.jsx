@@ -18,6 +18,8 @@ function ReportFrontPage () {
                 <h2 className='frontPageDate'>{moment().format('MMMM YYYY')}</h2>
                 <h2 className='frontPageEnterprise'>{enterpriseAnswers.enterpriseName}</h2>
                 <hr className="solid"></hr>
+                <h2 className="frontPageImpact">IMPACT OPPORTUNITY PROFILE</h2>
+                <img className="frontPageLogo" src="/images/BasilDataLogo/BasilDataLogo.png"/>
             </div>
         </Paper>
     )
