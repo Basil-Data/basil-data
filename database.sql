@@ -27,15 +27,15 @@ CREATE TABLE "answers" (
     "percentageBIPOC1" INTEGER DEFAULT NULL,
     "percentageFemale1" INTEGER DEFAULT NULL,
     "investorIntroduction1" VARCHAR (1024) DEFAULT NULL,
-    "problemBeingSolved2" VARCHAR (1024) DEFAULT NULL,
+    "problemBeingSolved2" VARCHAR (8000) DEFAULT NULL,
     "costOfProblem2" VARCHAR (1024) DEFAULT NULL,
-    "howTheySolve2" VARCHAR (1024) DEFAULT NULL,
+    "howTheySolve2" VARCHAR (8000) DEFAULT NULL,
     "whoBenefits2" VARCHAR (1024) DEFAULT NULL,
-	"elaborateOnIndicators2" VARCHAR (1024) DEFAULT NULL,
+	"elaborateOnIndicators2" VARCHAR (8000) DEFAULT NULL,
     "organizationLocation2" VARCHAR (1024) DEFAULT NULL,
 	"focusedEfforts2" VARCHAR (1024) DEFAULT NULL,
     "specificChanges2" VARCHAR (1024) DEFAULT NULL,
-    "measuredOutcome2" BOOLEAN DEFAULT NULL,
+    "measuredOutcome2" VARCHAR (1024) DEFAULT NULL,
     "secondarySDG2" VARCHAR (1024) DEFAULT NULL,
     "impactLevel2" VARCHAR (1024) DEFAULT NULL,
 	"payingCustomerProfile3" VARCHAR (1024) DEFAULT NULL,
@@ -102,7 +102,7 @@ CREATE TABLE "impactTableJunction" (
 	"impactSectorId" INTEGER
 );
 
-DROP TABLE "indicators";
+
 CREATE TABLE "indicators" (
 	"id" SERIAL PRIMARY KEY,
 	"sdgId" INTEGER,
@@ -254,8 +254,7 @@ VALUES
 	(17, 'Share of global exports'),
 	(17, 'Policies in favor or sustainable development'),
 	(17, 'Spending and policies on statistical measurement strategies');
-	
-DROP TABLE "indicatorsJunction";	
+		
 
 CREATE TABLE "indicatorsJunction" (
 	"id" SERIAL PRIMARY KEY,

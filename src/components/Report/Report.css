@@ -82,6 +82,22 @@ hr.dotted {
     color: #434343;
 }
 
+/* Section Two CSS */
+.reportSectionTwo {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin: 30px;
+}
+
+.problemParagraph {
+    width: 100%;
+}
+
+.problemText {
+    border: solid black 1px;
+}
+
 /* Final Page CSS */
 .finalPage {
     display: flex;
