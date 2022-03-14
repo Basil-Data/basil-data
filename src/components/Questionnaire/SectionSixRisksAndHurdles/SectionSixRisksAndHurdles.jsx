@@ -109,7 +109,7 @@ function SectionSixRisksAndHurdles () {
                 </Box>
             </Grid>
 
-            <h5>From the list below, please select the startup barriers that are most applicable to you.</h5>
+            {/* <h5>From the list below, please select the startup barriers that are most applicable to you.</h5>
             <p>The aim of this question is to gain a grasp of how your organization is dealing with/plans to 
                 deal with potential hurdles.
             </p>
@@ -200,7 +200,7 @@ function SectionSixRisksAndHurdles () {
                         fullWidth 
                     />
                 </Box>
-            </Grid>
+            </Grid> */}
 
             <Link to="/market"><button className="btn">Back</button></Link>
             <button className="btn">Submit</button>

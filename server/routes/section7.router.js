@@ -53,11 +53,6 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
 // answers
 router.get('/:id', rejectUnauthenticated, async (req, res) => {
 
-    let sqlQuery = `
-    INSERT INTO "environmentalImpactJunction"
-        ("enterpriseId", "environmentalImpactId")
-    `
-
     let sqlText1 = `
         SELECT 
             ARRAY_AGG("investmentVehicleId")
@@ -123,9 +118,9 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
         fundingUseId: Array.isArray(fundingUseId.rows[0].array_agg) ? fundingUseId.rows[0].array_agg : [],
         assistanceId: Array.isArray(assistanceId.rows[0].array_agg) ? assistanceId.rows[0].array_agg : [],
         ...answers.rows[0],
-        societalImpactId: societalImpactId.rows[0] ?? null,
-        environmentalImpactId: environmentalImpactId.rows[0] ?? null,
-        economicImpactId: economicImpactId.rows[0] ?? null
+        societalImpactId: societalImpactId.rows[0]?.societalImpactId || 0,
+        environmentalImpactId: environmentalImpactId.rows[0]?.environmentalImpactId || 0,
+        economicImpactId: economicImpactId.rows[0]?.economicImpactId || 0
     }
 
     console.log('results is:', results);
