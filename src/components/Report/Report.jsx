@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 
 // importing sections for report
+import ReportFrontPage from './ReportFrontPage';
 import ReportTableOfContents from './ReportTableOfContents';
 import ReportSection1Story from './ReportSection1Story';
 import ReportSection2Impact from './ReportSection2-0Impact';
@@ -34,6 +35,7 @@ function Report () {
     return (
         <Box>
         <div className="report">
+            <ReportFrontPage />
             <ReportTableOfContents />
             <ReportSection1Story />
             <ReportSection2Impact />

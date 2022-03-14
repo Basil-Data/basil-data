@@ -7,6 +7,7 @@
 .paper {
     width: 8.5in;
     height: 11in;
+    margin-bottom: 10px;
 }
 
 .list {
@@ -24,6 +25,30 @@ hr.dotted {
     border-top: 3px dotted #bbb;
 }
 
+/* Front page CSS */
+.frontPage{
+    background-image: url('/public/images/Basil\ Data\ Report\ Front\ Page.png');
+    background-size: 8.5in 11in;
+}
+
+.frontPageDate{
+    font-family: cursive;
+    padding-top: 300px;
+    padding-left: 300px;
+}
+
+.frontPageEnterprise {
+    padding-left: 300px;
+    color: #674ea7;
+    font-size: 30px;
+}
+
+.solid{
+    border: 1px solid #434343;
+    width: 400px;
+    text-align: right;
+}
+
 /* Table of Contents CSS */
 .tableOfContents{
     padding: 10px;
@@ -39,6 +64,15 @@ hr.dotted {
     margin-bottom: 0px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     color: #434343;
+}
+
+.tableOfContentsContainer {
+    display: flex;
+}
+
+.tableOfContentsColumn {
+    width: 50%;
+    padding-left: 100px;
 }
 
 /* Section One CSS */
@@ -87,10 +121,13 @@ hr.dotted {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    background-image: url('/public/images/Basil\ Data\ Report\ Front\ Page.png');
+    background-size: 8.5in 11in;
 }
 
 .finalLogo {
-    margin-top: 150px;
+    margin-top: 350px;
+    margin-left: 70px;
     width: 100%;
     text-align: center;
 }
@@ -99,6 +136,7 @@ hr.dotted {
     width: 100%;
     padding-right: 100px;
     padding-left: 100px;
+    margin-left: 100px;
     text-align: center;
 }
 
@@ -106,12 +144,11 @@ hr.dotted {
     text-align: center;
 }
 
-/* Table of Contents CSS */
-.tableOfContentsContainer {
-    display: flex;
-}
-
-.tableOfContentsColumn {
-    width: 50%;
-    padding-left: 100px;
+.disclaimer {
+    font-size: 12px;
+    margin-top: 200px;
+    margin-left: 500px;
+    margin-right: 50px;
+    margin-bottom: 10px;
+    text-align: justify;
 }
