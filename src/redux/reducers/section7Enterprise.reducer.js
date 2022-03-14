@@ -5,9 +5,9 @@ const section7Enterprise = (state = {
         fundingUseId: [],
         nextSteps7: '',
         assistanceId: [],
-        societalImpactId: '',
-        environmentalImpactId: '',
-        economicImpactId: '',
+        societalImpactId: 0,
+        environmentalImpactId: 0,
+        economicImpactId: 0,
         understandProblem7: ''
     }, action) => {
     switch (action.type) {

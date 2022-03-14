@@ -242,7 +242,7 @@ function SectionSevenNextSteps () {
         </p>
         <RadioGroup
             aria-labelledby="social-impact"
-            defaultValue=""
+            defaultValue={0}
             name="radio-buttons-group"
             value = {section7Enterprise.societalImpactId}
             onChange = {(event) =>
@@ -269,7 +269,7 @@ function SectionSevenNextSteps () {
         </p>
         <RadioGroup
             aria-labelledby="environmental-impact"
-            defaultValue=""
+            defaultValue={0}
             name="radio-buttons-group"
             value = {section7Enterprise.environmentalImpactId}
             onChange = {(event) =>
@@ -297,6 +297,7 @@ function SectionSevenNextSteps () {
         <RadioGroup
             aria-labelledby="economic-impact"
             name="radio-buttons-group"
+            defaultValue={0}
             value = {section7Enterprise.economicImpactId}
             onChange = {(event) =>
                 { dispatch({

@@ -118,9 +118,9 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
         fundingUseId: Array.isArray(fundingUseId.rows[0].array_agg) ? fundingUseId.rows[0].array_agg : [],
         assistanceId: Array.isArray(assistanceId.rows[0].array_agg) ? assistanceId.rows[0].array_agg : [],
         ...answers.rows[0],
-        societalImpactId: societalImpactId.rows[0]?.societalImpactId || '',
-        environmentalImpactId: environmentalImpactId.rows[0]?.environmentalImpactId || '',
-        economicImpactId: economicImpactId.rows[0]?.economicImpactId || ''
+        societalImpactId: societalImpactId.rows[0]?.societalImpactId || 0,
+        environmentalImpactId: environmentalImpactId.rows[0]?.environmentalImpactId || 0,
+        economicImpactId: economicImpactId.rows[0]?.economicImpactId || 0
     }
 
     console.log('results is:', results);
