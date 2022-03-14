@@ -31,6 +31,10 @@ function AffordableAndCleanEnergy() {
     const selectedSegment = useSelector(store => store.section2Enterprise.segmentId); 
     const sdg = useSelector(store => store.section2.sdg);
     const section2Enterprise = useSelector(store => store.section2Enterprise)
+    const indicators = useSelector(store => store.section2.indicators);
+    const selectedIndicator = useSelector(store => store.section2Enterprise.indicatorId);
+
+
 
     const handleInvestorSegments = (event) => {
         const index = selectedSegment.indexOf(Number(event.target.value))
@@ -53,18 +57,49 @@ function AffordableAndCleanEnergy() {
 
 
 
+    const handleIndicator = (event) => {
+        const index = selectedIndicator.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: [...selectedIndicator, Number(event.target.value)]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: selectedIndicator.filter((selectedIndicator) => selectedIndicator !== Number(event.target.value))
+                }
+            });
+        }
+    }
+
+
+
+
     return(
         <Box className="questionnaireForm">
                 <img src="images/SDGs/E-WEB-Goal-07.png" width="200px" height="200px"/>
                 <h1><b>SDG - Affordable And Clean Energy</b></h1>
                 <p>What Indicators do you use/intend to use to track change?</p>
                 <FormControl>
-                    <FormControlLabel control={<Checkbox />} label={'Access to electricity'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Access to clean fuel'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Renewable energy proportion of total energy use'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Total energy use'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Spending on clean energy'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Renewable energy capacity change'}/>
+                    {indicators?.map(indicator => {
+                        if(indicator.sdgId === 7) {
+                            return (
+                                <FormControlLabel
+                                    key={indicator.id}
+                                    checked={selectedIndicator.includes(indicator.id)}
+                                    value={indicator.id}
+                                    defaultValue={0}
+                                    onChange={handleIndicator}
+                                    control={<Checkbox />}
+                                    label={indicator.indicator}
+                                />  
+                            )
+                        }
+                    })}
                 </FormControl>
                 <p> Please elaborate on the progress shown in the indicators that you use
                 </p>

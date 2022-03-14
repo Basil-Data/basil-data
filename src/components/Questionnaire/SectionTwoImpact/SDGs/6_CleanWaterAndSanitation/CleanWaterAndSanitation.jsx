@@ -29,6 +29,29 @@ function CleanWaterAndSanitation() {
 
     const sdg = useSelector(store => store.section2.sdg);
     const section2Enterprise = useSelector(store => store.section2Enterprise)
+    const indicators = useSelector(store => store.section2.indicators);
+    const selectedIndicator = useSelector(store => store.section2Enterprise.indicatorId);
+
+
+    const handleIndicator = (event) => {
+        const index = selectedIndicator.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: [...selectedIndicator, Number(event.target.value)]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: selectedIndicator.filter((selectedIndicator) => selectedIndicator !== Number(event.target.value))
+                }
+            });
+        }
+    }
+
 
 
 
@@ -39,14 +62,22 @@ function CleanWaterAndSanitation() {
                 <h1><b>SDG - Clean Water & Sanitation</b></h1>
                 <p>What Indicators do you use/intend to use to track change?</p>
                 <FormControl>
-                    <FormControlLabel control={<Checkbox />} label={'Access to safe drinking water'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Access to safe sanitation services'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Ambient quality of bodies of water'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Change in water use'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Degree of integrated water resources'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Change in water-related ecosystems'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Government policy changes'}/>
-                </FormControl>
+                {indicators?.map(indicator => {
+                    if(indicator.sdgId === 6) {
+                        return (
+                            <FormControlLabel
+                                key={indicator.id}
+                                checked={selectedIndicator.includes(indicator.id)}
+                                value={indicator.id}
+                                defaultValue={0}
+                                onChange={handleIndicator}
+                                control={<Checkbox />}
+                                label={indicator.indicator}
+                            />  
+                        )
+                    }
+                })}
+            </FormControl>
                 <p> Please elaborate on the progress shown in the indicators that you use
                 </p>
                 <TextField

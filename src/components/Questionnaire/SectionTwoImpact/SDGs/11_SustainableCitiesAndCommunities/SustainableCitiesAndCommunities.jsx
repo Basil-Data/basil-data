@@ -29,7 +29,28 @@ function SustainableCitiesAndCommunities() {
 
     const sdg = useSelector(store => store.section2.sdg);
     const section2Enterprise = useSelector(store => store.section2Enterprise)
+    const indicators = useSelector(store => store.section2.indicators);
+    const selectedIndicator = useSelector(store => store.section2Enterprise.indicatorId);
 
+
+    const handleIndicator = (event) => {
+        const index = selectedIndicator.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: [...selectedIndicator, Number(event.target.value)]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: selectedIndicator.filter((selectedIndicator) => selectedIndicator !== Number(event.target.value))
+                }
+            });
+        }
+    }
 
 
 
@@ -38,14 +59,22 @@ function SustainableCitiesAndCommunities() {
                 <img src="images/SDGs/E-WEB-Goal-11.png" width="200px" height="200px"/>
                 <h1><b>SDG - Sustainable Cities & Communities</b></h1>
                 <p>What Indicators do you use/intend to use to track change?</p>
-                <FormControl>
-                    <FormControlLabel control={<Checkbox />} label={'Inadequate housing proportion'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Disaster deaths'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Economic loss due to disaster'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Waste management indicators'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Levels of pollution (particulate matter)'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Disaster risk reduction strategies implemented'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Development plans for population dynamics'}/>
+                 <FormControl>
+                    {indicators?.map(indicator => {
+                        if(indicator.sdgId === 11) {
+                            return (
+                                <FormControlLabel
+                                    key={indicator.id}
+                                    checked={selectedIndicator.includes(indicator.id)}
+                                    value={indicator.id}
+                                    defaultValue={0}
+                                    onChange={handleIndicator}
+                                    control={<Checkbox />}
+                                    label={indicator.indicator}
+                                />  
+                            )
+                        }
+                    })}
                 </FormControl>
                 <p> Please elaborate on the progress shown in the indicators that you use
                 </p>

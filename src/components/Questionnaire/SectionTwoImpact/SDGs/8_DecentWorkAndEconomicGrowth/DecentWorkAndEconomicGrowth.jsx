@@ -31,6 +31,10 @@ function DecentWorkAndEconomicGrowth() {
     const selectedSegment = useSelector(store => store.section2Enterprise.segmentId); 
     const sdg = useSelector(store => store.section2.sdg);
     const section2Enterprise = useSelector(store => store.section2Enterprise)
+    const indicators = useSelector(store => store.section2.indicators);
+    const selectedIndicator = useSelector(store => store.section2Enterprise.indicatorId);
+
+
 
     const handleInvestorSegments = (event) => {
         const index = selectedSegment.indexOf(Number(event.target.value))
@@ -52,6 +56,27 @@ function DecentWorkAndEconomicGrowth() {
     }
 
 
+    const handleIndicator = (event) => {
+        const index = selectedIndicator.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: [...selectedIndicator, Number(event.target.value)]}
+            }); 
+        }
+        else {
+            dispatch({
+                type: 'SET_SECTION_TWO_ENTERPRISE',
+                payload: {
+                    indicatorId: selectedIndicator.filter((selectedIndicator) => selectedIndicator !== Number(event.target.value))
+                }
+            });
+        }
+    }
+
+
+
 
     return(
         <Box className="questionnaireForm">
@@ -59,20 +84,21 @@ function DecentWorkAndEconomicGrowth() {
                 <h1><b>SDG - Decent Work & Economic Growth</b></h1>
                 <p>What Indicators do you use/intend to use to track change?</p>
                 <FormControl>
-                    <FormControlLabel control={<Checkbox />} label={'GDP per capita growth rate'}/>
-                    <FormControlLabel control={<Checkbox />} label={'GDP per capita growth rate per employed person'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Employment rate / Unemployment rates'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Hourly earnings'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Access to financial services'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Material footprint (waste)'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Material consumption'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Youth participation (school, employment, training)'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Child labor'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Occupational injuries'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Labor rights compliance'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Bank account rates'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Access to aid for trade support'}/>
-                    <FormControlLabel control={<Checkbox />} label={'Employment strategies'}/>
+                    {indicators?.map(indicator => {
+                        if(indicator.sdgId === 8) {
+                            return (
+                                <FormControlLabel
+                                    key={indicator.id}
+                                    checked={selectedIndicator.includes(indicator.id)}
+                                    value={indicator.id}
+                                    defaultValue={0}
+                                    onChange={handleIndicator}
+                                    control={<Checkbox />}
+                                    label={indicator.indicator}
+                                />  
+                            )
+                        }
+                    })}
                 </FormControl>
                 <p> Please elaborate on the progress shown in the indicators that you use
                 </p>

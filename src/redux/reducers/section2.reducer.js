@@ -1,6 +1,6 @@
 const section2 = (state = {}, action) => {
     switch (action.type) {
-        case 'SET_IMPACT_SECTORS':
+        case 'SET_SECTION_TWO':
             return action.payload;
     }
     return state;
