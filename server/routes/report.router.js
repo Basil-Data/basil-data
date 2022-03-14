@@ -27,7 +27,7 @@ router.get('/', rejectUnauthenticated, (req,res) => {
 		ARRAY_AGG(DISTINCT("progressIndicators"."indicator")) AS "stakeholderSegments",
 		"sdg"."sdg",
 		"sdg"."icon",
-		ARRAY_AGG(DISTINCT("societalImpact"."societalImpact")) AS "societalImpact",
+		ARRAY_AGG(DISTINCT("societalImpact"."impact")) AS "societalImpact",
 		ARRAY_AGG(DISTINCT("stakeholderSegments"."segment")) AS "societalImpact",
 		ARRAY_AGG(DISTINCT("startupBarriers"."barrier")) AS "startupBarriers",
 		ARRAY_AGG(DISTINCT("supportiveCharacteristics"."characteristic")) AS "supportiveCharacteristics",
