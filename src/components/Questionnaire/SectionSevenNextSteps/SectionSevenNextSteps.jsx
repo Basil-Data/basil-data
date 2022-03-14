@@ -25,7 +25,8 @@ function SectionSevenNextSteps () {
     const investmentSelection = useSelector((store) => store.section7Enterprise.investmentVehicleId);
     const fundingUse = useSelector((store) => store.section7Enterprise.fundingUseId);
     const wayAhead = useSelector((store) => store.section7Enterprise.assistanceId);
-    console.log('section 7:', section7);
+
+    console.log('section7Enterprise.societalImpactId.societalImpactId:', section7Enterprise.societalImpactId.societalImpactId);
 
     useEffect(() => {
         dispatch({
