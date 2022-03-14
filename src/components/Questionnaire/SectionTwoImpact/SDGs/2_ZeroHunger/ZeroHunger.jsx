@@ -55,6 +55,7 @@ function ZeroHunger() {
     }
 
 
+
     const handleIndicator = (event) => {
         const index = selectedIndicator.indexOf(Number(event.target.value))
         if (index === -1) {
@@ -73,6 +74,7 @@ function ZeroHunger() {
             });
         }
     }
+
 
 
 

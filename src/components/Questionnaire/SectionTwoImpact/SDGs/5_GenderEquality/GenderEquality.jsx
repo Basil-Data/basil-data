@@ -56,6 +56,7 @@ function GenderEquality() {
     }
 
 
+
     const handleIndicator = (event) => {
         const index = selectedIndicator.indexOf(Number(event.target.value))
         if (index === -1) {
@@ -74,6 +75,7 @@ function GenderEquality() {
             });
         }
     }
+
 
 
 

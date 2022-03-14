@@ -35,6 +35,7 @@ function QualityEducation() {
     const selectedIndicator = useSelector(store => store.section2Enterprise.indicatorId);
 
 
+
     const handleInvestorSegments = (event) => {
         const index = selectedSegment.indexOf(Number(event.target.value))
         if (index === -1) {

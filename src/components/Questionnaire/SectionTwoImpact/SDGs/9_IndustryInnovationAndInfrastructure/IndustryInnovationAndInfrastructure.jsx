@@ -53,7 +53,6 @@ function IndustryInnovationAndInfrastructure() {
     }
 
 
-
     return(
         <Box className="questionnaireForm">
                 <img src="images/SDGs/E-WEB-Goal-09.png" width="200px" height="200px"/>

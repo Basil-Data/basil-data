@@ -53,6 +53,7 @@ function LifeOnLand() {
     }
 
 
+
     return(
         <Box className="questionnaireForm">
                 <img src="images/SDGs/E-WEB-Goal-15.png" width="200px" height="200px"/>
