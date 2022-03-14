@@ -13,7 +13,7 @@ function ReportTableOfContents () {
 
     return (
         <Paper elevation={3} className="paper">
-            <div className="tableOfContents">
+            <div className="tableOfContentsBackground tableOfContents">
                 <h1 className="tocTitle">TABLE OF CONTENTS</h1>
                 <hr className="dotted"></hr>
                 <div className='tableOfContentsContainer'>
