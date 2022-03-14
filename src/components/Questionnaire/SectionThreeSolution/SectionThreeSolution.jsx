@@ -164,6 +164,7 @@ function SectionThreeSolution () {
                             variant="outlined" 
                             multiline rows={5}
                             fullWidth
+                            InputLabelProps={{shrink: true,}}
                             value={section3Enterprise.payingCustomerProfile3}
                             onChange={(event) => dispatch({
                                 type: 'SET_SECTION_THREE_ENTERPRISE',
@@ -192,6 +193,7 @@ function SectionThreeSolution () {
                             variant="outlined" 
                             multiline rows={5}
                             fullWidth
+                            InputLabelProps={{shrink: true,}}
                             value={section3Enterprise.mainCompetitors3}
                             onChange={(event) => dispatch({
                                 type: 'SET_SECTION_THREE_ENTERPRISE',
@@ -219,6 +221,7 @@ function SectionThreeSolution () {
                             label="Differing competitive factors" 
                             variant="outlined" 
                             multiline rows={5}
+                            InputLabelProps={{shrink: true,}}
                             fullWidth
                             value={section3Enterprise.differFromCompetitors3}
                             onChange={(event) => {
@@ -266,6 +269,7 @@ function SectionThreeSolution () {
                             variant="outlined" 
                             multiline rows={5}
                             fullWidth
+                            InputLabelProps={{shrink: true,}}
                             value={section3Enterprise.testimonial3}
                             onChange={(event) => dispatch({
                                 type: 'SET_SECTION_THREE_ENTERPRISE',
@@ -299,6 +303,7 @@ function SectionThreeSolution () {
                             variant="outlined" 
                             multiline rows={5}
                             fullWidth
+                            InputLabelProps={{shrink: true,}}
                             value={section3Enterprise.businessModel3}
                             onChange={(event) => dispatch({
                                 type: 'SET_SECTION_THREE_ENTERPRISE',
