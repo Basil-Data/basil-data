@@ -25,6 +25,11 @@ hr.dotted {
     border-top: 3px dotted #bbb;
 }
 
+.dottedMargin {
+    margin-right: 60px;
+    margin-left: 60px
+}
+
 /* Front page CSS */
 .frontPage{
     background-image: url('/public/images/Basil\ Data\ Report\ Front\ Page.png');
@@ -216,6 +221,31 @@ hr.dotted {
 .painPointTexts{
     margin: 0px 20px 0px 40px;
     padding-bottom: 6in;
+}
+
+/* Section 6 styling */
+
+.pageContainer {
+    position: relative;
+    min-height: 100%;
+}
+
+.heading {
+    padding-top: 80px;
+    padding-left: 70px;
+    padding-bottom: 20px;
+}
+
+.subheading {
+    padding-top: 10px;
+    padding-left: 70px;
+    padding-bottom: 20px;
+}
+
+.section6Color {
+    height: 3in;
+    position: absolute;
+    bottom: 0;
 }
 
 /* Final Page CSS */
