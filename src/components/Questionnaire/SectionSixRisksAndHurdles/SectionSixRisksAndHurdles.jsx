@@ -90,7 +90,8 @@ function SectionSixRisksAndHurdles () {
             payload: selectedEnterprise
         });
         dispatch({ 
-            type: "FETCH_ENTERPRISE_SECTION_SIX"
+            type: "FETCH_ENTERPRISE_SECTION_SIX",
+            payload: selectedEnterprise
         })
     }, []);
 
