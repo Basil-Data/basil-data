@@ -288,23 +288,23 @@ CREATE TABLE "sdg" (
 INSERT INTO "sdg"
 	("sdg", "icon")
 VALUES
-	('No Poverty', 'public/images/SDGs/E-WEB-Goal-01.png'),
-	('Zero Hunger', 'public/images/SDGs/E-WEB-Goal-02.png'),
-	('Good Health and Well-being', 'public/images/SDGs/E-WEB-Goal-03.png'),
-	('Quality Education', 'public/images/SDGs/E-WEB-Goal-04.png'),
-	('Gender Equality', 'public/images/SDGs/E-WEB-Goal-05.png'),
-	('Clean Water and Sanitation', 'public/images/SDGs/E-WEB-Goal-06.png'),
-	('Affordable and Clean Energy', 'public/images/SDGs/E-WEB-Goal-07.png'),
-	('Decent Work and Economic Growth', 'public/images/SDGs/E-WEB-Goal-08.png'),
-	('Industry, Innovation and Infrastructure', 'public/images/SDGs/E-WEB-Goal-09.png'),
-	('Reduced Inequality', 'public/images/SDGs/E-WEB-Goal-10.png'),
-	('Sustainable Cities and Communities', 'public/images/SDGs/E-WEB-Goal-11.png'),
-	('Responsible Consumption and Production', 'public/images/SDGs/E-WEB-Goal-12.png'),
-	('Climate Action', 'public/images/SDGs/E-WEB-Goal-13.png'),
-	('Life Below Water', 'public/images/SDGs/E-WEB-Goal-14.png'),
-	('Life on Land', 'public/images/SDGs/E-WEB-Goal-15.png'),
-	('Peace, Justice and Strong Institutions', 'public/images/SDGs/E-WEB-Goal-16.png'),
-	('Partnerships for the Goals', 'public/images/SDGs/E-WEB-Goal-17.png')
+	('No Poverty', '/images/SDGs/E-WEB-Goal-01.png'),
+	('Zero Hunger', '/images/SDGs/E-WEB-Goal-02.png'),
+	('Good Health and Well-being', '/images/SDGs/E-WEB-Goal-03.png'),
+	('Quality Education', '/images/SDGs/E-WEB-Goal-04.png'),
+	('Gender Equality', '/images/SDGs/E-WEB-Goal-05.png'),
+	('Clean Water and Sanitation', '/images/SDGs/E-WEB-Goal-06.png'),
+	('Affordable and Clean Energy', '/images/SDGs/E-WEB-Goal-07.png'),
+	('Decent Work and Economic Growth', '/images/SDGs/E-WEB-Goal-08.png'),
+	('Industry, Innovation and Infrastructure', '/images/SDGs/E-WEB-Goal-09.png'),
+	('Reduced Inequality', '/images/SDGs/E-WEB-Goal-10.png'),
+	('Sustainable Cities and Communities', '/images/SDGs/E-WEB-Goal-11.png'),
+	('Responsible Consumption and Production', '/images/SDGs/E-WEB-Goal-12.png'),
+	('Climate Action', '/images/SDGs/E-WEB-Goal-13.png'),
+	('Life Below Water', '/images/SDGs/E-WEB-Goal-14.png'),
+	('Life on Land', '/images/SDGs/E-WEB-Goal-15.png'),
+	('Peace, Justice and Strong Institutions', '/images/SDGs/E-WEB-Goal-16.png'),
+	('Partnerships for the Goals', '/images/SDGs/E-WEB-Goal-17.png')
 ;
 
 CREATE TABLE "sdgJunction" (

@@ -153,6 +153,89 @@ hr.dotted {
 .problemText {
     border: solid black 1px;
 }
+
+.problem {
+    margin: 10px;
+    font-size: 14px;
+}
+
+.beneficiary {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.beneficiaryText {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.sectionTwoColor {
+    height: 4in;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.sdgImage {
+    margin-top: 20px;
+    margin-left:200px;
+}
+
+.targetText {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.targets {
+    margin-bottom: 0px;
+    margin-left: 20px;
+}
+
+.targetsHeading {
+    margin-bottom: 0px;
+}
+
+.sdgTarget {
+    margin-top: 0px;
+    color: plum
+}
+
+.metricsText {
+    margin-left: 300px;;
+}
+
+.explanation {
+    border: solid white 1px;
+    width: 620px;
+    height: 100px;
+    justify-self: center;
+    align-self: center;
+    margin-top: 150px;
+}
+
+.solutionParagraph {
+    width: 100%;
+}
+
+.solution {
+    width: 640px;
+    display: flex;
+    margin-left: 40px;
+}
+
+.efficacy {
+    margin-left: 360px;
+}
+
+.targetLocations {
+    width: 200px;
+    margin-left: 40px;
+}
+
+
 /* Section Three CSS */
 .reportSectionThree{
     background-image: url('/public/images/Basil\ Data\ Report\ Top\ and\ Bottom.png');
