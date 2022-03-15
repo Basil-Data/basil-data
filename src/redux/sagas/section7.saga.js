@@ -16,9 +16,9 @@ function* fetchNextSteps() {
 }
 
 // This section gets the client's previous answers
-function* getSectionSevenEnterprise () {
+function* getSectionSevenEnterprise (action) {
     try {
-        const response = yield axios.get(`/api/section7/:id`);
+        const response = yield axios.get(`/api/section7/${action.payload}`);
         yield put({
             type: 'SET_NEXT_STEPS_ENTERPRISE',
             payload: response.data

@@ -27,6 +27,7 @@ function SectionFourTraction() {
     (store) => store.section4Enterprise.progressIndicatorId
   );
   const user = useSelector((store) => store.user);
+  const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
   
 
   useEffect(() => {
@@ -35,7 +36,7 @@ function SectionFourTraction() {
       type: "FETCH_SECTION_FOUR",
     });
     dispatch({
-      type: "FETCH_ENTERPRISE_SECTION_FOUR",
+      type: "FETCH_ENTERPRISE_SECTION_FOUR", payload: selectedEnterprise,
     });
   }, []);
 

@@ -16,9 +16,9 @@ function* fetchRisksAndHurdles() {
 }
 
 // This section gets the client's previous answers
-function* getSectionSixEnterprise () {
+function* getSectionSixEnterprise (action) {
     try {
-        const response = yield axios.get(`/api/section6/:id`);
+        const response = yield axios.get(`/api/section6/${action.payload}`);
         yield put({
             type: 'SET_SECTION6_ENTERPRISE',
             payload: response.data

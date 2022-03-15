@@ -35,15 +35,14 @@ function SectionTwoImpact() {
     useEffect(() => {
         window.scrollTo(0, 0);
         dispatch({type: 'FETCH_SECTION_TWO'});
-        dispatch({type: 'FETCH_SECTION_TWO_ENTERPRISE'});
+        dispatch({type: 'FETCH_SECTION_TWO_ENTERPRISE', payload: selectedEnterprise});
     }, [])
 
     const user = useSelector(store => store.user);
     const impactSectors = useSelector(store => store.section2.impactSectors);
     const section2Enterprise = useSelector(store => store.section2Enterprise);
     const selectedImpactSector = useSelector(store => store.section2Enterprise.impactSectorId);
-
-
+    const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
 
     const handleSubmit = (event) => {
         event.preventDefault();

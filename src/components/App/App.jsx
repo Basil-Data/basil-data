@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import AdminPage from '../AdminPage/AdminPage';
 
 // Sections for forms
 import SectionOneStory from '../Questionnaire/SectionOneStory/SectionOneStory';
@@ -68,7 +69,11 @@ function App() {
             exact
             path="/user"
           >
+            {user.authLevel === 'guest' ?
             <UserPage />
+            :
+            <AdminPage />
+            }
           </ProtectedRoute>
 
           <ProtectedRoute
