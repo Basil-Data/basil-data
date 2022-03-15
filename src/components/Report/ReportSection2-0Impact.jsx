@@ -129,12 +129,13 @@ function ReportSection2Impact () {
                     <h3>The Problem:</h3>
                     <div className="problemText">
                         <p className="problem">{enterpriseAnswers.problemBeingSolved2}</p>
+                        <p className="costOfProblem">{enterpriseAnswers.costOfProblem2}</p>
                     </div>
                 </div>
                 <div className="beneficiary">
                     <div className="beneficiaryText">
                         <h4><b>OUR BENEFICIARY:</b></h4>
-                        <h5>Social Enterprises and nonprofits and their<br></br>target beneficiaries.</h5>
+                        <h5>{enterpriseAnswers.whoBenefits2}</h5>
                     </div>
                     <div className="sdgIcons">
                         <img 
@@ -157,12 +158,10 @@ function ReportSection2Impact () {
                             <h4 className="targetsHeading"><b>TARGETS:</b></h4>
                             <h5 className="sdgTarget">SDG Target {sdgId}</h5>
                         </div>
-                        <div className="metricsText">
-                            <h4><b>KEY METRICS:</b></h4>
-                            <h5><b>Other...</b></h5>
                     </div>
+                    <div className="explanation">
+                        <p>{enterpriseAnswers.elaborateOnIndicators2}</p>
                     </div>
-                    <div className="explanation"></div>
                 </div>
             </div>
         </Paper>

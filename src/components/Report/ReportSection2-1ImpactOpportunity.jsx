@@ -25,7 +25,7 @@ function ReportSection2ImpactOpportunity () {
                 <div className="sectionColor sectionTwoColor">
                     <div className="targetLocations">
                         <h3><b>Our Target Location(s):</b></h3>
-                        <h5>- Based in {}</h5>
+                        <h5>{enterpriseAnswers.focusedEfforts2}</h5>
                     </div>
                 </div>
                 <div className="outcomesSection">
