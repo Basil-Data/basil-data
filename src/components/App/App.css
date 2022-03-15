@@ -118,3 +118,24 @@ Landing Page
 .introDiv {
   display: flex;
 }
+
+/* --------------------------------------------------------------------------------
+Admin View
+-------------------------------------------------------------------------------- */
+.adminView{
+  margin-left: 100px;
+}
+
+.adminTable, th, td{
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td{
+  padding: 10px;
+}
+
+.tableClick{
+  color: blue;
+  text-decoration: underline;
+}
