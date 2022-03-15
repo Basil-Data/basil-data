@@ -25,12 +25,18 @@ function SectionSixRisksAndHurdles () {
     // store.section6 contains all of the selections for
     // this page of the questionnaire
     const section6 = useSelector((store) => store.section6);
+
+    const [riskSelection, setRiskSelection] = useState([]);
+    const [riskPreparedness, setRiskPreparedness] = useState('');
+
     // store.section6Enterprise contains all of the responses
     // for the respective enterprise
     const section6Enterprise = useSelector((store) => store.section6Enterprise);
     const anticipatedRisks = useSelector((store) => store.section6Enterprise.riskId);
     const barriers = useSelector((store) => store.section6Enterprise.barrierId);
     const factors = useSelector((store) => store.section6Enterprise.factorId);
+    const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
+
 
     const handleRisk = (event) => {
         const index = anticipatedRisks.indexOf(Number(event.target.value))
@@ -81,9 +87,11 @@ function SectionSixRisksAndHurdles () {
         window.scrollTo(0, 0);
         dispatch({
             type: "FETCH_RISKS_AND_HURDLES",
+            payload: selectedEnterprise
         });
         dispatch({ 
-            type: "FETCH_ENTERPRISE_SECTION_SIX"
+            type: "FETCH_ENTERPRISE_SECTION_SIX",
+            payload: selectedEnterprise
         })
     }, []);
 

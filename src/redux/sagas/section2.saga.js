@@ -33,10 +33,10 @@ function* fetchSectionTwo() {
 }
 
 
-function* fetchSectionTwoEnterprise() {
+function* fetchSectionTwoEnterprise(action) {
 
     try {
-        const response = yield axios.get(`/api/section2/:id`);
+        const response = yield axios.get(`/api/section2/${action.payload}`);
         yield put({
             type: 'SET_SECTION_TWO_ENTERPRISE',
             payload: response.data
