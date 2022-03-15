@@ -31,7 +31,7 @@ function* getSectionSixEnterprise () {
 }
 
 function* putSectionSix (action) {
-
+    
     try {
         // axios put request which includes all the data needing to be updated
         yield axios.put('api/section6', action.payload);

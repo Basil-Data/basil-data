@@ -22,16 +22,15 @@ function SectionSixRisksAndHurdles () {
 
     history.scrollRestoration = 'manual';
 
-
     // store.section6 contains all of the selections for
     // this page of the questionnaire
     const section6 = useSelector((store) => store.section6);
     // store.section6Enterprise contains all of the responses
     // for the respective enterprise
     const section6Enterprise = useSelector((store) => store.section6Enterprise);
-    const anticipatedRisks = useSelector((store) => store.section6Enterprise.risks);
-
-    let regex = /.*(?= - )/gm;
+    const anticipatedRisks = useSelector((store) => store.section6Enterprise.riskId);
+    const barriers = useSelector((store) => store.section6Enterprise.barrierId);
+    const factors = useSelector((store) => store.section6Enterprise.factorId);
 
     const handleRisk = (event) => {
         const index = anticipatedRisks.indexOf(Number(event.target.value))
@@ -48,13 +47,34 @@ function SectionSixRisksAndHurdles () {
         }
     }
 
-    const replaceRisk = (replacement, anticipatedRisks) => {
-        let newRisk = anticipatedRisks?.filter((obj => obj.riskId === replacement.riskId)[0]);
-        console.log('newRisk is:', newRisk);
-        dispatch({
-            type: "SET_SECTION6_ENTERPRISE",
-            payload: {risks: [...anticipatedRisks, newRisk]}
-        });
+    const handleBarriers = (event) => {
+        const index = barriers.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: "SET_SECTION6_ENTERPRISE",
+                payload: {barrierId: [...barriers, Number(event.target.value)]}
+            });
+        } else {
+            dispatch({
+                type: "SET_SECTION6_ENTERPRISE",
+                payload: {barrierId: barriers.filter((barriers) => barriers !== Number(event.target.value))}
+            });
+        }
+    }
+
+    const handleFactors = (event) => {
+        const index = factors.indexOf(Number(event.target.value))
+        if (index === -1) {
+            dispatch({
+                type: "SET_SECTION6_ENTERPRISE",
+                payload: {factorId: [...factors, Number(event.target.value)]}
+            });
+        } else {
+            dispatch({
+                type: "SET_SECTION6_ENTERPRISE",
+                payload: {factorId: factors.filter((factors) => factors !== Number(event.target.value))}
+            });
+        }
     }
 
     useEffect(() => {
@@ -93,12 +113,12 @@ function SectionSixRisksAndHurdles () {
             <p>We understand these risks may be new to you. If you have not yet considered 
                 any of these risks, please select "None at this stage"
             </p>
-            {/* <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
+            <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
                     {section6.results1?.map(risk => (
                             <FormControlLabel 
                                 key={risk.id}
-                                checked={checkContents = anticipatedRisks?.map(({riskId}) => [riskId]).includes(risk.id)} 
+                                checked={anticipatedRisks.includes(risk.id)} 
                                 control={
                                     <Checkbox
                                         value={risk.id}
@@ -109,12 +129,10 @@ function SectionSixRisksAndHurdles () {
                             />
                     ))}
                 </FormControl>
-            </Box> */}
+            </Box>
 
-            {anticipatedRisks.length > 0 ? anticipatedRisks?.map (risk =>
-            <>
-            <h5>Please tell us more about how you've prepared (or plan to prepare) 
-                for: {(section6.results1?.filter(value => value.id === risk.riskId))[0].risk.match(regex)}.</h5>
+            <h5>If applicable, please tell us more about how you've prepared 
+                (or plan to prepare) for each of the selected impact risks. </h5>
             <Grid
                 container
                 spacing={0}
@@ -134,21 +152,18 @@ function SectionSixRisksAndHurdles () {
                         variant="outlined" 
                         multiline rows={5} 
                         fullWidth
-                        value={risk.riskPreparedness}
-                        onChange = {(event) => replaceRisk({riskId: risk.riskId, riskPreparedness: event.target.value}, anticipatedRisks)}
-                        // onChange = {(event) =>
-                        //     { dispatch({
-                        //         type: "SET_SECTION6_ENTERPRISE",
-                        //         payload: {risks: [...anticipatedRisks, {riskId: risk.riskId, riskPreparedness: event.target.value}]}
-                        //     }); }
-                        // }
+                        value={section6Enterprise.riskPrep6 || ''}
+                        onChange = {(event) =>
+                            { dispatch({
+                                type: "SET_SECTION6_ENTERPRISE",
+                                payload: {riskPrep6: event.target.value}
+                            }); }
+                        }
                     />
                 </Box>
             </Grid>
-            </>
-            ) : <></> }
 
-            {/* <h5>From the list below, please select the startup barriers that are most applicable to you.</h5>
+            <h5>From the list below, please select the startup barriers that are most applicable to you.</h5>
             <p>The aim of this question is to gain a grasp of how your organization is dealing with/plans to 
                 deal with potential hurdles.
             </p>
@@ -156,11 +171,12 @@ function SectionSixRisksAndHurdles () {
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
                     {section6.results2?.map(barrier => (
                             <FormControlLabel 
-                                key={barrier.id} 
+                                key={barrier.id}
+                                checked={barriers.includes(barrier.id)}  
                                 control={
                                     <Checkbox
                                         value={barrier.id}
-                                        
+                                        onChange={handleBarriers}
                                     />
                                 } 
                                 label={barrier.barrier} 
@@ -191,9 +207,18 @@ function SectionSixRisksAndHurdles () {
                         variant="outlined" 
                         multiline rows={5} 
                         fullWidth
+                        value={section6Enterprise.barrierPlan6 || ''}
+                        onChange = {(event) =>
+                            { dispatch({
+                                type: "SET_SECTION6_ENTERPRISE",
+                                payload: {barrierPlan6: event.target.value}
+                            }); }
+                        }
                     />
                 </Box>
             </Grid>
+
+            
 
             <h5>Select factors that could significantly influence the growth 
                 path of your enterprise (positive or negative)
@@ -206,7 +231,17 @@ function SectionSixRisksAndHurdles () {
             <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
                 <FormControl className='questionnaireForm' sx={{ m : 3}}>
                     {section6.results3?.map(factor => (
-                            <FormControlLabel key={factor.id} control={<Checkbox />} label={factor.factor} />
+                            <FormControlLabel 
+                                key={factor.id}
+                                checked={factors.includes(factor.id)}  
+                                control={
+                                    <Checkbox
+                                        value={factor.id}
+                                        onChange={handleFactors}
+                                    />
+                                } 
+                                label={factor.factor} 
+                            />
                     ))}
                 </FormControl>
             </Box>
@@ -236,10 +271,17 @@ function SectionSixRisksAndHurdles () {
                         label="Impact Risk Planning" 
                         variant="outlined" 
                         multiline rows={5} 
-                        fullWidth 
+                        fullWidth
+                        value={section6Enterprise.externalGrowth6 || ''}
+                        onChange = {(event) =>
+                            { dispatch({
+                                type: "SET_SECTION6_ENTERPRISE",
+                                payload: {externalGrowth6: event.target.value}
+                            }); }
+                        } 
                     />
                 </Box>
-            </Grid> */}
+            </Grid>
 
             <Link to="/market"><button className="btn">Back</button></Link>
 

@@ -36,8 +36,29 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
 router.get('/:id', rejectUnauthenticated, async (req, res) => {
 
     let sqlText1 = `
-        SELECT "riskId", "riskPreparedness"
+        SELECT 
+            ARRAY_AGG("riskId")
         FROM "anticipatedRisksJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText2 = `
+        SELECT 
+            ARRAY_AGG("barrierId")
+        FROM "startupBarriersJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText3 = `
+        SELECT 
+            ARRAY_AGG("factorId")
+        FROM "growthFactorsJunction"
+        WHERE "enterpriseId" = $1;
+    `;
+
+    let sqlText4 = `
+        SELECT "riskPrep6", "barrierPlan6", "externalGrowth6"
+        FROM "answers"
         WHERE "enterpriseId" = $1;
     `;
 
@@ -45,54 +66,130 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
         req.user.id
     ];
 
-    const enterpriseRisk = await pool.query(sqlText1, sqlParams);
-    console.log('enterprise risk:', enterpriseRisk);
+    let riskId = await pool.query(sqlText1, sqlParams);
+    let barrierId = await pool.query(sqlText2, sqlParams);
+    let factorId = await pool.query(sqlText3, sqlParams);
+    let answers = await pool.query(sqlText4, sqlParams);
 
-    // const results = {        
-    //     riskId: enterpriseRisk.rows[0].riskId ?? [],
-    //     riskPreparedness: enterpriseRisk.rows[0].riskPreparedness ?? [],
-    // }
-    
-    res.send({risks: enterpriseRisk.rows});
+    [riskId, barrierId, factorId, answers] = await Promise.all([
+        pool.query(sqlText1, sqlParams),
+        pool.query(sqlText2, sqlParams),
+        pool.query(sqlText3, sqlParams),
+        pool.query(sqlText4, sqlParams)
+    ])
+
+    res.send({
+        riskId: riskId.rows[0]?.array_agg || [], 
+        barrierId: barrierId.rows[0]?.array_agg || [], 
+        factorId: factorId.rows[0]?.array_agg || [], 
+        riskPrep6: answers.rows[0]?.riskPrep6 || '',
+        barrierPlan6: answers.rows[0]?.barrierPlan6 || '',
+        externalGrowth6: answers.rows[0]?.externalGrowth6 || ''
+    });
 });
 
 
 // POST endpoint for posting to junction table for check boxes
 router.put('/', rejectUnauthenticated, async (req, res) => {
 
-    console.log('req.body is:', req.body);
-
     try {
-        let sqlText1 = `
-        DELETE FROM "anticipatedRisksJunction"
-        WHERE "enterpriseId" = $1;
+
+        let sqlText = `
+            UPDATE "answers"
+            SET 
+                "riskPrep6" = $2,
+                "barrierPlan6" = $3,
+                "externalGrowth6" = $4
+            WHERE "answers"."enterpriseId" = $1;
         `;
 
         let sqlParams1 = [
+            req.user.id,
+            req.body.riskPrep6,
+            req.body.barrierPlan6,
+            req.body.externalGrowth6
+        ];
+
+        await pool.query(sqlText, sqlParams1);
+
+        let sqlText1 = `
+            DELETE FROM "anticipatedRisksJunction"
+            WHERE "enterpriseId" = $1;
+        `;
+
+        let sqlText3 = `
+            DELETE FROM "startupBarriersJunction"
+            WHERE "enterpriseId" = $1;
+        `;
+
+        let sqlText5 = `
+            DELETE FROM "growthFactorsJunction"
+            WHERE "enterpriseId" = $1;
+        `;
+
+        let sqlParams = [
             req.user.id
         ];
 
-        await pool.query(sqlText1, sqlParams1);
+        await Promise.all([
+            pool.query(sqlText1, sqlParams),
+            pool.query(sqlText3, sqlParams),
+            pool.query(sqlText5, sqlParams)
+        ])
 
         for (let risk of req.body.riskId) {
 
             let sqlText2 = `
-                    INSERT INTO "anticipatedRisksJunction"
-                        ("enterpriseId", "riskId", "riskPreparedness")
-                    VALUES
-                        ($1, $2, $3);
-                `;
+                INSERT INTO "anticipatedRisksJunction"
+                    ("enterpriseId", "riskId")
+                VALUES
+                    ($1, $2);
+            `;
 
             let sqlParams2 = [
                 req.user.id,
-                req.body.riskId,
-                req.body.riskPreparedness
+                risk
             ];
 
             await pool.query(sqlText2, sqlParams2);
 
         }
-        
+
+        for (let barrier of req.body.barrierId) {
+
+            let sqlText4 = `
+                INSERT INTO "startupBarriersJunction"
+                    ("enterpriseId", "barrierId")
+                VALUES
+                    ($1, $2);
+            `;
+
+            let sqlParams4 = [
+                req.user.id,
+                barrier
+            ];
+
+            await pool.query(sqlText4, sqlParams4);
+
+        }
+
+        for (let factor of req.body.factorId) {
+
+            let sqlText6 = `
+                INSERT INTO "growthFactorsJunction"
+                    ("enterpriseId", "factorId")
+                VALUES
+                    ($1, $2);
+            `;
+
+            let sqlParams6 = [
+                req.user.id,
+                factor
+            ];
+
+            await pool.query(sqlText6, sqlParams6);
+
+        }
         res.sendStatus(200);
     }
     catch (error){

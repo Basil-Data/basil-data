@@ -1,9 +1,10 @@
 const section6Enterprise = (state = {
-    risks: [],
+    riskId: [],
     barrierId: [],
     factorId: [],
-    barrierPlan: [],
-    factorReasons: []
+    riskPrep6: '',
+    barrierPlan6: '',
+    externalGrowth6: ''
 }, action) => {
 switch (action.type) {
     case 'SET_SECTION6_ENTERPRISE':
