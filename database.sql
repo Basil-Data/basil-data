@@ -109,11 +109,13 @@ CREATE TABLE "impactTableJunction" (
 CREATE TABLE "indicators" (
 	"id" SERIAL PRIMARY KEY,
 	"sdgId" INTEGER,
-	"indicator" VARCHAR (255)
+	"indicator" VARCHAR (255),
+	"targetNumber" VARCHAR (255),
+	"targetText" VARCHAR (8000)
 );
 
 INSERT INTO "indicators"
-	("sdgId", "indicator")
+	("sdgId", "indicator", "targetNumber", "targetText")
 VALUES
 	(1, 'Poverty Levels'),
 	(1, 'Change In Poverty'),

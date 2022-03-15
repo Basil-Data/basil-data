@@ -159,6 +159,11 @@ hr.dotted {
     font-size: 14px;
 }
 
+.costOfProblem {
+    margin: 10px;
+    font-size: 14px;
+}
+
 .beneficiary {
     display: flex;
     flex-direction: row;
@@ -168,6 +173,7 @@ hr.dotted {
 .beneficiaryText {
     margin-top: 10px;
     margin-left: 10px;
+    width: 400px;
 }
 
 .sectionTwoColor {
@@ -178,9 +184,16 @@ hr.dotted {
     flex-direction: column;
 }
 
-.sdgImage {
+.sdgIcons {
     margin-top: 20px;
-    margin-left:200px;
+    margin-left:70px;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.secondarySDGImage {
+    margin-top: 30px;
 }
 
 .targetText {
