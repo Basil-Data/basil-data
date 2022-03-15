@@ -26,6 +26,7 @@ function SectionSixRisksAndHurdles () {
     // store.section6 contains all of the selections for
     // this page of the questionnaire
     const section6 = useSelector((store) => store.section6);
+    const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
 
     const [riskSelection, setRiskSelection] = useState([]);
     const [riskPreparedness, setRiskPreparedness] = useState('');
@@ -43,6 +44,7 @@ function SectionSixRisksAndHurdles () {
         window.scrollTo(0, 0);
         dispatch({
             type: "FETCH_RISKS_AND_HURDLES",
+            payload: selectedEnterprise
         });
     }, []);
 

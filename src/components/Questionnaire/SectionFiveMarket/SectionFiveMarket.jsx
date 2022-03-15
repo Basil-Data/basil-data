@@ -13,7 +13,8 @@ function SectionFiveMarket() {
   const dispatch = useDispatch();
   const history = useHistory();
   const section5 = useSelector((store) => store.section5Enterprise);
-  const user = useSelector((store) => store.user)
+  const user = useSelector((store) => store.user);
+  const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
   console.log('user.id is', user.id);
 
   history.scrollRestoration = 'manual';
@@ -23,6 +24,7 @@ function SectionFiveMarket() {
     window.scrollTo(0, 0);
     dispatch({
         type: "FETCH_ENTERPRISE_SECTION_FIVE",
+        payload: selectedEnterprise
     });
 }, []);
 

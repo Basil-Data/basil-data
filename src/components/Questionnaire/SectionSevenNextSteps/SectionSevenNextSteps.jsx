@@ -29,6 +29,7 @@ function SectionSevenNextSteps () {
     const investmentSelection = useSelector((store) => store.section7Enterprise.investmentVehicleId);
     const fundingUse = useSelector((store) => store.section7Enterprise.fundingUseId);
     const wayAhead = useSelector((store) => store.section7Enterprise.assistanceId);
+    const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
 
     console.log('section7Enterprise.societalImpactId.societalImpactId:', section7Enterprise.societalImpactId.societalImpactId);
 
@@ -38,7 +39,8 @@ function SectionSevenNextSteps () {
             type: "FETCH_NEXT_STEPS",
         });
         dispatch({ 
-            type: "FETCH_ENTERPRISE_SECTION_SEVEN"
+            type: "FETCH_ENTERPRISE_SECTION_SEVEN",
+            payload: selectedEnterprise
         })
     }, []);
 
