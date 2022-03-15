@@ -27,15 +27,15 @@ CREATE TABLE "answers" (
     "percentageBIPOC1" INTEGER DEFAULT NULL,
     "percentageFemale1" INTEGER DEFAULT NULL,
     "investorIntroduction1" VARCHAR (1024) DEFAULT NULL,
-    "problemBeingSolved2" VARCHAR (1024) DEFAULT NULL,
+    "problemBeingSolved2" VARCHAR (8000) DEFAULT NULL,
     "costOfProblem2" VARCHAR (1024) DEFAULT NULL,
-    "howTheySolve2" VARCHAR (1024) DEFAULT NULL,
+    "howTheySolve2" VARCHAR (8000) DEFAULT NULL,
     "whoBenefits2" VARCHAR (1024) DEFAULT NULL,
-	"elaborateOnIndicators2" VARCHAR (1024) DEFAULT NULL,
+	"elaborateOnIndicators2" VARCHAR (8000) DEFAULT NULL,
     "organizationLocation2" VARCHAR (1024) DEFAULT NULL,
 	"focusedEfforts2" VARCHAR (1024) DEFAULT NULL,
     "specificChanges2" VARCHAR (1024) DEFAULT NULL,
-    "measuredOutcome2" BOOLEAN DEFAULT NULL,
+    "measuredOutcome2" VARCHAR (1024) DEFAULT NULL,
     "secondarySDG2" VARCHAR (1024) DEFAULT NULL,
     "impactLevel2" VARCHAR (1024) DEFAULT NULL,
 	"payingCustomerProfile3" VARCHAR (1024) DEFAULT NULL,
@@ -55,6 +55,9 @@ CREATE TABLE "answers" (
 	"addressableMarket5" INTEGER DEFAULT NULL,
 	"serviceableMarket5" INTEGER DEFAULT NULL,
 	"obtainableMarket5" INTEGER DEFAULT NULL,
+	"riskPrep6" VARCHAR (1024) DEFAULT NULL,
+	"barrierPlan6" VARCHAR (1024) DEFAULT NULL,
+	"externalGrowth6" VARCHAR (1024) DEFAULT NULL,
 	"whyRealistic5" VARCHAR (1024) DEFAULT NULL,
 	"raisingFunds7" VARCHAR (255) DEFAULT NULL,
 	"targetAmount7" INTEGER DEFAULT NULL,
@@ -102,7 +105,7 @@ CREATE TABLE "impactTableJunction" (
 	"impactSectorId" INTEGER
 );
 
-DROP TABLE "indicators";
+
 CREATE TABLE "indicators" (
 	"id" SERIAL PRIMARY KEY,
 	"sdgId" INTEGER,
@@ -254,8 +257,7 @@ VALUES
 	(17, 'Share of global exports'),
 	(17, 'Policies in favor or sustainable development'),
 	(17, 'Spending and policies on statistical measurement strategies');
-	
-DROP TABLE "indicatorsJunction";	
+		
 
 CREATE TABLE "indicatorsJunction" (
 	"id" SERIAL PRIMARY KEY,
@@ -289,23 +291,23 @@ CREATE TABLE "sdg" (
 INSERT INTO "sdg"
 	("sdg", "icon")
 VALUES
-	('No Poverty', 'public/images/SDGs/E-WEB-Goal-01.png'),
-	('Zero Hunger', 'public/images/SDGs/E-WEB-Goal-02.png'),
-	('Good Health and Well-being', 'public/images/SDGs/E-WEB-Goal-03.png'),
-	('Quality Education', 'public/images/SDGs/E-WEB-Goal-04.png'),
-	('Gender Equality', 'public/images/SDGs/E-WEB-Goal-05.png'),
-	('Clean Water and Sanitation', 'public/images/SDGs/E-WEB-Goal-06.png'),
-	('Affordable and Clean Energy', 'public/images/SDGs/E-WEB-Goal-07.png'),
-	('Decent Work and Economic Growth', 'public/images/SDGs/E-WEB-Goal-08.png'),
-	('Industry, Innovation and Infrastructure', 'public/images/SDGs/E-WEB-Goal-09.png'),
-	('Reduced Inequality', 'public/images/SDGs/E-WEB-Goal-10.png'),
-	('Sustainable Cities and Communities', 'public/images/SDGs/E-WEB-Goal-11.png'),
-	('Responsible Consumption and Production', 'public/images/SDGs/E-WEB-Goal-12.png'),
-	('Climate Action', 'public/images/SDGs/E-WEB-Goal-13.png'),
-	('Life Below Water', 'public/images/SDGs/E-WEB-Goal-14.png'),
-	('Life on Land', 'public/images/SDGs/E-WEB-Goal-15.png'),
-	('Peace, Justice and Strong Institutions', 'public/images/SDGs/E-WEB-Goal-16.png'),
-	('Partnerships for the Goals', 'public/images/SDGs/E-WEB-Goal-17.png')
+	('No Poverty', '/images/SDGs/E-WEB-Goal-01.png'),
+	('Zero Hunger', '/images/SDGs/E-WEB-Goal-02.png'),
+	('Good Health and Well-being', '/images/SDGs/E-WEB-Goal-03.png'),
+	('Quality Education', '/images/SDGs/E-WEB-Goal-04.png'),
+	('Gender Equality', '/images/SDGs/E-WEB-Goal-05.png'),
+	('Clean Water and Sanitation', '/images/SDGs/E-WEB-Goal-06.png'),
+	('Affordable and Clean Energy', '/images/SDGs/E-WEB-Goal-07.png'),
+	('Decent Work and Economic Growth', '/images/SDGs/E-WEB-Goal-08.png'),
+	('Industry, Innovation and Infrastructure', '/images/SDGs/E-WEB-Goal-09.png'),
+	('Reduced Inequality', '/images/SDGs/E-WEB-Goal-10.png'),
+	('Sustainable Cities and Communities', '/images/SDGs/E-WEB-Goal-11.png'),
+	('Responsible Consumption and Production', '/images/SDGs/E-WEB-Goal-12.png'),
+	('Climate Action', '/images/SDGs/E-WEB-Goal-13.png'),
+	('Life Below Water', '/images/SDGs/E-WEB-Goal-14.png'),
+	('Life on Land', '/images/SDGs/E-WEB-Goal-15.png'),
+	('Peace, Justice and Strong Institutions', '/images/SDGs/E-WEB-Goal-16.png'),
+	('Partnerships for the Goals', '/images/SDGs/E-WEB-Goal-17.png')
 ;
 
 CREATE TABLE "sdgJunction" (
@@ -461,7 +463,7 @@ VALUES
 	('Drop-off Risk - the positive impact does not endure or the negative impact is no longer mitigated'),
 	('Efficiency Risk - impact could be achieved with fewer resourcces or at a lower cost'),
 	('Execution Risk - activities are not delivered as planned and do not result in desired outcomes'),
-	('Alignement Risk - impact is not aligned into the enterprise model'),
+	('Alignment Risk - impact is not aligned into the enterprise model'),
 	('Endurance Risk - required activities are not delivered for a long enough period'),
 	('Unexpected Impact Risk - significant unexpected impact is experienced by stakeholders'),
 	('None at this stage');

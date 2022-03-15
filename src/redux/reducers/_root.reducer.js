@@ -11,6 +11,7 @@ import section4 from './section4.reducer';
 import section4Enterprise from './section4Enterprise.reducer';
 import section5Enterprise from './section5Enterprise.reducer';
 import section6 from './section6.reducer';
+import section6Enterprise from './section6Enterprise.reducer';
 import section7 from './section7.reducer';
 import section7Enterprise from './section7Enterprise.reducer';
 import reportReducer from './report.reducer';
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   section4Enterprise,
   section5Enterprise,
   section6,
+  section6Enterprise,
   section7,
   section7Enterprise,
   reportReducer,
