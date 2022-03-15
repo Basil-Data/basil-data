@@ -20,13 +20,13 @@ function ReportSection5Chart() {
     }, []);
 
     const data = {
-        labels: ['Total Addressable Market (US Dollars)', 'Serviceable Addressable Market', 'Serviceable Obtainable Market'],
+        labels: ['Total Addressable Market (US Dollars)', 'Serviceable Addressable Market (US Dollars)', 'Serviceable Obtainable Market (US Dollars)'],
         datasets: [
             {
                 labels: [
-                        'Total Addressable Market', 
-                        'Serviceable Addressable Market',
-                        'Serviceable Obtainable Market'],
+                        'Total Addressable Market (US Dollars)', 
+                        'Serviceable Addressable Market (US Dollars)',
+                        'Serviceable Obtainable Market (US Dollars)'],
                 data: [section5Enterprise.addressableMarket5,
                         section5Enterprise.serviceableMarket5,
                         section5Enterprise.obtainableMarket5],
@@ -41,7 +41,13 @@ function ReportSection5Chart() {
 
     return (
         <>
-            <Doughnut data={data}/>
+            <div style={{height:"50vh", width:"50vh", position:"relative", marginBottom:"1%", padding:"1%"}}>
+            <Doughnut 
+                data={data}
+                height="300px"
+                width="300px"
+            />
+            </div>
         </>
     )
 
