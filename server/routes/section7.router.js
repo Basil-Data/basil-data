@@ -122,8 +122,6 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
         environmentalImpactId: environmentalImpactId.rows[0]?.environmentalImpactId || 0,
         economicImpactId: economicImpactId.rows[0]?.economicImpactId || 0
     }
-
-    console.log('results is:', results);
     
     res.send(results);
 });

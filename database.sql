@@ -55,6 +55,9 @@ CREATE TABLE "answers" (
 	"addressableMarket5" INTEGER DEFAULT NULL,
 	"serviceableMarket5" INTEGER DEFAULT NULL,
 	"obtainableMarket5" INTEGER DEFAULT NULL,
+	"riskPrep6" VARCHAR (1024) DEFAULT NULL,
+	"barrierPlan6" VARCHAR (1024) DEFAULT NULL,
+	"externalGrowth6" VARCHAR (1024) DEFAULT NULL,
 	"whyRealistic5" VARCHAR (1024) DEFAULT NULL,
 	"raisingFunds7" VARCHAR (255) DEFAULT NULL,
 	"targetAmount7" INTEGER DEFAULT NULL,
@@ -461,7 +464,7 @@ VALUES
 	('Drop-off Risk - the positive impact does not endure or the negative impact is no longer mitigated'),
 	('Efficiency Risk - impact could be achieved with fewer resourcces or at a lower cost'),
 	('Execution Risk - activities are not delivered as planned and do not result in desired outcomes'),
-	('Alignement Risk - impact is not aligned into the enterprise model'),
+	('Alignment Risk - impact is not aligned into the enterprise model'),
 	('Endurance Risk - required activities are not delivered for a long enough period'),
 	('Unexpected Impact Risk - significant unexpected impact is experienced by stakeholders'),
 	('None at this stage');

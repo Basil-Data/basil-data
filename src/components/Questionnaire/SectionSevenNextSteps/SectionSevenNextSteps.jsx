@@ -148,6 +148,7 @@ function SectionSevenNextSteps () {
                 id="outlined-basic" 
                 label="Fundraising Target" 
                 variant="outlined"
+                type="number"
                 value={section7Enterprise.targetAmount7 ?? ''}
                 onChange = {(event) =>
                     { dispatch({
@@ -259,7 +260,7 @@ function SectionSevenNextSteps () {
             aria-labelledby="social-impact"
             defaultValue={0}
             name="radio-buttons-group"
-            value = {section7Enterprise.societalImpactId}
+            value = {Number(section7Enterprise.societalImpactId)}
             onChange = {(event) =>
                 { dispatch({
                     type: "SET_NEXT_STEPS_ENTERPRISE",
