@@ -31,7 +31,7 @@ function SectionFourTraction() {
   
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+
     dispatch({
       type: "FETCH_SECTION_FOUR",
     });
@@ -244,6 +244,7 @@ function SectionFourTraction() {
           label="Growth Percentage"
           variant="outlined"
           value={section4Enterprise.customerGrowth4}
+          InputLabelProps={{shrink: true,}}
           onChange={(evt) =>
             dispatch({
               type: "SET_SECTION4_ENTERPRISE",
@@ -256,7 +257,7 @@ function SectionFourTraction() {
 
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue=""
+          defaultValue=''
           row
           name="radio-buttons-group"
           className="centerHelp"
@@ -272,18 +273,18 @@ function SectionFourTraction() {
             labelPlacement="top"
             control={<Radio />}
             label="Yes"
-            value="true"
+            value='true'
           />
 
           <FormControlLabel
             labelPlacement="top"
             control={<Radio />}
             label="No"
-            value="false"
+            value='false'
           />
         </RadioGroup>
         {/* Questions below are generated if the user chooses yes. */}
-        {section4Enterprise.generatingRevenue4 === "true" && (
+        {section4Enterprise.generatingRevenue4 === 'true' && (
           <>
             <h5>
               What is your average growth in monthly revenue over the past 6
