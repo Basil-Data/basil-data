@@ -115,7 +115,7 @@ CREATE TABLE "indicators" (
 );
 
 INSERT INTO "indicators"
-	("sdgId", "indicator", "targetNumber", "targetText")
+	("sdgId", "indicator")
 VALUES
 	(1, 'Poverty Levels'),
 	(1, 'Change In Poverty'),
