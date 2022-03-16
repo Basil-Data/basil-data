@@ -38,13 +38,17 @@ function ReportSection5Market () {
 
                     </div>
                 </div>
-                <div className="sectionColor sectionThreeColor">
+                <div className="sectionColor section5Color">
                     <div className="section5IndustryPerspective">
-                            <h2>
+                            <h2 className="industryHeader">
                                 INDUSTRY PERSPECTIVE:
                             </h2>
 
-                            <p>Perspective quotes go here</p>
+                            <p>{enterpriseAnswers.industryPerspectiveOne5}</p>
+                            <br />
+                            <p>{enterpriseAnswers.industryPerspectiveTwo5}</p>
+                            <br />
+                            <p>{enterpriseAnswers.industryPerspectiveThree5}</p>
                     </div>
                 </div>
             </Paper>

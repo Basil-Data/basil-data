@@ -214,7 +214,7 @@ function SectionFiveMarket() {
               label="50-Word Limit Quote"
               variant="outlined"
               multiline
-              rows={5}
+              rows={2}
               fullWidth
               value={section5.industryPerspectiveOne5}
               InputLabelProps={{shrink: true,}}
@@ -249,7 +249,7 @@ function SectionFiveMarket() {
               label="50-Word Limit Quote"
               variant="outlined"
               multiline
-              rows={5}
+              rows={2}
               fullWidth
               value={section5.industryPerspectiveTwo5}
               InputLabelProps={{shrink: true,}}
@@ -283,7 +283,7 @@ function SectionFiveMarket() {
               label="50-Word Limit Quote"
               variant="outlined"
               multiline
-              rows={5}
+              rows={2}
               fullWidth
               value={section5.industryPerspectiveThree5}
               InputLabelProps={{shrink: true,}}

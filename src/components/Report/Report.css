@@ -234,7 +234,7 @@ hr.dotted {
 }
 
 .section5Color {
-    height: 500px;
+    height: 315px;
     margin-top: 100px;
     margin-left: 0px;
     display: flex;
@@ -245,6 +245,12 @@ hr.dotted {
 .section5IndustryPerspective {
     color: white;
     margin-left: 30px;
+    font-size: 15px;
+    
+}
+
+.industryHeader {
+    font-family: 'Arial';
 }
 
 /* Final Page CSS */
