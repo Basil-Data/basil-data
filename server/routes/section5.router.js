@@ -49,9 +49,17 @@ router.get('/:id', async (req, res) => {
     WHERE "enterpriseId" = $1;
     `;
   
-    let sqlParams = [
-      req.user.id
-    ]
+    let sqlParams = [];
+    if (req.user.authLevel === 'guest') {
+        sqlParams = [
+            req.user.id
+        ];
+    }
+    else { 
+        sqlParams = [
+            req.params.id
+        ]
+    }
 
     const answers = await pool.query(sqlText, sqlParams);
 

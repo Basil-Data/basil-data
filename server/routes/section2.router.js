@@ -66,9 +66,17 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
         WHERE "enterpriseId" = $1
     `;
 
-    const sqlParams = [
-        req.user.id
-    ];
+    let sqlParams = [];
+    if (req.user.authLevel === 'guest') {
+        sqlParams = [
+            req.user.id
+        ];
+    }
+    else { 
+        sqlParams = [
+            req.params.id
+        ]
+    }
 
     const impactSectorId = await pool.query(sqlText, sqlParams);
     const segmentId = await pool.query(sqlText2, sqlParams);

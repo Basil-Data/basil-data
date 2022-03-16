@@ -27,7 +27,7 @@ function SectionThreeSolution () {
     useEffect(() => {
         window.scrollTo(0, 0);
         dispatch({ type: 'FETCH_SECTION_THREE'});
-        dispatch({ type: 'FETCH_ENTERPRISE_SECTION_THREE'});
+        dispatch({ type: 'FETCH_ENTERPRISE_SECTION_THREE', payload: selectedEnterprise});
     }, []);
 
     // get the user.id from the store to send with everything else
@@ -42,6 +42,7 @@ function SectionThreeSolution () {
     const selectedOperatingSector = useSelector(store => store.section3Enterprise.operatingSectorId);
     const selectedPainPoints = useSelector(store => store.section3Enterprise.painPointsId);
     const selectedTechnologies = useSelector(store => store.section3Enterprise.technologiesId);
+    const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
 
     const handleOperatingSectors = (event) => {
         const index = selectedOperatingSector.indexOf(Number(event.target.value))

@@ -42,9 +42,17 @@ router.get('/:id', rejectUnauthenticated, async (req,res) => {
       WHERE "enterpriseId" = $1;
     `;
   
-    let sqlParams = [
-      req.user.id
-    ];
+    let sqlParams = [];
+    if (req.user.authLevel === 'guest') {
+        sqlParams = [
+            req.user.id
+        ];
+    }
+    else { 
+        sqlParams = [
+            req.params.id
+        ]
+    }
 
     let sqlText2 =`
       SELECT
@@ -85,8 +93,8 @@ router.get('/:id', rejectUnauthenticated, async (req,res) => {
     const results = {
       progressIndicatorId: Array.isArray(progressIndicatorId.rows[0].array_agg) ? progressIndicatorId.rows[0].array_agg : [],
       ...answers.rows[0],
-      developmentStageId: developmentStageId.rows[0].developmentStageId ?? null,
-      investmentStageId: investmentStageId.rows[0].investmentStageId ?? null
+      developmentStageId: developmentStageId.rows[0]?.developmentStageId || '',
+      investmentStageId: investmentStageId.rows[0]?.investmentStageId || ''
     }
     
     res.send(results)

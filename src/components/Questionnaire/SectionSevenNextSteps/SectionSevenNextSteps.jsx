@@ -29,7 +29,9 @@ function SectionSevenNextSteps () {
     const investmentSelection = useSelector((store) => store.section7Enterprise.investmentVehicleId);
     const fundingUse = useSelector((store) => store.section7Enterprise.fundingUseId);
     const wayAhead = useSelector((store) => store.section7Enterprise.assistanceId);
-    console.log('section 7:', section7);
+    const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
+
+    console.log('section7Enterprise.societalImpactId.societalImpactId:', section7Enterprise.societalImpactId.societalImpactId);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -37,7 +39,8 @@ function SectionSevenNextSteps () {
             type: "FETCH_NEXT_STEPS",
         });
         dispatch({ 
-            type: "FETCH_ENTERPRISE_SECTION_SEVEN"
+            type: "FETCH_ENTERPRISE_SECTION_SEVEN",
+            payload: selectedEnterprise
         })
     }, []);
 
@@ -147,6 +150,7 @@ function SectionSevenNextSteps () {
                 id="outlined-basic" 
                 label="Fundraising Target" 
                 variant="outlined"
+                type="number"
                 value={section7Enterprise.targetAmount7 ?? ''}
                 onChange = {(event) =>
                     { dispatch({
@@ -256,9 +260,9 @@ function SectionSevenNextSteps () {
         </p>
         <RadioGroup
             aria-labelledby="social-impact"
-            defaultValue=""
+            defaultValue={0}
             name="radio-buttons-group"
-            value = {section7Enterprise.societalImpactId}
+            value = {Number(section7Enterprise.societalImpactId)}
             onChange = {(event) =>
                 { dispatch({
                     type: "SET_NEXT_STEPS_ENTERPRISE",
@@ -283,7 +287,7 @@ function SectionSevenNextSteps () {
         </p>
         <RadioGroup
             aria-labelledby="environmental-impact"
-            defaultValue=""
+            defaultValue={0}
             name="radio-buttons-group"
             value = {section7Enterprise.environmentalImpactId}
             onChange = {(event) =>
@@ -311,6 +315,7 @@ function SectionSevenNextSteps () {
         <RadioGroup
             aria-labelledby="economic-impact"
             name="radio-buttons-group"
+            defaultValue={0}
             value = {section7Enterprise.economicImpactId}
             onChange = {(event) =>
                 { dispatch({

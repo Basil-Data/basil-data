@@ -28,11 +28,12 @@ function SectionOneStory () {
     const competitiveAdvantages = useSelector(store => store.section1.competitiveAdvantages);
     const section1Enterprise = useSelector(store => store.section1Enterprise);
     const selectedAdvantages = useSelector(store => store.section1Enterprise.competitiveAdvantagesId);
+    const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
 
     useEffect(() => {
         window.scrollTo(0, 0);
         dispatch({ type: 'FETCH_SECTION_ONE' });
-        dispatch({ type: 'FETCH_ENTERPRISE_SECTION_ONE'})
+        dispatch({ type: 'FETCH_ENTERPRISE_SECTION_ONE', payload: selectedEnterprise})
     }, []);
 
     const handleCompetitiveAdvantages = (event) => {

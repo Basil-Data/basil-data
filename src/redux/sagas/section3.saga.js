@@ -16,9 +16,9 @@ function* getSectionThree () {
     }
 };
 
-function* getSectionThreeEnterprise () {
+function* getSectionThreeEnterprise (action) {
     try {
-        const response = yield axios.get(`/api/section3/:id`);
+        const response = yield axios.get(`/api/section3/${action.payload}`);
         console.log(response.data);
         yield put({
             type: 'SET_SECTION_THREE_ENTERPRISE',
