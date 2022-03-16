@@ -26,9 +26,6 @@ function SectionSixRisksAndHurdles () {
     // this page of the questionnaire
     const section6 = useSelector((store) => store.section6);
 
-    const [riskSelection, setRiskSelection] = useState([]);
-    const [riskPreparedness, setRiskPreparedness] = useState('');
-
     // store.section6Enterprise contains all of the responses
     // for the respective enterprise
     const section6Enterprise = useSelector((store) => store.section6Enterprise);
