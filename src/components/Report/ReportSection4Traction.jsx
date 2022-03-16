@@ -14,10 +14,10 @@ function ReportSection4Traction () {
 
     return (
         <>
-            <Paper className="paper" elevation={3}>
+            {/* <Paper className="paper" elevation={3}>
                 <div className="report"></div>
 
-            </Paper>
+            </Paper> */}
 
 
         </>

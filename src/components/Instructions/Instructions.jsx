@@ -29,7 +29,7 @@ function Instructions() {
 
                 </p>
 
-                <a href='https://calendly.com' target='_blank'>
+                <a href='https://calendly.com/basil-data/45min' target='_blank'>
                     Schedule a Meeting with Basil-Data 
                 </a>
             </div>
