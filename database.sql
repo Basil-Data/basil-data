@@ -67,12 +67,21 @@ CREATE TABLE "answers" (
 
 CREATE TABLE "competitiveAdvantages" (
 	"id" SERIAL PRIMARY KEY,
-	"advantage" VARCHAR (255)
+	"advantage" VARCHAR (255),
+	"advantageLogo" VARCHAR (1000)
 );
+
 INSERT INTO "competitiveAdvantages"
-	("advantage")
+	("advantage", "advantageLogo")
 VALUES
-	('Patent'), ('Brand License'), ('Regulation'), ('Trademark'), ('Copyrights'), ('Software'), ('Customer Lists'), ('Personal Accreditation');
+	('Patent', '/images/CompetitiveAdvantages/patent.png'), 
+	('Brand License', '/images/CompetitiveAdvantages/brandlicense.png'), 
+	('Regulation', '/images/CompetitiveAdvantages/regulation.png'), 
+	('Trademark', '/images/CompetitiveAdvantages/trademark.png'), 
+	('Copyrights', '/images/CompetitiveAdvantages/copyrights.png'), 
+	('Software', '/images/CompetitiveAdvantages/software.png'), 
+	('Customer Lists', '/images/CompetitiveAdvantages/customerlists.png'), 
+	('Personal Accreditation', '/images/CompetitiveAdvantages/personalaccreditation.png');
 
 CREATE TABLE "competitiveAdvantagesJunction" (
 	"id" SERIAL PRIMARY KEY,

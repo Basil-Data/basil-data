@@ -4,34 +4,72 @@ import {useSelector, useDispatch} from 'react-redux';
 
 // Styling/MUI
 import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+
 
 function ReportSectionOneStory () {
     const dispatch = useDispatch();
 
-    const enterpriseAnswers = useSelector(store => store.reportReducer)
+    const enterpriseAnswers = useSelector(store => store.reportReducer);
+    const competitiveAdvantages = useSelector(store => store.reportReducer.competitiveAdvantages)
 
+
+    const factorArray = [
+        {
+            id: 1,
+            text: 'Patent',
+            url1: '/images/CompetitiveAdvantages/patent.png',
+        },
+        {
+            id: 2,
+            text: 'Brand License',
+            url1: '/images/CompetitiveAdvantages/brandlicense.png',
+        },
+        {
+            id: 3,
+            text: 'Regulation',
+            url1: '/images/CompetitiveAdvantages/regulation.png',
+        },
+        {
+            id: 4,
+            text: 'Trademark',
+            url1: '/images/CompetitiveAdvantages/trademark.png',
+        },
+        {
+            id: 5,
+            text: 'Copyrights',
+            url1: '/images/CompetitiveAdvantages/copyrights.png',
+        },
+        {
+            id: 6,
+            text: 'Software',
+            url1: '/images/CompetitiveAdvantages/software.png',
+        },
+        {
+            id: 7,
+            text: 'Customer Lists',
+            url1: '/images/CompetitiveAdvantages/customerlists.png',
+        },
+        {
+            id: 8,
+            text: 'Personal Accreditation',
+            url1: '/images/CompetitiveAdvantages/personalaccreditation.png',
+        },
+    ]
 
     return (
         <Paper className="paper" elevation={3}>
             <div className="reportSectionOne">
                 <div className="introParagraph">
-                    <h1>01. STORY</h1>
+                    <h1 className='pageHeader'>01. STORY</h1>
                     <hr className="dotted"></hr>
                     <h4>Introduction:</h4>
-                    <p>Basil Data began with a simple goal of helping social enterprises
-                    meaningfully analyze and understand their impact. Initial workshops
-                    and consulting services uncovered a fundamental problem: In the
-                    ecosystem of social enterprises and their stakeholders, there is a
-                    confounding lack of impact data. Effective impact measurement is rare
-                    because entrepreneurs - despite their talent, ambition, and vision - too
-                    often lack the skills, standards, and systems to capture the data needed
-                    for understanding real impact.</p>
-                    <p>The rise of the ESG and Impact Investing sectors has been incredible. At
-                    Basil Data, we believe we can play an important role in furthering this
-                    progress to make sure we create sustainable and lasting impact by
-                    focusing on early-stage social enterprises. Diversity and Equity,
-                    Authenticity, and Curiosity are some of the core values we hold dear
-                    which can be seen in the makeup and drive of our closely knit team.</p>
+                    <p>{enterpriseAnswers.investorIntroduction1 }</p>
                 </div>
                 <div className="introContainer">
                     <h2>MEET US</h2>
@@ -44,25 +82,37 @@ function ReportSectionOneStory () {
                     <h3 className="numbersSectionOne">{enterpriseAnswers.percentageFemale1}</h3>
                     <h5>Percent of founding team is female</h5>
                 </div>
-                <div className="sectionColor sectionOneColor">
+            </div>
+            <div className="sectionColor sectionOneColor">
                     <div className="sectionOneText">
                         <h3>OUR MISSION:</h3>
                         <p>"{enterpriseAnswers.missionStatement1}"</p>
                     </div>
-                    <div className="sectionOneText">
+                    <div className="sectionOneText competitiveAdvantages">
                         <h3>Competitive Advantages:</h3>
-                        <ul  className="list">
-                            {enterpriseAnswers.competitiveAdvantages ? 
-                                enterpriseAnswers.competitiveAdvantages.map(advantage =>
-                                <li key={advantage}>{advantage}</li>
-                                )
-                                :
-                                <></>
-                            }
-                        </ul>
+                        <div>
+                            <Box sx={{ flexGrow: 1 }}>
+                                <div className="competitiveAdvantagesContainer"> 
+                                    {factorArray.map(advantage => (
+                                        <>
+                                            {competitiveAdvantages?.includes(advantage.id)
+                                            ? 
+                                            <div className="competitiveCard">
+                                                <img src={advantage.url1} />
+                                                <Typography gutterBottom variant="subtitle2" component="div" align="center">
+                                                    {advantage.text}
+                                                </Typography>
+                                            </div>
+                                            :
+                                            <></>
+                                            }
+                                        </>))
+                                    }
+                                </div>
+                            </Box>
+                        </div>
                     </div>
                 </div>
-            </div>
         </Paper>
     )
 };
