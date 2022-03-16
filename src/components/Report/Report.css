@@ -223,8 +223,23 @@ hr.dotted {
 .sectionFiveTitle {
     margin-top: 30px;
     margin-left: 30px;
-    width: 700px;
+    margin-right: 20px;
 
+}
+
+.section5ChartQuestions {
+    padding-top: 20px;
+    margin-left: 30px;
+    
+}
+
+.section5Color {
+    height: 500px;
+    margin-top: 100px;
+    margin-left: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
 }
 
 /* Final Page CSS */

@@ -43,6 +43,7 @@ function ReportSection5Chart() {
     return (
         <>
         <div>
+            
             <Doughnut 
                 data={data}
                 width={300}
