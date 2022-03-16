@@ -29,6 +29,7 @@ hr.dotted {
 .frontPage{
     background-image: url('/public/images/Basil\ Data\ Report\ Front\ Page.png');
     background-size: 8.5in 11in;
+    background-repeat: no-repeat;
 }
 
 .frontPageDate{
@@ -59,13 +60,14 @@ hr.dotted {
 
 .frontPageLogo{
     margin-left: 250px;
-    padding-bottom: 430px;
+    padding-bottom: 400px;
 }
 
 /* Table of Contents CSS */
 .tableOfContentsBackground{
     background-image: url('/public/images/Basil\ Data\ Report\ Lower\ Page.png');
     background-size: 8.5in 11in;
+    background-repeat: no-repeat;
 }
 
 .tableOfContents{
@@ -326,8 +328,9 @@ hr.dotted {
 
 .painPointTexts{
     margin: 0px 20px 0px 40px;
-    padding-bottom: 6in;
 }
+
+
 
 /* Final Page CSS */
 .finalPage {
