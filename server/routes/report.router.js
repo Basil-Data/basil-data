@@ -16,7 +16,7 @@ router.get('/', rejectUnauthenticated, (req,res) => {
 		ARRAY_AGG(DISTINCT("economicImpact"."impact")) AS "economicImpact",
 		ARRAY_AGG(DISTINCT("environmentalImpact"."impact")) AS "environmentalImpact",
 		ARRAY_AGG(DISTINCT("fundingUse"."fundingUse")) AS "fundingUse",
-		ARRAY_AGG(DISTINCT("growthFactors"."id")) AS "growthFactors",
+		ARRAY_AGG(DISTINCT("growthFactorsJunction"."factorId")) AS "growthFactors",
 		ARRAY_AGG(DISTINCT("helpMoveForward"."assistance")) AS "helpMoveForward",
 		ARRAY_AGG(DISTINCT("impactSectors"."impactSector")) AS "impactSectors",
 		ARRAY_AGG(DISTINCT("indicators"."indicator")) AS "indicators",
@@ -29,7 +29,7 @@ router.get('/', rejectUnauthenticated, (req,res) => {
 		"sdg"."icon",
 		ARRAY_AGG(DISTINCT("societalImpact"."societalImpact")) AS "societalImpact",
 		ARRAY_AGG(DISTINCT("stakeholderSegments"."segment")) AS "societalImpact",
-		ARRAY_AGG(DISTINCT("startupBarriers"."barrier")) AS "startupBarriers",
+		ARRAY_AGG(DISTINCT("startupBarriersJunction"."barrierId")) AS "startupBarriers",
 		ARRAY_AGG(DISTINCT("supportiveCharacteristics"."characteristic")) AS "supportiveCharacteristics",
 		ARRAY_AGG(DISTINCT("technologies"."technology")) AS "technologies"
 	FROM "answers"
