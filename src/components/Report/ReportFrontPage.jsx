@@ -19,7 +19,7 @@ function ReportFrontPage () {
                 <h2 className='frontPageEnterprise'>{enterpriseAnswers.enterpriseName}</h2>
                 <hr className="solid"></hr>
                 <h2 className="frontPageImpact">IMPACT OPPORTUNITY PROFILE</h2>
-                <img className="frontPageLogo" src="/images/BasilDataLogo/BasilDataLogo.png"/>
+                <img className="frontPageLogo" src={enterpriseAnswers.logoUrl} height={200}/>
             </div>
         </Paper>
     )
