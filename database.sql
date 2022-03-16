@@ -106,29 +106,280 @@ CREATE TABLE "impactTableJunction" (
 CREATE TABLE "indicators" (
 	"id" SERIAL PRIMARY KEY,
 	"sdgId" INTEGER,
-	"indicator" VARCHAR (255)
+	"indicator" VARCHAR (255),
+	"targetNumber" VARCHAR (255),
+	"target" VARCHAR (255)
 );
 
 INSERT INTO "indicators"
-	("sdgId", "indicator")
+	("sdgId", "indicator", "targetNumber", "target")
 VALUES
-	(1, 'Poverty Levels'),
-	(1, 'Change In Poverty'),
-	(1, 'Access To Resources'),
-	(2, 'Nourishment / Undernourishment'),
-	(2, 'Food security level'),
-	(2, 'Food production indicators'),
-	(2, 'Animal protection'),
-	(2, 'Cost of Food'),
-	(3, 'Mortality rate and ratios'),
-	(3, 'Disease rate'),
-	(3, 'Access to healthcare/treatment'),
-	(3, 'Consumption measures'),
-	(3, 'Birth rate'),
-	(3, 'Healthcare coverage'),
-	(3, 'Vaccination levels'),
-	(3, 'Emergency preparedness'),
-	(4, 'Education Level'),
+	(1, 'Proportion of population below the international poverty line, 
+			by sex, age, employment status and geographical location 
+			(urban/rural)', 
+		'1.1', 
+		'By 2030, eradicate extreme poverty for all people everywhere, 
+			currently measured as people living on less than $1.25 a day.'),
+	(1, 'Proportion of population living below the national poverty line, 
+			by sex and age', 
+		'1.2', 
+		'By 2030, reduce at least by half the proportion of men, 
+			women and children of all ages living in poverty in all its 
+			dimensions according to national definitions.'),
+	(1, 'Proportion of men, women and children of all ages living in poverty 
+			in all its dimensions according to national definitions', 
+		'1.2',
+		'By 2030, reduce at least by half the proportion of men, 
+			women and children of all ages living in poverty in all its 
+			dimensions according to national definitions'),
+	(1, 'Proportion of population covered by social protection floors/systems, 
+			by sex, distinguishing children, unemployed persons, older persons, 
+			persons with disabilities, pregnant women, newborns, work-injury 
+			victims and the poor and the vulnerable', 
+		'1.3',
+		'Implement nationally appropriate social protection systems and measures for all, 
+			including floors, and by 2030 achieve substantial coverage of the poor and 
+			the vulnerable'),
+	(1, 'Proportion of population living in households with access to basic services', 
+		'1.4',
+		'By 2030, ensure that all men and women, in particular the poor and the vulnerable, 
+			have equal rights to economic resources, as well as access to basic services, 
+			ownership and control over land and other forms of property, inheritance, 
+			natural resources, appropriate new technology and financial services, 
+			including microfinance'),
+	(1, 'Proportion of total adult population with secure tenure rights to land, with 
+			legally recognized documentation and who perceive their rights to land as secure, 
+			by sex and by type of tenure', 
+		'1.4',
+		'By 2030, ensure that all men and women, in particular the poor and the vulnerable, 
+			have equal rights to economic resources, as well as access to basic services, 
+			ownership and control over land and other forms of property, inheritance, 
+			natural resources, appropriate new technology and financial services, 
+			including microfinance'),
+	(1, 'Number of deaths, missing persons and persons affected by disaster per 100,000 people', 
+		'1.5',
+		'By 2030, build the resilience of the poor and those in vulnerable situations and 
+			reduce their exposure and vulnerability to climate-related extreme events and 
+			other economic, social and environmental shocks and disasters'),
+	(1, 'Direct disaster economic loss in relation to global gross domestic product (GDP)',  
+		'1.5'
+		'By 2030, build the resilience of the poor and those in vulnerable situations and 
+			reduce their exposure and vulnerability to climate-related extreme events and 
+			other economic, social and environmental shocks and disasters'),
+	(1, 'Number of countries with national and local disaster risk reduction strategies', 
+		'1.5',
+		'By 2030, build the resilience of the poor and those in vulnerable situations and 
+			reduce their exposure and vulnerability to climate-related extreme events and 
+			other economic, social and environmental shocks and disasters'),
+	(1, 'Proportion of local governments that adopt and implement local disaster risk 
+			reduction strategies', 
+		'1.5',
+		'By 2030, build the resilience of the poor and those in vulnerable situations and 
+			reduce their exposure and vulnerability to climate-related extreme events and 
+			other economic, social and environmental shocks and disasters'),
+	(2, 'Prevalence of undernourishment', 
+		'2.1', 
+		'By 2030, end hunger and ensure access by all people, 
+			in particular the poor and people in vulnerable situations, 
+			including infants, to safe, nutritious and sufficient food 
+			all year round'),
+	(2, 'Prevalence of moderate or severe food insecurity in the population, 
+			based on the Food Insecurity Experience Scale (FIES)', 
+		'2.1', 
+		'By 2030, end hunger and ensure access by all people, 
+			in particular the poor and people in vulnerable situations, 
+			including infants, to safe, nutritious and sufficient food 
+			all year round'),
+	(2, 'Prevalence of stunting (height for age <-2 standard deviation 
+			from the median of the World Health Organization (WHO) 
+			Child Growth Standards) among children under 5 years of age', 
+		'2.2', 
+		'By 2030, end all forms of malnutrition, including achieving, 
+			by 2025, the internationally agreed targets on stunting and 
+			wasting in children under 5 years of age, and address the 
+			nutritional needs of adolescent girls, pregnant and 
+			lactating women and older persons'),
+	(2, 'Prevalence of malnutrition (weight for height >+2 or <-2 standard 
+			deviation from the median of the WHO Child Growth Standards) 
+			among children under 5 years of age, by type (wasting and overweight)', 
+		'2.2', 
+		'By 2030, end all forms of malnutrition, including achieving, by 2025, 
+			the internationally agreed targets on stunting and wasting in 
+			children under 5 years of age, and address the nutritional needs of 
+			adolescent girls, pregnant and lactating women and older persons'),
+	(2, 'Prevalence of anaemia in women aged 15 to 49 years, 
+			by pregnancy status (percentage)', 
+		'2.2', 
+		'By 2030, end all forms of malnutrition, including achieving, 
+			by 2025, the internationally agreed targets on stunting and 
+			wasting in children under 5 years of age, and address the 
+			nutritional needs of adolescent girls, pregnant and 
+			lactating women and older persons'),
+	(2, 'Volume of production per labour unit by classes of 
+			farming/pastoral/forestry enterprise size', 
+		'2.3', 
+		'By 2030, double the agricultural productivity and incomes of 
+			small-scale food producers, in particular women, 
+			indigenous peoples, family farmers, pastoralists and fishers, 
+			including through secure and equal access to land, 
+			other productive resources and inputs, knowledge, 
+			financial services, markets and opportunities for 
+			value addition and non-farm employment'),
+	(2, 'Average income of small-scale food producers, 
+			by sex and indigenous status', 
+		'2.3', 
+		'By 2030, double the agricultural productivity and 
+			incomes of small-scale food producers, in particular women, 
+			indigenous peoples, family farmers, pastoralists and fishers, 
+			including through secure and equal access to land, 
+			other productive resources and inputs, knowledge, 
+			financial services, markets and opportunities for 
+			value addition and non-farm employment'),
+	(2, 'Proportion of agricultural area under productive and 
+			sustainable agriculture', 
+		'2.4', 
+		'By 2030, ensure sustainable food production systems and 
+			implement resilient agricultural practices that increase 
+			productivity and production, that help maintain ecosystems, 
+			that strengthen capacity for adaptation to climate change, 
+			extreme weather, drought, flooding and other disasters and 
+			that progressively improve land and soil quality'),
+	(2, 'Number of (a) plant and (b) animal genetic resources for 
+			food and agriculture secured in either medium- or 
+			long-term conservation facilities', 
+		'2.5', 
+		'By 2020, maintain the genetic diversity of seeds, 
+			cultivated plants and farmed and domesticated animals and 
+			their related wild species, including through soundly managed 
+			and diversified seed and plant banks at the national, 
+			regional and international levels, and promote access to and 
+			fair and equitable sharing of benefits arising from the 
+			utilization of genetic resources and associated traditional knowledge, 
+			as internationally agreed'),
+	(2, 'Proportion of local breeds classified as being at risk, 
+			not-at-risk or at unknown level of risk of extinction', 
+		'2.5', 
+		'By 2020, maintain the genetic diversity of seeds, 
+			cultivated plants and farmed and domesticated animals and 
+			their related wild species, including through soundly managed and 
+			diversified seed and plant banks at the national, 
+			regional and international levels, and promote access to and 
+			fair and equitable sharing of benefits arising from the 
+			utilization of genetic resources and associated traditional knowledge, 
+			as internationally agreed'),
+	(3, 'Maternal mortality ratio', 
+		'3.1', 
+		'By 2030, reduce the global maternal mortality ratio to less than 70 per 
+			100,000 live births'),
+	(3, 'Proportion of births attended by skilled health personnel', 
+		'3.1', 
+		'By 2030, reduce the global maternal mortality ratio to less than 
+			70 per 100,000 live births'),
+	(3, 'Under-five mortality rate', 
+		'3.2', 
+		'By 2030, end preventable deaths of newborns and children under 
+			5 years of age, with all countries aiming to reduce neonatal 
+			mortality to at least as low as 12 per 1,000 live births and 
+			under-5 mortality to at least as low as 25 per 1,000 live births'),
+	(3, 'Neonatal mortality rate', 
+		'3.2', 
+		'By 2030, end preventable deaths of newborns and children under 
+			5 years of age, with all countries aiming to reduce neonatal 
+			mortality to at least as low as 12 per 1,000 live births and 
+			under-5 mortality to at least as low as 25 per 1,000 live births'),
+	(3, 'Number of new HIV infections per 1,000 uninfected population, 
+			by sex, age and key populations', 
+		'3.3', 
+		'By 2030, end the epidemics of AIDS, tuberculosis, 
+			malaria and neglected tropical diseases and 
+			combat hepatitis, water-borne diseases and other 
+			communicable diseases'),
+	(3, 'Tuberculosis incidence per 1,000 population', 
+		'3.3', 
+		'By 2030, end the epidemics of AIDS, tuberculosis, 
+			malaria and neglected tropical diseases and combat hepatitis, 
+			water-borne diseases and other communicable diseases'),
+	(3, 'Malaria incidence per 1,000 population', 
+		'3.3', 
+		'By 2030, end the epidemics of AIDS, tuberculosis, 
+			malaria and neglected tropical diseases and combat hepatitis, 
+			water-borne diseases and other communicable diseases'),
+	(3, 'Hepatitis B incidence per 100,000 population', 
+		'3.3', 
+		'By 2030, end the epidemics of AIDS, tuberculosis, 
+			malaria and neglected tropical diseases and combat hepatitis, 
+			water-borne diseases and other communicable diseases'),
+	(3, 'Number of people requiring interventions against neglected tropical diseases', 
+		'3.3', 
+		'By 2030, end the epidemics of AIDS, tuberculosis, 
+			malaria and neglected tropical diseases and combat hepatitis, 
+			water-borne diseases and other communicable diseases'),
+	(3, 'Mortality rate attributed to cardiovascular disease, 
+			cancer, diabetes or chronic respiratory disease', 
+		'3.4', 
+		'By 2030, reduce by one third premature mortality from non-communicable diseases 
+			through prevention and treatment and promote mental health and well-being'),
+	(3, 'Suicide mortality rate', 
+		'3.4', 
+		'By 2030, reduce by one third premature mortality from non-communicable diseases 
+			through prevention and treatment and promote mental health and well-being'),
+	(3, 'Coverage of treatment interventions (pharmacological, psychosocial and 
+			rehabilitation and aftercare services) for substance use disorders', 
+		'3.5', 
+		'Strengthen the prevention and treatment of substance abuse, including narcotic 
+			drug abuse and harmful use of alcohol'),
+	(3, 'Harmful use of alcohol, defined according to the national context as 
+			alcohol per capita consumption (aged 15 years and older) within 
+			a calendar year in litres of pure alcohol', 
+		'3.5', 
+		'Coverage of treatment interventions (pharmacological, psychosocial and 
+			rehabilitation and aftercare services) for substance use disorders'),
+	(3, 'Death rate due to road traffic injuries', 
+		'3.6', 
+		'By 2020, halve the number of global deaths and injuries from road traffic accidents'),
+	(3, 'Proportion of women of reproductive age (aged 15-49 years) who have their 
+			need for family planning satisfied with modern methods', 
+		'3.7', 
+		'By 2030, ensure universal access to sexual and reproductive health-care services, 
+			including for family planning, information and education, 
+			and the integration of reproductive health into national 
+			strategies and programmes'),
+	(3, 'Adolescent birth rate (aged 10-14 years; aged 15-19 years) per 1,000 women in 
+			that age group', 
+		'3.7', 
+		'By 2030, ensure universal access to sexual and reproductive health-care services, 
+			including for family planning, information and education, 
+			and the integration of reproductive health into national 
+			strategies and programmes'),
+	(3, 'Coverage of essential health services (defined as the average coverage of 
+			essential services based on tracer interventions that include reproductive, 
+			maternal, newborn and child health, infectious diseases, 
+			non-communicable diseases and service capacity and access, 
+			among the general and the most disadvantaged population)', 
+		'3.8', 
+		'Achieve universal health coverage, including financial risk protection, 
+			access to quality essential health-care services and access to safe, 
+			effective, quality and affordable essential medicines and vaccines for all'),
+	(3, 'Proportion of population with large household expenditures on health as 
+			a share of total household expenditure or income', 
+		'3.8', 
+		'Achieve universal health coverage, including financial risk protection, 
+			access to quality essential health-care services and access to safe, 
+			effective, quality and affordable essential medicines and vaccines for all'),
+	(3, 'Mortality rate attributed to household and ambient air pollution', 
+		'3.9', 
+		'By 2030, substantially reduce the number of deaths and illnesses from 
+			hazardous chemicals and air, water and soil pollution and contamination'),
+	(3, 'Mortality rate attributed to unsafe water, unsafe sanitation and lack of 	
+			hygiene (exposure to unsafe Water, Sanitation and Hygiene for All 
+			(WASH) services)', 
+		'3.9', 
+		'By 2030, substantially reduce the number of deaths and illnesses from hazardous 
+			chemicals and air, water and soil pollution and contamination'),
+	(3, 'Mortality rate attributed to unintentional poisoning', 
+		'3.9', 
+		'By 2030, substantially reduce the number of deaths and illnesses from hazardous 
+			chemicals and air, water and soil pollution and contamination'),
 	(4, 'Completion rates'),
 	(4, 'Participation rates'),
 	(4, 'Enrollment rates'),
@@ -157,20 +408,95 @@ VALUES
 	(7, 'Total energy use'),
 	(7, 'Spending on clean energy'),
 	(7, 'Renewable energy capacity change'),
-	(8, 'GDP per capita growth rate'),
-	(8, 'GDP per capita growth rate per employed person'),
-	(8, 'Employment rate / Unemployment rates'),
-	(8, 'Hourly earnings'),
-	(8, 'Access to financial services'),
-	(8, 'Material footprint (waste)'),
-	(8, 'Material consumption'),
-	(8, 'Youth participation (school, employment, training)'),
-	(8, 'Child labor'),
-	(8, 'Occupational injuries'),
-	(8, 'Labor rights compliance'),
-	(8, 'Bank account rates'),
-	(8, 'Access to aid for trade support'),
-	(8, 'Employment strategies'),
+	(8, 'Annual growth rate of real GDP per capita', 
+		'8.1', 
+		'Sustain per capita economic growth in accordance with 
+			national circumstances and, in particular, at least 7 
+			per cent gross domestic product growth per annum in the 
+			least developed countries.'),
+	(8, 'Annual growth rate of real GDP per employed person', 
+		'8.2', 
+		'Achieve higher levels of economic productivity through 
+			diversification, technological upgrading and innovation, 
+			including through a focus on high-value added and 
+			labour-intensive sectors.'),
+	(8, 'Proportion of informal employment in non‑agriculture 
+			employment, by sex', 
+		'8.3', 
+		'Promote development-oriented 
+			policies that support productive activities, decent job creation, 
+			entrepreneurship, creativity and innovation, and encourage the 
+			formalization and growth of micro-, small- and medium-sized 
+			enterprises, including through access to financial services.'),
+	(8, 'Material footprint, material footprint per capita, 
+			and material footprint per GDP', 
+		'8.4', 
+		'Improve progressively, through 2030, global resource efficiency 
+			in consumption and production and endeavour to decouple economic 
+			growth from environmental degradation, in accordance with the 10-year 
+			framework of programmes on sustainable consumption and production, 
+			with developed countries taking the lead.'),
+	(8, 'Domestic material consumption, domestic material consumption 
+			per capita, and domestic material consumption per GDP', 
+		'8.4', 
+		'Improve progressively, through 2030, global resource efficiency 
+			in consumption and production and endeavour to decouple economic 
+			growth from environmental degradation, in accordance with the 
+			10-year framework of programmes on sustainable consumption and 
+			production, with developed countries taking the lead.'),
+	(8, 'Average hourly earnings of female and male employees, 
+			by occupation, age and persons with disabilities', 
+		'8.5',
+		'By 2030, achieve full and productive employment and decent work for 
+			all women and men, including for young people and persons with 
+			disabilities, and equal pay for work of equal value.'),
+	(8, 'Unemployment rate, by sex, age and persons with disabilities', 
+		'8.5',
+		'By 2030, achieve full and productive employment and decent work for 
+			all women and men, including for young people and persons with 
+			disabilities, and equal pay for work of equal value'),
+	(8, 'Proportion of youth (aged 15-24 years) not in education, 
+			employment or training.', 
+		'8.6', 
+		'By 2020, substantially reduce the proportion of youth not in employment, 
+			education or training.'),
+	(8, 'Proportion and number of children aged 5‑17 years engaged in 
+			child labour, by sex and age', 
+		'8.7',
+		'Take immediate and effective measures to eradicate forced labour, 
+			end modern slavery and human trafficking and secure the prohibition and 
+			elimination of the worst forms of child labour, 
+			including recruitment and use of child soldiers, 
+			and by 2025 end child labour in all its forms.' ),
+	(8, 'Fatal and non-fatal occupational injuries per 100,000 workers, 
+			by sex and migrant status', 
+		'8.8',
+		'Protect labour rights and promote safe and secure working environments for 
+			all workers, including migrant workers, in particular women migrants, 
+			and those in precarious employment.'),
+	(8, 'Level of national compliance with labour rights 
+			(freedom of association and collective bargaining) based on 
+			International Labour Organization (ILO) textual sources and 
+			national legislation, by sex and migrant status', 
+		'8.8', 
+		'Protect labour rights and promote safe and secure working environments for 
+			all workers, including migrant workers, in particular women migrants, 
+			and those in precarious employment.'),
+	(8, 'Tourism direct GDP as a proportion of total GDP and in growth rate', 
+		'8.9',
+		'By 2030, devise and implement policies to promote sustainable tourism that 
+			creates jobs and promotes local culture and products'),
+	(8, 'Number of commercial bank branches and automated teller machines 
+			(ATMs) per 100,000 adults', 
+		'8.10', 
+		'Strengthen the capacity of domestic financial institutions to encourage and 
+			expand access to banking, insurance and financial services for all'),
+	(8, 'Proportion of adults (15 years and older) with an account at a 
+			bank or other financial institution or with a 
+			mobile-money-service provider', 
+		'8.10',
+		'Strengthen the capacity of domestic financial institutions to encourage and 
+			expand access to banking, insurance and financial services for all'),
 	(9, 'Access to mode of transportation'),
 	(9, 'Road access'),
 	(9, 'Manufacturing Employment'),
