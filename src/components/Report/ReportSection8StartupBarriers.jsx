@@ -85,7 +85,7 @@ function ReportSection8StartupBarriers () {
         <>
         <Paper className="paper" elevation={3}>
         <div className="pageContainer">
-        <h1 className="heading">08. STARTUP BARRIERS</h1>
+        <h1 className="pageHeader">08. STARTUP BARRIERS</h1>
         <hr className="dotted dottedMargin"></hr>
         <h2 className="subheading">What factors affect our growth path?</h2>
         <Box sx={{ flexGrow: 1 }}>

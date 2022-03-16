@@ -901,7 +901,7 @@ VALUES
 	('External Risk - external factors disrupt ability to deliver impact'),
 	('Stakeholder Participation Risk - misunderstanding of stakeholder experiences/expectations'),
 	('Drop-off Risk - the positive impact does not endure or the negative impact is no longer mitigated'),
-	('Efficiency Risk - impact could be achieved with fewer resourcces or at a lower cost'),
+	('Efficiency Risk - impact could be achieved with fewer resources or at a lower cost'),
 	('Execution Risk - activities are not delivered as planned and do not result in desired outcomes'),
 	('Alignment Risk - impact is not aligned into the enterprise model'),
 	('Endurance Risk - required activities are not delivered for a long enough period'),
