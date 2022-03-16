@@ -44,7 +44,10 @@ router.get('/:id', async (req, res) => {
       "addressableMarket5",
       "serviceableMarket5",
       "obtainableMarket5",
-      "whyRealistic5"
+      "whyRealistic5",
+      "industryPerspectiveOne5",
+      "industryPerspectiveTwo5",
+      "industryPerspectiveThree5"
     FROM "answers"
     WHERE "enterpriseId" = $1;
     `;
@@ -66,15 +69,26 @@ router.get('/:id', async (req, res) => {
 router.post('/', rejectUnauthenticated, (req, res) => {
 
   let sqlText = `
-    INSERT INTO "answers" ( "addressableMarket5", "serviceableMarket5", "obtainableMarket5", "whyRealistic5")
-    VALUES ($1, $2, $3, $4)
-    WHERE "answers"."id" = $5`
+    INSERT INTO "answers" 
+    ( "addressableMarket5",
+     "serviceableMarket5",
+      "obtainableMarket5", 
+      "whyRealistic5",
+      "industryPerspectiveOne5",
+      "industryPerspectiveTwo5",
+      "industryPerspectiveThree5"
+      )
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    WHERE "answers"."id" = $8`
 
     let sqlParams = [
       req.body.addressableMarket5,
       req.body.serviceableMarket5,
       req.body.obtainableMarket5,
       req.body.whyRealistic5,
+      req.body.industryPerspectiveOne5,
+      req.body.industryPerspectiveTwo5,
+      req.body.industryPerspectiveThree5,
       req.user.id
     ]
 
@@ -98,8 +112,11 @@ router.put('/', rejectUnauthenticated, async (req, res) => {
       "addressableMarket5" = $1,
       "serviceableMarket5" = $2,
       "obtainableMarket5" = $3,
-      "whyRealistic5" = $4
-    WHERE "answers"."enterpriseId" = $5;
+      "whyRealistic5" = $4,
+      "industryPerspectiveOne5" = $5,
+      "industryPerspectiveTwo5" = $6,
+      "industryPerspectiveThree5" = $7
+    WHERE "answers"."enterpriseId" = $8;
      `;
 
   let sqlParams = [
@@ -107,6 +124,9 @@ router.put('/', rejectUnauthenticated, async (req, res) => {
     req.body.serviceableMarket5,
     req.body.obtainableMarket5,
     req.body.whyRealistic5,
+    req.body.industryPerspectiveOne5,
+    req.body.industryPerspectiveTwo5,
+    req.body.industryPerspectiveThree5,
     req.user.id
   ]
 

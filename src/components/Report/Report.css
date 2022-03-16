@@ -242,6 +242,11 @@ hr.dotted {
     position: relative;
 }
 
+.section5IndustryPerspective {
+    color: white;
+    margin-left: 30px;
+}
+
 /* Final Page CSS */
 .finalPage {
     display: flex;

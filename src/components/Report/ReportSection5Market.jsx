@@ -31,12 +31,22 @@ function ReportSection5Market () {
                             <h3>Market Assumptions</h3>
                             <h4>{enterpriseAnswers.whyRealistic5}</h4>
                         </div>
+                        
+                        
 
                         
 
                     </div>
                 </div>
-                <div className="sectionColor sectionThreeColor"></div>
+                <div className="sectionColor sectionThreeColor">
+                    <div className="section5IndustryPerspective">
+                            <h2>
+                                INDUSTRY PERSPECTIVE:
+                            </h2>
+
+                            <p>Perspective quotes go here</p>
+                    </div>
+                </div>
             </Paper>
         </>
     )

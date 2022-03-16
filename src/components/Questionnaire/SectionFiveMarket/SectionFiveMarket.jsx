@@ -177,6 +177,127 @@ function SectionFiveMarket() {
           </Box>
         </Grid>
 
+        <h5>
+          In the box(es) below, include up to 3 quotes, 
+          statistics, or metrics that provide some broader 
+          perspective or context about your market. 
+          We recommend including a reliable source.  
+        </h5>
+
+        <h6>
+          Example:
+          “Concerns about impact washing (66%) loom largest, followed
+          less acutely by the market’s ‘inability to demonstrate impact
+          <br />
+          results’ (35%) and the ‘inability to compare impact results with peers’
+          (34%)” 
+          <br />
+          - Global Impact Investing Network 2020 Annual Survey
+        </h6>
+
+
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box
+            sx={{
+              width: 600,
+              maxWidth: "100%",
+            }}
+          >
+            <TextField
+              id="outlined-basic"
+              label="50-Word Limit Quote"
+              variant="outlined"
+              multiline
+              rows={5}
+              fullWidth
+              value={section5.industryPerspectiveOne5}
+              InputLabelProps={{shrink: true,}}
+              onChange={(evt) =>
+                dispatch({
+                  type: "SET_SECTION5_RESPONSES",
+                  payload: { industryPerspectiveOne5: evt.target.value },
+                })
+              }
+
+            />
+          </Box>
+        </Grid>
+
+        <br />
+
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box
+            sx={{
+              width: 600,
+              maxWidth: "100%",
+            }}
+          >
+            <TextField
+              id="outlined-basic"
+              label="50-Word Limit Quote"
+              variant="outlined"
+              multiline
+              rows={5}
+              fullWidth
+              value={section5.industryPerspectiveTwo5}
+              InputLabelProps={{shrink: true,}}
+              onChange={(evt) =>
+                dispatch({
+                  type: "SET_SECTION5_RESPONSES",
+                  payload: { industryPerspectiveTwo5: evt.target.value },
+                })
+              }
+            />
+          </Box>
+        </Grid>
+        
+        <br />
+
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box
+            sx={{
+              width: 600,
+              maxWidth: "100%",
+            }}
+          >
+            <TextField
+              id="outlined-basic"
+              label="50-Word Limit Quote"
+              variant="outlined"
+              multiline
+              rows={5}
+              fullWidth
+              value={section5.industryPerspectiveThree5}
+              InputLabelProps={{shrink: true,}}
+              onChange={(evt) =>
+                dispatch({
+                  type: "SET_SECTION5_RESPONSES",
+                  payload: { industryPerspectiveThree5: evt.target.value },
+                })
+              }
+            />
+          </Box>
+        </Grid>
+
+
         <br />
         <br />
 
