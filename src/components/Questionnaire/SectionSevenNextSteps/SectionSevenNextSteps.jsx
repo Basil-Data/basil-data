@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {Link} from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 // MUI
 import Box from '@mui/material/Box';
@@ -18,21 +18,29 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav'
 function SectionSevenNextSteps () {
 
     const dispatch = useDispatch();
+    const history = useHistory();
     // store.section6 contains all of the selections for
     // this page of the questionnaire
+
+    history.scrollRestoration = 'manual';
+
     const section7 = useSelector((store) => store.section7);
     const section7Enterprise = useSelector((store) => store.section7Enterprise);
     const investmentSelection = useSelector((store) => store.section7Enterprise.investmentVehicleId);
     const fundingUse = useSelector((store) => store.section7Enterprise.fundingUseId);
     const wayAhead = useSelector((store) => store.section7Enterprise.assistanceId);
-    console.log('section 7:', section7);
+    const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
+
+    console.log('section7Enterprise.societalImpactId.societalImpactId:', section7Enterprise.societalImpactId.societalImpactId);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         dispatch({
             type: "FETCH_NEXT_STEPS",
         });
         dispatch({ 
-            type: "FETCH_ENTERPRISE_SECTION_SEVEN"
+            type: "FETCH_ENTERPRISE_SECTION_SEVEN",
+            payload: selectedEnterprise
         })
     }, []);
 
@@ -90,6 +98,16 @@ function SectionSevenNextSteps () {
         })
     };
 
+    const onNext = (event) => {
+        handleSubmit(event);
+        history.push('/user');
+    }
+
+    const onBack = (event) => {
+        handleSubmit(event);
+        history.push('/risks-and-hurdles');
+    }
+
     return (
         <>
         <QuestionnaireNav/>
@@ -132,6 +150,7 @@ function SectionSevenNextSteps () {
                 id="outlined-basic" 
                 label="Fundraising Target" 
                 variant="outlined"
+                type="number"
                 value={section7Enterprise.targetAmount7 ?? ''}
                 onChange = {(event) =>
                     { dispatch({
@@ -241,9 +260,9 @@ function SectionSevenNextSteps () {
         </p>
         <RadioGroup
             aria-labelledby="social-impact"
-            defaultValue=""
+            defaultValue={0}
             name="radio-buttons-group"
-            value = {section7Enterprise.societalImpactId}
+            value = {Number(section7Enterprise.societalImpactId)}
             onChange = {(event) =>
                 { dispatch({
                     type: "SET_NEXT_STEPS_ENTERPRISE",
@@ -268,7 +287,7 @@ function SectionSevenNextSteps () {
         </p>
         <RadioGroup
             aria-labelledby="environmental-impact"
-            defaultValue=""
+            defaultValue={0}
             name="radio-buttons-group"
             value = {section7Enterprise.environmentalImpactId}
             onChange = {(event) =>
@@ -296,6 +315,7 @@ function SectionSevenNextSteps () {
         <RadioGroup
             aria-labelledby="economic-impact"
             name="radio-buttons-group"
+            defaultValue={0}
             value = {section7Enterprise.economicImpactId}
             onChange = {(event) =>
                 { dispatch({
@@ -344,7 +364,7 @@ function SectionSevenNextSteps () {
         <Link to="/risks-and-hurdles">
             <button 
                 className="btn"
-                onClick={(event) => handleSubmit(event)}
+                onClick={(event) => onBack(event)}
             >
                 Back
             </button>
@@ -364,7 +384,7 @@ function SectionSevenNextSteps () {
         <Link to="/story">
             <button 
                 className="btn"
-                onClick={(event) => handleSubmit(event)}
+                onClick={(event) => onNext(event)}
             >
                 Next
             </button>

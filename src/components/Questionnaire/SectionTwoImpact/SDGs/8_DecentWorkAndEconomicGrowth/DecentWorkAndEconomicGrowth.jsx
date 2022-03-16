@@ -77,6 +77,7 @@ function DecentWorkAndEconomicGrowth() {
 
 
 
+
     return(
         <Box className="questionnaireForm">
                 <img src="images/SDGs/E-WEB-Goal-08.png" width="200px" height="200px"/>

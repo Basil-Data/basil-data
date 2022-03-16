@@ -16,20 +16,27 @@ import QuestionnaireNav from "../QuestionnaireNav/QuestionnaireNav";
 
 function SectionFourTraction() {
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  history.scrollRestoration = 'manual';
+
+
   const section4 = useSelector((store) => store.section4);
   const section4Enterprise = useSelector((store) => store.section4Enterprise);
   const progressIndicator = useSelector(
     (store) => store.section4Enterprise.progressIndicatorId
   );
   const user = useSelector((store) => store.user);
-  const history = useHistory();
+  const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
+  
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch({
       type: "FETCH_SECTION_FOUR",
     });
     dispatch({
-      type: "FETCH_ENTERPRISE_SECTION_FOUR",
+      type: "FETCH_ENTERPRISE_SECTION_FOUR", payload: selectedEnterprise,
     });
   }, []);
 
@@ -108,7 +115,7 @@ function SectionFourTraction() {
         <h5>What stage of development is your PRODUCT in?</h5>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue=""
+          defaultValue={0}
           value={section4Enterprise.developmentStageId}
           name="radio-buttons-group"
           className="centerHelp"
@@ -165,6 +172,8 @@ function SectionFourTraction() {
           id="outlined-basic"
           label="Amount Funded $"
           variant="outlined"
+          type="number"
+          required
           InputLabelProps={{ shrink: true }}
           value={section4Enterprise.fundingReceived4}
           onChange={(evt) =>
@@ -288,6 +297,8 @@ function SectionFourTraction() {
               label="Percentage"
               variant="outlined"
               value={section4Enterprise.averageGrowth4}
+              type="number"
+              required
               onChange={(evt) =>
                 dispatch({
                   type: "SET_SECTION4_ENTERPRISE",

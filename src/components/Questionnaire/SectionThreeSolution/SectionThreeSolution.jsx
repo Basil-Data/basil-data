@@ -19,10 +19,15 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 function SectionThreeSolution () {
     
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    history.scrollRestoration = 'manual';
+
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         dispatch({ type: 'FETCH_SECTION_THREE'});
-        dispatch({ type: 'FETCH_ENTERPRISE_SECTION_THREE'});
+        dispatch({ type: 'FETCH_ENTERPRISE_SECTION_THREE', payload: selectedEnterprise});
     }, []);
 
     // get the user.id from the store to send with everything else
@@ -37,6 +42,7 @@ function SectionThreeSolution () {
     const selectedOperatingSector = useSelector(store => store.section3Enterprise.operatingSectorId);
     const selectedPainPoints = useSelector(store => store.section3Enterprise.painPointsId);
     const selectedTechnologies = useSelector(store => store.section3Enterprise.technologiesId);
+    const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
 
     const handleOperatingSectors = (event) => {
         const index = selectedOperatingSector.indexOf(Number(event.target.value))
@@ -100,6 +106,21 @@ function SectionThreeSolution () {
         }})
     };
 
+
+    const onNext = (event) => {
+        console.log('in onNext');
+        handleSubmit(event);
+        history.push('/traction')
+    }
+
+
+    const onBack = (event) => {
+        handleSubmit(event);
+        history.push('/impact')
+    }
+
+
+
     return (
         <>
             <QuestionnaireNav />
@@ -144,6 +165,7 @@ function SectionThreeSolution () {
                             variant="outlined" 
                             multiline rows={5}
                             fullWidth
+                            InputLabelProps={{shrink: true,}}
                             value={section3Enterprise.payingCustomerProfile3}
                             onChange={(event) => dispatch({
                                 type: 'SET_SECTION_THREE_ENTERPRISE',
@@ -172,6 +194,7 @@ function SectionThreeSolution () {
                             variant="outlined" 
                             multiline rows={5}
                             fullWidth
+                            InputLabelProps={{shrink: true,}}
                             value={section3Enterprise.mainCompetitors3}
                             onChange={(event) => dispatch({
                                 type: 'SET_SECTION_THREE_ENTERPRISE',
@@ -199,6 +222,7 @@ function SectionThreeSolution () {
                             label="Differing competitive factors" 
                             variant="outlined" 
                             multiline rows={5}
+                            InputLabelProps={{shrink: true,}}
                             fullWidth
                             value={section3Enterprise.differFromCompetitors3}
                             onChange={(event) => {
@@ -246,6 +270,7 @@ function SectionThreeSolution () {
                             variant="outlined" 
                             multiline rows={5}
                             fullWidth
+                            InputLabelProps={{shrink: true,}}
                             value={section3Enterprise.testimonial3}
                             onChange={(event) => dispatch({
                                 type: 'SET_SECTION_THREE_ENTERPRISE',
@@ -279,6 +304,7 @@ function SectionThreeSolution () {
                             variant="outlined" 
                             multiline rows={5}
                             fullWidth
+                            InputLabelProps={{shrink: true,}}
                             value={section3Enterprise.businessModel3}
                             onChange={(event) => dispatch({
                                 type: 'SET_SECTION_THREE_ENTERPRISE',
@@ -308,10 +334,10 @@ function SectionThreeSolution () {
                 </Box>
                 <br/>
                 <br/>
-                <Link to="/impact">
+                <Link>
                     <button 
                         className="btn" 
-                        onClick={handleSubmit}>
+                        onClick={(event) => onBack(event)}>
                         Back
                     </button>
                 </Link>
@@ -320,10 +346,10 @@ function SectionThreeSolution () {
                     onClick={handleSubmit}>
                         Submit
                     </button>
-                <Link to="/traction">
+                <Link>
                     <button 
                         className="btn"
-                        onClick={handleSubmit}>
+                        onClick={(event) => onNext(event)}>
                         Next
                     </button>
                 </Link>

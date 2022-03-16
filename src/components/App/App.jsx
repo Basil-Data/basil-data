@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import AdminPage from '../AdminPage/AdminPage';
 
 // Sections for forms
 import SectionOneStory from '../Questionnaire/SectionOneStory/SectionOneStory';
@@ -28,7 +29,7 @@ import SectionFourTraction from '../Questionnaire/SectionFourTraction/SectionFou
 import SectionFiveMarket from '../Questionnaire/SectionFiveMarket/SectionFiveMarket';
 import SectionSixRisksAndHurdles from '../Questionnaire/SectionSixRisksAndHurdles/SectionSixRisksAndHurdles';
 import SectionSevenNextSteps from '../Questionnaire/SectionSevenNextSteps/SectionSevenNextSteps';
-
+import Report from '../Report/Report';
 
 import './App.css';
 
@@ -68,7 +69,11 @@ function App() {
             exact
             path="/user"
           >
+            {user.authLevel === 'guest' ?
             <UserPage />
+            :
+            <AdminPage />
+            }
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -158,6 +163,13 @@ function App() {
             path="/next-steps"
           >
             <SectionSevenNextSteps/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/report"
+          >
+            <Report />
           </ProtectedRoute>
 
           <Route

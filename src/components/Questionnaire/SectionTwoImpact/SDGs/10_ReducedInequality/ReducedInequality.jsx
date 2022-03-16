@@ -36,6 +36,7 @@ function ReducedInequality() {
 
 
 
+
     const handleInvestorSegments = (event) => {
         const index = selectedSegment.indexOf(Number(event.target.value))
         if (index === -1) {
@@ -54,6 +55,7 @@ function ReducedInequality() {
             });
         }
     }
+
 
 
     const handleIndicator = (event) => {

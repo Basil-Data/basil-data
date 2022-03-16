@@ -4,7 +4,7 @@ const section4Enterprise = (state = {
     customerGrowth4: '',
     fundingReceived4: '',
     generatingRevenue4: '',
-    developmentStageId: null,
+    developmentStageId: 0,
     makingProfit4: ''
 }, action) => {
     switch (action.type) {

@@ -49,6 +49,7 @@ function NoPoverty() {
                 type: 'SET_SECTION_TWO_ENTERPRISE',
                 payload: {
                     segmentId: selectedSegment.filter((selectedSegment) => selectedSegment !== Number(event.target.value))
+
                 }
             });
         }
@@ -69,6 +70,7 @@ function NoPoverty() {
                 type: 'SET_SECTION_TWO_ENTERPRISE',
                 payload: {
                     indicatorId: selectedIndicator.filter((selectedIndicator) => selectedIndicator !== Number(event.target.value))
+
                 }
             });
         }

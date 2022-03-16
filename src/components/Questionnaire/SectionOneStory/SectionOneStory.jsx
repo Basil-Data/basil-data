@@ -19,16 +19,21 @@ import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 
 function SectionOneStory () {
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    history.scrollRestoration = 'manual';
 
     // get the user.id from the store to send with everything else
     const user = useSelector((store) => store.user);
     const competitiveAdvantages = useSelector(store => store.section1.competitiveAdvantages);
     const section1Enterprise = useSelector(store => store.section1Enterprise);
     const selectedAdvantages = useSelector(store => store.section1Enterprise.competitiveAdvantagesId);
+    const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         dispatch({ type: 'FETCH_SECTION_ONE' });
-        dispatch({ type: 'FETCH_ENTERPRISE_SECTION_ONE'})
+        dispatch({ type: 'FETCH_ENTERPRISE_SECTION_ONE', payload: selectedEnterprise})
     }, []);
 
     const handleCompetitiveAdvantages = (event) => {
@@ -60,6 +65,12 @@ function SectionOneStory () {
                 data: section1Enterprise
         }})
     };
+
+
+    const onNext = (event) => {
+        handleSubmit(event);
+        history.push('/impact')
+    }
 
     return (
         <>
@@ -241,7 +252,7 @@ function SectionOneStory () {
             <Link to="/impact">
                 <button 
                     className="btn"
-                    onClick={(event) => handleSubmit(event)}
+                    onClick={(event) => onNext(event)}
                 >
                     Next
                 </button>

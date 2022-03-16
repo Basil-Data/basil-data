@@ -14,9 +14,9 @@ function* getSectionFive() {
     }
 }
 
-function* getSectionFiveEnterprise() {
+function* getSectionFiveEnterprise(action) {
     try {
-        const response = yield axios.get('/api/section5/:id');
+        const response = yield axios.get(`/api/section5/${action.payload}`);
         console.log(response.data);
         yield put({
             type: 'SET_SECTION5_RESPONSES',

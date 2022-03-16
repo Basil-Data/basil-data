@@ -19,9 +19,9 @@ function* getSectionOne () {
 };
 
 // This section gets the client's previous answers
-function* getSectionOneEnterprise () {
+function* getSectionOneEnterprise (action) {
     try {
-        const response = yield axios.get(`/api/section1/:id`);
+        const response = yield axios.get(`/api/section1/${action.payload}`);
         console.log(response.data);
         yield put({
             type: 'SET_SECTION_ONE_ENTERPRISE',
