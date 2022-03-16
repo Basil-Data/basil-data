@@ -20,13 +20,11 @@ function ReportSection5Chart() {
     }, []);
 
     const data = {
-        labels: ['Total Addressable Market (US Dollars)', 'Serviceable Addressable Market (US Dollars)', 'Serviceable Obtainable Market (US Dollars)'],
+        labels: ['Total Addressable Market', 'Serviceable Addressable Market', 'Serviceable Obtainable Market',],
         datasets: [
             {
-                labels: [
-                        'Total Addressable Market (US Dollars)', 
-                        'Serviceable Addressable Market (US Dollars)',
-                        'Serviceable Obtainable Market (US Dollars)'],
+                label: [
+                        'Total Addressable Market (US Dollars)', 'Serviceable Addressable Market (US Dollars)','Serviceable Obtainable Market (US Dollars)'],
                 data: [section5Enterprise.addressableMarket5,
                         section5Enterprise.serviceableMarket5,
                         section5Enterprise.obtainableMarket5],
@@ -34,20 +32,24 @@ function ReportSection5Chart() {
                                     'rgba(54, 162, 235, 0.2)',
                                     'rgba(255, 206, 86, 0.2)'
                                 ],
-                borderColor: ['rgba(255, 99, 132, 1)'],
+                borderColor: ['rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)'
+                            ],
                 borderWidth: 1, }
         ]
     }
 
     return (
         <>
-            <div style={{height:"50vh", width:"50vh", position:"relative", marginBottom:"1%", padding:"1%"}}>
+        <div>
             <Doughnut 
                 data={data}
-                height="300px"
-                width="300px"
+                width={300}
+                height={300}
+                options={{ maintainAspectRatio: false }}
             />
-            </div>
+        </div>
         </>
     )
 

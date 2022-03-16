@@ -282,7 +282,7 @@ function SectionFourTraction() {
           />
         </RadioGroup>
         {/* Questions below are generated if the user chooses yes. */}
-        {section4Enterprise.generatingRevenue4 === "true" && (
+        {section4Enterprise.generatingRevenue4 === true && (
           <>
             <h5>
               What is your average growth in monthly revenue over the past 6

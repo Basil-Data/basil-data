@@ -21,6 +21,8 @@ function ReportSection5Market () {
                         <h1>05. Market</h1>
                         <hr className="dotted"></hr>
                         <ReportSection5Chart />
+                        <div></div>
+                        
 
                     </div>
                 </div>
