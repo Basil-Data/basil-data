@@ -16,7 +16,7 @@ router.get('/', rejectUnauthenticated, (req,res) => {
 		ARRAY_AGG(DISTINCT("economicImpact"."impact")) AS "economicImpact",
 		ARRAY_AGG(DISTINCT("environmentalImpact"."impact")) AS "environmentalImpact",
 		ARRAY_AGG(DISTINCT("fundingUse"."fundingUse")) AS "fundingUse",
-		ARRAY_AGG(DISTINCT("growthFactors"."factor")) AS "growthFactors",
+		ARRAY_AGG(DISTINCT("growthFactors"."id")) AS "growthFactors",
 		ARRAY_AGG(DISTINCT("helpMoveForward"."assistance")) AS "helpMoveForward",
 		ARRAY_AGG(DISTINCT("impactSectors"."impactSector")) AS "impactSectors",
 		ARRAY_AGG(DISTINCT("indicators"."indicator")) AS "indicators",
