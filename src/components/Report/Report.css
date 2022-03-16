@@ -25,6 +25,11 @@ hr.dotted {
     border-top: 3px dotted #bbb;
 }
 
+.dottedMargin {
+    margin-right: 60px;
+    margin-left: 60px
+}
+
 /* Front page CSS */
 .frontPage{
     background-image: url('/public/images/Basil\ Data\ Report\ Front\ Page.png');
@@ -338,6 +343,37 @@ hr.dotted {
     margin-left: 30px;
     width: 700px;
 
+}
+
+/* Section 6 styling */
+
+.pageContainer {
+    position: relative;
+    min-height: 100%;
+}
+
+.heading {
+    padding-top: 50px;
+    padding-left: 70px;
+    padding-bottom: 10px;
+}
+
+.subheading {
+    padding-top: 15px;
+    padding-left: 70px;
+}
+
+.section6Color {
+    height: 3in;
+    position: absolute;
+    bottom: 0;
+}
+
+.media {
+    display: block;
+    max-height:110px;
+    width: auto;
+    height: auto;
 }
 
 /* Final Page CSS */
