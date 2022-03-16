@@ -415,7 +415,7 @@ hr.dotted {
     min-height: 100%;
 }
 
-.heading {
+.pageHeader {
     padding-top: 50px;
     padding-left: 70px;
     padding-bottom: 10px;
@@ -437,6 +437,22 @@ hr.dotted {
     max-height:110px;
     width: auto;
     height: auto;
+}
+
+/* Section 7 styling */
+
+#arrowBackground {
+    padding-top: 6px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url('/public/images/arrows.png');
+    color: white;
+}
+
+.section7Color {
+    height: 3in;
+    position: absolute;
+    bottom: 0;
 }
 
 /* Final Page CSS */
