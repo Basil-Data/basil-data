@@ -1,17 +1,18 @@
 /* All Report CSS */
 .report {
     margin: 40px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat';
+}
+
+.pageHeader {
+    font-family: 'Open Sans';
+    font-weight: 800;
 }
 
 .paper {
     width: 8.5in;
     height: 11in;
     margin-bottom: 10px;
-}
-
-.list {
-    list-style-type: none;
 }
 
 .sectionColor {
@@ -38,7 +39,8 @@ hr.dotted {
 }
 
 .frontPageDate{
-    font-family: cursive;
+    font-family: 'Lora';
+    font-style: italic;
     padding-top: 300px;
     padding-left: 300px;
 }
@@ -112,6 +114,7 @@ hr.dotted {
 
 .introParagraph {
     width: 70%;
+    height: 500px;
 }
 
 .introContainer {
@@ -128,21 +131,38 @@ hr.dotted {
 .sectionOneText{
     text-align: center;
     padding-right: 100px;
-    margin-top: 50px;
     margin-left: 50px;
+    margin-bottom: 50px;
     width: 400px;
 }
 
 .sectionOneColor {
-    height: 4in;
-    margin-top: 100px;
+    padding-top: 20px;
+    height: 500px;
 }
 
 .numbersSectionOne {
     font-size: 45px;
     margin-bottom: 0px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Lora';
     color: #434343;
+}
+
+.competitiveAdvantages{
+    margin-top: 0px;
+    margin-left: 220px;
+}
+
+.competitiveAdvantagesContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 400px;
+    justify-content: space-evenly;
+}
+
+.competitiveCard{
+    margin: 10px;
 }
 
 /* Section Two CSS */
@@ -269,6 +289,12 @@ hr.dotted {
     width: 700px;
 }
 
+.businessModel{
+    height: 100px;
+    padding-top: 10px;
+    margin-top: 20px;
+}
+
 .technicalApproach{
     display: flex;
     flex-direction: row;
@@ -278,11 +304,13 @@ hr.dotted {
     font-weight: lighter;
     flex-grow: 1;
     margin-left: 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
 }
 
 .sectionThreeColor {
-    height: 615px;
-    margin-top: 40px;
+    height: 665px;
+    margin-top: 75px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -324,6 +352,15 @@ hr.dotted {
 .sectionThreeSecondPart{
     background-image: url('/public/images/Basil\ Data\ Report\ Top\ and\ Bottom.png');
     background-size: 8.5in 11in;
+}
+
+.painPointPic{
+    height: 100px;
+    margin-left: 75px;
+}
+
+.painPointPicText{
+    text-align: center;
 }
 
 .painPoints{
@@ -437,4 +474,23 @@ hr.dotted {
     margin-right: 50px;
     margin-bottom: 10px;
     text-align: justify;
+}
+
+
+
+
+
+
+
+
+
+/* PRINT VIEW */
+@media print{
+    nav{
+        display: none;
+    }
+    
+    body{
+        border: 2px solid black;
+    }
 }

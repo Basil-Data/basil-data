@@ -11,7 +11,7 @@ router.get('/', rejectUnauthenticated, (req,res) => {
 		"user"."logoUrl",
 		"answers".*,
 		ARRAY_AGG(DISTINCT("anticipatedRisks"."risk")) AS "anticipatedRisks",
-		ARRAY_AGG(DISTINCT("competitiveAdvantages"."advantage")) AS "competitiveAdvantages",
+		ARRAY_AGG(DISTINCT("competitiveAdvantagesJunction"."advantageId")) AS "competitiveAdvantages",
 		ARRAY_AGG(DISTINCT("developmentStage"."stage")) AS "developmentStage",
 		ARRAY_AGG(DISTINCT("economicImpact"."impact")) AS "economicImpact",
 		ARRAY_AGG(DISTINCT("environmentalImpact"."impact")) AS "environmentalImpact",
@@ -122,7 +122,7 @@ router.get('/', rejectUnauthenticated, (req,res) => {
 	WHERE "user"."id" = $1
 	GROUP BY
 		"answers"."id",
-			"user"."enterpriseName",
+		"user"."enterpriseName",
 		"user"."logoUrl",
 		"sdg"."sdg",
 		"sdg"."icon";
