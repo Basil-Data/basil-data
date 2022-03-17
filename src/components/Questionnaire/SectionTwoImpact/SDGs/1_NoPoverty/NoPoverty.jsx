@@ -82,7 +82,12 @@ function NoPoverty() {
             <img src="images/SDGs/E-WEB-Goal-01.png" width="200px" height="200px"/>
             <h1><b>SDG - No Poverty</b></h1>
             <p>What Indicators do you use/intend to use to track change?</p>
-            <FormControl>
+            <FormControl
+                sx={{
+                    width: "700px",
+                    
+            }}
+            >
                 {indicators?.map(indicator => {
                     if(indicator.sdgId === 1) {
                         return (
@@ -93,7 +98,7 @@ function NoPoverty() {
                                 defaultValue={0}
                                 onChange={handleIndicator}
                                 control={<Checkbox />}
-                                label={indicator.indicator}
+                                label={indicator.indicator} 
                             />  
                         )
                     }

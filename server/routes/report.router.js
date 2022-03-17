@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-router.get('/', rejectUnauthenticated, (req,res) => {
+router.get('/', rejectUnauthenticated, async (req,res) => {
     
 	let sqlText = `
 	SELECT 
@@ -128,14 +128,28 @@ router.get('/', rejectUnauthenticated, (req,res) => {
 		"sdg"."icon";
 		`;
 
-    pool.query(sqlText, [req.user.id])
-        .then((results) => {
-            res.send(results.rows[0]);
-        })
-        .catch((error) => {
-			console.log('error getting report answers', error);
-            res.sendStatus(500);
-        })
+	const sqlText2 = `
+		SELECT
+			"indicators"."id",
+			"indicators"."targetNumber",
+			"indicators"."target"
+		FROM "indicators"
+		LEFT JOIN "indicatorsJunction"
+			ON "indicatorsJunction"."indicatorId" = "indicators"."id"
+		LEFT JOIN "user"
+			ON "user"."id" = "indicatorsJunction"."enterpriseId"
+		WHERE "user"."id" = $1;
+	`;
+
+    const overallAnswers = await pool.query(sqlText, [req.user.id])
+	const indicatorAnswers = await pool.query(sqlText2, [req.user.id])
+	
+	const results = {
+		...overallAnswers.rows[0],
+		indicatorAnswers: indicatorAnswers.rows
+	}
+
+	res.send(results);
 })
 
 module.exports = router;

@@ -146,11 +146,28 @@ hr.dotted {
 }
 
 /* Section Two CSS */
+.section2Background {
+    background-image: url('/public/images/Basil\ Data\ Report\ Bottom\ Left.png');
+    background-size: 8.5in 11in;
+    background-repeat: no-repeat;
+    
+}
 .reportSectionTwo {
     display: flex;
     flex-wrap: wrap;
     padding: 10px;
-    margin: 30px;
+   margin: 30px;
+}
+
+.reportSectionTwoPageTwo {
+    padding: 10px;
+}
+
+.sectionTwoPageTwoContainer {
+    display: flex;
+    flex-direction: column;
+    height: 11in;
+    margin: 0px 30px 30px 30px;
 }
 
 .problemParagraph {
@@ -215,12 +232,24 @@ hr.dotted {
 }
 
 .targetsHeading {
-    margin-bottom: 0px;
+    margin-bottom: 20px;
 }
 
 .sdgTarget {
     margin-top: 0px;
     color: plum
+}
+
+.outcomesContainer {
+    width: 300px;
+}
+
+.outcomes {
+    margin-left: 140px;
+}
+
+.efficacy {
+    margin-top: 40px;
 }
 
 .metricsText {
@@ -238,6 +267,7 @@ hr.dotted {
 
 .solutionParagraph {
     width: 100%;
+    margin-top: 0px;;
 }
 
 .solution {
@@ -248,11 +278,27 @@ hr.dotted {
 
 .efficacy {
     margin-left: 360px;
+    margin-top: 0px;
 }
 
 .targetLocations {
-    width: 200px;
+    display: flex;
+    flex-direction: row;
     margin-left: 40px;
+}
+
+.targetTitle {
+    margin-left: 20px;
+}
+
+.usImage {
+    margin-left: 100px;
+    margin-top: 20px;
+}
+
+.titleContainer {
+    margin-left: 30px;
+    margin-bottom: 0px;
 }
 
 
