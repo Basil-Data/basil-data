@@ -10,6 +10,7 @@ import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 
 import "../Questionnaire.css";
 import QuestionnaireNav from "../QuestionnaireNav/QuestionnaireNav";
@@ -105,6 +106,7 @@ function SectionFourTraction() {
   return (
     <>
       <QuestionnaireNav />
+      <Paper className="formPaper" elevation={3}>
       <form className="questionnaireForm">
         <h1>Section 4 - Traction</h1>
         <p>
@@ -456,6 +458,7 @@ function SectionFourTraction() {
         </button>
         
       </form>
+      </Paper>
     </>
   );
 }

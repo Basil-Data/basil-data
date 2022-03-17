@@ -9,6 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 // Internal Imports
 import '../Questionnaire.css'
@@ -104,6 +105,7 @@ function SectionSixRisksAndHurdles () {
     return (
         <>
         <QuestionnaireNav/>
+        <Paper className="formPaper" elevation={3}>
         <form className='questionnaireForm'>
             <h1>Section 6 - Risks and Hurdles</h1>
             <p>Enhancing your Transparency by providing insight into current and future factors 
@@ -300,6 +302,7 @@ function SectionSixRisksAndHurdles () {
             <Link to="/next-steps"><button className="btn">Next</button></Link>
 
         </form>
+        </Paper>
         </>
     )
 };

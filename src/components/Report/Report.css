@@ -15,10 +15,30 @@
     margin-bottom: 10px;
 }
 
+.formPaper {
+    font-family: 'Open Sans';
+    width: 8.5in;
+    padding: 10px;
+    margin-top: 30px;
+    margin-left: 530px;
+}
+
 .sectionColor {
     background-image: linear-gradient(to bottom right, #122445, #2f5a52);
     width: 100%;
     color: white;
+}
+
+.buttonCenter {
+    margin-left: 235px;
+}
+
+.buttonCenter2{
+    margin-left: 80px;
+}
+
+.boxHeight{
+    height: 60px;
 }
 
 /* Dotted border */
