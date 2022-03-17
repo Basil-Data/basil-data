@@ -122,48 +122,52 @@ function ReportSection2Impact () {
 
     return (
         <Paper className="paper" elevation={3}>
-            <div className="reportSectionTwo">
-                <div className="problemParagraph">
-                    <h1>02. IMPACT</h1>
-                    <hr className="dotted"></hr>
-                    <h3>The Problem:</h3>
-                    <div className="problemText">
-                        <p className="problem">{enterpriseAnswers.problemBeingSolved2}</p>
-                        <p className="costOfProblem">{enterpriseAnswers.costOfProblem2}</p>
-                    </div>
-                </div>
-                <div className="beneficiary">
-                    <div className="beneficiaryText">
-                        <h4><b>OUR BENEFICIARY:</b></h4>
-                        <h5>{enterpriseAnswers.whoBenefits2}</h5>
-                    </div>
-                    <div className="sdgIcons">
-                        <img 
-                            className="sdgImage" 
-                            width="130px" 
-                            height="130px" 
-                            src={enterpriseAnswers.icon}
-                        />
-                        <img 
-                            className="secondarySDGImage"
-                            width="100px"
-                            height="100px"
-                            src={secondarySDGImage}
-                        />
-                    </div>
-                </div>
-                <div className="sectionColor sectionTwoColor">
-                    <div className="targetText">
-                        <div className="targets">
-                            <h4 className="targetsHeading"><b>TARGETS:</b></h4>
-                            <h5 className="sdgTarget">SDG Target {sdgId}</h5>
+                <div className="reportSectionTwo">
+                    <div className="problemParagraph">
+                        <h1>02. IMPACT</h1>
+                        <hr className="dotted"></hr>
+                        <h3>The Problem:</h3>
+                        <div className="problemText">
+                            <p className="problem">{enterpriseAnswers.problemBeingSolved2}</p>
+                            <p className="costOfProblem">{enterpriseAnswers.costOfProblem2}</p>
                         </div>
                     </div>
-                    <div className="explanation">
-                        <p>{enterpriseAnswers.elaborateOnIndicators2}</p>
+                    <div className="beneficiary">
+                        <div className="beneficiaryText">
+                            <h4><b>OUR BENEFICIARY:</b></h4>
+                            <h5>{enterpriseAnswers.whoBenefits2}</h5>
+                        </div>
+                        <div className="sdgIcons">
+                            <img 
+                                className="sdgImage" 
+                                width="130px" 
+                                height="130px" 
+                                src={enterpriseAnswers.icon}
+                            />
+                            <img 
+                                className="secondarySDGImage"
+                                width="100px"
+                                height="100px"
+                                src={secondarySDGImage}
+                            />
+                        </div>
                     </div>
-                </div>
-            </div>
+                    <div className="sectionColor sectionTwoColor">
+                        <div className="targetText">
+                            <div className="targets">
+                                <h4 className="targetsHeading"><b>TARGETS:</b></h4>
+                                {enterpriseAnswers.indicatorAnswers?.slice(0, 2).map(answer => {
+                                    return(
+                                        <div>
+                                            <h5 className="sdgTarget">SDG Target {answer.targetNumber}</h5>
+                                            <h5>{answer.target}</h5>
+                                        </div>   
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                </div> 
         </Paper>
     )
 };
