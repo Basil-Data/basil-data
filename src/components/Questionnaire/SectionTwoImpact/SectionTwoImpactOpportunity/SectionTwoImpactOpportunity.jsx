@@ -164,6 +164,7 @@ function SectionTwoImpactOpportunity() {
                     })}
                 </FormControl>
                 <p>Which Sustainable Development Goal best aligns best with your impact objective?</p>
+                <div className="buttonCenter">
                 <RadioGroup 
                     className="centerHelp"
                     onChange={handleSDG}
@@ -177,11 +178,11 @@ function SectionTwoImpactOpportunity() {
                             value={goal.id}
                             defaultValue={0}
                             label={goal.sdg}
-                            key={goal.id}
                             />
                         )
                     })}
                 </RadioGroup>
+                </div>
             <div>
                 {component}
             </div>
