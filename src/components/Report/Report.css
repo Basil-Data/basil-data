@@ -455,6 +455,21 @@ hr.dotted {
     bottom: 0;
 }
 
+/* Section 9 styling */
+
+.section9Background {
+    display: block;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-image: url('/public/images/reportSection9Background.png');
+    background-size: 8.5in 11in;
+}
+
+.dottedMargin9 {
+    margin-right: 340px;
+    margin-left: 60px
+}
+
 /* Final Page CSS */
 .finalPage {
     display: flex;
