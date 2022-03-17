@@ -33,7 +33,7 @@ function ReportSection5Chart() {
                                     'rgba(159, 135, 225)',
                                     'rgb(205, 205, 218)'
                                 ],
-                borderColor: ['rgba(255, 99, 132, 1)'],
+                borderColor: ['rgb(17, 35, 69)'],
                 borderWidth: 1, }
         ]
     }
