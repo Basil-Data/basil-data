@@ -545,14 +545,17 @@ hr.dotted {
 
 
 
-
 /* PRINT VIEW */
 @media print{
-    nav{
+    header, footer, Nav{
         display: none;
     }
     
     body{
         border: 2px solid black;
+    }
+
+    @page :right {
+        margin: 3.5cm;
     }
 }
