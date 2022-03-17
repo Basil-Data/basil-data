@@ -19,7 +19,7 @@ function ReportSection5Market () {
             <Paper className="paper" elevation={3}>
                 <div className="reportSectionThree">
                     <div className="sectionFiveTitle">
-                        <h1>05. Market</h1>
+                        <h1>05. MARKET</h1>
                         <hr className="dotted"></hr>
                         <ReportSection5Chart />
                         <div className="section5ChartQuestions">

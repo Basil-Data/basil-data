@@ -372,6 +372,34 @@ hr.dotted {
     margin: 0px 20px 0px 40px;
 }
 
+/* Section 4 CSS */
+
+.sectionFourNumbers {
+    font-size: 25px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-family: 'Lora';
+    color: #434343;
+}
+
+.sectionFourText {
+    font-size: 10px;
+}
+
+.sectionFourColor {
+    height: 460px;
+}
+
+.sectionFourIntro {
+    width: 70%;
+    height: 400px;
+}
+
+.sectionFourParagraph {
+    font-family: 'Montserrat';
+    font-size: 18px;
+}
+
 
 /* Section Five CSS */
 
@@ -379,7 +407,7 @@ hr.dotted {
     margin-top: 30px;
     margin-left: 30px;
     margin-right: 20px;
-
+    font-family: 'Open Sans';
 }
 
 .section5ChartQuestions {
