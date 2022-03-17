@@ -121,9 +121,9 @@ CREATE TABLE "impactTableJunction" (
 CREATE TABLE "indicators" (
 	"id" SERIAL PRIMARY KEY,
 	"sdgId" INTEGER,
-	"indicator" VARCHAR (255),
-	"targetNumber" VARCHAR (255),
-	"target" VARCHAR (255)
+	"indicator" VARCHAR (1000),
+	"targetNumber" VARCHAR (1000),
+	"target" VARCHAR (1000)
 );
 
 INSERT INTO "indicators"
@@ -924,7 +924,7 @@ VALUES
 	(17, 
 	'Proportion of countries that (a) have conducted at least one population and housing census in the last 10 years; and (b) have achieved 100 per cent birth registration and 80 per cent death registration', 
 	'17.19', 
-	'By 2030, build on existing initiatives to develop measurements of progress on sustainable development that complement gross domestic product, and support statistical capacity-building in developing countries'),
+	'By 2030, build on existing initiatives to develop measurements of progress on sustainable development that complement gross domestic product, and support statistical capacity-building in developing countries');
 
 		
 
@@ -1312,4 +1312,3 @@ CREATE TABLE "economicImpactJunction" (
 	"enterpriseId" INTEGER,
 	"economicImpactId" INTEGER
 );
-

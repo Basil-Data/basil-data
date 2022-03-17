@@ -7,21 +7,20 @@ import {useSelector, useDispatch} from 'react-redux';
 import Paper from '@mui/material/Paper';
 
 function ReportSection9NextSteps () {
-    const dispatch = useDispatch();
 
     const enterpriseAnswers = useSelector(store => store.reportReducer);
     const investmentVehicles = useSelector(store => store.reportReducer.investmentVehicles);
 
-    function commafy(num) {
-    let str = num.toString().split(".");
-    if (str[0].length >= 3) {
-        str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, "$1,");
-    }
-    if (str[1] && str[1].length >= 3) {
-        str[1] = str[1].replace(/(\d{3})/g, "$1 ");
-    }
-    return str.join(".");
-    }
+    // function commafy(num) {
+    // let str = num.toString().split(".");
+    // if (str[0].length >= 3) {
+    //     str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, "$1,");
+    // }
+    // if (str[1] && str[1].length >= 3) {
+    //     str[1] = str[1].replace(/(\d{3})/g, "$1 ");
+    // }
+    // return str.join(".");
+    // }
 
     return (
         <>
@@ -30,7 +29,7 @@ function ReportSection9NextSteps () {
         <h1 className="pageHeader">09. NEXT STEPS</h1>
         <hr className="dotted dottedMargin9"></hr>
 
-        <div>
+        {/* <div>
         <h3 className="subheading">We are currently raising...</h3>
         <h2 className="subheading">${commafy(enterpriseAnswers.targetAmount7)}</h2>
         {investmentVehicles.length > 1 
@@ -44,24 +43,24 @@ function ReportSection9NextSteps () {
         :
         <h3 className="subheading">Funding Instrument:</h3>
         }
-        </div>
+        </div> */}
 
-        <div className="sectionColor">
+        {/* <div className="sectionColor">
             <h2>Our plan for this round:</h2>
             <ul>
-                {fundingUse?.map(use =>
+                {fundingUse?.map(use => (
                     <li><h3>{use}</h3></li>
-                )}
+                ))}
             </ul>
             <h2>
                 Our next steps toward our goal:
                 <h3>{enterpriseAnswers.nextSteps}</h3>
             </h2>
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
             <img src={user.logoUrl} height={120}/>
-        </div>
+        </div> */}
 
         </div>
         </Paper>
