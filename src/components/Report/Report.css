@@ -221,7 +221,7 @@ hr.dotted {
 }
 
 .sectionTwoColor {
-    height: 4in;
+    height: 350px;
     margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
@@ -266,10 +266,11 @@ hr.dotted {
 
 .outcomes {
     margin-left: 140px;
+    margin-bottom: 0px;
 }
 
 .efficacy {
-    margin-top: 40px;
+    margin-top: 0px;
 }
 
 .metricsText {
@@ -299,6 +300,7 @@ hr.dotted {
 .efficacy {
     margin-left: 360px;
     margin-top: 0px;
+    margin-bottom: 40px;
 }
 
 .targetLocations {
@@ -313,7 +315,7 @@ hr.dotted {
 
 .usImage {
     margin-left: 100px;
-    margin-top: 20px;
+    margin-top: 8px;
 }
 
 .titleContainer {

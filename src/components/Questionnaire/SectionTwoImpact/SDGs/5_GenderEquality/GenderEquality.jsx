@@ -8,6 +8,7 @@ import {
     Table, 
     TableHead, 
     TableRow, 
+    TableCell,
     TableBody,
     Button, 
     Box, 
@@ -84,19 +85,32 @@ function GenderEquality() {
             <img src="images/SDGs/E-WEB-Goal-05.png" width="200px" height="200px"/>
             <h1><b>SDG - Gender Equality</b></h1>
             <p>What Indicators do you use/intend to use to track change?</p>
-            <FormControl>
+            <FormControl
+                sx={{
+                    width: "700px",
+                }}
+            >
                 {indicators?.map(indicator => {
                     if(indicator.sdgId === 5) {
                         return (
-                            <FormControlLabel
-                                key={indicator.id}
-                                checked={selectedIndicator.includes(indicator.id)}
-                                value={indicator.id}
-                                defaultValue={0}
-                                onChange={handleIndicator}
-                                control={<Checkbox />}
-                                label={indicator.indicator}
-                            />  
+                            <Box>
+                                <Table>
+                                    <TableRow sx={{display: "table"}}>
+                                        <TableCell>
+                                            <Checkbox
+                                                key={indicator.id} 
+                                                checked={selectedIndicator.includes(indicator.id)}
+                                                value={indicator.id}
+                                                defaultValue={0}
+                                                onChange={handleIndicator}
+                                            />
+                                        </TableCell>
+                                        <TableCell>
+                                            {indicator.indicator}
+                                        </TableCell>
+                                    </TableRow>
+                                </Table> 
+                            </Box>                   
                         )
                     }
                 })}

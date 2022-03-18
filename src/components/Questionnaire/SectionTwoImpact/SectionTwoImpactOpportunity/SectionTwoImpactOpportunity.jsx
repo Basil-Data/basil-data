@@ -112,9 +112,7 @@ function SectionTwoImpactOpportunity() {
 
 
     const handleSupportiveCharacteristics = (event) => {
-        console.log('in handleSupportiveCharacteristics');
-        const index = selectedCharacteristic.indexOf(Number(event.target.value))
-        console.log('index:', index);
+        const index = selectedCharacteristic.indexOf(Number(event.target.value));
         if (index === -1) {
             dispatch({
                 type: 'SET_SECTION_TWO_ENTERPRISE',

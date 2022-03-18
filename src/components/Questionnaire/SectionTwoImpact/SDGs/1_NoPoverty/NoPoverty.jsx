@@ -9,8 +9,10 @@ import {
     TableHead, 
     TableRow, 
     TableBody,
+    TableCell,
     Button, 
     Box, 
+    Container,
     Select,
     MenuItem,
     FormControl,
@@ -85,21 +87,29 @@ function NoPoverty() {
             <FormControl
                 sx={{
                     width: "700px",
-                    
-            }}
+                }}
             >
                 {indicators?.map(indicator => {
                     if(indicator.sdgId === 1) {
                         return (
-                            <FormControlLabel
-                                key={indicator.id}
-                                checked={selectedIndicator.includes(indicator.id)}
-                                value={indicator.id}
-                                defaultValue={0}
-                                onChange={handleIndicator}
-                                control={<Checkbox />}
-                                label={indicator.indicator} 
-                            />  
+                            <Box>
+                                <Table>
+                                    <TableRow sx={{display: "table"}}>
+                                        <TableCell>
+                                            <Checkbox
+                                                key={indicator.id} 
+                                                checked={selectedIndicator.includes(indicator.id)}
+                                                value={indicator.id}
+                                                defaultValue={0}
+                                                onChange={handleIndicator}
+                                            />
+                                        </TableCell>
+                                        <TableCell>
+                                            {indicator.indicator}
+                                        </TableCell>
+                                    </TableRow>
+                                </Table> 
+                            </Box>                   
                         )
                     }
                 })}

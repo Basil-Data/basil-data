@@ -242,3 +242,21 @@ function SectionTwoImpact() {
 
 
 export default SectionTwoImpact;
+
+
+<Box>
+    <Container sx={{textAlign: "left"}}>
+    <FormControlLabel
+        sx={{
+            display: "table-cell",
+        }}
+        key={indicator.id}
+        checked={selectedIndicator.includes(indicator.id)}
+        value={indicator.id}
+        defaultValue={0}
+        onChange={handleIndicator}
+        control={<Checkbox />}
+        label={indicator.indicator} 
+    />
+    </Container> 
+</Box>
