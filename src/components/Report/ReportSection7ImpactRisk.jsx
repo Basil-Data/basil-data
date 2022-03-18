@@ -81,7 +81,7 @@ function ReportSection7ImpactRisk () {
         <Checkbox 
             size="large" 
             color="default"
-            iconStyle={{fill: 'white'}}
+            // iconStyle={{fill: 'white'}}
             disableRipple
             sx={{ mr: 2, ml: 4 }}
             checked={enterpriseRisks?.includes(risk.id)}

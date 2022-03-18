@@ -1,7 +1,12 @@
 /* All Report CSS */
 .report {
     margin: 40px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat';
+}
+
+.pageHeader {
+    font-family: 'Open Sans';
+    font-weight: 800;
 }
 
 .paper {
@@ -10,14 +15,30 @@
     margin-bottom: 10px;
 }
 
-.list {
-    list-style-type: none;
+.formPaper {
+    font-family: 'Open Sans';
+    width: 8.5in;
+    padding: 10px;
+    margin-top: 30px;
+    margin-left: 530px;
 }
 
 .sectionColor {
     background-image: linear-gradient(to bottom right, #122445, #2f5a52);
     width: 100%;
     color: white;
+}
+
+.buttonCenter {
+    margin-left: 235px;
+}
+
+.buttonCenter2{
+    margin-left: 80px;
+}
+
+.boxHeight{
+    height: 60px;
 }
 
 /* Dotted border */
@@ -38,7 +59,8 @@ hr.dotted {
 }
 
 .frontPageDate{
-    font-family: cursive;
+    font-family: 'Lora';
+    font-style: italic;
     padding-top: 300px;
     padding-left: 300px;
 }
@@ -112,6 +134,7 @@ hr.dotted {
 
 .introParagraph {
     width: 70%;
+    height: 500px;
 }
 
 .introContainer {
@@ -128,29 +151,63 @@ hr.dotted {
 .sectionOneText{
     text-align: center;
     padding-right: 100px;
-    margin-top: 50px;
     margin-left: 50px;
+    margin-bottom: 50px;
     width: 400px;
 }
 
 .sectionOneColor {
-    height: 4in;
-    margin-top: 100px;
+    padding-top: 20px;
+    height: 500px;
 }
 
 .numbersSectionOne {
     font-size: 45px;
     margin-bottom: 0px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Lora';
     color: #434343;
 }
 
+.competitiveAdvantages{
+    margin-top: 0px;
+    margin-left: 220px;
+}
+
+.competitiveAdvantagesContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 400px;
+    justify-content: space-evenly;
+}
+
+.competitiveCard{
+    margin: 10px;
+}
+
 /* Section Two CSS */
+.section2Background {
+    background-image: url('/public/images/Basil\ Data\ Report\ Bottom\ Left.png');
+    background-size: 8.5in 11in;
+    background-repeat: no-repeat;
+    
+}
 .reportSectionTwo {
     display: flex;
     flex-wrap: wrap;
     padding: 10px;
-    margin: 30px;
+   margin: 30px;
+}
+
+.reportSectionTwoPageTwo {
+    padding: 10px;
+}
+
+.sectionTwoPageTwoContainer {
+    display: flex;
+    flex-direction: column;
+    height: 11in;
+    margin: 0px 30px 30px 30px;
 }
 
 .problemParagraph {
@@ -215,12 +272,24 @@ hr.dotted {
 }
 
 .targetsHeading {
-    margin-bottom: 0px;
+    margin-bottom: 20px;
 }
 
 .sdgTarget {
     margin-top: 0px;
     color: plum
+}
+
+.outcomesContainer {
+    width: 300px;
+}
+
+.outcomes {
+    margin-left: 140px;
+}
+
+.efficacy {
+    margin-top: 40px;
 }
 
 .metricsText {
@@ -238,6 +307,7 @@ hr.dotted {
 
 .solutionParagraph {
     width: 100%;
+    margin-top: 0px;;
 }
 
 .solution {
@@ -248,11 +318,27 @@ hr.dotted {
 
 .efficacy {
     margin-left: 360px;
+    margin-top: 0px;
 }
 
 .targetLocations {
-    width: 200px;
+    display: flex;
+    flex-direction: row;
     margin-left: 40px;
+}
+
+.targetTitle {
+    margin-left: 20px;
+}
+
+.usImage {
+    margin-left: 100px;
+    margin-top: 20px;
+}
+
+.titleContainer {
+    margin-left: 30px;
+    margin-bottom: 0px;
 }
 
 
@@ -269,6 +355,12 @@ hr.dotted {
     width: 700px;
 }
 
+.businessModel{
+    height: 100px;
+    padding-top: 10px;
+    margin-top: 20px;
+}
+
 .technicalApproach{
     display: flex;
     flex-direction: row;
@@ -278,11 +370,13 @@ hr.dotted {
     font-weight: lighter;
     flex-grow: 1;
     margin-left: 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
 }
 
 .sectionThreeColor {
-    height: 615px;
-    margin-top: 40px;
+    height: 665px;
+    margin-top: 75px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -326,6 +420,15 @@ hr.dotted {
     background-size: 8.5in 11in;
 }
 
+.painPointPic{
+    height: 100px;
+    margin-left: 75px;
+}
+
+.painPointPicText{
+    text-align: center;
+}
+
 .painPoints{
     font-weight: normal;
     margin-left: 40px;
@@ -335,14 +438,68 @@ hr.dotted {
     margin: 0px 20px 0px 40px;
 }
 
+/* Section 4 CSS */
+
+.sectionFourNumbers {
+    font-size: 25px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-family: 'Lora';
+    color: #434343;
+}
+
+.sectionFourText {
+    font-size: 10px;
+}
+
+.sectionFourColor {
+    height: 460px;
+}
+
+.sectionFourIntro {
+    width: 70%;
+    height: 400px;
+}
+
+.sectionFourParagraph {
+    font-family: 'Montserrat';
+    font-size: 18px;
+}
+
 
 /* Section Five CSS */
 
 .sectionFiveTitle {
     margin-top: 30px;
     margin-left: 30px;
-    width: 700px;
+    margin-right: 20px;
+    font-family: 'Open Sans';
+}
 
+.section5ChartQuestions {
+    padding-top: 20px;
+    margin-left: 30px;
+    
+}
+
+.section5Color {
+    height: 315px;
+    margin-top: 100px;
+    margin-left: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.section5IndustryPerspective {
+    color: white;
+    margin-left: 30px;
+    font-size: 15px;
+    
+}
+
+.industryHeader {
+    font-family: 'Arial';
 }
 
 /* Section 6 styling */
@@ -361,6 +518,7 @@ hr.dotted {
 .subheading {
     padding-top: 15px;
     padding-left: 70px;
+    padding-right: 70px;
 }
 
 .section6Color {
@@ -390,6 +548,36 @@ hr.dotted {
     height: 3in;
     position: absolute;
     bottom: 0;
+}
+
+/* Section 9 styling */
+
+.section9Background {
+    display: block;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-image: url('/public/images/reportSection9Background.png');
+    background-size: 8.5in 11in;
+    background-repeat: no-repeat;
+}
+
+.dottedMargin9 {
+    margin-right: 340px;
+    margin-left: 60px
+}
+
+.section9Color {
+    height: 5in;
+}
+
+.bullets {
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.money {
+    padding-left: 140px;
+    padding-right: 70px;
 }
 
 /* Final Page CSS */
@@ -427,4 +615,26 @@ hr.dotted {
     margin-right: 50px;
     margin-bottom: 10px;
     text-align: justify;
+}
+
+
+
+
+
+
+
+
+/* PRINT VIEW */
+@media print{
+    header, footer, Nav{
+        display: none;
+    }
+    
+    body{
+        border: 2px solid black;
+    }
+
+    @page :right {
+        margin: 3.5cm;
+    }
 }

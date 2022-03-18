@@ -18,9 +18,9 @@ function ReportSection3BusinessSolution () {
             <Paper className="paper" elevation={3}>
                 <div className="reportSectionThree">
                     <div className="sectionThreeTitle">
-                        <h1>03. BUSINESS SOLUTION</h1>
+                        <h1 className="pageHeader">03. BUSINESS SOLUTION</h1>
                         <hr className="dotted"></hr>
-                        <p>{enterpriseAnswers.businessModel3}</p>
+                        <p className="businessModel">{enterpriseAnswers.businessModel3}</p>
                     </div>
                     <div className="technicalApproach">
                             <h3 className="technicalTitle">Technical Approach</h3>
@@ -62,30 +62,36 @@ function ReportSection3BusinessSolution () {
                 </div>
                 <hr className="section3Line"></hr>
                 <h1 className="painPoints">Pain Points we work to solve</h1>
-                <Box sx={{ maxHeight:600 }}> 
-                <Grid className="painPointGrid" 
-                    container 
-                    spacing={3}
-                >
-                    {enterpriseAnswers.painPoints?.map(point => (
-                        <>
-                            <Grid item xs={4}>
-                                {point === 'Process - areas where you could provide more convenient processes for your customers' 
-                                    && <img src={`/images/PainPoints/process.png`}/>}
-                                {point === 'Financial - areas where your customers are spending too much. money' 
-                                    && <img src={`/images/PainPoints/financial.png`}/>}
-                                {point === 'Productivity - areas where your customer wants to be more efficient or productive' 
-                                    && <img src={`/images/PainPoints/productivity.png`}/>}
-                                {point === 'Support - areas where customers are not receiving the support they need' 
-                                    && <img src={`/images/PainPoints/support.png`}/>}
-                            </Grid>
-                            <Grid item xs={8}>
-                                <p>{point}</p>
-                            </Grid>
-                        </>
-                        ))}
-                    </Grid>
-                </Box>
+                <div className='painPointsContainer'>
+                    <Box> 
+                    <Grid id="painPointGrid" 
+                        container 
+                        spacing={3}
+                    >
+                        {enterpriseAnswers.painPoints?.map(point => (
+                            <>
+                                <Grid item xs={4}>
+                                    {point === 'Process - areas where you could provide more convenient processes for your customers' 
+                                        && <> <img className="painPointPic" src={`/images/PainPoints/process.png`}/> 
+                                                <h3 className="painPointPicText">Process</h3></>}
+                                    {point === 'Financial - areas where your customers are spending too much. money' 
+                                        && <> <img className="painPointPic" src={`/images/PainPoints/financial.png`}/>
+                                                <h3 className="painPointPicText">Financial</h3></>}
+                                    {point === 'Productivity - areas where your customer wants to be more efficient or productive' 
+                                        && <><img className="painPointPic" src={`/images/PainPoints/productivity.png`}/>
+                                                <h3 className="painPointPicText">Productivity</h3></>}
+                                    {point === 'Support - areas where customers are not receiving the support they need' 
+                                        && <><img className="painPointPic" src={`/images/PainPoints/support.png`}/>
+                                                <h3 className="painPointPicText">Support</h3></>}
+                                </Grid>
+                                <Grid item xs={8}>
+                                    <p>{point}</p>
+                                </Grid>
+                            </>
+                            ))}
+                        </Grid>
+                    </Box>
+                </div>
             </Paper>
         </>
     )

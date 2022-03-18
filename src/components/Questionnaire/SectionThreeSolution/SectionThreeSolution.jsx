@@ -11,6 +11,7 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 import '../Questionnaire.css';
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
@@ -124,6 +125,7 @@ function SectionThreeSolution () {
     return (
         <>
             <QuestionnaireNav />
+            <Paper className="formPaper" elevation={3}>
             <h1 className='questionnaireForm'>Section 3 - Solution</h1>
             <p className='questionnaireForm'>In this section we ask for more detail regarding your business
             offering and how it can help potential customers.</p>
@@ -354,6 +356,7 @@ function SectionThreeSolution () {
                     </button>
                 </Link>
             </form>
+            </Paper>
         </>
     )
 };

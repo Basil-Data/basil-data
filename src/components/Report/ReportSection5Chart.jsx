@@ -20,34 +20,35 @@ function ReportSection5Chart() {
     }, []);
 
     const data = {
-        labels: ['Total Addressable Market (US Dollars)', 'Serviceable Addressable Market (US Dollars)', 'Serviceable Obtainable Market (US Dollars)'],
+        labels: ['Total Addressable Market', 'Serviceable Addressable Market', 'Serviceable Obtainable Market',],
         datasets: [
             {
-                labels: [
-                        'Total Addressable Market (US Dollars)', 
-                        'Serviceable Addressable Market (US Dollars)',
-                        'Serviceable Obtainable Market (US Dollars)'],
+                label: [
+                        'Total Addressable Market (US Dollars)', 'Serviceable Addressable Market (US Dollars)','Serviceable Obtainable Market (US Dollars)'],
                 data: [section5Enterprise.addressableMarket5,
                         section5Enterprise.serviceableMarket5,
                         section5Enterprise.obtainableMarket5],
-                backgroundColor: ['rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)'
+                
+                        backgroundColor: ['rgba(38, 53, 73)',
+                                    'rgba(159, 135, 225)',
+                                    'rgb(205, 205, 218)'
                                 ],
-                borderColor: ['rgba(255, 99, 132, 1)'],
+                borderColor: ['rgb(17, 35, 69)'],
                 borderWidth: 1, }
         ]
     }
 
     return (
         <>
-            <div style={{height:"50vh", width:"50vh", position:"relative", marginBottom:"1%", padding:"1%"}}>
+        <div>
+            
             <Doughnut 
                 data={data}
-                height="300px"
-                width="300px"
+                width={300}
+                height={300}
+                options={{ maintainAspectRatio: false }}
             />
-            </div>
+        </div>
         </>
     )
 

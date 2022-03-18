@@ -82,7 +82,12 @@ function NoPoverty() {
             <img src="images/SDGs/E-WEB-Goal-01.png" width="200px" height="200px"/>
             <h1><b>SDG - No Poverty</b></h1>
             <p>What Indicators do you use/intend to use to track change?</p>
-            <FormControl>
+            <FormControl
+                sx={{
+                    width: "700px",
+                    
+            }}
+            >
                 {indicators?.map(indicator => {
                     if(indicator.sdgId === 1) {
                         return (
@@ -93,7 +98,7 @@ function NoPoverty() {
                                 defaultValue={0}
                                 onChange={handleIndicator}
                                 control={<Checkbox />}
-                                label={indicator.indicator}
+                                label={indicator.indicator} 
                             />  
                         )
                     }
@@ -189,7 +194,7 @@ function NoPoverty() {
             ></TextField>
             <p>Have you measured the outcomes for your primary beneficiaries?</p>
             <RadioGroup 
-                className="centerHelp"
+                className="buttonCenter"
                 value={section2Enterprise.measuredOutcome2}
                 onChange={(event) => dispatch({
                     type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -217,7 +222,7 @@ function NoPoverty() {
             </RadioGroup>
             <p>If applicable, please select any secondary Sustainable Development Goals that align with your organization's mission. </p>
             <RadioGroup 
-                className="centerHelp"
+                className="buttonCenter"
                 value={section2Enterprise.secondarySDG2}
                 onChange={(event) => dispatch({
                     type: 'SET_SECTION_TWO_ENTERPRISE',

@@ -13,6 +13,7 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 import '../Questionnaire.css';
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
@@ -75,6 +76,7 @@ function SectionOneStory () {
     return (
         <>
         <QuestionnaireNav/>
+        <Paper className="formPaper" elevation={3}>
             <h1 className='questionnaireForm'>Section 1 - Story</h1>
             <p className='questionnaireForm'>This section is about you and your team, your motivation for the problem, 
                 the special make-up of your organization and most importantly a chance to
@@ -258,6 +260,7 @@ function SectionOneStory () {
                 </button>
             </Link>
         </form>
+        </Paper>
         </>
     )
 };
