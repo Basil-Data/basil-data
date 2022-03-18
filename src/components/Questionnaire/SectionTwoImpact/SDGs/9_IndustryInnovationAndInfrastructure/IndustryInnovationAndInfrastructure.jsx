@@ -143,7 +143,7 @@ function IndustryInnovationAndInfrastructure() {
                 ></TextField>
                 <p>Have you measured your outcomes?</p>
                 <RadioGroup 
-                    className="centerHelp"
+                    className="buttonCenter"
                     value={section2Enterprise.measuredOutcome2}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -171,7 +171,7 @@ function IndustryInnovationAndInfrastructure() {
                 </RadioGroup>
                 <p>If applicable, please select any secondary Sustainable Development Goals that align with your organization's mission. </p>
                 <RadioGroup 
-                    className="centerHelp"
+                    className="buttonCenter"
                     value={section2Enterprise.secondarySDG2}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',

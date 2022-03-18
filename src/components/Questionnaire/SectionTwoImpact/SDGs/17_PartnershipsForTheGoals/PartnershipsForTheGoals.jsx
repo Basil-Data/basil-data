@@ -111,7 +111,7 @@ function PartnershipsForTheGoals() {
                 ></TextField>
                 <p>What level does your impact operate on?</p>
                 <RadioGroup 
-                    className="centerHelp"
+                    className="buttonCenter"
                     value={section2Enterprise.impactLevel2}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -181,7 +181,7 @@ function PartnershipsForTheGoals() {
                 ></TextField>
                 <p>Have you measured your outcomes?</p>
                 <RadioGroup 
-                    className="centerHelp"
+                    className="buttonCenter"
                     value={section2Enterprise.measuredOutcome2}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -213,7 +213,7 @@ function PartnershipsForTheGoals() {
                     your organization's mission. 
                 </p>
                 <RadioGroup 
-                    className="centerHelp"
+                    className="buttonCenter"
                     value={section2Enterprise.secondarySDG2}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',
