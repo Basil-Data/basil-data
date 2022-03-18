@@ -453,17 +453,40 @@ hr.dotted {
 }
 
 .sectionFourColor {
-    height: 460px;
+    height: 560px;
 }
 
 .sectionFourIntro {
     width: 70%;
-    height: 400px;
+    height: 300px;
 }
 
 .sectionFourParagraph {
     font-family: 'Montserrat';
-    font-size: 18px;
+    display: flex;
+    margin-left: 30px;
+
+}
+
+.sectionFourParagraphHeader {
+    margin-left: 140px;
+}
+
+.sectionFourIncome {
+    justify-content:flex-start ;
+}
+
+.checkPic {
+    width:45px;
+    position: absolute;
+    margin-left: -85px;
+    margin-top: -9px;
+}
+
+.generatingRev {
+    margin-left: 10px;
+    margin-top: 76px;
+    padding-right: 30px;
 }
 
 
