@@ -443,21 +443,29 @@ hr.dotted {
 
 .sectionFourParagraph {
     font-family: 'Montserrat';
-    margin-left: 0px;
+    display: flex;
+    margin-left: 30px;
+
 }
 
 .sectionFourParagraphHeader {
     margin-left: 140px;
 }
 
+.sectionFourIncome {
+    justify-content:flex-start ;
+}
+
 .checkPic {
     width:45px;
-    margin-left: 20px;
-    padding-right: 20px;
+    position: absolute;
+    margin-left: -85px;
+    margin-top: -9px;
 }
 
 .generatingRev {
     margin-left: 10px;
+    margin-top: 76px;
     padding-right: 30px;
 }
 
