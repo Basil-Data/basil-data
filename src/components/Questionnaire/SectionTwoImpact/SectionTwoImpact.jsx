@@ -11,6 +11,7 @@ import {
     TableBody,
     Button, 
     Box, 
+    Container,
     Checkbox,
     Select,
     MenuItem,
@@ -45,6 +46,8 @@ function SectionTwoImpact() {
     const section2Enterprise = useSelector(store => store.section2Enterprise);
     const selectedImpactSector = useSelector(store => store.section2Enterprise.impactSectorId);
     const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
+    const selectedIndicator = useSelector(store => store.section2Enterprise.indicatorId);
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
