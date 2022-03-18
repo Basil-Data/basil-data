@@ -10,7 +10,7 @@ router.get('/', rejectUnauthenticated, async (req,res) => {
 		"user"."enterpriseName",
 		"user"."logoUrl",
 		"answers".*,
-		ARRAY_AGG(DISTINCT("anticipatedRisks"."risk")) AS "anticipatedRisks",
+		ARRAY_AGG(DISTINCT("anticipatedRisksJunction"."riskId")) AS "anticipatedRisks",
 		ARRAY_AGG(DISTINCT("competitiveAdvantagesJunction"."advantageId")) AS "competitiveAdvantages",
 		ARRAY_AGG(DISTINCT("developmentStage"."stage")) AS "developmentStage",
 		ARRAY_AGG(DISTINCT("economicImpact"."impact")) AS "economicImpact",
