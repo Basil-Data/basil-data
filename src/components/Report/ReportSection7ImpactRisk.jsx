@@ -5,8 +5,13 @@ import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import Checkbox from '@mui/material/Checkbox';
-
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableRow from '@mui/material/TableRow';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 function ReportSection7ImpactRisk () {
 
@@ -74,9 +79,55 @@ function ReportSection7ImpactRisk () {
     <h1 className="pageHeader">07. IMPACT RISK</h1>
     <hr className="dotted dottedMargin"></hr>
     <h2 className="subheading">Anticipated Risks:</h2>
-    <div id="arrowBackground">
-    {anticipatedRisks.map(risk => (
-        <>
+    
+        <TableContainer component={Paper}>
+        <div className="tableBanner">
+        <Table sx={{ minWidth: 650 }} size="small">
+        <div className="tableInner"></div>
+        <TableBody>
+
+        {anticipatedRisks.map(risk => (
+            <TableRow key={risk.id}>
+
+                <TableCell>
+                    {enterpriseRisks?.includes(risk.id) 
+                        ? 
+                        <CheckBoxIcon></CheckBoxIcon> 
+                        : 
+                        <CheckBoxOutlineBlankIcon></CheckBoxOutlineBlankIcon> 
+                    }
+                </TableCell>
+
+                <TableCell>
+                    {enterpriseRisks?.includes(risk.id)
+                        ?
+                        <Box sx={{ fontWeight: 'bold' }}>{risk.name}</Box>
+                        :
+                        <Box sx={{ fontWeight: 'light' }}>{risk.name}</Box>
+                    }
+                </TableCell>
+
+                <TableCell><div className="arrowRight"></div></TableCell>
+
+                <TableCell>        
+                    {enterpriseRisks?.includes(risk.id) 
+                        ?
+                        <Box sx={{ fontWeight: 'bold' }}>{risk.text}</Box>
+                        :
+                        <Box sx={{ fontWeight: 'light' }}>{risk.text}</Box>
+                    }
+                </TableCell>
+
+            </TableRow>
+        ))}
+
+        </TableBody>
+        </Table>
+        </div>
+        </TableContainer>
+        
+        {/* <div id="arrowBackground">
+        {anticipatedRisks.map(risk => (
         <div style={{display:"flex"}}>
         <Checkbox 
             size="large" 
@@ -110,10 +161,10 @@ function ReportSection7ImpactRisk () {
         <Typography variant="body2">{risk.text}</Typography>
         }
         </div>
-        </>
+        
     )
     )}
-    </div>
+    </div> */}
     <div className="sectionColor section7Color">
         <Typography variant="h5" className="subheading" gutterBottom>How we have prepared for these risks:</Typography>
         <Typography variant="subtitle1" className="subheading" gutterBottom>{enterpriseAnswers.riskPrep6}</Typography>
