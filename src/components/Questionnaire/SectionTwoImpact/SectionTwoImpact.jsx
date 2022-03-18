@@ -11,6 +11,7 @@ import {
     TableBody,
     Button, 
     Box, 
+    Container,
     Checkbox,
     Select,
     MenuItem,
@@ -43,6 +44,8 @@ function SectionTwoImpact() {
     const section2Enterprise = useSelector(store => store.section2Enterprise);
     const selectedImpactSector = useSelector(store => store.section2Enterprise.impactSectorId);
     const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
+    const selectedIndicator = useSelector(store => store.section2Enterprise.indicatorId);
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -242,21 +245,3 @@ function SectionTwoImpact() {
 
 
 export default SectionTwoImpact;
-
-
-<Box>
-    <Container sx={{textAlign: "left"}}>
-    <FormControlLabel
-        sx={{
-            display: "table-cell",
-        }}
-        key={indicator.id}
-        checked={selectedIndicator.includes(indicator.id)}
-        value={indicator.id}
-        defaultValue={0}
-        onChange={handleIndicator}
-        control={<Checkbox />}
-        label={indicator.indicator} 
-    />
-    </Container> 
-</Box>
