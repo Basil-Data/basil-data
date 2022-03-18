@@ -11,7 +11,8 @@ router.get('/', rejectUnauthenticated, (req,res) => {
             SELECT
                 "user"."id",
                 "user"."enterpriseName",
-                "user"."logoUrl"
+                "user"."logoUrl",
+                "user"."email"
             FROM "user"
             WHERE "user"."authLevel" = 'guest';
         `;

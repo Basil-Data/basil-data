@@ -1,5 +1,6 @@
 const section1Enterprise = (state = {
-        competitiveAdvantagesId: []
+        competitiveAdvantagesId: [],
+        admin1: 'Basil Data Input'
     }, action) => {
     switch (action.type) {
         case 'SET_SECTION_ONE_ENTERPRISE':

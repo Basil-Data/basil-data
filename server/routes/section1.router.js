@@ -73,8 +73,6 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
 // Post router for posting to joiner table for check boxes
 router.post('/', rejectUnauthenticated, async (req, res) => {
 
-    console.log(req.body);
-
     // deletes all the existing rows 
     let sqlText = `
     DELETE FROM "competitiveAdvantagesJunction"
@@ -114,6 +112,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 // individual enterprise changes their answers
 router.put('/', rejectUnauthenticated, (req, res) => {
 
+    console.log(req.body)
+
     let sqlText = `
         UPDATE "answers"
         SET 
@@ -124,21 +124,40 @@ router.put('/', rejectUnauthenticated, (req, res) => {
             "yearsCollectiveExperience1" = $5,
             "percentageBIPOC1" = $6,
             "percentageFemale1" = $7,
-            "investorIntroduction1" = $8
-        WHERE "answers"."enterpriseId" = $9;
+            "investorIntroduction1" = $8,
+            "admin1" = $9
+        WHERE "answers"."enterpriseId" = $10;
     `;
 
-    let sqlParams = [
-        req.body.enterpriseSize1,
-        req.body.dateFounded1,
-        req.body.missionStatement1,
-        req.body.understandProblem1,
-        req.body.yearsCollectiveExperience1,
-        req.body.percentageBIPOC1,
-        req.body.percentageFemale1,
-        req.body.investorIntroduction1,
-        req.user.id
-    ];
+    let sqlParams = [];
+    if(req.user.authLevel === 'guest') {
+        sqlParams = [
+            req.body.enterpriseSize1,
+            req.body.dateFounded1,
+            req.body.missionStatement1,
+            req.body.understandProblem1,
+            req.body.yearsCollectiveExperience1,
+            req.body.percentageBIPOC1,
+            req.body.percentageFemale1,
+            req.body.investorIntroduction1,
+            req.body.admin1,
+            req.user.id
+        ];
+    }
+    else {
+        sqlParams = [
+            req.body.enterpriseSize1,
+            req.body.dateFounded1,
+            req.body.missionStatement1,
+            req.body.understandProblem1,
+            req.body.yearsCollectiveExperience1,
+            req.body.percentageBIPOC1,
+            req.body.percentageFemale1,
+            req.body.investorIntroduction1,
+            req.body.admin1,
+            req.body.id
+        ];
+    }
 
     pool
         .query(sqlText, sqlParams)

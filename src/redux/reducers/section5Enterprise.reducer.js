@@ -1,8 +1,6 @@
 const section5EnterpriseReducer = (state = {
-    addressableMarket5: '',
-    serviceableMarket5: '',
-    obtainableMarket5: '',
-    whyRealistic5: ''
+    whyRealistic5: '',
+    admin5: 'Basil Data Input'
 }, action) => {
     switch (action.type) {
         case 'SET_SECTION5_RESPONSES':

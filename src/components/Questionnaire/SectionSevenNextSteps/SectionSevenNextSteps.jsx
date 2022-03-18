@@ -14,7 +14,9 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 
 import '../Questionnaire.css'
-import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav'
+import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
+import AdminInputBox from '../../AdminInputBox/AdminInputBox';
+
 
 function SectionSevenNextSteps () {
 
@@ -108,6 +110,7 @@ function SectionSevenNextSteps () {
         handleSubmit(event);
         history.push('/risks-and-hurdles');
     }
+
 
     return (
         <>
@@ -392,6 +395,8 @@ function SectionSevenNextSteps () {
         </Link>
 
     </form>
+    {/* <AdminInputBox/> */}
+
     </Paper>
     </>
     )

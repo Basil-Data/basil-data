@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 
 import "../Questionnaire.css";
 import QuestionnaireNav from "../QuestionnaireNav/QuestionnaireNav";
+import AdminInputBox from '../../AdminInputBox/AdminInputBox';
 
 function SectionFiveMarket() {
   const dispatch = useDispatch();
@@ -37,7 +38,10 @@ function SectionFiveMarket() {
     dispatch({
       type: "UPDATE_SECTION_FIVE",
       payload: {
-        data: section5
+        data: {
+          ...section5,
+          id: selectedEnterprise
+        }
       }});
   }
 
@@ -65,6 +69,13 @@ function SectionFiveMarket() {
     
     history.push('/risks-and-hurdles')
 
+  }
+
+  const handleAdminDispatch = (event) => {
+    dispatch({
+      type: 'SET_SECTION5_RESPONSES',
+      payload: {admin5: event}
+    })
   }
 
   return (
@@ -325,6 +336,10 @@ function SectionFiveMarket() {
         </button>
         
       </form>
+        <AdminInputBox 
+          value={section5.admin5}
+          callback={handleAdminDispatch}
+        />
       </Paper>
     </>
   );

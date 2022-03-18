@@ -14,6 +14,8 @@ import Paper from '@mui/material/Paper';
 // Internal Imports
 import '../Questionnaire.css'
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
+import AdminInputBox from '../../AdminInputBox/AdminInputBox';
+
 
 
 function SectionSixRisksAndHurdles () {
@@ -302,6 +304,8 @@ function SectionSixRisksAndHurdles () {
             <Link to="/next-steps"><button className="btn">Next</button></Link>
 
         </form>
+        {/* <AdminInputBox/> */}
+
         </Paper>
         </>
     )
