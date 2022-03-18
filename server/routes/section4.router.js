@@ -64,7 +64,9 @@ router.get('/:id', rejectUnauthenticated, async (req,res) => {
         "netProfitMargin4",
         "customerAcquisitionCost4",
         "marketingExpenses4",
-        "newCustomers4"
+        "newCustomers4",
+        "progressExplanationOne4",
+        "progressExplanationTwo4"
       FROM "answers"
       WHERE "enterpriseId" = $1;
     `;
@@ -213,8 +215,10 @@ router.put('/', rejectUnauthenticated, (req, res) => {
       "netProfitMargin4" = $6,
       "customerAcquisitionCost4" = $7,
       "newCustomers4" = $8,
-      "marketingExpenses4" = $9
-    WHERE "answers"."enterpriseId" = $10;
+      "marketingExpenses4" = $9,
+      "progressExplanationOne4" = $10,
+      "progressExplanationTwo4" = $11
+    WHERE "answers"."enterpriseId" = $12;
       `;
     
     let sqlParams = [
@@ -227,6 +231,8 @@ router.put('/', rejectUnauthenticated, (req, res) => {
       req.body.customerAcquisitionCost4,
       req.body.newCustomers4,
       req.body.marketingExpenses4,
+      req.body.progressExplanationOne4,
+      req.body.progressExplanationTwo4,
       req.user.id
     ]
 

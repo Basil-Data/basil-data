@@ -68,21 +68,8 @@ function ReportSection4Traction () {
                 <div className="sectionColor sectionFourColor">
                     <div className="sectionFourParagraph">
                         <br />
-                        <h2 className="section4ParagraphHeader">INCOME</h2>
+                        <h2 className="section4ParagraphHeader">GROWTH</h2>
                         <br />
-                        <h3 className="generatingRev">{enterpriseAnswers.generatingRevenue4 === 'true' && 
-                            <img className="checkPic" src="/images/DevelopmentStage/incomeCheck.png" /> }
-                            Are you generating revenue?
-                        </h3>
-                        <div>
-                            <h2 className="sectionFourParagraphHeader">
-                                USER GROWTH
-                            </h2>
-
-                            
-                            <h2 className="sectionFourParagraphHeader">UP {enterpriseAnswers.customerGrowth4}%</h2>
-                            <p className="sectionFourParagraphHeader">Over the past 6 months</p>
-                        </div>
                     </div>
 
                     
