@@ -9,8 +9,13 @@ function ReportSection4Traction () {
     const dispatch = useDispatch();
 
     const enterpriseAnswers = useSelector(store => store.reportReducer);
+    const section4 = useSelector(store => store.section4Enterprise);
 
-
+    useEffect(() => {
+        dispatch({
+          type: "FETCH_ENTERPRISE_SECTION_FOUR",
+        });
+      }, []);
 
     return (
         <>
@@ -26,23 +31,22 @@ function ReportSection4Traction () {
                             
                             <img src={'/images/DevelopmentStage/devStageBar.png'} />
 
-                            
-                            {enterpriseAnswers.developmentStage[0] === 'Concept & Research' && 
+                            {section4.developmentStageId === 1 && 
                                 <img src={'/images/DevelopmentStage/devStage1.png'} />
                             }
-                            {enterpriseAnswers.developmentStage[0] === 'Initial Prototype' && 
+                            {section4.developmentStageId === 2 && 
                                 <img src={'/images/DevelopmentStage/devStage2.png'} />
                             }
-                            {enterpriseAnswers.developmentStage[0] === 'Validation' && 
+                            {section4.developmentStageId === 3 && 
                                 <img src={'/images/DevelopmentStage/devStage3.png'} />
                             }
-                            {enterpriseAnswers.developmentStage[0] === 'Refinement' && 
+                            {section4.developmentStageId === 4 && 
                                 <img src={'/images/DevelopmentStage/devStage4.png'} />
                             } 
-                            {enterpriseAnswers.developmentStage[0] === 'Scaling' && 
+                            {section4.developmentStageId === 5 && 
                                 <img src={'/images/DevelopmentStage/devStage5.png'} />
                             } 
-                            {enterpriseAnswers.developmentStage[0] === 'Established Loyal Customer Base' && 
+                            {section4.developmentStageId === 6 && 
                                 <img src={'/images/DevelopmentStage/devStage6.png'} />
                             }
                             
@@ -64,9 +68,12 @@ function ReportSection4Traction () {
                 <div className="sectionColor sectionFourColor">
                     <div className="sectionFourParagraph">
                         <br />
-                        <h4>INCOME</h4>
-                        <p>Are you generating revenue?</p>
-                        <p>{enterpriseAnswers.developmentStage}</p>
+                        <h2 className="section4ParagraphHeader">INCOME</h2>
+                        
+                        <h3 className="generatingRev">{enterpriseAnswers.generatingRevenue4 === 'true' && 
+                            <img className="checkPic" src="/images/DevelopmentStage/incomeCheck.png" /> }
+                            Are you generating revenue?
+                        </h3>
                         <br />
                     </div>
                     
