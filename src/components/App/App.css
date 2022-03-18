@@ -20,6 +20,7 @@ Container
 
 .container {
   padding: 20px;
+  text-align: center;
 }
 
 /* --------------------------------------------------------------------------------
@@ -57,6 +58,10 @@ Button
 .btn:hover {
   background-color: #646a94;
   text-decoration: none;
+}
+
+.calendarButton{
+  background-color: #78e194;
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */
@@ -117,6 +122,18 @@ Landing Page
 
 .introDiv {
   display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.userLogo {
+  width: 400px;
+  align-self: center;
+}
+
+.userName {
+  font-size: 40px;
+  font-weight: normal;
 }
 
 /* --------------------------------------------------------------------------------
