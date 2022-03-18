@@ -29,9 +29,9 @@ function Instructions() {
 
                 </p>
 
-                <a href='https://calendly.com/basil-data/45min' target='_blank'>
+                <button className="btn calendarButton" href='https://calendly.com/basil-data/45min' target='_blank'>
                     Schedule a Meeting with Basil-Data 
-                </a>
+                </button>
             </div>
         </>
     )

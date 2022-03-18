@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import ReportSection5Chart from './ReportSection5Chart';
+import './Report.css';
 
 
 //Styling/MUI
@@ -18,10 +19,36 @@ function ReportSection5Market () {
             <Paper className="paper" elevation={3}>
                 <div className="reportSectionThree">
                     <div className="sectionFiveTitle">
-                        <h1>05. Market</h1>
+                        <h1>05. MARKET</h1>
                         <hr className="dotted"></hr>
                         <ReportSection5Chart />
+                        <div className="section5ChartQuestions">
+                            <p>Total Addressable Market - What is the size of the Total Addressable Market in US Dollars?</p>
+                            <p>Serviceable Addressable Market - What is the size of the Serviceable Addressable Market in US Dollars?</p>
+                            <p>Serviceable Addressable Market - What is the size of the Serviceable Obtainable Market in US Dollars?</p>
+                        </div>
+                        <div className="section5MarketAssumptions">
+                            <h3>Market Assumptions</h3>
+                            <h4>{enterpriseAnswers.whyRealistic5}</h4>
+                        </div>
+                        
+                        
 
+                        
+
+                    </div>
+                </div>
+                <div className="sectionColor section5Color">
+                    <div className="section5IndustryPerspective">
+                            <h2 className="industryHeader">
+                                INDUSTRY PERSPECTIVE:
+                            </h2>
+
+                            <p>{enterpriseAnswers.industryPerspectiveOne5}</p>
+                            <br />
+                            <p>{enterpriseAnswers.industryPerspectiveTwo5}</p>
+                            <br />
+                            <p>{enterpriseAnswers.industryPerspectiveThree5}</p>
                     </div>
                 </div>
             </Paper>

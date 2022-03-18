@@ -7,7 +7,8 @@ import '../../../Questionnaire.css';
 import { 
     Table, 
     TableHead, 
-    TableRow, 
+    TableRow,
+    TableCell, 
     TableBody,
     Button, 
     Box, 
@@ -82,19 +83,32 @@ function ClimateAction() {
                 <img src="images/SDGs/E-WEB-Goal-13.png" width="200px" height="200px"/>
                 <h1><b>SDG - Climate Action</b></h1>
                 <p>What Indicators do you use/intend to use to track change?</p>
-                <FormControl>
+                <FormControl
+                    sx={{
+                        width: "700px",
+                    }}
+                >
                     {indicators?.map(indicator => {
                         if(indicator.sdgId === 13) {
                             return (
-                                <FormControlLabel
-                                    key={indicator.id}
-                                    checked={selectedIndicator.includes(indicator.id)}
-                                    value={indicator.id}
-                                    defaultValue={0}
-                                    onChange={handleIndicator}
-                                    control={<Checkbox />}
-                                    label={indicator.indicator}
-                                />  
+                                <Box>
+                                    <Table>
+                                        <TableRow sx={{display: "table"}}>
+                                            <TableCell>
+                                                <Checkbox
+                                                    key={indicator.id} 
+                                                    checked={selectedIndicator.includes(indicator.id)}
+                                                    value={indicator.id}
+                                                    defaultValue={0}
+                                                    onChange={handleIndicator}
+                                                />
+                                            </TableCell>
+                                            <TableCell>
+                                                {indicator.indicator}
+                                            </TableCell>
+                                        </TableRow>
+                                    </Table> 
+                                </Box>                   
                             )
                         }
                     })}
@@ -169,7 +183,7 @@ function ClimateAction() {
                 ></TextField>
                 <p>Have you measured your outcomes?</p>
                 <RadioGroup 
-                    className="centerHelp"
+                    className="buttonCenter"
                     value={section2Enterprise.measuredOutcome2}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -197,7 +211,7 @@ function ClimateAction() {
                 </RadioGroup>
                 <p>If applicable, please select any secondary Sustainable Development Goals that align with your organization's mission. </p>
                 <RadioGroup 
-                    className="centerHelp"
+                    className="buttonCenter"
                     value={section2Enterprise.secondarySDG2}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',

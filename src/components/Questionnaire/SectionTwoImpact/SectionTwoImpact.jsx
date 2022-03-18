@@ -11,6 +11,7 @@ import {
     TableBody,
     Button, 
     Box, 
+    Container,
     Checkbox,
     Select,
     MenuItem,
@@ -21,6 +22,8 @@ import {
     TextField,
 } 
 from '@mui/material';
+import Paper from '@mui/material/Paper';
+
 
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 import SectionTwoImpactOpportunity from "./SectionTwoImpactOpportunity/SectionTwoImpactOpportunity";
@@ -43,6 +46,8 @@ function SectionTwoImpact() {
     const section2Enterprise = useSelector(store => store.section2Enterprise);
     const selectedImpactSector = useSelector(store => store.section2Enterprise.impactSectorId);
     const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
+    const selectedIndicator = useSelector(store => store.section2Enterprise.indicatorId);
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -93,6 +98,7 @@ function SectionTwoImpact() {
     return(
         <>
         <QuestionnaireNav/>
+        <Paper className="formPaper" elevation={3}>
         <Box className="questionnaireForm">
             <form>
                 <h1><b>Section 2 - Impact</b></h1>
@@ -236,6 +242,7 @@ function SectionTwoImpact() {
                 </Link>
             </form>
         </Box>
+        </Paper>
         </>
     )
 }

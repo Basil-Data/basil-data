@@ -14,7 +14,7 @@ function ReportTableOfContents () {
     return (
         <Paper elevation={3} className="paper">
             <div className="tableOfContentsBackground tableOfContents">
-                <h1 className="tocTitle">TABLE OF CONTENTS</h1>
+                <h1 className="tocTitle pageHeader">TABLE OF CONTENTS</h1>
                 <hr className="dotted"></hr>
                 <div className='tableOfContentsContainer'>
                     <div className='tableOfContentsColumn'>
