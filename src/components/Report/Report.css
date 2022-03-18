@@ -559,6 +559,15 @@ hr.dotted {
     height: auto;
 }
 
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
+.imgOpaque {
+    opacity: 0.5;
+}
+
+=======
+>>>>>>> master
 /* Section 7 styling */
 
 #arrowBackground {
@@ -624,6 +633,10 @@ hr.dotted {
     padding-right: 70px;
 }
 
+<<<<<<< HEAD
+>>>>>>> Stashed changes
+=======
+>>>>>>> master
 /* Final Page CSS */
 .finalPage {
     display: flex;
