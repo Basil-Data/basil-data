@@ -26,6 +26,7 @@ import Paper from '@mui/material/Paper';
 
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 import SectionTwoImpactOpportunity from "./SectionTwoImpactOpportunity/SectionTwoImpactOpportunity";
+import AdminInputBox from '../../AdminInputBox/AdminInputBox';
 
 
 function SectionTwoImpact() {
@@ -239,6 +240,7 @@ function SectionTwoImpact() {
                 </Link>
             </form>
         </Box>
+        {/* <AdminInputBox/> */}
         </Paper>
         </>
     )

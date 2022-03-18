@@ -17,6 +17,8 @@ import Paper from '@mui/material/Paper';
 
 import '../Questionnaire.css';
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
+import AdminInputBox from '../../AdminInputBox/AdminInputBox';
+
 
 function SectionOneStory () {
     const dispatch = useDispatch();
@@ -62,15 +64,23 @@ function SectionOneStory () {
             // the user id from the store) as part of the payload
             // this was the way I was able to figure it out
             payload: {
-                id: user.id,
-                data: section1Enterprise
-        }})
+                data: {
+                id: selectedEnterprise,
+                ...section1Enterprise
+        }}})
     };
 
 
     const onNext = (event) => {
         handleSubmit(event);
         history.push('/impact')
+    }
+    
+    const handleAdminDispatch = (event) => {
+        dispatch({
+            type: 'SET_SECTION_ONE_ENTERPRISE',
+            payload: {admin1: event}
+        })
     }
 
     return (
@@ -260,6 +270,11 @@ function SectionOneStory () {
                 </button>
             </Link>
         </form>
+        <AdminInputBox 
+            value={section1Enterprise.admin1}
+            callback={handleAdminDispatch}
+        />
+
         </Paper>
         </>
     )

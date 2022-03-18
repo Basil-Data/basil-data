@@ -14,6 +14,7 @@ import Paper from "@mui/material/Paper";
 
 import "../Questionnaire.css";
 import QuestionnaireNav from "../QuestionnaireNav/QuestionnaireNav";
+import AdminInputBox from '../../AdminInputBox/AdminInputBox';
 
 function SectionFourTraction() {
   const dispatch = useDispatch();
@@ -458,6 +459,7 @@ function SectionFourTraction() {
         </button>
         
       </form>
+      <AdminInputBox />
       </Paper>
     </>
   );

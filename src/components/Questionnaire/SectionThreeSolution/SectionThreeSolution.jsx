@@ -15,6 +15,8 @@ import Paper from '@mui/material/Paper';
 
 import '../Questionnaire.css';
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
+import AdminInputBox from '../../AdminInputBox/AdminInputBox';
+
 
 
 function SectionThreeSolution () {
@@ -356,6 +358,8 @@ function SectionThreeSolution () {
                     </button>
                 </Link>
             </form>
+        {/* <AdminInputBox/> */}
+
             </Paper>
         </>
     )

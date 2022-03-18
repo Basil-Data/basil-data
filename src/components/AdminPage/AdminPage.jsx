@@ -74,6 +74,7 @@ function AdminPage() {
                         <TableRow>
                             <StyledTableCell>Enterprise Name</StyledTableCell>
                             <StyledTableCell align="center">Enterprise Logo</StyledTableCell>
+                            <StyledTableCell align="center">Point of Contact</StyledTableCell>
                             <StyledTableCell></StyledTableCell>
                         </TableRow>
                     </TableHead>
@@ -86,6 +87,9 @@ function AdminPage() {
                                 <StyledTableCell align="center">
                                     <img src={enterprise.logoUrl} height={100}/>
                                 </StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    {enterprise.email}
+                                </StyledTableCell>
                                 <StyledTableCell 
                                     align="center"
                                 >
@@ -93,7 +97,7 @@ function AdminPage() {
                                         variant="contained"
                                         onClick={() => handleClick(enterprise.id)}
                                     >
-                                        View Enterprise Report
+                                        View Enterprise Questionnaire
                                     </ColorButton>
                                 </StyledTableCell>
                             </StyledTableRow>
