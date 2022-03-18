@@ -26,7 +26,29 @@ function ReportSection4Traction () {
                             
                             <img src={'/images/DevelopmentStage/devStageBar.png'} />
 
-                            <img src={'/images/DevelopmentStage/devStage1.png'} />
+                            
+                            {enterpriseAnswers.developmentStage[0] === 'Concept & Research' && 
+                                <img src={'/images/DevelopmentStage/devStage1.png'} />
+                            }
+                            {enterpriseAnswers.developmentStage[0] === 'Initial Prototype' && 
+                                <img src={'/images/DevelopmentStage/devStage2.png'} />
+                            }
+                            {enterpriseAnswers.developmentStage[0] === 'Validation' && 
+                                <img src={'/images/DevelopmentStage/devStage3.png'} />
+                            }
+                            {enterpriseAnswers.developmentStage[0] === 'Refinement' && 
+                                <img src={'/images/DevelopmentStage/devStage4.png'} />
+                            } 
+                            {enterpriseAnswers.developmentStage[0] === 'Scaling' && 
+                                <img src={'/images/DevelopmentStage/devStage5.png'} />
+                            } 
+                            {enterpriseAnswers.developmentStage[0] === 'Established Loyal Customer Base' && 
+                                <img src={'/images/DevelopmentStage/devStage6.png'} />
+                            }
+                            
+                            
+                            
+
 
                         </div>
                         <div className="introContainer">
@@ -44,6 +66,7 @@ function ReportSection4Traction () {
                         <br />
                         <h4>INCOME</h4>
                         <p>Are you generating revenue?</p>
+                        <p>{enterpriseAnswers.developmentStage}</p>
                         <br />
                     </div>
                     
