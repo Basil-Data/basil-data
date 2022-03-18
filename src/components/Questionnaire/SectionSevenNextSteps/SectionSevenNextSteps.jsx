@@ -11,6 +11,7 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 import '../Questionnaire.css'
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav'
@@ -111,7 +112,7 @@ function SectionSevenNextSteps () {
     return (
         <>
         <QuestionnaireNav/>
-
+        <Paper className="formPaper" elevation={3}>
         <h1 className='questionnaireForm'>Section 7 - Next Steps</h1>
         <p className='questionnaireForm'>
             Where do you go from here?
@@ -262,6 +263,7 @@ function SectionSevenNextSteps () {
             aria-labelledby="social-impact"
             defaultValue={0}
             name="radio-buttons-group"
+            className="buttonCenter2"
             value = {Number(section7Enterprise.societalImpactId)}
             onChange = {(event) =>
                 { dispatch({
@@ -276,7 +278,6 @@ function SectionSevenNextSteps () {
                     value={impact.id}
                     control={<Radio />} 
                     label={impact.societalImpact}
-                    className='centerHelp' 
                 />
             ))}
         </RadioGroup>
@@ -289,6 +290,7 @@ function SectionSevenNextSteps () {
             aria-labelledby="environmental-impact"
             defaultValue={0}
             name="radio-buttons-group"
+            className="buttonCenter2"
             value = {section7Enterprise.environmentalImpactId}
             onChange = {(event) =>
                 { dispatch({
@@ -303,7 +305,6 @@ function SectionSevenNextSteps () {
                     control={<Radio />}
                     value={impact.id} 
                     label={impact.impact} 
-                    className='centerHelp' 
                 />
             ))}
         </RadioGroup>
@@ -316,6 +317,7 @@ function SectionSevenNextSteps () {
             aria-labelledby="economic-impact"
             name="radio-buttons-group"
             defaultValue={0}
+            className='buttonCenter2' 
             value = {section7Enterprise.economicImpactId}
             onChange = {(event) =>
                 { dispatch({
@@ -330,7 +332,6 @@ function SectionSevenNextSteps () {
                     control={<Radio />}
                     value={impact.id} 
                     label={impact.impact} 
-                    className='centerHelp' 
                 />
             ))}
         </RadioGroup>
@@ -391,6 +392,7 @@ function SectionSevenNextSteps () {
         </Link>
 
     </form>
+    </Paper>
     </>
     )
 };

@@ -10,17 +10,18 @@ function ReportSection9NextSteps () {
 
     const enterpriseAnswers = useSelector(store => store.reportReducer);
     const investmentVehicles = useSelector(store => store.reportReducer.investmentVehicles);
+    const fundingUse = useSelector(store => store.reportReducer.fundingUse);
 
-    // function commafy(num) {
-    // let str = num.toString().split(".");
-    // if (str[0].length >= 3) {
-    //     str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, "$1,");
-    // }
-    // if (str[1] && str[1].length >= 3) {
-    //     str[1] = str[1].replace(/(\d{3})/g, "$1 ");
-    // }
-    // return str.join(".");
-    // }
+    function commafy(num) {
+    let str = num.toString().split(".");
+    if (str[0].length >= 3) {
+        str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, "$1,");
+    }
+    if (str[1] && str[1].length >= 3) {
+        str[1] = str[1].replace(/(\d{3})/g, "$1 ");
+    }
+    return str.join(".");
+    }
 
     return (
         <>
@@ -29,38 +30,40 @@ function ReportSection9NextSteps () {
         <h1 className="pageHeader">09. NEXT STEPS</h1>
         <hr className="dotted dottedMargin9"></hr>
 
-        {/* <div>
+        <div>
         <h3 className="subheading">We are currently raising...</h3>
-        <h2 className="subheading">${commafy(enterpriseAnswers.targetAmount7)}</h2>
-        {investmentVehicles.length > 1 
+        {enterpriseAnswers.targetAmount7 && <h2 className="money">${commafy(enterpriseAnswers.targetAmount7)}</h2>}
+        {investmentVehicles?.length > 1 
         ?
         <h3 className="subheading">Funding Instruments: {investmentVehicles.map((vehicle, index) => {
             return(
-                <h3 key={index}>{vehicle} {index < investmentVehicles.length - 1 ? ", " : ""}</h3>
+                <h3 className="subheading" key={index}>{vehicle} {index < investmentVehicles.length - 1 ? ", " : ""}</h3>
             );
         })}
         </h3>
         :
         <h3 className="subheading">Funding Instrument:</h3>
         }
-        </div> */}
+        </div>
 
-        {/* <div className="sectionColor">
-            <h2>Our plan for this round:</h2>
+        <div className="sectionColor section9Color">
+            <h2 className="subheading">Our plan for this round:</h2>
             <ul>
                 {fundingUse?.map(use => (
-                    <li><h3>{use}</h3></li>
+                    <div className="bullets"><li><h3>{use}</h3></li></div>
                 ))}
             </ul>
-            <h2>
+            <h2 className="subheading">
+                <>
                 Our next steps toward our goal:
-                <h3>{enterpriseAnswers.nextSteps}</h3>
+                <h5>{enterpriseAnswers.nextSteps7}</h5>
+                </>
             </h2>
-        </div> */}
+        </div>
 
-        {/* <div>
-            <img src={user.logoUrl} height={120}/>
-        </div> */}
+        <div>
+            <img src={enterpriseAnswers.logoUrl} height={120}/>
+        </div>
 
         </div>
         </Paper>

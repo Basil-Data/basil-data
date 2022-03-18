@@ -15,10 +15,30 @@
     margin-bottom: 10px;
 }
 
+.formPaper {
+    font-family: 'Open Sans';
+    width: 8.5in;
+    padding: 10px;
+    margin-top: 30px;
+    margin-left: 530px;
+}
+
 .sectionColor {
     background-image: linear-gradient(to bottom right, #122445, #2f5a52);
     width: 100%;
     color: white;
+}
+
+.buttonCenter {
+    margin-left: 235px;
+}
+
+.buttonCenter2{
+    margin-left: 80px;
+}
+
+.boxHeight{
+    height: 60px;
 }
 
 /* Dotted border */
@@ -521,6 +541,7 @@ hr.dotted {
 .subheading {
     padding-top: 15px;
     padding-left: 70px;
+    padding-right: 70px;
 }
 
 .section6Color {
@@ -560,11 +581,26 @@ hr.dotted {
     flex-wrap: wrap;
     background-image: url('/public/images/reportSection9Background.png');
     background-size: 8.5in 11in;
+    background-repeat: no-repeat;
 }
 
 .dottedMargin9 {
     margin-right: 340px;
     margin-left: 60px
+}
+
+.section9Color {
+    height: 5in;
+}
+
+.bullets {
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.money {
+    padding-left: 140px;
+    padding-right: 70px;
 }
 
 /* Final Page CSS */

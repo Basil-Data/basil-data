@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 
 import "../Questionnaire.css";
 import QuestionnaireNav from "../QuestionnaireNav/QuestionnaireNav";
@@ -69,6 +70,7 @@ function SectionFiveMarket() {
   return (
     <>
       <QuestionnaireNav />
+      <Paper className="formPaper" elevation={3}>
       <form className="questionnaireForm">
         <h1>Section 5 - Market</h1>
         <p>
@@ -323,6 +325,7 @@ function SectionFiveMarket() {
         </button>
         
       </form>
+      </Paper>
     </>
   );
 }
