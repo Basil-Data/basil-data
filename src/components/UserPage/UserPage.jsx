@@ -18,8 +18,8 @@ function UserPage() {
     <div className="container">
       <h2>Welcome</h2> 
       <div className="introDiv">
-        <img src={user.logoUrl} height={80}/>
-        <h3>{user.enterpriseName}!</h3>
+        <img className="userLogo" src={user.logoUrl} height={80}/>
+        <h3 className="userName">{user.enterpriseName}!</h3>
       </div>
       <Instructions />
       <p>To get started, click below!</p>
