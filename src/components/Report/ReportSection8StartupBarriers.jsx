@@ -93,12 +93,22 @@ function ReportSection8StartupBarriers () {
             {barriersArray.map(factor => (
                 <Grid item sm={2} key={factor.id}>
                 <Card raised="true" sx={{ height: 175, justifyContent: 'center' }}>
-                <CardMedia
-                    component="img"
-                    className="media"
-                    image={startupBarriers?.includes(factor.id) ? factor.url1 : factor.url2}
-                    alt={factor.text}
-                />
+                {startupBarriers?.includes(factor.id) 
+                    ?
+                    <CardMedia
+                        component="img"
+                        className="media"
+                        image={factor.url1}
+                        alt={factor.text}
+                    />
+                    :
+                    <CardMedia
+                        component="img"
+                        className="media imgOpaque"
+                        image={factor.url2}
+                        alt={factor.text}
+                    />
+                }
                 <CardContent>
                     <Typography gutterBottom variant="subtitle2" component="div" align="center">
                         {factor.text}

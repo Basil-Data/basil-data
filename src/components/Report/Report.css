@@ -376,6 +376,78 @@ hr.dotted {
     height: auto;
 }
 
+<<<<<<< Updated upstream
+=======
+.imgOpaque {
+    opacity: 0.5;
+}
+
+/* Section 7 styling */
+
+#arrowBackground {
+    padding-top: 6px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url('/public/images/arrows.png');
+    color: white;
+}
+
+.section7Color {
+    height: 3in;
+    position: absolute;
+    bottom: 0;
+}
+
+.tableBanner {
+    position: relative;
+    z-index: 1;
+}
+
+.tableBanner .tableInner {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: linear-gradient(to top left, #122445, #2f5a52);
+    opacity: .7;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Section 9 styling */
+
+.section9Background {
+    display: block;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-image: url('/public/images/reportSection9Background.png');
+    background-size: 8.5in 11in;
+    background-repeat: no-repeat;
+}
+
+.dottedMargin9 {
+    margin-right: 340px;
+    margin-left: 60px
+}
+
+.section9Color {
+    height: 5in;
+}
+
+.bullets {
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.money {
+    padding-left: 140px;
+    padding-right: 70px;
+}
+
+>>>>>>> Stashed changes
 /* Final Page CSS */
 .finalPage {
     display: flex;
