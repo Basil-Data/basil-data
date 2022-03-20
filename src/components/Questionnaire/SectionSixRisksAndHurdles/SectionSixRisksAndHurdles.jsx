@@ -115,12 +115,21 @@ function SectionSixRisksAndHurdles () {
         })
     };
 
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
+
     const handleAdminDispatch = (event) => {
         dispatch({
             type: 'SET_SECTION6_ENTERPRISE',
             payload: {admin6: event}
         })
     }
+
 
     return (
         <>

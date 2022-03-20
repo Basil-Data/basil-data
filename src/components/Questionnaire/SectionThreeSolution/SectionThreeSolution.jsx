@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 
@@ -129,12 +128,21 @@ function SectionThreeSolution () {
         history.push('/impact')
     }
 
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
+
     const handleAdminDispatch = (event) => {
         dispatch({
             type: 'SET_SECTION_THREE_ENTERPRISE',
             payload: {admin3: event}
         })
     }
+
 
     return (
         <>

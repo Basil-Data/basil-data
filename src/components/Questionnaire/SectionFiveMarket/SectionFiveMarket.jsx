@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
@@ -53,6 +52,13 @@ function SectionFiveMarket() {
         }
       }});
   }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
   function handleBack(event) {
     event.preventDefault();

@@ -123,12 +123,21 @@ function SectionSevenNextSteps () {
         history.push('/risks-and-hurdles');
     }
 
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
+
     const handleAdminDispatch = (event) => {
         dispatch({
             type: 'SET_NEXT_STEPS_ENTERPRISE',
             payload: {admin7: event}
         })
     }
+
 
     return (
         <>

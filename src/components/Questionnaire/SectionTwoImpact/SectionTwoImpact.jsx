@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import React from 'react';
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from 'react-router-dom';
 
@@ -102,12 +101,20 @@ function SectionTwoImpact() {
         history.push('/story')
     }
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
+
     const handleAdminDispatch = (event) => {
         dispatch({
             type: 'SET_SECTION_TWO_ENTERPRISE',
             payload: {admin2: event}
         })
     }
+
 
     return(
         <>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import React from 'react';
@@ -116,12 +116,21 @@ function SectionFourTraction() {
     }
   };
 
+
+  const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpen(false);
+  };
+
   const handleAdminDispatch = (event) => {
     dispatch({
       type: 'SET_SECTION4_ENTERPRISE',
       payload: {admin4: event}
     })
   }
+
 
   return (
     <>
