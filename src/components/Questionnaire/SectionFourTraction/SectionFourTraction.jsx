@@ -122,7 +122,6 @@ function SectionFourTraction() {
           value={section4Enterprise.developmentStageId}
           name="radio-buttons-group"
           className="centerHelp"
-          row
           onChange={(event) =>
             dispatch({
               type: "SET_SECTION4_ENTERPRISE",
@@ -232,6 +231,7 @@ function SectionFourTraction() {
               label="Progress Indicator Explanation"
               variant="outlined"
               multiline
+              InputLabelProps={{shrink: true,}}
               rows={5}
               fullWidth
               value={section4Enterprise.progressExplanationOne4}
@@ -263,6 +263,7 @@ function SectionFourTraction() {
               label="Progress Indicator 2 Explanation"
               variant="outlined"
               multiline
+              InputLabelProps={{shrink: true,}}
               rows={5}
               fullWidth
               value={section4Enterprise.progressExplanationTwo4}

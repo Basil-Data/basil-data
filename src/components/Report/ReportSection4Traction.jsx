@@ -69,7 +69,7 @@ function ReportSection4Traction () {
                     <div className="sectionFourParagraph">
                         <br />
                         <h2 className="section4ParagraphHeader">GROWTH</h2>
-                        <br />
+
                     </div>
 
                     
