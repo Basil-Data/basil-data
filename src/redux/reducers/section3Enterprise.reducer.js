@@ -1,7 +1,8 @@
 const section3Enterprise = (state = {
     operatingSectorId: [],
     painPointsId: [],
-    technologiesId: []
+    technologiesId: [],
+    admin3: 'Basil Data Input'
 }, action) => {
     switch (action.type) {
         case 'SET_SECTION_THREE_ENTERPRISE':

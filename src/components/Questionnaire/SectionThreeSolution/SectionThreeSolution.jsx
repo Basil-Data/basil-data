@@ -104,8 +104,8 @@ function SectionThreeSolution () {
             // the user id from the store) as part of the payload
             // this was the way I was able to figure it out
             payload: {
-                id: user.id,
-                data: section3Enterprise
+                id: selectedEnterprise,
+                ...section3Enterprise
         }})
     };
 
@@ -122,7 +122,12 @@ function SectionThreeSolution () {
         history.push('/impact')
     }
 
-
+    const handleAdminDispatch = (event) => {
+        dispatch({
+            type: 'SET_SECTION_THREE_ENTERPRISE',
+            payload: {admin3: event}
+        })
+    }
 
     return (
         <>
@@ -358,7 +363,10 @@ function SectionThreeSolution () {
                     </button>
                 </Link>
             </form>
-        {/* <AdminInputBox/> */}
+        <AdminInputBox
+            value={section3Enterprise.admin3}
+            callback={handleAdminDispatch}
+        />
 
             </Paper>
         </>

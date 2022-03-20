@@ -56,8 +56,8 @@ function SectionTwoImpact() {
         dispatch({
             type: 'UPDATE_SECTION_TWO',
             payload: {
-                id: user.id,
-                data: section2Enterprise
+                id: selectedEnterprise,
+                ...section2Enterprise
             }
         })
     }
@@ -94,7 +94,12 @@ function SectionTwoImpact() {
         history.push('/story')
     }
 
-
+    const handleAdminDispatch = (event) => {
+        dispatch({
+            type: 'SET_SECTION_TWO_ENTERPRISE',
+            payload: {admin2: event}
+        })
+    }
 
     return(
         <>
@@ -243,7 +248,10 @@ function SectionTwoImpact() {
                 </Link>
             </form>
         </Box>
-        {/* <AdminInputBox/> */}
+        <AdminInputBox
+            value={section2Enterprise.admin2}
+            callback={handleAdminDispatch}
+        />
         </Paper>
         </>
     )

@@ -41,7 +41,8 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
             "yearsCollectiveExperience1",
             "percentageBIPOC1",
             "percentageFemale1",
-            "investorIntroduction1"
+            "investorIntroduction1",
+            "admin1"
         FROM "answers"
         WHERE "enterpriseId" = $1
     `;

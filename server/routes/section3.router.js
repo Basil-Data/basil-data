@@ -65,7 +65,8 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
             "mainCompetitors3",
             "differFromCompetitors3",
             "testimonial3",
-            "businessModel3"
+            "businessModel3",
+            "admin3"
         FROM "answers"
         WHERE "enterpriseId" = $1
     `;
@@ -201,19 +202,35 @@ router.put('/', rejectUnauthenticated, (req, res) => {
             "mainCompetitors3" = $2,
             "differFromCompetitors3" = $3,
             "testimonial3" = $4,
-            "businessModel3" = $5
-        WHERE "answers"."enterpriseId" = $6;
+            "businessModel3" = $5,
+            "admin3" = $6
+        WHERE "answers"."enterpriseId" = $7;
     `;
 
     // match up everything
-    let sqlParams = [
-        req.body.payingCustomerProfile3,
-        req.body.mainCompetitors3,
-        req.body.differFromCompetitors3,
-        req.body.testimonial3,
-        req.body.businessModel3,
-        req.user.id
+    let sqlParams = [];
+    if(req.user.authLevel === 'guest'){
+        sqlParams = [
+            req.body.payingCustomerProfile3,
+            req.body.mainCompetitors3,
+            req.body.differFromCompetitors3,
+            req.body.testimonial3,
+            req.body.businessModel3,
+            req.body.admin3,
+            req.user.id
     ];
+    }
+    else {
+        sqlParams = [
+            req.body.payingCustomerProfile3,
+            req.body.mainCompetitors3,
+            req.body.differFromCompetitors3,
+            req.body.testimonial3,
+            req.body.businessModel3,
+            req.body.admin3,
+            req.body.id
+        ];
+    }
     
     pool.query(sqlText, sqlParams)
         .then(res.sendStatus(200))
