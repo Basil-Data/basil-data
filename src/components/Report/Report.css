@@ -20,7 +20,7 @@
     width: 8.5in;
     padding: 10px;
     margin-top: 30px;
-    margin-left: 530px;
+    margin-left: 330px;
 }
 
 .sectionColor {
@@ -557,6 +557,11 @@ hr.dotted {
     max-height:110px;
     width: auto;
     height: auto;
+}
+
+
+.imgOpaque {
+    opacity: 0.5;
 }
 
 /* Section 7 styling */

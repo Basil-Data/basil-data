@@ -12,9 +12,17 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import '../Questionnaire.css'
-import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav'
+import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
+import AdminInputBox from '../../AdminInputBox/AdminInputBox';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 
 function SectionSevenNextSteps () {
 
@@ -22,6 +30,8 @@ function SectionSevenNextSteps () {
     const history = useHistory();
     // store.section6 contains all of the selections for
     // this page of the questionnaire
+
+    const [open, setOpen] = React.useState(false);
 
     history.scrollRestoration = 'manual';
 
@@ -92,10 +102,14 @@ function SectionSevenNextSteps () {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setOpen(true);
 
         dispatch({
             type: 'PUT_SECTION_SEVEN',
-            payload: {data: section7Enterprise}
+            payload: {
+                ...section7Enterprise,
+                id: selectedEnterprise
+            }
         })
     };
 
@@ -108,6 +122,22 @@ function SectionSevenNextSteps () {
         handleSubmit(event);
         history.push('/risks-and-hurdles');
     }
+
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
+
+    const handleAdminDispatch = (event) => {
+        dispatch({
+            type: 'SET_NEXT_STEPS_ENTERPRISE',
+            payload: {admin7: event}
+        })
+    }
+
 
     return (
         <>
@@ -392,6 +422,18 @@ function SectionSevenNextSteps () {
         </Link>
 
     </form>
+
+    {/* <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            Questionnaire saved!
+        </Alert>
+    </Snackbar> */}
+
+    <AdminInputBox
+        value={section7Enterprise.admin7}
+        callback={handleAdminDispatch}
+    />
+
     </Paper>
     </>
     )

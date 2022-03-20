@@ -57,7 +57,7 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
     `;
 
     let sqlText4 = `
-        SELECT "riskPrep6", "barrierPlan6", "externalGrowth6"
+        SELECT "riskPrep6", "barrierPlan6", "externalGrowth6", "admin6"
         FROM "answers"
         WHERE "enterpriseId" = $1;
     `;
@@ -107,16 +107,29 @@ router.put('/', rejectUnauthenticated, async (req, res) => {
             SET 
                 "riskPrep6" = $2,
                 "barrierPlan6" = $3,
-                "externalGrowth6" = $4
+                "externalGrowth6" = $4,
+                "admin6" = $5
             WHERE "answers"."enterpriseId" = $1;
         `;
 
-        let sqlParams1 = [
-            req.user.id,
-            req.body.riskPrep6,
-            req.body.barrierPlan6,
-            req.body.externalGrowth6
-        ];
+        let sqlParams1 = [];
+        if(req.user.authLevel === 'guest'){
+            sqlParams1 = [
+                req.user.id,
+                req.body.riskPrep6,
+                req.body.barrierPlan6,
+                req.body.externalGrowth6,
+                req.body.admin6
+            ];
+        } else {
+            sqlParams1 = [
+                req.body.id,
+                req.body.riskPrep6,
+                req.body.barrierPlan6,
+                req.body.externalGrowth6,
+                req.body.admin6
+            ];
+        }
 
         await pool.query(sqlText, sqlParams1);
 

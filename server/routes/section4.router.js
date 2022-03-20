@@ -67,6 +67,7 @@ router.get('/:id', rejectUnauthenticated, async (req,res) => {
         "newCustomers4",
         "progressExplanationOne4",
         "progressExplanationTwo4"
+        "admin4"
       FROM "answers"
       WHERE "enterpriseId" = $1;
     `;
@@ -217,11 +218,28 @@ router.put('/', rejectUnauthenticated, (req, res) => {
       "newCustomers4" = $8,
       "marketingExpenses4" = $9,
       "progressExplanationOne4" = $10,
-      "progressExplanationTwo4" = $11
-    WHERE "answers"."enterpriseId" = $12;
+      "progressExplanationTwo4" = $11,
+      "admin4" = $12,
+    WHERE "answers"."enterpriseId" = $13;
       `;
     
-    let sqlParams = [
+    let sqlParams = [];
+    if(req.user.authLevel === 'guest'){
+      sqlParams = [
+        req.body.fundingReceived4,
+        req.body.customerGrowth4,
+        req.body.generatingRevenue4,
+        req.body.averageGrowth4,
+        req.body.makingProfit4,
+        req.body.netProfitMargin4,
+        req.body.customerAcquisitionCost4,
+        req.body.newCustomers4,
+        req.body.marketingExpenses4,
+        req.body.admin4,
+        req.user.id
+      ]
+  } else {
+    sqlParams = [
       req.body.fundingReceived4,
       req.body.customerGrowth4,
       req.body.generatingRevenue4,
@@ -233,8 +251,10 @@ router.put('/', rejectUnauthenticated, (req, res) => {
       req.body.marketingExpenses4,
       req.body.progressExplanationOne4,
       req.body.progressExplanationTwo4,
-      req.user.id
+      req.body.admin4,
+      req.body.id
     ]
+  }
 
     pool.query(sqlText, sqlParams)
       .then(res.sendStatus(200))

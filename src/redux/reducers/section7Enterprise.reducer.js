@@ -8,7 +8,8 @@ const section7Enterprise = (state = {
         societalImpactId: 0,
         environmentalImpactId: 0,
         economicImpactId: 0,
-        understandProblem7: 0
+        understandProblem7: 0,
+        admin7: 'Basil Data Input'
     }, action) => {
     switch (action.type) {
         case 'SET_NEXT_STEPS_ENTERPRISE':

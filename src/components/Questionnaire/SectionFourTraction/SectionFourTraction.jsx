@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
@@ -11,13 +11,22 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import "../Questionnaire.css";
 import QuestionnaireNav from "../QuestionnaireNav/QuestionnaireNav";
+import AdminInputBox from '../../AdminInputBox/AdminInputBox';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function SectionFourTraction() {
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const [open, setOpen] = useState(false);
 
   history.scrollRestoration = 'manual';
 
@@ -44,11 +53,13 @@ function SectionFourTraction() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    setOpen(true);
 
     dispatch({
       type: "UPDATE_SECTION4_ENTERPRISE",
       payload: {
-        data: section4Enterprise,
+        ...section4Enterprise,
+        id: selectedEnterprise
       },
     });
   }
@@ -103,6 +114,22 @@ function SectionFourTraction() {
       });
     }
   };
+
+
+  const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpen(false);
+  };
+
+  const handleAdminDispatch = (event) => {
+    dispatch({
+      type: 'SET_SECTION4_ENTERPRISE',
+      payload: {admin4: event}
+    })
+  }
+
 
   return (
     <>
@@ -489,7 +516,7 @@ function SectionFourTraction() {
         </button>
 
         <button onClick={handleSubmit} className="btn">
-          Submit
+          Save
         </button>
 
         
@@ -498,6 +525,17 @@ function SectionFourTraction() {
         </button>
         
       </form>
+
+
+        <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                  Questionnaire saved!
+              </Alert>
+          </Snackbar>
+        <AdminInputBox
+          value={section4Enterprise.admin4}
+          callback={handleAdminDispatch}
+        />
       </Paper>
     </>
   );

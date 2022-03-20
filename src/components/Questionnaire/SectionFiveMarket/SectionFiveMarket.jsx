@@ -1,4 +1,4 @@
-import { react, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
@@ -6,9 +6,16 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import "../Questionnaire.css";
 import QuestionnaireNav from "../QuestionnaireNav/QuestionnaireNav";
+import AdminInputBox from '../../AdminInputBox/AdminInputBox';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function SectionFiveMarket() {
   const dispatch = useDispatch();
@@ -17,6 +24,8 @@ function SectionFiveMarket() {
   const user = useSelector((store) => store.user);
   const selectedEnterprise = useSelector(store => store.adminReducer.selectedEnterprise);
   console.log('user.id is', user.id);
+
+  const [open, setOpen] = React.useState(false);
 
   history.scrollRestoration = 'manual';
 
@@ -32,14 +41,24 @@ function SectionFiveMarket() {
   // Update Function
   function handleSubmit(evt) {
     evt.preventDefault();
-
+    setOpen(true);
     
     dispatch({
       type: "UPDATE_SECTION_FIVE",
       payload: {
-        data: section5
+        data: {
+          ...section5,
+          id: selectedEnterprise
+        }
       }});
   }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
   function handleBack(event) {
     event.preventDefault();
@@ -65,6 +84,13 @@ function SectionFiveMarket() {
     
     history.push('/risks-and-hurdles')
 
+  }
+
+  const handleAdminDispatch = (event) => {
+    dispatch({
+      type: 'SET_SECTION5_RESPONSES',
+      payload: {admin5: event}
+    })
   }
 
   return (
@@ -315,7 +341,7 @@ function SectionFiveMarket() {
         <button 
             onClick={(evt) => handleSubmit(evt)} 
             className="btn">
-            Submit
+            Save
         </button>
 
         
@@ -325,6 +351,17 @@ function SectionFiveMarket() {
         </button>
         
       </form>
+
+      <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                Questionnaire saved!
+            </Alert>
+        </Snackbar>
+        
+        <AdminInputBox 
+          value={section5.admin5}
+          callback={handleAdminDispatch}
+        />
       </Paper>
     </>
   );

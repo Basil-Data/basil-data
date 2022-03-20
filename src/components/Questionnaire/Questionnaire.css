@@ -13,4 +13,12 @@
     border-radius: 30%;
 }
 
+.guestFeedback {
+    border: 1px solid black;
+    width: 400px;
+    height: 200px;
+    margin: auto;
+    padding: 10px;
+}
+
 
