@@ -12,17 +12,23 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import '../Questionnaire.css';
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 import AdminInputBox from '../../AdminInputBox/AdminInputBox';
 
-
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function SectionThreeSolution () {
     
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const [open, setOpen] = React.useState(false);
 
     history.scrollRestoration = 'manual';
 
@@ -97,6 +103,7 @@ function SectionThreeSolution () {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setOpen(true);
 
         dispatch({
             type: 'POST_SECTION_THREE',
@@ -348,7 +355,7 @@ function SectionThreeSolution () {
                 <button 
                     className="btn"
                     onClick={handleSubmit}>
-                        Submit
+                        Save
                     </button>
                 <Link>
                     <button 
@@ -358,6 +365,13 @@ function SectionThreeSolution () {
                     </button>
                 </Link>
             </form>
+
+            <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    Questionnaire saved!
+                </Alert>
+            </Snackbar>
+            
         {/* <AdminInputBox/> */}
 
             </Paper>
