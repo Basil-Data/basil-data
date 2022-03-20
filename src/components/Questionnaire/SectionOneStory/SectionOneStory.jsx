@@ -1,6 +1,5 @@
-import react from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 
@@ -14,15 +13,22 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import '../Questionnaire.css';
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 import AdminInputBox from '../../AdminInputBox/AdminInputBox';
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function SectionOneStory () {
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const [open, setOpen] = React.useState(false);
 
     history.scrollRestoration = 'manual';
 
@@ -57,6 +63,7 @@ function SectionOneStory () {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setOpen(true);
 
         dispatch({
             type: 'UPDATE_SECTION_ONE',
@@ -70,8 +77,15 @@ function SectionOneStory () {
         }}})
     };
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
 
     const onNext = (event) => {
+        setOpen(true);
         handleSubmit(event);
         history.push('/impact')
     }
@@ -270,6 +284,13 @@ function SectionOneStory () {
                 </button>
             </Link>
         </form>
+
+        <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                Questionnaire saved!
+            </Alert>
+        </Snackbar>
+
         <AdminInputBox 
             value={section1Enterprise.admin1}
             callback={handleAdminDispatch}
