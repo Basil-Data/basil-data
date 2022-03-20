@@ -97,7 +97,10 @@ function SectionSevenNextSteps () {
 
         dispatch({
             type: 'PUT_SECTION_SEVEN',
-            payload: {data: section7Enterprise}
+            payload: {
+                ...section7Enterprise,
+                id: selectedEnterprise
+            }
         })
     };
 
@@ -111,6 +114,12 @@ function SectionSevenNextSteps () {
         history.push('/risks-and-hurdles');
     }
 
+    const handleAdminDispatch = (event) => {
+        dispatch({
+            type: 'SET_NEXT_STEPS_ENTERPRISE',
+            payload: {admin7: event}
+        })
+    }
 
     return (
         <>
@@ -395,7 +404,10 @@ function SectionSevenNextSteps () {
         </Link>
 
     </form>
-    {/* <AdminInputBox/> */}
+    <AdminInputBox
+        value={section7Enterprise.admin7}
+        callback={handleAdminDispatch}
+    />
 
     </Paper>
     </>

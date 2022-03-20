@@ -34,8 +34,8 @@ function* putSectionSeven (action) {
 
     try {
         // axios put request which includes all the data needing to be updated
-        yield axios.put('/api/section7', action.payload.data);
-        yield axios.post('api/section7', action.payload.data);
+        yield axios.put('/api/section7', action.payload);
+        yield axios.post('api/section7', action.payload);
     }
     catch {
         console.log('failed to put section 7');

@@ -49,7 +49,8 @@ function SectionFourTraction() {
     dispatch({
       type: "UPDATE_SECTION4_ENTERPRISE",
       payload: {
-        data: section4Enterprise,
+        ...section4Enterprise,
+        id: selectedEnterprise
       },
     });
   }
@@ -104,6 +105,13 @@ function SectionFourTraction() {
       });
     }
   };
+
+  const handleAdminDispatch = (event) => {
+    dispatch({
+      type: 'SET_SECTION4_ENTERPRISE',
+      payload: {admin4: event}
+    })
+  }
 
   return (
     <>
@@ -460,7 +468,10 @@ function SectionFourTraction() {
         </button>
         
       </form>
-      <AdminInputBox />
+      <AdminInputBox
+        value={section4Enterprise.admin4}
+        callback={handleAdminDispatch}
+      />
       </Paper>
     </>
   );
