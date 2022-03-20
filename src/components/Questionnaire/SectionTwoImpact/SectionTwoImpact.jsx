@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from 'react-router-dom';
 
@@ -38,7 +39,7 @@ function SectionTwoImpact() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     history.scrollRestoration = 'manual';
 
