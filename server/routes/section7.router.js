@@ -75,7 +75,7 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
     `;
 
     let sqlText4 = `
-        SELECT "raisingFunds7", "targetAmount7", "nextSteps7", "understandProblem7"
+        SELECT "raisingFunds7", "targetAmount7", "nextSteps7", "understandProblem7", "admin7"
         FROM "answers"
         WHERE "enterpriseId" = $1;
     `;
@@ -138,23 +138,39 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
 // individual enterprise changes their answers
 router.put('/', rejectUnauthenticated, (req, res) => {
 
+    console.log(req.body);
+
     let sqlText = `
         UPDATE "answers"
         SET 
             "raisingFunds7" = $1,
             "targetAmount7" = $2,
             "nextSteps7" = $3,
-            "understandProblem7" = $4
-        WHERE "answers"."enterpriseId" = $5;
+            "understandProblem7" = $4,
+            "admin7" = $5
+        WHERE "answers"."enterpriseId" = $6;
     `;
 
-    let sqlParams = [
-        req.body.raisingFunds7,
-        Number(req.body.targetAmount7),
-        req.body.nextSteps7,
-        Number(req.body.understandProblem7),
-        req.user.id
-    ];
+    let sqlParams = [];
+    if (req.user.authLevel === 'guest') {
+        sqlParams = [
+            req.body.raisingFunds7,
+            Number(req.body.targetAmount7),
+            req.body.nextSteps7,
+            Number(req.body.understandProblem7),
+            req.body.admin7,
+            req.user.id
+        ];
+    } else {
+        sqlParams = [
+            req.body.raisingFunds7,
+            Number(req.body.targetAmount7),
+            req.body.nextSteps7,
+            Number(req.body.understandProblem7),
+            req.body.admin7,
+            req.body.id
+        ];
+    }
 
     pool
     .query(sqlText, sqlParams)

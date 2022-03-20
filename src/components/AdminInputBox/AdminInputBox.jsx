@@ -12,6 +12,9 @@ function AdminInputPage ({value, callback}) {
     return (
         <div className="adminInputBox">
             <h3>Input from Basil Data</h3>
+            {user.authLevel === 'guest' ?
+            <p className='guestFeedback'>{value}</p>
+            :
             <TextField
                 id="outlined-basic"
                 label="Basil Data Input"
@@ -24,6 +27,7 @@ function AdminInputPage ({value, callback}) {
                 onChange={(event) => callback(event.target.value)}
                 disabled={user.authLevel==='guest'}
             ></TextField>
+            }
         </div>
     )
 

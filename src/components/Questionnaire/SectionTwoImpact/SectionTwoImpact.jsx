@@ -38,7 +38,7 @@ function SectionTwoImpact() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     history.scrollRestoration = 'manual';
 
@@ -63,8 +63,8 @@ function SectionTwoImpact() {
         dispatch({
             type: 'UPDATE_SECTION_TWO',
             payload: {
-                id: user.id,
-                data: section2Enterprise
+                id: selectedEnterprise,
+                ...section2Enterprise
             }
         })
     }
@@ -107,6 +107,14 @@ function SectionTwoImpact() {
         }
         setOpen(false);
     };
+
+    const handleAdminDispatch = (event) => {
+        dispatch({
+            type: 'SET_SECTION_TWO_ENTERPRISE',
+            payload: {admin2: event}
+        })
+    }
+
 
     return(
         <>
@@ -262,7 +270,10 @@ function SectionTwoImpact() {
             </Snackbar>
 
         </Box>
-        {/* <AdminInputBox/> */}
+        <AdminInputBox
+            value={section2Enterprise.admin2}
+            callback={handleAdminDispatch}
+        />
         </Paper>
         </>
     )

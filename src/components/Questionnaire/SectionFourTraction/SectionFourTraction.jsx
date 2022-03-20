@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import React from 'react';
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -26,7 +27,7 @@ function SectionFourTraction() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   history.scrollRestoration = 'manual';
 
@@ -58,7 +59,8 @@ function SectionFourTraction() {
     dispatch({
       type: "UPDATE_SECTION4_ENTERPRISE",
       payload: {
-        data: section4Enterprise,
+        ...section4Enterprise,
+        id: selectedEnterprise
       },
     });
   }
@@ -114,12 +116,21 @@ function SectionFourTraction() {
     }
   };
 
+
   const handleClose = (event, reason) => {
       if (reason === 'clickaway') {
         return;
       }
       setOpen(false);
   };
+
+  const handleAdminDispatch = (event) => {
+    dispatch({
+      type: 'SET_SECTION4_ENTERPRISE',
+      payload: {admin4: event}
+    })
+  }
+
 
   return (
     <>
@@ -477,13 +488,16 @@ function SectionFourTraction() {
         
       </form>
 
-      <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                Questionnaire saved!
-            </Alert>
-        </Snackbar>
-        
-      <AdminInputBox />
+
+        <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                  Questionnaire saved!
+              </Alert>
+          </Snackbar>
+        <AdminInputBox
+          value={section4Enterprise.admin4}
+          callback={handleAdminDispatch}
+        />
       </Paper>
     </>
   );

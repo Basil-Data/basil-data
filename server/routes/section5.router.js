@@ -127,7 +127,7 @@ router.put('/', rejectUnauthenticated, async (req, res) => {
       "industryPerspectiveThree5" = $7,
       "admin5" = $8
     WHERE "answers"."enterpriseId" = $9;
-     `;
+    `;
 
   let sqlParams = []
   if(req.user.authLevel === 'guest') {

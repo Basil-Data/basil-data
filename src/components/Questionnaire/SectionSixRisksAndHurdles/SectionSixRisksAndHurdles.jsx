@@ -108,9 +108,13 @@ function SectionSixRisksAndHurdles () {
 
         dispatch({
             type: 'PUT_SECTION_SIX',
-            payload: section6Enterprise
+            payload: {
+                ...section6Enterprise,
+                id: selectedEnterprise
+            }
         })
     };
+
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -118,6 +122,14 @@ function SectionSixRisksAndHurdles () {
         }
         setOpen(false);
     };
+
+    const handleAdminDispatch = (event) => {
+        dispatch({
+            type: 'SET_SECTION6_ENTERPRISE',
+            payload: {admin6: event}
+        })
+    }
+
 
     return (
         <>
@@ -326,8 +338,10 @@ function SectionSixRisksAndHurdles () {
             </Alert>
         </Snackbar>
         
-        {/* <AdminInputBox/> */}
-
+        <AdminInputBox
+            value={section6Enterprise.admin6}
+            callback={handleAdminDispatch}
+        />
         </Paper>
         </>
     )

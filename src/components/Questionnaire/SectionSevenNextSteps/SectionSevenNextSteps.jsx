@@ -106,7 +106,10 @@ function SectionSevenNextSteps () {
 
         dispatch({
             type: 'PUT_SECTION_SEVEN',
-            payload: {data: section7Enterprise}
+            payload: {
+                ...section7Enterprise,
+                id: selectedEnterprise
+            }
         })
     };
 
@@ -120,12 +123,21 @@ function SectionSevenNextSteps () {
         history.push('/risks-and-hurdles');
     }
 
+
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
         setOpen(false);
     };
+
+    const handleAdminDispatch = (event) => {
+        dispatch({
+            type: 'SET_NEXT_STEPS_ENTERPRISE',
+            payload: {admin7: event}
+        })
+    }
+
 
     return (
         <>
@@ -411,13 +423,16 @@ function SectionSevenNextSteps () {
 
     </form>
 
-    <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+    {/* <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
             Questionnaire saved!
         </Alert>
-    </Snackbar>
+    </Snackbar> */}
 
-    {/* <AdminInputBox/> */}
+    <AdminInputBox
+        value={section7Enterprise.admin7}
+        callback={handleAdminDispatch}
+    />
 
     </Paper>
     </>
