@@ -10,18 +10,25 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 // Internal Imports
 import '../Questionnaire.css'
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 import AdminInputBox from '../../AdminInputBox/AdminInputBox';
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 
 function SectionSixRisksAndHurdles () {
 
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const [open, setOpen] = React.useState(false);
 
     history.scrollRestoration = 'manual';
 
@@ -97,6 +104,7 @@ function SectionSixRisksAndHurdles () {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setOpen(true);
 
         dispatch({
             type: 'PUT_SECTION_SIX',
@@ -304,6 +312,13 @@ function SectionSixRisksAndHurdles () {
             <Link to="/next-steps"><button className="btn">Next</button></Link>
 
         </form>
+
+        <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                Questionnaire saved!
+            </Alert>
+        </Snackbar>
+        
         {/* <AdminInputBox/> */}
 
         </Paper>

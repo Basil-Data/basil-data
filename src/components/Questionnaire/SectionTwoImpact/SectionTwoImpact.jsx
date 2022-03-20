@@ -23,16 +23,22 @@ import {
 } 
 from '@mui/material';
 import Paper from '@mui/material/Paper';
-
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
 import SectionTwoImpactOpportunity from "./SectionTwoImpactOpportunity/SectionTwoImpactOpportunity";
 import AdminInputBox from '../../AdminInputBox/AdminInputBox';
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function SectionTwoImpact() {
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const [open, setOpen] = React.useState(false);
 
     history.scrollRestoration = 'manual';
 
@@ -52,6 +58,7 @@ function SectionTwoImpact() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setOpen(true);
 
         dispatch({
             type: 'UPDATE_SECTION_TWO',
@@ -231,7 +238,7 @@ function SectionTwoImpact() {
                     className="btn"
                     onClick={(event) => handleSubmit(event)}
                 >
-                    Submit
+                    Save
                 </button>
                 <Link to="/solution">
                     <button 
@@ -242,6 +249,13 @@ function SectionTwoImpact() {
                     </button>
                 </Link>
             </form>
+
+            <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    Questionnaire saved!
+                </Alert>
+            </Snackbar>
+
         </Box>
         {/* <AdminInputBox/> */}
         </Paper>
