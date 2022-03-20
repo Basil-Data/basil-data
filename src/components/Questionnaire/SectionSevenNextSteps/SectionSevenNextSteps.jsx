@@ -414,11 +414,11 @@ function SectionSevenNextSteps () {
 
     </form>
 
-    <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+    {/* <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
             Questionnaire saved!
         </Alert>
-    </Snackbar>
+    </Snackbar> */}
 
     <AdminInputBox
         value={section7Enterprise.admin7}
