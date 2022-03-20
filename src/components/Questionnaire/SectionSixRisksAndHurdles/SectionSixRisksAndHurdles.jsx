@@ -112,6 +112,13 @@ function SectionSixRisksAndHurdles () {
         })
     };
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
+
     return (
         <>
         <QuestionnaireNav/>

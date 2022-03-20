@@ -120,6 +120,12 @@ function SectionSevenNextSteps () {
         history.push('/risks-and-hurdles');
     }
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
 
     return (
         <>
