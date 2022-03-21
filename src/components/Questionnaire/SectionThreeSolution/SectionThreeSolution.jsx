@@ -11,6 +11,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
@@ -145,216 +148,254 @@ function SectionThreeSolution () {
 
 
     return (
-        <>
+        <Box className="fullPage">
             <QuestionnaireNav />
             <Paper className="formPaper" elevation={3}>
-            <h1 className='questionnaireForm'>Section 3 - Solution</h1>
-            <p className='questionnaireForm'>In this section we ask for more detail regarding your business
-            offering and how it can help potential customers.</p>
-            <form className='questionnaireForm'>
-                <h5>What sector do you operate in?</h5>
-                <Box className='centerHelp' sx={{ display: 'flex' }}>
-                    <FormControl sx={{ m : 3}}>
-                        {operatingSector?.map(sector => (
-                                <FormControlLabel 
-                                    checked={selectedOperatingSector.includes(sector.id)}
-                                    value={sector.id}
-                                    onChange={handleOperatingSectors}
-                                    control={
-                                    <Checkbox 
-                                    />} 
-                                    label={sector.sector}
-                                    key={sector.id} />
-                        ))}
-                    </FormControl>
-                </Box>
-                <h5>Describe the profile of your PAYING customer:</h5>
-                <p>What are the characteristics of your target user market?</p>
-                <Grid
-                    container
-                    spacing={0}
-                    direction="column"
-                    alignItems="center"
-                    justifyContent="center"
-                >
-                    <Box
-                        sx={{
-                            width: 600,
-                            maxWidth: '100%',
-                        }}
-                    >
-                        <TextField 
-                            id="outlined-basic" 
-                            label="Customer characteristics" 
-                            variant="outlined" 
-                            multiline rows={5}
-                            fullWidth
-                            InputLabelProps={{shrink: true,}}
-                            value={section3Enterprise.payingCustomerProfile3}
-                            onChange={(event) => dispatch({
-                                type: 'SET_SECTION_THREE_ENTERPRISE',
-                                payload: {payingCustomerProfile3: event.target.value}
-                            })}
-                        />
-                    </Box>
-                </Grid>
-                <h5>Who are your main competitors?</h5>
-                <Grid
-                    container
-                    spacing={0}
-                    direction="column"
-                    alignItems="center"
-                    justifyContent="center"
-                >
-                    <Box
-                        sx={{
-                            width: 600,
-                            maxWidth: '100%',
-                        }}
-                    >
-                        <TextField 
-                            id="outlined-basic" 
-                            label="Main competitors" 
-                            variant="outlined" 
-                            multiline rows={5}
-                            fullWidth
-                            InputLabelProps={{shrink: true,}}
-                            value={section3Enterprise.mainCompetitors3}
-                            onChange={(event) => dispatch({
-                                type: 'SET_SECTION_THREE_ENTERPRISE',
-                                payload: {mainCompetitors3: event.target.value}
-                            })}
-                        />
-                    </Box>
-                </Grid>
-                <h5>How does your product/service differ from your competitors?</h5>
-                <Grid
-                    container
-                    spacing={0}
-                    direction="column"
-                    alignItems="center"
-                    justifyContent="center"
-                >
-                    <Box
-                        sx={{
-                            width: 600,
-                            maxWidth: '100%',
-                        }}
-                    >
-                        <TextField 
-                            id="outlined-basic" 
-                            label="Differing competitive factors" 
-                            variant="outlined" 
-                            multiline rows={5}
-                            InputLabelProps={{shrink: true,}}
-                            fullWidth
-                            value={section3Enterprise.differFromCompetitors3}
-                            onChange={(event) => {
-                                dispatch({
-                                    type: 'SET_SECTION_THREE_ENTERPRISE',
-                                    payload: {differFromCompetitors3: event.target.value}
-                                })
-                            }}
-                        />
-                    </Box>
-                </Grid>
-                <h5>What customer pain points does your product/service seek to solve?</h5>
-                <Box className='centerHelp' sx={{ display: 'flex' }}>
-                    <FormControl sx={{ m : 3}}>
-                        {painPoints?.map(point => (
-                                <FormControlLabel 
-                                    checked={selectedPainPoints.includes(point.id)}
-                                    control={
-                                        <Checkbox
-                                            value={point.id}
-                                            onChange={handlePainPoints}
+                <h1 className='questionnaireForm'>Section 3 - Solution</h1>
+                <p className='questionnaireForm'>In this section we ask for more detail regarding your business
+                offering and how it can help potential customers.
+                </p>
+                <form className='questionnaireForm'>
+                    <Box sx={{marginTop: "50px"}}>
+                        <h4>What sector do you operate in?</h4>
+                        <Box sx={{marginLeft: "120px"}}>
+                            <FormControl sx={{ m : 3}}>
+                                {operatingSector?.map(sector => (
+                                    <FormControlLabel 
+                                        checked={selectedOperatingSector.includes(sector.id)}
+                                        value={sector.id}
+                                        onChange={handleOperatingSectors}
+                                        control={
+                                        <Checkbox 
                                         />} 
-                                    label={point.painPoint}
-                                    key={point.id} />
-                        ))}
-                    </FormControl>
+                                        label={sector.sector}
+                                        key={sector.id} />
+                                ))}
+                            </FormControl>
+                        </Box>
+                    </Box>
+                    <Box sx={{marginTop: "50px"}}>
+                        <h4>Describe the profile of your PAYING customer:</h4>
+                        <p>What are the characteristics of your target user market?</p>
+                        <Grid
+                            container
+                            spacing={0}
+                            direction="column"
+                            alignItems="center"
+                            justifyContent="center"
+                        >
+                            <Box
+                                sx={{
+                                    width: 600,
+                                    maxWidth: '100%',
+                                }}
+                            >
+                                <TextField 
+                                    id="outlined-basic" 
+                                    label="Customer characteristics" 
+                                    variant="outlined" 
+                                    multiline rows={5}
+                                    fullWidth
+                                    InputLabelProps={{shrink: true,}}
+                                    value={section3Enterprise.payingCustomerProfile3}
+                                    onChange={(event) => dispatch({
+                                        type: 'SET_SECTION_THREE_ENTERPRISE',
+                                        payload: {payingCustomerProfile3: event.target.value}
+                                    })}
+                                />
+                        </Box>
+                    </Grid>
                 </Box>
-                <h5>What do your clients/customers say about your product or service? (i.e. testimonial)</h5>
-                <Grid
-                    container
-                    spacing={0}
-                    direction="column"
-                    alignItems="center"
-                    justifyContent="center"
-                >
-                    <Box
-                        sx={{
-                            width: 600,
-                            maxWidth: '100%',
-                        }}
+                <Box sx={{marginTop: "50px"}}>
+                    <h4>Who are your main competitors?</h4>
+                    <Grid
+                        container
+                        spacing={0}
+                        direction="column"
+                        alignItems="center"
+                        justifyContent="center"
                     >
-                        <TextField 
-                            id="outlined-basic" 
-                            label="Testimonial" 
-                            variant="outlined" 
-                            multiline rows={5}
-                            fullWidth
-                            InputLabelProps={{shrink: true,}}
-                            value={section3Enterprise.testimonial3}
-                            onChange={(event) => dispatch({
-                                type: 'SET_SECTION_THREE_ENTERPRISE',
-                                payload: {testimonial3: event.target.value}
-                            })}
-                        />
-                    </Box>
-                </Grid>
-                <h5>Describe your business model</h5>
-                <p>Things to focus on: Description of the solution from a 
-                    business standpoint;  Is the product an SaaS solution? 
-                    What is the pricing model? How will your product/service 
-                    generate revenue? What achievements do you have that can 
-                    mark your progress to-date?</p>
-                <Grid
-                    container
-                    spacing={0}
-                    direction="column"
-                    alignItems="center"
-                    justifyContent="center"
-                >
-                    <Box
-                        sx={{
-                            width: 600,
-                            maxWidth: '100%',
-                        }}
+                        <Box
+                            sx={{
+                                width: 600,
+                                maxWidth: '100%',
+                            }}
+                        >
+                            <TextField 
+                                id="outlined-basic" 
+                                label="Main competitors" 
+                                variant="outlined" 
+                                multiline rows={5}
+                                fullWidth
+                                InputLabelProps={{shrink: true,}}
+                                value={section3Enterprise.mainCompetitors3}
+                                onChange={(event) => dispatch({
+                                    type: 'SET_SECTION_THREE_ENTERPRISE',
+                                    payload: {mainCompetitors3: event.target.value}
+                                })}
+                            />
+                        </Box>
+                    </Grid>
+                </Box>
+                <Box sx={{marginTop: "50px"}}>
+                    <h4>How does your product/service differ from your competitors?</h4>
+                    <Grid
+                        container
+                        spacing={0}
+                        direction="column"
+                        alignItems="center"
+                        justifyContent="center"
                     >
-                        <TextField 
-                            id="outlined-basic" 
-                            label="Business Model" 
-                            variant="outlined" 
-                            multiline rows={5}
-                            fullWidth
-                            InputLabelProps={{shrink: true,}}
-                            value={section3Enterprise.businessModel3}
-                            onChange={(event) => dispatch({
-                                type: 'SET_SECTION_THREE_ENTERPRISE',
-                                payload: {businessModel3: event.target.value}
+                        <Box
+                            sx={{
+                                width: 600,
+                                maxWidth: '100%',
+                            }}
+                        >
+                            <TextField 
+                                id="outlined-basic" 
+                                label="Differing competitive factors" 
+                                variant="outlined" 
+                                multiline rows={5}
+                                InputLabelProps={{shrink: true,}}
+                                fullWidth
+                                value={section3Enterprise.differFromCompetitors3}
+                                onChange={(event) => {
+                                    dispatch({
+                                        type: 'SET_SECTION_THREE_ENTERPRISE',
+                                        payload: {differFromCompetitors3: event.target.value}
+                                    })
+                                }}
+                            />
+                        </Box>
+                    </Grid>
+                </Box>
+                <Box sx={{marginTop: "50px"}}>
+                    <h4>What customer pain points does your product/service seek to solve?</h4>
+                    <Box >
+                        <FormControl sx={{marginLeft: "70px"}}>
+                            {painPoints?.map(point => {
+                                return(
+                                    <Box>
+                                        <Table>
+                                            <TableRow sx={{display: "table"}}>
+                                                <TableCell sx={{border: "none"}}>
+                                                    <Checkbox 
+                                                        key={point.id}
+                                                        checked={selectedPainPoints.includes(point.id)}
+                                                        value={point.id}
+                                                        defaultValue={0}
+                                                        onChange={handlePainPoints}
+                                                    />
+                                                </TableCell>
+                                                <TableCell sx={{border: "none"}}>
+                                                    {point.painPoint}
+                                                </TableCell>
+                                            </TableRow>
+                                        </Table>
+                                    </Box>
+                                )
                             })}
-                        />
+                        </FormControl>
                     </Box>
-                </Grid>
-                <h5>Please select the top three technology applications that apply 
-                    to your organization.</h5>
-                <Box className='centerHelp' sx={{ display: 'flex' }}>
-                    <FormControl sx={{ m : 3}}>
-                        {technologies?.map(technology => (
-                                <FormControlLabel 
-                                    checked={selectedTechnologies.includes(technology.id)}
-                                    disabled={!selectedTechnologies.includes(technology.id) && selectedTechnologies.length > 2}
-                                    control={
-                                    <Checkbox 
+                </Box>
+                {/* <FormControlLabel 
+                                        key={point.id}
+                                        checked={selectedPainPoints.includes(point.id)}
+                                        control={
+                                            <Checkbox
+                                                value={point.id}
+                                                onChange={handlePainPoints}
+                                            />} 
+                                        label={point.painPoint}
+                                    /> */}
+                <Box sx={{marginTop: "50px"}}>
+                    <h4>What do your clients/customers say about your product or service? (i.e. testimonial)</h4>
+                    <Grid
+                        container
+                        spacing={0}
+                        direction="column"
+                        alignItems="center"
+                        justifyContent="center"
+                    >
+                        <Box
+                            sx={{
+                                width: 600,
+                                maxWidth: '100%',
+                            }}
+                        >
+                            <TextField 
+                                id="outlined-basic" 
+                                label="Testimonial" 
+                                variant="outlined" 
+                                multiline rows={5}
+                                fullWidth
+                                InputLabelProps={{shrink: true,}}
+                                value={section3Enterprise.testimonial3}
+                                onChange={(event) => dispatch({
+                                    type: 'SET_SECTION_THREE_ENTERPRISE',
+                                    payload: {testimonial3: event.target.value}
+                                })}
+                            />
+                        </Box>
+                    </Grid>
+                </Box>
+                <Box sx={{marginTop: "50px"}}>
+                    <h4>Describe your business model</h4>
+                    <p>Things to focus on: Description of the solution from a 
+                        business standpoint;  Is the product an SaaS solution? 
+                        What is the pricing model? How will your product/service 
+                        generate revenue? What achievements do you have that can 
+                        mark your progress to-date?</p>
+                    <Grid
+                        container
+                        spacing={0}
+                        direction="column"
+                        alignItems="center"
+                        justifyContent="center"
+                    >
+                        <Box
+                            sx={{
+                                width: 600,
+                                maxWidth: '100%',
+                            }}
+                        >
+                            <TextField 
+                                id="outlined-basic" 
+                                label="Business Model" 
+                                variant="outlined" 
+                                multiline rows={5}
+                                fullWidth
+                                InputLabelProps={{shrink: true,}}
+                                value={section3Enterprise.businessModel3}
+                                onChange={(event) => dispatch({
+                                    type: 'SET_SECTION_THREE_ENTERPRISE',
+                                    payload: {businessModel3: event.target.value}
+                                })}
+                            />
+                        </Box>
+                    </Grid>
+                </Box>
+                <Box sx={{marginTop: "50px"}}>
+                    <h4>Please select the top three technology applications that apply 
+                        to your organization.</h4>
+                    <Box className='centerHelp' sx={{ display: 'flex' }}>
+                        <FormControl sx={{ m : 3}}>
+                            {technologies?.map(technology => (
+                                    <FormControlLabel 
+                                        checked={selectedTechnologies.includes(technology.id)}
+                                        disabled={!selectedTechnologies.includes(technology.id) && selectedTechnologies.length > 2}
+                                        control={
+                                        <Checkbox 
 
-                                    />} 
-                                    value={technology.id}
-                                    onChange={handleTechnologies}
-                                    label={technology.technology}
-                                    key={technology.id} />
-                        ))}
-                    </FormControl>
+                                        />} 
+                                        value={technology.id}
+                                        onChange={handleTechnologies}
+                                        label={technology.technology}
+                                        key={technology.id} />
+                            ))}
+                        </FormControl>
+                    </Box>
                 </Box>
                 <br/>
                 <br/>
@@ -391,7 +432,7 @@ function SectionThreeSolution () {
                 callback={handleAdminDispatch}
             />
             </Paper>
-        </>
+        </Box>
     )
 };
 

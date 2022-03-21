@@ -1,31 +1,40 @@
 import { Link } from 'react-router-dom';
+import Box from '@mui/material/Box'
+import '../Questionnaire.css';
 
 
 function QuestionnaireNav () {
     return (
-        <div className='questionnaireForm'>
+        <Box 
+            className='sectionNav' 
+            sx={{
+                marginTop: "170px",
+                marginBottom: "40px",
+                
+            }}
+        >
             <Link className='questionnaireNavLink' to="/story">
-                Story
+                <h3>01. Story</h3>
             </Link>
             <Link className='questionnaireNavLink' to="/impact">
-                Impact
+                <h3>02. Impact</h3>
             </Link>
             <Link className='questionnaireNavLink' to="/solution">
-                Solution
+            <h3>03. Solution</h3>
             </Link>
             <Link className='questionnaireNavLink' to="/traction">
-                Traction
+                <h3>04. Traction</h3>
             </Link>
             <Link className='questionnaireNavLink' to="/market">
-                Market
+                <h3>05. Market</h3>
             </Link>
             <Link className='questionnaireNavLink' to="/risks-and-hurdles">
-                Risks & Hurdles
+                <h3>06. Risks & Hurdles</h3>
             </Link>
             <Link className='questionnaireNavLink' to="/next-steps">
-                Next Steps
+                <h3>07. Next Steps</h3>
             </Link>
-        </div>
+        </Box>
     )
 };
 

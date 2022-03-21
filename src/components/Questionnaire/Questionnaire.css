@@ -1,5 +1,6 @@
 .questionnaireForm {
     text-align: center;
+    margin: .5in;
 }
 
 .centerHelp {
@@ -8,10 +9,45 @@
 
 .questionnaireNavLink {
     padding: 10px;
-    border: 1px solid black;
-    margin: 2px;
+    border: 2px solid #112345;
     border-radius: 30%;
+    text-decoration: none;
+    color: #112345;
+    margin-left: 5px;
+    margin-right: 5px;
+
 }
+
+.questionnaireNavLink:hover {
+    background-color: #68688F;
+    color: white;
+    
+} 
+
+.sectionNav {
+    display: flex;
+    justify-content: center;
+}
+
+.fullPage {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+
+.formPaper {
+   margin-right: 527px;
+}
+
+.measuredOutcomeBtn {
+    margin-left: 120px;
+}
+
+.secondarySDGBtn {
+    margin-left: 120px;
+}
+
 
 .guestFeedback {
     border: 1px solid black;
