@@ -479,7 +479,18 @@ function SectionSevenNextSteps () {
             ))}
         </RadioGroup>
 
-        <h5>How well do you understand the problem?</h5>
+        <h5 onClick={() =>
+        dispatch({
+            type: 'SET_NEXT_STEPS_ENTERPRISE',
+            payload: {admin7: `A new computation
+            paradigm has emerged in the last decade under several names: online aggregation in the database
+            community; progressive, incremental, or iterative visualization in other communities. It consists
+            of splitting long computations into a series of approximate results improving with time; in this
+            process, partial or approximate results are then rapidly returned to the user and can be interacted
+            with in a fluent and iterative fashion.`}
+        })}>
+            How well do you understand the problem?
+        </h5>
         <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             row
@@ -537,11 +548,11 @@ function SectionSevenNextSteps () {
         </form>
 
 
-    {/* <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+    <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
             Questionnaire saved!
         </Alert>
-    </Snackbar> */}
+    </Snackbar>
 
     <AdminInputBox
         value={section7Enterprise.admin7}

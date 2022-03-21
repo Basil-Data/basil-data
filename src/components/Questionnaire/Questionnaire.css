@@ -3,6 +3,11 @@
     margin: .5in;
 }
 
+.clickText {
+    height: 40px;
+    margin-top: 10px;
+}
+
 .centerHelp {
     justify-content: center;
 }
