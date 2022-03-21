@@ -6,6 +6,8 @@ const section4Enterprise = (state = {
     generatingRevenue4: '',
     developmentStageId: 0,
     makingProfit4: '',
+    progressExplanationOne4: '',
+    progressExplanationTwo4: '',
     admin4: 'Basil Data Input'
 }, action) => {
     switch (action.type) {

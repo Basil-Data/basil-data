@@ -191,7 +191,10 @@ function SectionFourTraction() {
                     payload: {
                       investmentStageId: evt.target.value,
                     },
-                  })
+                  })}/>
+            ))}
+          </RadioGroup>
+          </Box>
 
         <h5>How much have you received in funding to date?</h5>
 
@@ -221,13 +224,15 @@ function SectionFourTraction() {
             {section4.results3?.map((use) => (
               <FormControlLabel
                 key={use.id}
+                control={<Radio/>}
+                label={use.indicator}
                 disabled={
                   !progressIndicator.includes(use.id) &&
                   progressIndicator.length > 1
                 }
               />
             ))}
-          </RadioGroup>
+            </FormControl>
         </Box>
 
         <Box sx={{marginTop: "50px"}}>
