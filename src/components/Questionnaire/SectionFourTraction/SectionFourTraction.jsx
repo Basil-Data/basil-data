@@ -149,7 +149,6 @@ function SectionFourTraction() {
           value={section4Enterprise.developmentStageId}
           name="radio-buttons-group"
           className="centerHelp"
-          row
           onChange={(event) =>
             dispatch({
               type: "SET_SECTION4_ENTERPRISE",
@@ -226,7 +225,7 @@ function SectionFourTraction() {
                 key={use.id}
                 disabled={
                   !progressIndicator.includes(use.id) &&
-                  progressIndicator.length > 2
+                  progressIndicator.length > 1
                 }
                 checked={progressIndicator.includes(use.id)}
                 control={<Checkbox value={use.id} onChange={handleProgress} />}
@@ -256,11 +255,50 @@ function SectionFourTraction() {
           >
             <TextField
               id="outlined-basic"
-              label="Long Answer Text"
+              label="Progress Indicator Explanation"
               variant="outlined"
               multiline
+              InputLabelProps={{shrink: true,}}
               rows={5}
               fullWidth
+              value={section4Enterprise.progressExplanationOne4}
+              onChange={(evt =>
+                dispatch({
+                  type: 'SET_SECTION4_ENTERPRISE',
+                  payload: {progressExplanationOne4: evt.target.value}
+                }))}
+            />
+          </Box>
+          <br />
+        </Grid>
+
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box
+            sx={{
+              width: 600,
+              maxWidth: "100%",
+            }}
+          >
+            <TextField
+              id="outlined-basic"
+              label="Progress Indicator 2 Explanation"
+              variant="outlined"
+              multiline
+              InputLabelProps={{shrink: true,}}
+              rows={5}
+              fullWidth
+              value={section4Enterprise.progressExplanationTwo4}
+              onChange={(evt =>
+                dispatch({
+                  type: 'SET_SECTION4_ENTERPRISE',
+                  payload: {progressExplanationTwo4: evt.target.value}
+                }))}
             />
           </Box>
         </Grid>
@@ -272,6 +310,7 @@ function SectionFourTraction() {
         <TextField
           id="outlined-basic"
           label="Growth Percentage"
+          type="number"
           variant="outlined"
           value={section4Enterprise.customerGrowth4}
           InputLabelProps={{shrink: true,}}
