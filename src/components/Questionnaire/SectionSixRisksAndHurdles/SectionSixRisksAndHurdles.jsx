@@ -12,6 +12,10 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import Table from '@mui/material/Table';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import TableBody from '@mui/material/TableBody';
 
 // Internal Imports
 import '../Questionnaire.css'
@@ -138,188 +142,226 @@ function SectionSixRisksAndHurdles () {
             <Paper className="formPaper" elevation={3}>
                 <form className='questionnaireForm'>
                     <h1>Section 6 - Risks and Hurdles</h1>
-                    <p>Enhancing your Transparency by providing insight into current and future factors 
+                    <h3>Enhancing your Transparency by providing insight into current and future factors 
                         that could have an effect on the growth of your organization.
-                    </p>
-                    <p>The goal of this section is not to highlight the bad or the negatives but to 
+                    </h3>
+                    <h3>The goal of this section is not to highlight the bad or the negatives but to 
                         gain a better understanding of your organization from an internal standpoint, 
                         and to demonstrate business acumen to any external users.
-                    </p>
-
-                    <h5>Have you anticipated any of these risks to the expected outcomes?</h5>
-                    <p>We understand these risks may be new to you. If you have not yet considered 
+                    </h3>
+                    <br></br>
+                    <br></br>
+                    <h3>Have you anticipated any of these risks to the expected outcomes?</h3>
+                    <h3>We understand these risks may be new to you. If you have not yet considered 
                         any of these risks, please select "None at this stage"
-                    </p>
-                    <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
-                        <FormControl className='questionnaireForm' sx={{ m : 3}}>
-                            {section6.results1?.map(risk => (
-                                    <FormControlLabel 
-                                        key={risk.id}
-                                        checked={anticipatedRisks.includes(risk.id)} 
-                                        control={
-                                            <Checkbox
-                                                value={risk.id}
-                                                onChange={handleRisk}
-                                            />
-                                        } 
-                                        label={risk.risk} 
-                                    />
-                            ))}
+                    </h3>
+                    <Box>
+                        <FormControl sx={{ m : 3, marginLeft: "80px" }}>
+                            {section6.results1?.map(risk => {
+                                return(
+                                    <Box>
+                                        <Table>
+                                            <TableBody>
+                                                <TableRow sx={{display: "table"}}>
+                                                    <TableCell sx={{border: "none"}}>
+                                                        <Checkbox 
+                                                            key={risk.id}
+                                                            checked={anticipatedRisks.includes(risk.id)}
+                                                            value={risk.id}
+                                                            onChange={handleRisk}
+                                                        />
+                                                    </TableCell>
+                                                    <TableCell sx={{border: "none", fontSize: "17px"}}>
+                                                        {risk.risk}
+                                                    </TableCell>
+                                                </TableRow>
+                                            </TableBody>
+                                        </Table>
+                                    </Box>
+                                )})}
                         </FormControl>
                     </Box>
 
-                    <h5>If applicable, please tell us more about how you've prepared 
-                        (or plan to prepare) for each of the selected impact risks. </h5>
-                    <Grid
-                        container
-                        spacing={0}
-                        direction="column"
-                        alignItems="center"
-                        justifyContent="center"
-                    >
-                        <Box
-                            sx={{
-                                width: 600,
-                                maxWidth: '100%',
-                            }}
+                    <Box sx={{marginTop: "50px"}}>
+                        <h4>If applicable, please tell us more about how you've prepared 
+                            (or plan to prepare) for each of the selected impact risks. </h4>
+                        <Grid
+                            container
+                            spacing={0}
+                            direction="column"
+                            alignItems="center"
+                            justifyContent="center"
                         >
-                            <TextField 
-                                id="outlined-basic" 
-                                label="Impact Risk Planning" 
-                                variant="outlined" 
-                                multiline rows={5} 
-                                fullWidth
-                                value={section6Enterprise.riskPrep6 || ''}
-                                onChange = {(event) =>
-                                    { dispatch({
-                                        type: "SET_SECTION6_ENTERPRISE",
-                                        payload: {riskPrep6: event.target.value}
-                                    }); }
-                                }
-                            />
-                        </Box>
-                    </Grid>
-
-                    <h5>From the list below, please select the startup barriers that are most applicable to you.</h5>
-                    <p>The aim of this question is to gain a grasp of how your organization is dealing with/plans to 
-                        deal with potential hurdles.
-                    </p>
-                    <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
-                        <FormControl className='questionnaireForm' sx={{ m : 3}}>
-                            {section6.results2?.map(barrier => (
-                                    <FormControlLabel 
-                                        key={barrier.id}
-                                        checked={barriers.includes(barrier.id)}  
-                                        control={
-                                            <Checkbox
-                                                value={barrier.id}
-                                                onChange={handleBarriers}
-                                            />
-                                        } 
-                                        label={barrier.barrier} 
-                                    />
-                            ))}
-                        </FormControl>
+                            <Box
+                                sx={{
+                                    width: 600,
+                                    maxWidth: '100%',
+                                }}
+                            >
+                                <TextField 
+                                    id="outlined-basic" 
+                                    label="Impact Risk Planning" 
+                                    variant="outlined" 
+                                    multiline rows={5} 
+                                    fullWidth
+                                    value={section6Enterprise.riskPrep6 || ''}
+                                    onChange = {(event) =>
+                                        { dispatch({
+                                            type: "SET_SECTION6_ENTERPRISE",
+                                            payload: {riskPrep6: event.target.value}
+                                        }); }
+                                    }
+                                />
+                            </Box>
+                        </Grid>
                     </Box>
 
-                    <h5>Please elaborate on how you are dealing/plan to deal with each 
-                        of the startup barriers you selected above.
-                    </h5>
-                    <Grid
-                        container
-                        spacing={0}
-                        direction="column"
-                        alignItems="center"
-                        justifyContent="center"
-                    >
-                        <Box
-                            sx={{
-                                width: 600,
-                                maxWidth: '100%',
-                            }}
+                    <Box sx={{marginTop: "50px"}}>
+                        <h4>From the list below, please select the startup barriers that are most applicable to you.</h4>
+                        <h4>The aim of this question is to gain a grasp of how your organization is dealing with/plans to 
+                            deal with potential hurdles.
+                        </h4>
+                        <Box>
+                            <FormControl sx={{ m : 3, marginLeft: "-150px"}}>
+                                    {section6.results2?.map(barrier => {
+                                        return(
+                                            <Box>
+                                                <Table>
+                                                    <TableRow sx={{display: "table"}}>
+                                                        <TableCell sx={{border: "none"}}>
+                                                            <Checkbox 
+                                                                key={barrier.id}
+                                                                checked={barriers.includes(barrier.id)}
+                                                                value={barrier.id}
+                                                                onChange={handleBarriers}
+                                                            />
+                                                        </TableCell>
+                                                        <TableCell sx={{border: "none", fontSize: "17px"}}>
+                                                            {barrier.barrier}
+                                                        </TableCell>
+                                                    </TableRow>
+                                                </Table>
+                                            </Box>
+                                        )})}
+                                </FormControl>
+                            </Box>
+                    </Box>
+
+                    <Box sx={{marginTop: "50px"}}>
+                        <h4>Please elaborate on how you are dealing/plan to deal with each 
+                            of the startup barriers you selected above.
+                        </h4>
+                        <Grid
+                            container
+                            spacing={0}
+                            direction="column"
+                            alignItems="center"
+                            justifyContent="center"
                         >
-                            <TextField 
-                                id="outlined-basic" 
-                                label="Planning for Startup Barriers" 
-                                variant="outlined" 
-                                multiline rows={5} 
-                                fullWidth
-                                value={section6Enterprise.barrierPlan6 || ''}
-                                onChange = {(event) =>
-                                    { dispatch({
-                                        type: "SET_SECTION6_ENTERPRISE",
-                                        payload: {barrierPlan6: event.target.value}
-                                    }); }
-                                }
-                            />
-                        </Box>
-                    </Grid>
+                            <Box
+                                sx={{
+                                    width: 600,
+                                    maxWidth: '100%',
+                                }}
+                            >
+                                <TextField 
+                                    id="outlined-basic" 
+                                    label="Planning for Startup Barriers" 
+                                    variant="outlined" 
+                                    multiline rows={5} 
+                                    fullWidth
+                                    value={section6Enterprise.barrierPlan6 || ''}
+                                    onChange = {(event) =>
+                                        { dispatch({
+                                            type: "SET_SECTION6_ENTERPRISE",
+                                            payload: {barrierPlan6: event.target.value}
+                                        }); }
+                                    }
+                                />
+                            </Box>
+                        </Grid>
+                    </Box>
 
                     
 
-                    <h5>Select factors that could significantly influence the growth 
-                        path of your enterprise (positive or negative)
-                    </h5>
-                    <p>Here we are looking for factors that could be outside of your control 
-                        that may have an impact on the progress of your organization. Gaining 
-                        an understanding of external factors in your industry will help you to 
-                        be more adept in from a business standpoint.
-                    </p>
-                    <Box className='questionnaireForm centerHelp' sx={{ display: 'flex' }}>
-                        <FormControl className='questionnaireForm' sx={{ m : 3}}>
-                            {section6.results3?.map(factor => (
-                                    <FormControlLabel 
-                                        key={factor.id}
-                                        checked={factors.includes(factor.id)}  
-                                        control={
-                                            <Checkbox
-                                                value={factor.id}
-                                                onChange={handleFactors}
-                                            />
-                                        } 
-                                        label={factor.factor} 
-                                    />
-                            ))}
-                        </FormControl>
-                    </Box>
-
-                    <h5>Please explain your reason(s) for your selection(s) above.</h5>
-                    <p>Following on from the previous question, here we are looking for 
-                        explanations that tell us you are aware of how the selected external 
-                        factors may impact your organization, or even better, how you are 
-                        prepared to deal with external factors that may influence your growth 
-                        path (+ve or -ve)
-                    </p>
-                    <Grid
-                        container
-                        spacing={0}
-                        direction="column"
-                        alignItems="center"
-                        justifyContent="center"
-                    >
-                        <Box
-                            sx={{
-                                width: 600,
-                                maxWidth: '100%',
-                            }}
-                        >
-                            <TextField 
-                                id="outlined-basic" 
-                                label="Impact Risk Planning" 
-                                variant="outlined" 
-                                multiline rows={5} 
-                                fullWidth
-                                value={section6Enterprise.externalGrowth6 || ''}
-                                onChange = {(event) =>
-                                    { dispatch({
-                                        type: "SET_SECTION6_ENTERPRISE",
-                                        payload: {externalGrowth6: event.target.value}
-                                    }); }
-                                } 
-                            />
+                    <Box sx={{marginTop: "50px"}}>
+                        <h4>Select factors that could significantly influence the growth 
+                            path of your enterprise (positive or negative)
+                        </h4>
+                        <h4>Here we are looking for factors that could be outside of your control 
+                            that may have an impact on the progress of your organization. Gaining 
+                            an understanding of external factors in your industry will help you to 
+                            be more adept in from a business standpoint.
+                        </h4>
+                        <Box>
+                        <FormControl>
+                            <Box>
+                                <Table>
+                                    <TableBody>
+                                        {section6.results3?.map(factor => {
+                                            return(
+                                                <TableRow sx={{display: "table"}}>
+                                                    <TableCell sx={{border: "none"}}>
+                                                        <Checkbox 
+                                                            key={factor.id}
+                                                            checked={factors.includes(factor.id)}
+                                                            value={factor.id}
+                                                            onChange={handleFactors}
+                                                        />
+                                                    </TableCell>
+                                                    <TableCell sx={{border: "none", fontSize: "17px"}}>
+                                                        {factor.factor} 
+                                                    </TableCell>
+                                                </TableRow>
+                                            )})}
+                                        </TableBody>
+                                    </Table>
+                                </Box>
+                            </FormControl>
                         </Box>
-                    </Grid>
-
+                    </Box>
+                    
+                    <Box sx={{marginTop: "50px"}}>
+                        <h4>Please explain your reason(s) for your selection(s) above.</h4>
+                        <h4>Following on from the previous question, here we are looking for 
+                            explanations that tell us you are aware of how the selected external 
+                            factors may impact your organization, or even better, how you are 
+                            prepared to deal with external factors that may influence your growth 
+                            path (+ve or -ve)
+                        </h4>
+                        <Grid
+                            container
+                            spacing={0}
+                            direction="column"
+                            alignItems="center"
+                            justifyContent="center"
+                        >
+                            <Box
+                                sx={{
+                                    width: 600,
+                                    maxWidth: '100%',
+                                }}
+                            >
+                                <TextField 
+                                    id="outlined-basic" 
+                                    label="Impact Risk Planning" 
+                                    variant="outlined" 
+                                    multiline rows={5} 
+                                    fullWidth
+                                    value={section6Enterprise.externalGrowth6 || ''}
+                                    onChange = {(event) =>
+                                        { dispatch({
+                                            type: "SET_SECTION6_ENTERPRISE",
+                                            payload: {externalGrowth6: event.target.value}
+                                        }); }
+                                    } 
+                                />
+                            </Box>
+                        </Grid>
+                    </Box>
+                    
+                    <br></br>
+                    <br></br>
                     <Link to="/market"><button className="btn">Back</button></Link>
 
                     <button 
