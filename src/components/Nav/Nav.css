@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .nav {
   /* flex box layout */
   display: flex;
@@ -5,8 +9,16 @@
   align-items: center;
 
   margin: 0 0 30px;
-  background-color: #dfe1e7;
+  background-color: #112345;
   overflow: hidden;
+  position: fixed;
+  height: 10vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 9994;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .nav a {
@@ -23,8 +35,8 @@
 
 .navLink {
   display: inline-block;
-  color: #000000;
-  background-color: #dfe1e7;
+  color: #A894E4;
+  background-color: #112345;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
@@ -38,5 +50,5 @@
 }
 
 .navLink:hover {
-  background-color: #68688c;
+  color: white;
 }

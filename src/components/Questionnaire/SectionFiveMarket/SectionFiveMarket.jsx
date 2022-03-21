@@ -68,7 +68,7 @@ function SectionFiveMarket() {
   }
 
   return (
-    <>
+    <Box className="fullPage">
       <QuestionnaireNav />
       <Paper className="formPaper" elevation={3}>
       <form className="questionnaireForm">
@@ -326,7 +326,7 @@ function SectionFiveMarket() {
         
       </form>
       </Paper>
-    </>
+    </Box>
   );
 }
 

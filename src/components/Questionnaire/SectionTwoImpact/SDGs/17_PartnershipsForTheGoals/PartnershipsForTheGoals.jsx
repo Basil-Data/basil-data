@@ -57,21 +57,18 @@ function PartnershipsForTheGoals() {
 
     return(
         <Box className="questionnaireForm">
-                <img src="images/SDGs/E-WEB-Goal-17.png" width="200px" height="200px"/>
-                <h1><b>SDG - Partnerships for the Goals</b></h1>
+            <img src="images/SDGs/E-WEB-Goal-17.png" width="200px" height="200px"/>
+            <h1><b>SDG - Partnerships for the Goals</b></h1>
+            <Box sx={{marginTop: "50px"}}>
                 <p>What Indicators do you use/intend to use to track change?</p>
-                <FormControl
-                    sx={{
-                        width: "700px",
-                    }}
-                >
+                <FormControl sx={{marginLeft: "14px"}}>
                     {indicators?.map(indicator => {
                         if(indicator.sdgId === 17) {
                             return (
                                 <Box>
                                     <Table>
                                         <TableRow sx={{display: "table"}}>
-                                            <TableCell>
+                                            <TableCell sx={{border: "none"}}>
                                                 <Checkbox
                                                     key={indicator.id} 
                                                     checked={selectedIndicator.includes(indicator.id)}
@@ -80,7 +77,7 @@ function PartnershipsForTheGoals() {
                                                     onChange={handleIndicator}
                                                 />
                                             </TableCell>
-                                            <TableCell>
+                                            <TableCell sx={{border: "none"}}>
                                                 {indicator.indicator}
                                             </TableCell>
                                         </TableRow>
@@ -90,6 +87,8 @@ function PartnershipsForTheGoals() {
                         }
                     })}
                 </FormControl>
+            </Box>
+            <Box sx={{marginTop: "50px"}}>
                 <p> 
                     Please elaborate on the progress shown in 
                     the indicators that you use
@@ -102,16 +101,18 @@ function PartnershipsForTheGoals() {
                     placeholder="Please Elaborate"
                     multiline rows={5}
                     id="outlined-basic" 
-                    sx={{width: 600}}
+                    sx={{width: 600, marginLeft: "-37px"}}
                     value={section2Enterprise.elaborateOnIndicators2 || ''}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',
                         payload: {elaborateOnIndicators2: event.target.value}
                     })}
                 ></TextField>
+            </Box>
+            <Box sx={{marginTop: "50px"}}>
                 <p>What level does your impact operate on?</p>
                 <RadioGroup 
-                    className="buttonCenter"
+                    sx={{marginLeft: "107px"}}
                     value={section2Enterprise.impactLevel2}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -143,6 +144,8 @@ function PartnershipsForTheGoals() {
                         label="Country"
                     />
                 </RadioGroup>
+            </Box>
+            <Box sx={{marginTop: "50px"}}>
                 <p>What specific city, state, or region is your current target?</p>
                 <TextField
                     label="Location"
@@ -152,13 +155,15 @@ function PartnershipsForTheGoals() {
                     placeholder="Location"
                     multiline rows={5}
                     id="outlined-basic" 
-                    sx={{width: 600}}
+                    sx={{width: 600, marginLeft: "-37px"}}
                     value={section2Enterprise.focusedEfforts2 || ''}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',
                         payload: { focusedEfforts2: event.target.value }
                     })}
                 ></TextField>
+            </Box>
+            <Box sx={{marginTop: "50px"}}>
                 <p>
                     What are the specific changes you would like 
                     to see due to your efforts?
@@ -172,16 +177,18 @@ function PartnershipsForTheGoals() {
                     placeholder="Specific Changes"
                     multiline rows={5}
                     id="outlined-basic" 
-                    sx={{width: 600}}
+                    sx={{width: 600, marginLeft: "-37px"}}
                     value={section2Enterprise.specificChanges2 || ''}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',
                         payload: { specificChanges2: event.target.value }
                     })}
                 ></TextField>
+            </Box>
+            <Box sx={{marginTop: "50px"}}>
                 <p>Have you measured your outcomes?</p>
                 <RadioGroup 
-                    className="buttonCenter"
+                    className="measuredOutcomeBtn"
                     value={section2Enterprise.measuredOutcome2}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -207,13 +214,15 @@ function PartnershipsForTheGoals() {
                         label="Sometimes - not consistently"
                     />
                 </RadioGroup>
+            </Box>
+            <Box sx={{marginTop: "50px"}}>
                 <p>
                     If applicable, please select any secondary 
                     Sustainable Development Goals that align with 
                     your organization's mission. 
                 </p>
                 <RadioGroup 
-                    className="buttonCenter"
+                    className="secondarySDGBtn"
                     value={section2Enterprise.secondarySDG2}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -230,6 +239,7 @@ function PartnershipsForTheGoals() {
                     />
                     ))}
                 </RadioGroup>
+            </Box>
         </Box>
 
     )

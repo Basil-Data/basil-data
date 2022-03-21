@@ -105,7 +105,7 @@ function SectionFourTraction() {
   };
 
   return (
-    <>
+    <Box className="fullPage">
       <QuestionnaireNav />
       <Paper className="formPaper" elevation={3}>
       <form className="questionnaireForm">
@@ -460,7 +460,7 @@ function SectionFourTraction() {
         
       </form>
       </Paper>
-    </>
+    </Box>
   );
 }
 

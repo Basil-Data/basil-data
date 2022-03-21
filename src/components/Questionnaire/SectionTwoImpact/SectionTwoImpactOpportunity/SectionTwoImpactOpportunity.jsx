@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import '../../Questionnaire.css';
 
@@ -142,7 +142,8 @@ function SectionTwoImpactOpportunity() {
 
     return(
         <Box className="questionnaireForm">
-                <h1><b>Impact Opportunity</b></h1>
+            <h1><b>Impact Opportunity</b></h1>
+            <Box sx={{marginTop: "50px"}}>
                 <p>Select the characteristics that support the efficacy of your solution</p>
                 <FormControl>
                     {supportiveCharacteristics?.map(characteristic => {
@@ -161,29 +162,33 @@ function SectionTwoImpactOpportunity() {
                         )
                     })}
                 </FormControl>
+            </Box>
+            <Box sx={{marginTop: "50px"}}>
                 <p>Which Sustainable Development Goal best aligns best with your impact objective?</p>
-                <div className="buttonCenter">
-                <RadioGroup 
-                    className="centerHelp"
-                    onChange={handleSDG}
-                >
-                    {sdg?.map(goal => {
-                        return(
-                            <FormControlLabel 
-                            key={goal.id}
-                            control={<Radio/>} 
-                            labelPlacement="end"
-                            value={goal.id}
-                            defaultValue={0}
-                            label={goal.sdg}
-                            />
-                        )
-                    })}
-                </RadioGroup>
-                </div>
-            <div>
+                <Box sx={{marginLeft: "134px"}}>
+                    <RadioGroup 
+                        onChange={handleSDG}
+                    >
+                        {sdg?.map(goal => {
+                            return(
+                                
+                                <FormControlLabel 
+                                    key={goal.id}
+                                    control={<Radio/>} 
+                                    labelPlacement="end"
+                                    value={goal.id}
+                                    defaultValue={0}
+                                    label={goal.sdg}
+                                />
+                    
+                            )
+                        })}
+                    </RadioGroup>
+                </Box>
+            </Box>
+            <Box id="SDGComponent">
                 {component}
-            </div>
+            </Box>
         </Box>
     )
 
