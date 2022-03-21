@@ -4,7 +4,8 @@ const section6Enterprise = (state = {
     factorId: [],
     riskPrep6: '',
     barrierPlan6: '',
-    externalGrowth6: ''
+    externalGrowth6: '',
+    admin6: 'Basil Data Input'
 }, action) => {
 switch (action.type) {
     case 'SET_SECTION6_ENTERPRISE':

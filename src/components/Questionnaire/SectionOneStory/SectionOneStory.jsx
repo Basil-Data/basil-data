@@ -1,6 +1,5 @@
-import react from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 
@@ -15,13 +14,22 @@ import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Slider from '@mui/material/Slider'
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import '../Questionnaire.css';
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
+import AdminInputBox from '../../AdminInputBox/AdminInputBox';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function SectionOneStory () {
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const [open, setOpen] = React.useState(false);
 
     history.scrollRestoration = 'manual';
 
@@ -56,6 +64,7 @@ function SectionOneStory () {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setOpen(true);
 
         dispatch({
             type: 'UPDATE_SECTION_ONE',
@@ -63,15 +72,30 @@ function SectionOneStory () {
             // the user id from the store) as part of the payload
             // this was the way I was able to figure it out
             payload: {
-                id: user.id,
-                data: section1Enterprise
-        }})
+                data: {
+                id: selectedEnterprise,
+                ...section1Enterprise
+        }}})
     };
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
 
     const onNext = (event) => {
+        setOpen(true);
         handleSubmit(event);
         history.push('/impact')
+    }
+    
+    const handleAdminDispatch = (event) => {
+        dispatch({
+            type: 'SET_SECTION_ONE_ENTERPRISE',
+            payload: {admin1: event}
+        })
     }
 
     return (
@@ -148,6 +172,8 @@ function SectionOneStory () {
                 </Box>
                 <Box sx={{marginTop: "50px"}}>
                     <h4>How well do you understand the problem?</h4>
+                      <p>One meaning you are just getting started, and ten meaning you are very experienced
+                          and can clearly link the solution to the problem.</p>
                         <Slider 
                             defaultValue={1}
                             step={1}
@@ -179,6 +205,7 @@ function SectionOneStory () {
                 </Box>
                 <Box sx={{marginTop: "50px"}}>
                     <h4>What percentage of your founding team is BIPOC (Black, Indigenous, Person of Color)?</h4>
+                >
                     <TextField 
                         id="outlined-basic" 
                         label="Percentage BIPOC" 
@@ -274,6 +301,22 @@ function SectionOneStory () {
             </form>
             </Paper>
         </Box>
+            </Link>
+        </form>
+
+        <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                Questionnaire saved!
+            </Alert>
+        </Snackbar>
+
+        <AdminInputBox 
+            value={section1Enterprise.admin1}
+            callback={handleAdminDispatch}
+        />
+
+        </Paper>
+        </>
     )
 };
 

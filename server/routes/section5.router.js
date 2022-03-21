@@ -47,7 +47,8 @@ router.get('/:id', async (req, res) => {
       "whyRealistic5",
       "industryPerspectiveOne5",
       "industryPerspectiveTwo5",
-      "industryPerspectiveThree5"
+      "industryPerspectiveThree5",
+      "admin5"
     FROM "answers"
     WHERE "enterpriseId" = $1;
     `;
@@ -79,7 +80,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   let sqlText = `
     INSERT INTO "answers" 
     ( "addressableMarket5",
-     "serviceableMarket5",
+      "serviceableMarket5",
       "obtainableMarket5", 
       "whyRealistic5",
       "industryPerspectiveOne5",
@@ -87,7 +88,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
       "industryPerspectiveThree5"
       )
     VALUES ($1, $2, $3, $4, $5, $6, $7)
-    WHERE "answers"."id" = $8`
+    WHERE "answers"."id" = $8;`
 
     let sqlParams = [
       req.body.addressableMarket5,
@@ -123,11 +124,14 @@ router.put('/', rejectUnauthenticated, async (req, res) => {
       "whyRealistic5" = $4,
       "industryPerspectiveOne5" = $5,
       "industryPerspectiveTwo5" = $6,
-      "industryPerspectiveThree5" = $7
-    WHERE "answers"."enterpriseId" = $8;
-     `;
+      "industryPerspectiveThree5" = $7,
+      "admin5" = $8
+    WHERE "answers"."enterpriseId" = $9;
+    `;
 
-  let sqlParams = [
+  let sqlParams = []
+  if(req.user.authLevel === 'guest') {
+    sqlParams=[
     req.body.addressableMarket5,
     req.body.serviceableMarket5,
     req.body.obtainableMarket5,
@@ -135,8 +139,22 @@ router.put('/', rejectUnauthenticated, async (req, res) => {
     req.body.industryPerspectiveOne5,
     req.body.industryPerspectiveTwo5,
     req.body.industryPerspectiveThree5,
+    req.body.admin5,
     req.user.id
-  ]
+  ]}
+  else {
+    sqlParams= [
+      req.body.addressableMarket5,
+      req.body.serviceableMarket5,
+      req.body.obtainableMarket5,
+      req.body.whyRealistic5,
+      req.body.industryPerspectiveOne5,
+      req.body.industryPerspectiveTwo5,
+      req.body.industryPerspectiveThree5,
+      req.body.admin5,
+      req.body.id
+    ]
+  }
 
   pool.query(sqlText, sqlParams)
     .then(res.sendStatus(200))

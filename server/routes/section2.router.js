@@ -61,7 +61,8 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
             "problemBeingSolved2",
             "costOfProblem2",
             "howTheySolve2",
-            "whoBenefits2"
+            "whoBenefits2",
+            "admin2"
         FROM "answers"
         WHERE "enterpriseId" = $1
     `;
@@ -112,25 +113,49 @@ router.put('/', rejectUnauthenticated, (req, res) => {
             "specificChanges2" = $8,
             "measuredOutcome2" = $9,
             "secondarySDG2" = $10,
-            "impactLevel2" = $11
-        WHERE "answers"."enterpriseId" = $12;
+            "impactLevel2" = $11,
+            "admin2" = $12
+        WHERE "answers"."enterpriseId" = $13;
     `;  
 
 
-    const sqlParams = [
-        req.body.problemBeingSolved2,
-        req.body.costOfProblem2,
-        req.body.howTheySolve2,
-        req.body.whoBenefits2,
-        req.body.elaborateOnIndicators2,
-        req.body.organizationLocation2,
-        req.body.focusedEfforts2,
-        req.body.specificChanges2,
-        req.body.measuredOutcome2,
-        req.body.secondarySDG2,
-        req.body.impactLevel2,
-        req.user.id
-    ];
+    let sqlParams = [];
+
+    if(req.user.authLevel === 'guest') {
+        sqlParams = [
+            req.body.problemBeingSolved2,
+            req.body.costOfProblem2,
+            req.body.howTheySolve2,
+            req.body.whoBenefits2,
+            req.body.elaborateOnIndicators2,
+            req.body.organizationLocation2,
+            req.body.focusedEfforts2,
+            req.body.specificChanges2,
+            req.body.measuredOutcome2,
+            req.body.secondarySDG2,
+            req.body.impactLevel2,
+            req.body.admin2,
+            req.user.id
+        ]
+    }
+    else {
+        sqlParams = [
+            req.body.problemBeingSolved2,
+            req.body.costOfProblem2,
+            req.body.howTheySolve2,
+            req.body.whoBenefits2,
+            req.body.elaborateOnIndicators2,
+            req.body.organizationLocation2,
+            req.body.focusedEfforts2,
+            req.body.specificChanges2,
+            req.body.measuredOutcome2,
+            req.body.secondarySDG2,
+            req.body.impactLevel2,
+            req.body.admin2,
+            req.body.id
+        ]
+    }
+
 
     pool.query(sqlText, sqlParams)
         .then(res.sendStatus(200))

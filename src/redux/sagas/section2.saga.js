@@ -51,8 +51,8 @@ function* fetchSectionTwoEnterprise(action) {
 function* postSectionTwo (action) {
     
     try{
-        yield axios.put(`/api/section2`, action.payload.data);
-        yield axios.post(`/api/section2`, action.payload.data);
+        yield axios.put(`/api/section2`, action.payload);
+        yield axios.post(`/api/section2`, action.payload);
     }
     catch {
         console.log('POST section2 error');

@@ -12,9 +12,17 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import '../Questionnaire.css'
-import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav'
+import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
+import AdminInputBox from '../../AdminInputBox/AdminInputBox';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 
 function SectionSevenNextSteps () {
 
@@ -22,6 +30,8 @@ function SectionSevenNextSteps () {
     const history = useHistory();
     // store.section6 contains all of the selections for
     // this page of the questionnaire
+
+    const [open, setOpen] = React.useState(false);
 
     history.scrollRestoration = 'manual';
 
@@ -92,10 +102,14 @@ function SectionSevenNextSteps () {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setOpen(true);
 
         dispatch({
             type: 'PUT_SECTION_SEVEN',
-            payload: {data: section7Enterprise}
+            payload: {
+                ...section7Enterprise,
+                id: selectedEnterprise
+            }
         })
     };
 
@@ -108,6 +122,22 @@ function SectionSevenNextSteps () {
         handleSubmit(event);
         history.push('/risks-and-hurdles');
     }
+
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
+
+    const handleAdminDispatch = (event) => {
+        dispatch({
+            type: 'SET_NEXT_STEPS_ENTERPRISE',
+            payload: {admin7: event}
+        })
+    }
+
 
     return (
         <Box className="fullPage">
@@ -394,6 +424,166 @@ function SectionSevenNextSteps () {
             </form>
         </Paper>
     </Box>
+                ))}
+            </FormControl>
+        </Box>
+
+        <h4>Matching Questions</h4>
+        <p>In this last section we ask you questions to hopefully match you with potential 
+            investors in the future as our platform develops!
+        </p>
+
+        <h5>Classify your impact on Society.</h5>
+        <p>By impact on society we are referring to your organization's effect on the social fabric 
+            of the community and well-being of the individuals and families you serve
+        </p>
+        <RadioGroup
+            aria-labelledby="social-impact"
+            defaultValue={0}
+            name="radio-buttons-group"
+            className="buttonCenter2"
+            value = {Number(section7Enterprise.societalImpactId)}
+            onChange = {(event) =>
+                { dispatch({
+                    type: "SET_NEXT_STEPS_ENTERPRISE",
+                    payload: {societalImpactId: event.target.value}
+                }); }
+            }
+        >
+            {section7.results4?.map(impact => (
+                <FormControlLabel 
+                    key={impact.id}
+                    value={impact.id}
+                    control={<Radio />} 
+                    label={impact.societalImpact}
+                />
+            ))}
+        </RadioGroup>
+
+        <h5>Classify your impact on the environment.</h5>
+        <p>This question refers to how your organization avoids of the depletion of natural 
+            resources in order to maintain an ecological balance.
+        </p>
+        <RadioGroup
+            aria-labelledby="environmental-impact"
+            defaultValue={0}
+            name="radio-buttons-group"
+            className="buttonCenter2"
+            value = {section7Enterprise.environmentalImpactId}
+            onChange = {(event) =>
+                { dispatch({
+                    type: "SET_NEXT_STEPS_ENTERPRISE",
+                    payload: {environmentalImpactId: event.target.value}
+                }); }
+            }
+        >
+            {section7.results5?.map(impact => (
+                <FormControlLabel 
+                    key={impact.id} 
+                    control={<Radio />}
+                    value={impact.id} 
+                    label={impact.impact} 
+                />
+            ))}
+        </RadioGroup>
+
+        <h5>Classify your impact on economic development.</h5>
+        <p>This question is meant to classify your organization's effect on wealth and 
+            economic growth for individuals or communities.
+        </p>
+        <RadioGroup
+            aria-labelledby="economic-impact"
+            name="radio-buttons-group"
+            defaultValue={0}
+            className='buttonCenter2' 
+            value = {section7Enterprise.economicImpactId}
+            onChange = {(event) =>
+                { dispatch({
+                    type: "SET_NEXT_STEPS_ENTERPRISE",
+                    payload: {economicImpactId: event.target.value}
+                }); }
+            }
+        >
+            {section7.results6?.map(impact => (
+                <FormControlLabel 
+                    key={impact.id} 
+                    control={<Radio />}
+                    value={impact.id} 
+                    label={impact.impact} 
+                />
+            ))}
+        </RadioGroup>
+
+        <h5>How well do you understand the problem?</h5>
+        <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            row
+            name="radio-buttons-group"
+            className='centerHelp'
+            value = {section7Enterprise.understandProblem7}
+            onChange = {(event) =>
+                { dispatch({
+                    type: "SET_NEXT_STEPS_ENTERPRISE",
+                    payload: {understandProblem7: Number(event.target.value)}
+                }); }
+            }
+        >
+            <FormControlLabel labelPlacement="top" value="1" control={<Radio />} label="1" />
+            <FormControlLabel labelPlacement="top" value="2" control={<Radio />} label="2" />
+            <FormControlLabel labelPlacement="top" value="3" control={<Radio />} label="3" />
+            <FormControlLabel labelPlacement="top" value="4" control={<Radio />} label="4" />
+            <FormControlLabel labelPlacement="top" value="5" control={<Radio />} label="5" />
+            <FormControlLabel labelPlacement="top" value="6" control={<Radio />} label="6" />
+            <FormControlLabel labelPlacement="top" value="7" control={<Radio />} label="7" />
+            <FormControlLabel labelPlacement="top" value="8" control={<Radio />} label="8" />
+            <FormControlLabel labelPlacement="top" value="9" control={<Radio />} label="9" />
+            <FormControlLabel labelPlacement="top" value="10" control={<Radio />} label="10" />
+        </RadioGroup>
+
+        <Link to="/risks-and-hurdles">
+            <button 
+                className="btn"
+                onClick={(event) => onBack(event)}
+            >
+                Back
+            </button>
+        </Link>
+        
+        <button 
+            className="btn"
+            onClick={(event) => handleSubmit(event)}
+        >
+            Save
+        </button>
+
+        {/* 
+            Below should link should change from story to 
+            whatever comes after last step in questionnaire 
+        */}
+        <Link to="/story">
+            <button 
+                className="btn"
+                onClick={(event) => onNext(event)}
+            >
+                Next
+            </button>
+        </Link>
+
+    </form>
+
+    {/* <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            Questionnaire saved!
+        </Alert>
+    </Snackbar> */}
+
+    <AdminInputBox
+        value={section7Enterprise.admin7}
+        callback={handleAdminDispatch}
+    />
+
+    </Paper>
+    </>
     )
 };
 

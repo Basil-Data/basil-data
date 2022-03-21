@@ -20,9 +20,10 @@ import {
     RadioGroup,
     Radio,
     FormControlLabel,
-    Checkbox,
+    Checkbox
 } 
 from '@mui/material';
+
 import NoPoverty from "../SDGs/1_NoPoverty/NoPoverty";
 import ZeroHunger from "../SDGs/2_ZeroHunger/ZeroHunger";
 import GoodHealthAndWellbeing from "../SDGs/3_GoodHealthAndWellbeing/GoodHealthAndWellbeing";
@@ -42,7 +43,6 @@ import PeaceJusticeAndStrongInstitutions from "../SDGs/16_PeaceJusticeAndStrongI
 import PartnershipsForTheGoals from "../SDGs/17_PartnershipsForTheGoals/PartnershipsForTheGoals";
 
 
-
 function SectionTwoImpactOpportunity() {
     const dispatch = useDispatch();
     const [sdgPrimary, setSdgPrimary] = useState('');
@@ -52,7 +52,6 @@ function SectionTwoImpactOpportunity() {
     const supportiveCharacteristics = useSelector(store => store.section2.supportiveCharacteristics);
     const selectedCharacteristic = useSelector(store => store.section2Enterprise.characteristicId);
     const selectedSDG = useSelector(store => store.section2Enterprise.sdgId);
-
 
     let component;
     switch(sdgPrimary) {
@@ -109,8 +108,6 @@ function SectionTwoImpactOpportunity() {
             break;
     }
 
-
-
     const handleSupportiveCharacteristics = (event) => {
         const index = selectedCharacteristic.indexOf(Number(event.target.value));
         if (index === -1) {
@@ -129,7 +126,6 @@ function SectionTwoImpactOpportunity() {
             });
         }
     }
-
 
     const handleSDG = (event) => {
         setSdgPrimary(Number(event.target.value));

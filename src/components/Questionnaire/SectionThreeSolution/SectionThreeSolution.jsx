@@ -1,5 +1,4 @@
-import react from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 
@@ -15,15 +14,23 @@ import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 import '../Questionnaire.css';
 import QuestionnaireNav from '../QuestionnaireNav/QuestionnaireNav';
+import AdminInputBox from '../../AdminInputBox/AdminInputBox';
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function SectionThreeSolution () {
     
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const [open, setOpen] = React.useState(false);
 
     history.scrollRestoration = 'manual';
 
@@ -98,6 +105,7 @@ function SectionThreeSolution () {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setOpen(true);
 
         dispatch({
             type: 'POST_SECTION_THREE',
@@ -105,8 +113,8 @@ function SectionThreeSolution () {
             // the user id from the store) as part of the payload
             // this was the way I was able to figure it out
             payload: {
-                id: user.id,
-                data: section3Enterprise
+                id: selectedEnterprise,
+                ...section3Enterprise
         }})
     };
 
@@ -123,6 +131,20 @@ function SectionThreeSolution () {
         history.push('/impact')
     }
 
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
+
+    const handleAdminDispatch = (event) => {
+        dispatch({
+            type: 'SET_SECTION_THREE_ENTERPRISE',
+            payload: {admin3: event}
+        })
+    }
 
 
     return (
@@ -387,7 +409,7 @@ function SectionThreeSolution () {
                 <button 
                     className="btn"
                     onClick={handleSubmit}>
-                        Submit
+                        Save
                     </button>
                 <Link>
                     <button 
@@ -397,6 +419,18 @@ function SectionThreeSolution () {
                     </button>
                 </Link>
             </form>
+
+
+            <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    Questionnaire saved!
+                </Alert>
+            </Snackbar>
+            
+            <AdminInputBox
+                value={section3Enterprise.admin3}
+                callback={handleAdminDispatch}
+            />
             </Paper>
         </Box>
     )

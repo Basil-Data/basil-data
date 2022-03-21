@@ -32,8 +32,8 @@ function* getSectionFourEnterprise (action) {
 
 function* updateSectionFive(action) {
     try {
-        yield axios.put('/api/section4/', action.payload.data)
-        yield axios.post('/api/section4/', action.payload.data)
+        yield axios.put('/api/section4/', action.payload)
+        yield axios.post('/api/section4/', action.payload)
     }
     catch(err) {
         console.error('Section 4 PUT saga failed');

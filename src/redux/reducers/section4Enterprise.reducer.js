@@ -5,7 +5,8 @@ const section4Enterprise = (state = {
     fundingReceived4: '',
     generatingRevenue4: '',
     developmentStageId: 0,
-    makingProfit4: ''
+    makingProfit4: '',
+    admin4: 'Basil Data Input'
 }, action) => {
     switch (action.type) {
         case 'SET_SECTION4_ENTERPRISE':
