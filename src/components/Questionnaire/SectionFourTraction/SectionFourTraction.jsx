@@ -304,7 +304,7 @@ function SectionFourTraction() {
               variant="outlined"
               multiline
               InputLabelProps={{shrink: true,}}
-              rows={5}
+              rows={3}
               fullWidth
               value={section4Enterprise.progressExplanationOne4}
               onChange={(evt =>
@@ -336,7 +336,7 @@ function SectionFourTraction() {
               variant="outlined"
               multiline
               InputLabelProps={{shrink: true,}}
-              rows={5}
+              rows={3}
               fullWidth
               value={section4Enterprise.progressExplanationTwo4}
               onChange={(evt =>
