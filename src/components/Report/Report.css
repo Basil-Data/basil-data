@@ -482,19 +482,21 @@ hr.dotted {
     width: 300px;
     display: inline-block;
     margin-left: 50px;
+    margin-top: -20px;
 }
 
 .indicatorDetails {
     width:300px;
     margin-top: -175px;
-    margin-left: 506px;
+    margin-left: 442px;
+    text-align: center;
     
 }
 
 .userGrowth {
     width: 300px;
     margin-left: 50px;
-    margin-top: 50px;
+    margin-top: 34px;
     text-align: center;
 }
 
@@ -504,7 +506,7 @@ hr.dotted {
 
 .revenueGrowth {
     width: 450px;
-    margin-left: 375px;
+    margin-left: 379px;
     margin-top: -100px;
     text-align: center;
 }

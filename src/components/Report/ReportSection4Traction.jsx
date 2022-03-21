@@ -75,7 +75,7 @@ function ReportSection4Traction () {
                         </div>
                         <div className="growth">
 
-                        <h2 className="section4ProgressHeader">Progress Indicators:</h2>
+                        <h3 className="section4ProgressHeader">Progress Indicators:</h3>
                             
                         <ul>
                             {progressIndicators?.map(use => (
@@ -84,18 +84,18 @@ function ReportSection4Traction () {
                         </ul>
                         </div>
                         <div className="indicatorDetails">
-                        <h2>Indicator Details:</h2>
+                        <h3>Indicator Details:</h3>
 
                         <ul>
                             <li>
-                                <h3>
+                                <h5>
                                     {enterpriseAnswers.progressExplanationOne4}
-                                </h3>
+                                </h5>
                             </li>
                             <li>
-                                <h3>
+                                <h5>
                                     {enterpriseAnswers.progressExplanationTwo4}
-                                </h3>
+                                </h5>
                             </li>
                         </ul>
                         </div>
