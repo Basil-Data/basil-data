@@ -115,104 +115,111 @@ function SectionFourTraction() {
           you are able to provide more detail about the numbers behind
           opportunity for growth and recent customer development.
         </p>
-        <h5>What stage of development is your PRODUCT in?</h5>
-        <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue={0}
-          value={section4Enterprise.developmentStageId}
-          name="radio-buttons-group"
-          className="centerHelp"
-          row
-          onChange={(event) =>
-            dispatch({
-              type: "SET_SECTION4_ENTERPRISE",
-              payload: { developmentStageId: event.target.value },
-            })
-          }
-        >
-          {section4.results1?.map((development) => (
-            <FormControlLabel
-              key={development.id}
-              value={development.id}
-              control={<Radio />}
-              label={development.stage}
-              className="centerHelp"
-            />
-          ))}
-        </RadioGroup>
-        <h5>What stage of investment is your ORGANIZATION in?</h5>
-
-        <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue=""
-          value={section4Enterprise.investmentStageId}
-          row
-          name="radio-buttons-group"
-          className="centerHelp"
-        >
-          {section4.results2?.map((investment) => (
-            <FormControlLabel
-              key={investment.id}
-              value={investment.id}
-              control={<Radio />}
-              label={investment.stage}
-              onChange={(evt) =>
-                dispatch({
-                  type: "SET_SECTION4_ENTERPRISE",
-                  payload: {
-                    investmentStageId: evt.target.value,
-                  },
-                })
-              }
-              className="centerHelp"
-            />
-          ))}
-        </RadioGroup>
-
-        <h5>How much have you received in funding to date?</h5>
-
-        <TextField
-          id="outlined-basic"
-          label="Amount Funded $"
-          variant="outlined"
-          type="number"
-          required
-          InputLabelProps={{ shrink: true }}
-          value={section4Enterprise.fundingReceived4}
-          onChange={(evt) =>
-            dispatch({
-              type: "SET_SECTION4_ENTERPRISE",
-              payload: {
-                fundingReceived4: evt.target.value,
-              },
-            })
-          }
-        />
-
-        <h5>
-          What indicators other than sales show your progress since inception?
-        </h5>
-        <Box>
-          <FormControl className="questionnaireForm centerHelp">
-            {section4.results3?.map((use) => (
+        <Box sx={{marginTop: "50px"}}>
+          <h4>What stage of development is your PRODUCT in?</h4>
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue={0}
+            value={section4Enterprise.developmentStageId}
+            name="radio-buttons-group"
+            column
+            sx={{marginLeft: "175px"}}
+            onChange={(event) =>
+              dispatch({
+                type: "SET_SECTION4_ENTERPRISE",
+                payload: { developmentStageId: event.target.value },
+              })
+            }
+          >
+            {section4.results1?.map((development) => (
               <FormControlLabel
-                key={use.id}
-                disabled={
-                  !progressIndicator.includes(use.id) &&
-                  progressIndicator.length > 2
-                }
-                checked={progressIndicator.includes(use.id)}
-                control={<Checkbox value={use.id} onChange={handleProgress} />}
-                label={use.indicator}
+                key={development.id}
+                value={development.id}
+                control={<Radio />}
+                label={development.stage}
               />
             ))}
-          </FormControl>
+          </RadioGroup>
+        </Box>
+        <Box sx={{marginTop: "50px"}}>
+          <h4>What stage of investment is your ORGANIZATION in?</h4>
+
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue=""
+            value={section4Enterprise.investmentStageId}
+            column
+            sx={{marginLeft: "175px"}}
+            name="radio-buttons-group"
+          >
+            {section4.results2?.map((investment) => (
+              <FormControlLabel
+                key={investment.id}
+                value={investment.id}
+                control={<Radio />}
+                label={investment.stage}
+                onChange={(evt) =>
+                  dispatch({
+                    type: "SET_SECTION4_ENTERPRISE",
+                    payload: {
+                      investmentStageId: evt.target.value,
+                    },
+                  })
+                }
+              />
+            ))}
+          </RadioGroup>
         </Box>
 
-        <h5>
+        <Box sx={{marginTop: "50px"}}>
+          <h4>How much have you received in funding to date?</h4>
+
+          <TextField
+            id="outlined-basic"
+            label="Amount Funded $"
+            variant="outlined"
+            type="number"
+            required
+            InputLabelProps={{ shrink: true }}
+            value={section4Enterprise.fundingReceived4}
+            onChange={(evt) =>
+              dispatch({
+                type: "SET_SECTION4_ENTERPRISE",
+                payload: {
+                  fundingReceived4: evt.target.value,
+                },
+              })
+            }
+          />
+        </Box>
+
+        <Box sx={{marginTop: "50px"}}>
+          <h4>
+            What indicators other than sales show your progress since inception?
+          </h4>
+          <Box sx={{marginLeft: "-100px"}}>
+            <FormControl className="questionnaireForm">
+              {section4.results3?.map((use) => (
+                <FormControlLabel
+                  key={use.id}
+                  disabled={
+                    !progressIndicator.includes(use.id) &&
+                    progressIndicator.length > 2
+                  }
+                  checked={progressIndicator.includes(use.id)}
+                  control={<Checkbox value={use.id} onChange={handleProgress} />}
+                  label={use.indicator}
+                />
+              ))}
+            </FormControl>
+          </Box>
+        </Box>
+
+        <Box>
+        <h4>
           Tell us more about the progress shown from each of these indicators
           and/or any other unique traction you may have gained.
-        </h5>
+        </h4>
 
         <Grid
           container
@@ -237,24 +244,27 @@ function SectionFourTraction() {
             />
           </Box>
         </Grid>
+        </Box>
 
-        <h5>What is your customer growth rate over the last 6 months?</h5>
+        <Box>
+          <h4>What is your customer growth rate over the last 6 months?</h4>
 
-        <h6>Please provide a percentage</h6>
+          <h5>Please provide a percentage</h5>
 
-        <TextField
-          id="outlined-basic"
-          label="Growth Percentage"
-          variant="outlined"
-          value={section4Enterprise.customerGrowth4}
-          InputLabelProps={{shrink: true,}}
-          onChange={(evt) =>
-            dispatch({
-              type: "SET_SECTION4_ENTERPRISE",
-              payload: { customerGrowth4: evt.target.value },
-            })
-          }
-        />
+          <TextField
+            id="outlined-basic"
+            label="Growth Percentage"
+            variant="outlined"
+            value={section4Enterprise.customerGrowth4}
+            InputLabelProps={{shrink: true,}}
+            onChange={(evt) =>
+              dispatch({
+                type: "SET_SECTION4_ENTERPRISE",
+                payload: { customerGrowth4: evt.target.value },
+              })
+            }
+          />
+        </Box>
 
         <h5>Are you generating revenue?</h5>
 

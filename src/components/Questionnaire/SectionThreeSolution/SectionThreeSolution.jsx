@@ -256,7 +256,7 @@ function SectionThreeSolution () {
                                 return(
                                     <Box>
                                         <Table>
-                                            <TableRow>
+                                            <TableRow sx={{display: "table"}}>
                                                 <TableCell sx={{border: "none"}}>
                                                     <Checkbox 
                                                         key={point.id}
