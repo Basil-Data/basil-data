@@ -99,6 +99,7 @@ function SectionOneStory () {
     }
 
     return (
+        <>
         <Box className="fullPage">
             <QuestionnaireNav/>
             <Paper className="formPaper" elevation={3}>
@@ -205,7 +206,6 @@ function SectionOneStory () {
                 </Box>
                 <Box sx={{marginTop: "50px"}}>
                     <h4>What percentage of your founding team is BIPOC (Black, Indigenous, Person of Color)?</h4>
-                >
                     <TextField 
                         id="outlined-basic" 
                         label="Percentage BIPOC" 
@@ -299,10 +299,7 @@ function SectionOneStory () {
                     </button>
                 </Link>
             </form>
-            </Paper>
-        </Box>
-            </Link>
-        </form>
+          
 
         <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
@@ -314,8 +311,8 @@ function SectionOneStory () {
             value={section1Enterprise.admin1}
             callback={handleAdminDispatch}
         />
-
-        </Paper>
+          </Paper>
+        </Box>
         </>
     )
 };

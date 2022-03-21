@@ -132,6 +132,7 @@ function SectionSixRisksAndHurdles () {
 
 
     return (
+        <>
         <Box className="fullPage">
             <QuestionnaireNav/>
             <Paper className="formPaper" elevation={3}>
@@ -331,8 +332,7 @@ function SectionSixRisksAndHurdles () {
                     <Link to="/next-steps"><button className="btn">Next</button></Link>
 
                 </form>
-            </Paper>
-        </Box>
+            
 
         <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
@@ -344,6 +344,8 @@ function SectionSixRisksAndHurdles () {
             value={section6Enterprise.admin6}
             callback={handleAdminDispatch}
         />
+        </Paper>
+        </Box>
         </>
     )
 };

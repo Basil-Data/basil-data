@@ -117,6 +117,7 @@ function SectionTwoImpact() {
 
 
     return(
+        <>
         <Box className="fullPage">
             <QuestionnaireNav/>
             <Paper className="formPaper" elevation={3}>
@@ -267,10 +268,6 @@ function SectionTwoImpact() {
                         </Link>
                     </form>
                 </Box>
-            </Paper>
-        </Box>
-        <>
-       
 
             <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
@@ -278,12 +275,13 @@ function SectionTwoImpact() {
                 </Alert>
             </Snackbar>
 
-        </Box>
         <AdminInputBox
             value={section2Enterprise.admin2}
             callback={handleAdminDispatch}
         />
-        </Paper>
+            </Paper>
+        </Box>
+
         </>
     )
 }

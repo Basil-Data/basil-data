@@ -140,6 +140,7 @@ function SectionSevenNextSteps () {
 
 
     return (
+        <>
         <Box className="fullPage">
             <QuestionnaireNav/>
             <Paper className="formPaper" elevation={3}>
@@ -392,42 +393,6 @@ function SectionSevenNextSteps () {
                     <FormControlLabel labelPlacement="top" value="10" control={<Radio />} label="10" />
                 </RadioGroup>
 
-                <Link to="/risks-and-hurdles">
-                    <button 
-                        className="btn"
-                        onClick={(event) => onBack(event)}
-                    >
-                        Back
-                    </button>
-                </Link>
-                
-                <button 
-                    className="btn"
-                    onClick={(event) => handleSubmit(event)}
-                >
-                    Save
-                </button>
-
-                {/* 
-                    Below should link should change from story to 
-                    whatever comes after last step in questionnaire 
-                */}
-                <Link to="/story">
-                    <button 
-                        className="btn"
-                        onClick={(event) => onNext(event)}
-                    >
-                        Next
-                    </button>
-                </Link>
-
-            </form>
-        </Paper>
-    </Box>
-                ))}
-            </FormControl>
-        </Box>
-
         <h4>Matching Questions</h4>
         <p>In this last section we ask you questions to hopefully match you with potential 
             investors in the future as our platform develops!
@@ -540,6 +505,7 @@ function SectionSevenNextSteps () {
             <FormControlLabel labelPlacement="top" value="10" control={<Radio />} label="10" />
         </RadioGroup>
 
+
         <Link to="/risks-and-hurdles">
             <button 
                 className="btn"
@@ -568,8 +534,8 @@ function SectionSevenNextSteps () {
                 Next
             </button>
         </Link>
+        </form>
 
-    </form>
 
     {/* <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
@@ -581,8 +547,9 @@ function SectionSevenNextSteps () {
         value={section7Enterprise.admin7}
         callback={handleAdminDispatch}
     />
+        </Paper>
+    </Box>
 
-    </Paper>
     </>
     )
 };
