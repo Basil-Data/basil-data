@@ -478,18 +478,53 @@ hr.dotted {
     justify-content:flex-start ;
 }
 
-.checkPic {
-    width:45px;
-    position: absolute;
-    margin-left: -85px;
-    margin-top: -9px;
+.growth {
+    width: 300px;
+    display: inline-block;
+    margin-left: 50px;
 }
 
-.generatingRev {
-    margin-left: 10px;
-    margin-top: 76px;
-    padding-right: 30px;
+.indicatorDetails {
+    width:300px;
+    margin-top: -175px;
+    margin-left: 506px;
+    
 }
+
+.userGrowth {
+    width: 300px;
+    margin-left: 50px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.userGrowthHeader {
+    text-decoration: underline;
+}
+
+.revenueGrowth {
+    width: 450px;
+    margin-left: 375px;
+    margin-top: -100px;
+    text-align: center;
+}
+
+.fundingHeader {
+    text-align: center;
+}
+
+.investmentStage {
+    width: 392px;
+    text-align: center;
+}
+
+.fundingReceived {
+    width: 350px;
+    margin-top: -107px;
+    margin-left: 429px;
+    text-align: center;
+}
+
 
 
 /* Section Five CSS */

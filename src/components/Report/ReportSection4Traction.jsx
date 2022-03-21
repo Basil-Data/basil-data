@@ -10,6 +10,8 @@ function ReportSection4Traction () {
 
     const enterpriseAnswers = useSelector(store => store.reportReducer);
     const section4 = useSelector(store => store.section4Enterprise);
+    const progressIndicators = useSelector(store => store.reportReducer.progressIndicators);
+    const investmentStage = useSelector(store => store.reportReducer.investmentStage)
 
     useEffect(() => {
         dispatch({
@@ -69,8 +71,78 @@ function ReportSection4Traction () {
                     <div className="sectionFourParagraph">
                         <br />
                         <h2 className="section4ParagraphHeader">GROWTH</h2>
+                        <br />
+                        </div>
+                        <div className="growth">
 
-                    </div>
+                        <h2 className="section4ProgressHeader">Progress Indicators:</h2>
+                            
+                        <ul>
+                            {progressIndicators?.map(use => (
+                                <div><li><h3>{use}</h3></li></div>
+                            ))}
+                        </ul>
+                        </div>
+                        <div className="indicatorDetails">
+                        <h2>Indicator Details:</h2>
+
+                        <ul>
+                            <li>
+                                <h3>
+                                    {enterpriseAnswers.progressExplanationOne4}
+                                </h3>
+                            </li>
+                            <li>
+                                <h3>
+                                    {enterpriseAnswers.progressExplanationTwo4}
+                                </h3>
+                            </li>
+                        </ul>
+                        </div>
+
+                        <div className="userGrowth">
+                            <h2 className="userGrowthHeader">6-Month User Growth</h2>
+                            
+                            <h2>{enterpriseAnswers.customerGrowth4}%</h2>
+                        </div>
+
+                        <div className="revenueGrowth">
+                            <h2 className="userGrowthHeader">
+                                6-Month Revenue Growth
+                            </h2>
+
+                            <h2>{enterpriseAnswers.averageGrowth4}%</h2>
+                        </div>
+
+                        <div>
+                            <hr className="dotted"/>
+
+                            <h2 className="fundingHeader">
+                                FUNDING
+                            </h2>
+
+                            <div className="investmentStage">
+                                <h3>
+                                    What stage of investment is your organization in?
+                                </h3>
+
+                                <h3 className="fundingHeader">
+                                    {investmentStage}
+                                </h3>
+                            </div>
+
+                            <div className="fundingReceived">
+                                <h3>
+                                    How much have you received in funding to date?
+                                </h3>
+
+                                <h3 className="fundingHeader">
+                                    $ {enterpriseAnswers.fundingReceived4}
+                                </h3>
+                            </div>
+                        </div>
+                        
+                    
 
                     
                 </div>
