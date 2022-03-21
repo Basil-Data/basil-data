@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import React from 'react';
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
