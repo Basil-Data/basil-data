@@ -137,11 +137,11 @@ function SectionFourTraction() {
       <Paper className="formPaper" elevation={3}>
       <form className="questionnaireForm">
         <h1>Section 4 - Traction</h1>
-        <p>
+        <h3>
           Tell us about the momentum behind your organization! In this section
           you are able to provide more detail about the numbers behind
           opportunity for growth and recent customer development.
-        </p>
+        </h3>
         <Box sx={{marginTop: "50px"}}>
           <h4>What stage of development is your PRODUCT in?</h4>
           <RadioGroup
@@ -196,31 +196,34 @@ function SectionFourTraction() {
           </RadioGroup>
           </Box>
 
-        <h5>How much have you received in funding to date?</h5>
+        <Box sx={{marginTop: "50px"}}>
+          <h4>How much have you received in funding to date?</h4>
 
-        <TextField
-          id="outlined-basic"
-          label="Amount Funded $"
-          variant="outlined"
-          type="number"
-          required
-          InputLabelProps={{ shrink: true }}
-          value={section4Enterprise.fundingReceived4}
-          onChange={(evt) =>
-            dispatch({
-              type: "SET_SECTION4_ENTERPRISE",
-              payload: {
-                fundingReceived4: evt.target.value,
-              },
-            })
-          }
-        />
+          <TextField
+            id="outlined-basic"
+            label="Amount Funded $"
+            variant="outlined"
+            type="number"
+            required
+            InputLabelProps={{ shrink: true }}
+            value={section4Enterprise.fundingReceived4}
+            onChange={(evt) =>
+              dispatch({
+                type: "SET_SECTION4_ENTERPRISE",
+                payload: {
+                  fundingReceived4: evt.target.value,
+                },
+              })
+            }
+          />
+        </Box>
 
-        <h5>
+        <Box sx={{marginTop: "50px"}}>
+        <h4>
           What indicators other than sales show your progress since inception?
-        </h5>
-        <Box>
-          <FormControl className="questionnaireForm centerHelp">
+        </h4>
+        <Box sx={{marginLeft: "-95px"}}>
+          <FormControl>
             {section4.results3?.map((use) => (
               <FormControlLabel
                 key={use.id}
@@ -233,6 +236,7 @@ function SectionFourTraction() {
               />
             ))}
             </FormControl>
+        </Box>
         </Box>
 
         <Box sx={{marginTop: "50px"}}>
@@ -261,7 +265,7 @@ function SectionFourTraction() {
           <h4>
             What indicators other than sales show your progress since inception?
           </h4>
-          <Box sx={{marginLeft: "-100px"}}>
+          <Box sx={{marginLeft: "-95px"}}>
             <FormControl className="questionnaireForm">
               {section4.results3?.map((use) => (
                 <FormControlLabel
@@ -279,7 +283,7 @@ function SectionFourTraction() {
           </Box>
         </Box>
 
-        <Box>
+        <Box sx={{marginTop: "50px"}}>
         <h4>
           Tell us more about the progress shown from each of these indicators
           and/or any other unique traction you may have gained.
@@ -349,7 +353,7 @@ function SectionFourTraction() {
         </Grid>
         </Box>
 
-        <Box>
+        <Box sx={{marginTop: "50px"}}>
           <h4>What is your customer growth rate over the last 6 months?</h4>
 
           <h5>Please provide a percentage</h5>
@@ -371,190 +375,205 @@ function SectionFourTraction() {
 
    
 
-        <h5>Are you generating revenue?</h5>
+        <Box sx={{marginTop: "50px"}}>
+          <h4>Are you generating revenue?</h4>
 
-        <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue=''
-          row
-          name="radio-buttons-group"
-          className="centerHelp"
-          value={section4Enterprise.generatingRevenue4}
-          onClick={(evt) => {
-            dispatch({
-              type: "SET_SECTION4_ENTERPRISE",
-              payload: { generatingRevenue4: evt.target.value },
-            });
-          }}
-        >
-          <FormControlLabel
-            labelPlacement="top"
-            control={<Radio />}
-            label="Yes"
-            value='true'
-          />
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            defaultValue=''
+            column
+            sx={{marginLeft: "250px"}}
+            name="radio-buttons-group"
+            className="centerHelp"
+            value={section4Enterprise.generatingRevenue4}
+            onClick={(evt) => {
+              dispatch({
+                type: "SET_SECTION4_ENTERPRISE",
+                payload: { generatingRevenue4: evt.target.value },
+              });
+            }}
+          >
+            <FormControlLabel
+              labelPlacement="end"
+              control={<Radio />}
+              label="Yes"
+              value='true'
+            />
 
-          <FormControlLabel
-            labelPlacement="top"
-            control={<Radio />}
-            label="No"
-            value='false'
-          />
-        </RadioGroup>
+            <FormControlLabel
+              labelPlacement="end"
+              control={<Radio />}
+              label="No"
+              value='false'
+            />
+          </RadioGroup>
+        </Box>
         {/* Questions below are generated if the user chooses yes. */}
         {section4Enterprise.generatingRevenue4 === 'true' && (
           <>
-            <h5>
-              What is your average growth in monthly revenue over the past 6
-              months?
-            </h5>
+            <Box sx={{marginTop: "50px"}}>
+              <h4>
+                What is your average growth in monthly revenue over the past 6
+                months?
+              </h4>
 
-            <h6>Please provide a percentage</h6>
+              <h5>Please provide a percentage</h5>
 
-            <TextField
-              id="outlined-basic"
-              label="Percentage"
-              variant="outlined"
-              value={section4Enterprise.averageGrowth4}
-              type="number"
-              required
-              onChange={(evt) =>
-                dispatch({
-                  type: "SET_SECTION4_ENTERPRISE",
-                  payload: {
-                    averageGrowth4: evt.target.value,
-                  },
-                })
-              }
-            />
-
-            <h5>Are you making a profit?</h5>
-
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue=""
-              row
-              name="radio-buttons-group"
-              className="centerHelp"
-              value={section4Enterprise.makingProfit4}
-              onChange={(evt) => {
-                dispatch({
-                  type: "SET_SECTION4_ENTERPRISE",
-                  payload: { makingProfit4: evt.target.value },
-                });
-              }}
-            >
-              <FormControlLabel
-                labelPlacement="top"
-                control={<Radio />}
-                label="Yes"
-                value="true"
+              <TextField
+                id="outlined-basic"
+                label="Percentage"
+                variant="outlined"
+                value={section4Enterprise.averageGrowth4}
+                type="number"
+                required
+                onChange={(evt) =>
+                  dispatch({
+                    type: "SET_SECTION4_ENTERPRISE",
+                    payload: {
+                      averageGrowth4: evt.target.value,
+                    },
+                  })
+                }
               />
+            </Box>
 
-              <FormControlLabel
-                labelPlacement="top"
-                control={<Radio />}
-                label="No"
-                value="false"
+            <Box sx={{marginTop: "50px"}}>
+              <h4>Are you making a profit?</h4>
+
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue=""
+                row
+                name="radio-buttons-group"
+                className="centerHelp"
+                value={section4Enterprise.makingProfit4}
+                onChange={(evt) => {
+                  dispatch({
+                    type: "SET_SECTION4_ENTERPRISE",
+                    payload: { makingProfit4: evt.target.value },
+                  });
+                }}
+              >
+                  <FormControlLabel
+                    labelPlacement="top"
+                    control={<Radio />}
+                    label="Yes"
+                    value="true"
+                  />
+
+                  <FormControlLabel
+                    labelPlacement="top"
+                    control={<Radio />}
+                    label="No"
+                    value="false"
+                  />
+              </RadioGroup>
+            </Box>
+
+            <Box sx={{marginTop: "50px"}}>
+              <h4>If yes, what is your net profit margin (%)?</h4>
+
+              <h5>(Total Revenue - Total Costs)/ Total Revenue</h5>
+
+              <TextField
+                id="outlined-basic"
+                label="Net Profit Margin %"
+                variant="outlined"
+                value={section4Enterprise.netProfitMargin4}
+                onChange={(evt) =>
+                  dispatch({
+                    type: "SET_SECTION4_ENTERPRISE",
+                    payload: {
+                      netProfitMargin4: evt.target.value,
+                    },
+                  })
+                }
               />
-            </RadioGroup>
+            </Box>
 
-            <h5>If yes, what is your net profit margin (%)?</h5>
+            <Box sx={{marginTop: "50px"}}>
+              <h4>Customer Acquisition Cost (CAC)</h4>
 
-            <h6>(Total Revenue - Total Costs)/ Total Revenue</h6>
+              <h5>
+                In this brief section we want to gain more insight into the
+                expenses associated with acquiring new customers in a given
+                sales/marketing cycle. Please provide answers to the best of your
+                ability.
+              </h5>
 
-            <TextField
-              id="outlined-basic"
-              label="Net Profit Margin %"
-              variant="outlined"
-              value={section4Enterprise.netProfitMargin4}
-              onChange={(evt) =>
-                dispatch({
-                  type: "SET_SECTION4_ENTERPRISE",
-                  payload: {
-                    netProfitMargin4: evt.target.value,
-                  },
-                })
-              }
-            />
+              <h4>
+                What is your most recent Customer Acquisition Cost? (dollars)
+              </h4>
 
-            <h5>Customer Acquisition Cost (CAC)</h5>
+              <h5>
+                If known, provide below. If unknown, answer "N/A" and proceed to
+                answer the further questions.
+              </h5>
 
-            <h6>
-              In this brief section we want to gain more insight into the
-              expenses associated with acquiring new customers in a given
-              sales/marketing cycle. Please provide answers to the best of your
-              ability.
-            </h6>
+              <TextField
+                id="outlined-basic"
+                label="CAC $"
+                variant="outlined"
+                value={section4Enterprise.customerAcquisitionCost4}
+                onChange={(evt) =>
+                  dispatch({
+                    type: "SET_SECTION4_ENTERPRISE",
+                    payload: {
+                      customerAcquisitionCost4: evt.target.value,
+                    },
+                  })
+                }
+              />
+            </Box>
 
-            <h5>
-              What is your most recent Customer Acquisition Cost? (dollars)
-            </h5>
+            <Box sx={{marginTop: "50px"}}>
+              <h4>
+                What are your total marketing expenses during one sales/marketing
+                cycle? (in dollars)
+              </h4>
 
-            <h6>
-              If known, provide below. If unknown, answer "N/A" and proceed to
-              answer the further questions.
-            </h6>
+              <h5>
+                This includes campaigns, marketing salary expenses, overhead
+                expenses, etc.
+              </h5>
 
-            <TextField
-              id="outlined-basic"
-              label="CAC $"
-              variant="outlined"
-              value={section4Enterprise.customerAcquisitionCost4}
-              onChange={(evt) =>
-                dispatch({
-                  type: "SET_SECTION4_ENTERPRISE",
-                  payload: {
-                    customerAcquisitionCost4: evt.target.value,
-                  },
-                })
-              }
-            />
+              <TextField
+                id="outlined-basic"
+                label="Marketing Expenses"
+                variant="outlined"
+                value={section4Enterprise.marketingExpenses4}
+                onChange={(evt) =>
+                  dispatch({
+                    type: "SET_SECTION4_ENTERPRISE",
+                    payload: {
+                      marketingExpenses4: Number(evt.target.value),
+                    },
+                  })
+                }
+              />
+            </Box>
 
-            <h5>
-              What are your total marketing expenses during one sales/marketing
-              cycle? (in dollars)
-            </h5>
+            <Box sx={{marginTop: "50px"}}>
+              <h4>
+                How many new customers have you acquired in your most recent
+                sales/marketing cycle?
+              </h4>
 
-            <h6>
-              This includes campaigns, marketing salary expenses, overhead
-              expenses, etc.
-            </h6>
-
-            <TextField
-              id="outlined-basic"
-              label="Marketing Expenses"
-              variant="outlined"
-              value={section4Enterprise.marketingExpenses4}
-              onChange={(evt) =>
-                dispatch({
-                  type: "SET_SECTION4_ENTERPRISE",
-                  payload: {
-                    marketingExpenses4: Number(evt.target.value),
-                  },
-                })
-              }
-            />
-
-            <h5>
-              How many new customers have you acquired in your most recent
-              sales/marketing cycle?
-            </h5>
-
-            <TextField
-              id="outlined-basic"
-              label="New Customers"
-              variant="outlined"
-              value={section4Enterprise.newCustomers4}
-              onChange={(evt) =>
-                dispatch({
-                  type: "SET_SECTION4_ENTERPRISE",
-                  payload: {
-                    newCustomers4: evt.target.value,
-                  },
-                })
-              }
-            />
+              <TextField
+                id="outlined-basic"
+                label="New Customers"
+                variant="outlined"
+                value={section4Enterprise.newCustomers4}
+                onChange={(evt) =>
+                  dispatch({
+                    type: "SET_SECTION4_ENTERPRISE",
+                    payload: {
+                      newCustomers4: evt.target.value,
+                    },
+                  })
+                }
+              />
+            </Box>
           </>
         )}
         <br />

@@ -126,13 +126,13 @@ function SectionTwoImpact() {
                         <h1><b>Section 2 - Impact</b></h1>
                         <p className="definingImpact">Defining your Impact...</p>
                         <br></br>
-                        <p>
+                        <h3>
                             This section includes questions surrounding the social, environmental or economic 
                             impact your organization is trying to achieve. Answers should be thorough and 
                             thoughtful as this is a very important section of your report. 
                             Being able to communicate your impact opportunity and results in a way that 
                             external users can understand is of utmost importance!
-                        </p>
+                        </h3>
                         <Box sx={{marginTop: "50px"}}>
                             <p>What is the social / environmental problem you are trying to solve?</p>
                             <TextField
