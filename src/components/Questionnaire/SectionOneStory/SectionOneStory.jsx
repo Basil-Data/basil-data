@@ -163,6 +163,9 @@ function SectionOneStory () {
                 </Box>
             </Grid>
             <h5>How well do you understand the problem?</h5>
+            <p>One meaning you are just getting started, and 10 meaning you are very experienced
+                and can clearly link the solution to the problem.
+            </p>
                 <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
                     value={Number(section1Enterprise.understandProblem1)}
@@ -239,6 +242,8 @@ function SectionOneStory () {
                 </FormControl>
             </Box>
             <h5>How would you introduce your organization to a potential investor in a paragraph?</h5>
+            <p>Things to include: Brief description of solution, motivation for solving the problem, 
+                add some color! It is important to approach this question as a first Impression</p>
             <Grid
                 container
                 spacing={0}
