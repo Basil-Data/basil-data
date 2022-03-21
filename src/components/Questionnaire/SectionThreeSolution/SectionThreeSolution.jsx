@@ -152,9 +152,9 @@ function SectionThreeSolution () {
             <QuestionnaireNav />
             <Paper className="formPaper" elevation={3}>
                 <h1 className='questionnaireForm'>Section 3 - Solution</h1>
-                <p className='questionnaireForm'>In this section we ask for more detail regarding your business
+                <h3 className='questionnaireForm'>In this section we ask for more detail regarding your business
                 offering and how it can help potential customers.
-                </p>
+                </h3>
                 <form className='questionnaireForm'>
                     <Box sx={{marginTop: "50px"}}>
                         <h4>What sector do you operate in?</h4>
