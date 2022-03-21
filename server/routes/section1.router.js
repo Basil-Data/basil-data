@@ -66,7 +66,7 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
     const results = {
         competitiveAdvantagesId: Array.isArray(competitiveAdvantagesId.rows[0].array_agg) ? competitiveAdvantagesId.rows[0].array_agg : [],
         ...answers.rows[0]
-    }
+    };
 
     res.send(results);
 });
