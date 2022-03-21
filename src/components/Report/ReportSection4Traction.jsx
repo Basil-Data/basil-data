@@ -10,6 +10,8 @@ function ReportSection4Traction () {
 
     const enterpriseAnswers = useSelector(store => store.reportReducer);
     const section4 = useSelector(store => store.section4Enterprise);
+    const progressIndicators = useSelector(store => store.reportReducer.progressIndicators);
+    const investmentStage = useSelector(store => store.reportReducer.investmentStage)
 
     useEffect(() => {
         dispatch({
@@ -68,22 +70,79 @@ function ReportSection4Traction () {
                 <div className="sectionColor sectionFourColor">
                     <div className="sectionFourParagraph">
                         <br />
-                        <h2 className="section4ParagraphHeader">INCOME</h2>
+                        <h2 className="section4ParagraphHeader">GROWTH</h2>
                         <br />
-                        <h3 className="generatingRev">{enterpriseAnswers.generatingRevenue4 === 'true' && 
-                            <img className="checkPic" src="/images/DevelopmentStage/incomeCheck.png" /> }
-                            Are you generating revenue?
-                        </h3>
-                        <div>
-                            <h2 className="sectionFourParagraphHeader">
-                                USER GROWTH
+                        </div>
+                        <div className="growth">
+
+                        <h3 className="section4ProgressHeader">Progress Indicators:</h3>
+                            
+                        <ul>
+                            {progressIndicators?.map(use => (
+                                <div><li><h3>{use}</h3></li></div>
+                            ))}
+                        </ul>
+                        </div>
+                        <div className="indicatorDetails">
+                        <h3>Indicator Details:</h3>
+
+                        <ul>
+                            <li>
+                                <h5>
+                                    {enterpriseAnswers.progressExplanationOne4}
+                                </h5>
+                            </li>
+                            <li>
+                                <h5>
+                                    {enterpriseAnswers.progressExplanationTwo4}
+                                </h5>
+                            </li>
+                        </ul>
+                        </div>
+
+                        <div className="userGrowth">
+                            <h2 className="userGrowthHeader">6-Month User Growth</h2>
+                            
+                            <h2>{enterpriseAnswers.customerGrowth4}%</h2>
+                        </div>
+
+                        <div className="revenueGrowth">
+                            <h2 className="userGrowthHeader">
+                                6-Month Revenue Growth
                             </h2>
 
-                            
-                            <h2 className="sectionFourParagraphHeader">UP {enterpriseAnswers.customerGrowth4}%</h2>
-                            <p className="sectionFourParagraphHeader">Over the past 6 months</p>
+                            <h2>{enterpriseAnswers.averageGrowth4}%</h2>
                         </div>
-                    </div>
+
+                        <div>
+                            <hr className="dotted"/>
+
+                            <h2 className="fundingHeader">
+                                FUNDING
+                            </h2>
+
+                            <div className="investmentStage">
+                                <h3>
+                                    What stage of investment is your organization in?
+                                </h3>
+
+                                <h3 className="fundingHeader">
+                                    {investmentStage}
+                                </h3>
+                            </div>
+
+                            <div className="fundingReceived">
+                                <h3>
+                                    How much have you received in funding to date?
+                                </h3>
+
+                                <h3 className="fundingHeader">
+                                    $ {enterpriseAnswers.fundingReceived4}
+                                </h3>
+                            </div>
+                        </div>
+                        
+                    
 
                     
                 </div>

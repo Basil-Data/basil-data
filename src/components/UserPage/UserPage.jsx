@@ -9,7 +9,7 @@ function UserPage() {
   const dispatch = useDispatch();
 
   useEffect(() => { 
-    dispatch({ type: 'CREATE_ANSWER'})
+    // dispatch({ type: 'CREATE_ANSWER'})
   }, []);
 
   // this component doesn't do much to start, just renders some user reducer info to the DOM

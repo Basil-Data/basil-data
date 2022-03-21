@@ -80,21 +80,18 @@ function ClimateAction() {
 
     return(
         <Box className="questionnaireForm">
-                <img src="images/SDGs/E-WEB-Goal-13.png" width="200px" height="200px"/>
-                <h1><b>SDG - Climate Action</b></h1>
+            <img src="images/SDGs/E-WEB-Goal-13.png" width="200px" height="200px"/>
+            <h1><b>SDG - Climate Action</b></h1>
+            <Box sx={{marginTop: "50px"}}>
                 <p>What Indicators do you use/intend to use to track change?</p>
-                <FormControl
-                    sx={{
-                        width: "700px",
-                    }}
-                >
+                <FormControl sx={{marginLeft: "14px"}}>
                     {indicators?.map(indicator => {
                         if(indicator.sdgId === 13) {
                             return (
                                 <Box>
                                     <Table>
                                         <TableRow sx={{display: "table"}}>
-                                            <TableCell>
+                                            <TableCell sx={{border: "none"}}>
                                                 <Checkbox
                                                     key={indicator.id} 
                                                     checked={selectedIndicator.includes(indicator.id)}
@@ -102,8 +99,8 @@ function ClimateAction() {
                                                     defaultValue={0}
                                                     onChange={handleIndicator}
                                                 />
-                                            </TableCell>
-                                            <TableCell>
+                                            </TableCell >
+                                            <TableCell sx={{border: "none"}}>
                                                 {indicator.indicator}
                                             </TableCell>
                                         </TableRow>
@@ -113,6 +110,8 @@ function ClimateAction() {
                         }
                     })}
                 </FormControl>
+            </Box>
+            <Box sx={{marginTop: "50px"}}>
                 <p> Please elaborate on the progress shown in the indicators that you use
                 </p>
                 <TextField
@@ -123,15 +122,17 @@ function ClimateAction() {
                     placeholder="Please Elaborate"
                     multiline rows={5}
                     id="outlined-basic" 
-                    sx={{width: 600}}
+                    sx={{width: 600, marginLeft: "-37px"}}
                     value={section2Enterprise.elaborateOnIndicators2 || ''}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',
                         payload: {elaborateOnIndicators2: event.target.value}
                     })}
                 ></TextField>
+            </Box>
+            <Box sx={{marginTop: "50px"}}>
                 <p>How do you segment your stakeholders?</p>
-                <FormControl>
+                <FormControl sx={{marginLeft: "-90px"}}>
                     {stakeholderSegments?.map(segment => {
                         return(
                             <FormControlLabel 
@@ -146,6 +147,8 @@ function ClimateAction() {
                         )
                     })}
                 </FormControl>
+            </Box>
+            <Box sx={{marginTop: "50px"}}>
                 <p> Where specifically is your current target region / environment?</p>
                 <p>In what regions, states or cities are you focusing your efforts today?</p>
                 <TextField
@@ -156,13 +159,15 @@ function ClimateAction() {
                     placeholder="Location"
                     multiline rows={5}
                     id="outlined-basic" 
-                    sx={{width: 600}}
+                    sx={{width: 600, marginLeft: "-37px"}}
                     value={section2Enterprise.focusedEfforts2 || ''}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',
                         payload: { focusedEfforts2: event.target.value }
                     })}
                 ></TextField>
+            </Box>
+            <Box sx={{marginTop: "50px"}}>
                 <p> What are the specific changes you would like to see for your region / environment?
                 </p>
                 <TextField
@@ -174,16 +179,18 @@ function ClimateAction() {
                     placeholder="Specific Changes"
                     multiline rows={5}
                     id="outlined-basic" 
-                    sx={{width: 600}}
+                    sx={{width: 600, marginLeft: "-37px"}}
                     value={section2Enterprise.specificChanges2 || ''}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',
                         payload: { specificChanges2: event.target.value }
                     })}
                 ></TextField>
+            </Box>
+            <Box sx={{marginTop: "50px"}}>
                 <p>Have you measured your outcomes?</p>
                 <RadioGroup 
-                    className="buttonCenter"
+                    sx={{marginLeft: "120px"}}
                     value={section2Enterprise.measuredOutcome2}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -209,9 +216,11 @@ function ClimateAction() {
                         label="Sometimes - not consistently"
                     />
                 </RadioGroup>
+            </Box>
+            <Box sx={{marginTop: "50px"}}>
                 <p>If applicable, please select any secondary Sustainable Development Goals that align with your organization's mission. </p>
                 <RadioGroup 
-                    className="buttonCenter"
+                    sx={{marginLeft: "120px"}}
                     value={section2Enterprise.secondarySDG2}
                     onChange={(event) => dispatch({
                         type: 'SET_SECTION_TWO_ENTERPRISE',
@@ -228,6 +237,7 @@ function ClimateAction() {
                         />
                         ))}
                 </RadioGroup>
+            </Box>  
         </Box>
 
     )

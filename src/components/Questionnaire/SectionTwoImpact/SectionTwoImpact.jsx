@@ -118,150 +118,156 @@ function SectionTwoImpact() {
 
     return(
         <>
-        <QuestionnaireNav/>
-        <Paper className="formPaper" elevation={3}>
-        <Box className="questionnaireForm">
-            <form>
-                <h1><b>Section 2 - Impact</b></h1>
-                <p className="definingImpact">Defining your Impact...</p>
-                <br></br>
-                <p>
-                    This section includes questions surrounding the social, environmental or economic 
-                    impact your organization is trying to achieve. <br></br>Answers should be thorough and 
-                    thoughtful as this is a very important section of your report.<br></br> 
-                    Being able to communicate your impact opportunity and results in a way that 
-                    external users can understand is of utmost importance!
-                </p>
-                <br></br>
-                <p>What is the social / environmental problem you are trying to solve?</p>
-                <TextField
-                    className="socialEnviroProblem"
-                    label="Social/Environmental Problem"
-                    InputLabelProps={{ shrink: true }}
-                    variant="outlined"
-                    type="text"
-                    placeholder="Social/Environmental Problem"
-                    multiline rows={5}
-                    id="outlined-basic" 
-                    sx={{width: 600}}
-                    value={section2Enterprise.problemBeingSolved2}
-                    onChange={(event) => dispatch({
-                    type: 'SET_SECTION_TWO_ENTERPRISE',
-                    payload: { problemBeingSolved2: event.target.value }
-                    })}
-                >
+        <Box className="fullPage">
+            <QuestionnaireNav/>
+            <Paper className="formPaper" elevation={3}>
+                <Box className="questionnaireForm">
+                    <form>
+                        <h1><b>Section 2 - Impact</b></h1>
+                        <p className="definingImpact">Defining your Impact...</p>
+                        <br></br>
+                        <h3>
+                            This section includes questions surrounding the social, environmental or economic 
+                            impact your organization is trying to achieve. Answers should be thorough and 
+                            thoughtful as this is a very important section of your report. 
+                            Being able to communicate your impact opportunity and results in a way that 
+                            external users can understand is of utmost importance!
+                        </h3>
+                        <Box sx={{marginTop: "50px"}}>
+                            <p>What is the social / environmental problem you are trying to solve?</p>
+                            <TextField
+                                className="socialEnviroProblem"
+                                label="Social/Environmental Problem"
+                                InputLabelProps={{ shrink: true }}
+                                variant="outlined"
+                                type="text"
+                                placeholder="Social/Environmental Problem"
+                                multiline rows={5}
+                                id="outlined-basic" 
+                                sx={{width: 600}}
+                                value={section2Enterprise.problemBeingSolved2}
+                                onChange={(event) => dispatch({
+                                type: 'SET_SECTION_TWO_ENTERPRISE',
+                                payload: { problemBeingSolved2: event.target.value }
+                                })}
+                            >
 
-                </TextField>
-                <br></br>
-                <p>What category best describes your IMPACT Sector?</p>
-                <FormControl>
-                    {impactSectors?.map(sector => {
-                        return(
-                            <FormControlLabel 
-                                key={sector.id}
-                                checked={selectedImpactSector.includes(sector.id)}
-                                value={sector.id}
-                                defaultValue={0}
-                                onChange={handleImpactSector}
-                                control={<Checkbox />} 
-                                label={sector.impactSector}
-                            />
-                        )
-                    })}
-                </FormControl>
-                <br></br>
-                <p>
-                    Please tell us about the economic, 
-                    environmental or social COST of the problem
-                    in your words (dollars lost, people effected, 
-                    loss of opportunity, etc.)
-                </p>
-                <TextField
-                    label="Cost of The Problem"
-                    InputLabelProps={{ shrink: true }}
-                    className="costOfProblem"
-                    variant="outlined"
-                    type="text"
-                    placeholder="COST of The Problem"
-                    multiline rows={5}
-                    id="outlined-basic" 
-                    sx={{width: 600}}
-                    value={section2Enterprise.costOfProblem2}
-                    onChange={(event) => dispatch({
-                    type: 'SET_SECTION_TWO_ENTERPRISE',
-                    payload: { costOfProblem2: event.target.value }
-                    })}
-                >
+                            </TextField>
+                        </Box>
+                        <Box sx={{marginTop: "50px"}}>
+                            <p>What category best describes your IMPACT Sector?</p>
+                            <FormControl sx={{marginLeft: "-160px"}}>
+                                {impactSectors?.map(sector => {
+                                    return(
+                                        <FormControlLabel 
+                                            key={sector.id}
+                                            checked={selectedImpactSector.includes(sector.id)}
+                                            value={sector.id}
+                                            defaultValue={0}
+                                            onChange={handleImpactSector}
+                                            control={<Checkbox />} 
+                                            label={sector.impactSector}
+                                        />
+                                    )
+                                })}
+                            </FormControl>
+                        </Box>
+                        <Box sx={{marginTop: "50px"}}>
+                            <p>
+                                Please tell us about the economic, 
+                                environmental or social COST of the problem
+                                in your words (dollars lost, people effected, 
+                                loss of opportunity, etc.)
+                            </p>
+                            <TextField
+                                label="Cost of The Problem"
+                                InputLabelProps={{ shrink: true }}
+                                className="costOfProblem"
+                                variant="outlined"
+                                type="text"
+                                placeholder="COST of The Problem"
+                                multiline rows={5}
+                                id="outlined-basic" 
+                                sx={{width: 600}}
+                                value={section2Enterprise.costOfProblem2}
+                                onChange={(event) => dispatch({
+                                type: 'SET_SECTION_TWO_ENTERPRISE',
+                                payload: { costOfProblem2: event.target.value }
+                                })}
+                            >
 
-                </TextField>
-                <br></br>
-                <p>How does your product or service help solve the 
-                    social or economic problem outlined in the problem 
-                    questions above?</p>
-                <TextField
-                    label="Solution"
-                    InputLabelProps={{ shrink: true }}
-                    className="solutionToProblem"
-                    variant="outlined"
-                    type="text"
-                    placeholder="Solution"
-                    multiline rows={5}
-                    id="outlined-basic" 
-                    sx={{width: 600}}
-                    value={section2Enterprise.howTheySolve2}
-                    onChange={(event) => dispatch({
-                    type: 'SET_SECTION_TWO_ENTERPRISE',
-                    payload: { howTheySolve2: event.target.value }
-                    })}
-                >
+                            </TextField>
+                        </Box>
+                        <Box sx={{marginTop: "50px"}}>
+                            <p>How does your product or service help solve the 
+                                social or economic problem outlined in the problem 
+                                questions above?</p>
+                            <TextField
+                                label="Solution"
+                                InputLabelProps={{ shrink: true }}
+                                className="solutionToProblem"
+                                variant="outlined"
+                                type="text"
+                                placeholder="Solution"
+                                multiline rows={5}
+                                id="outlined-basic" 
+                                sx={{width: 600}}
+                                value={section2Enterprise.howTheySolve2}
+                                onChange={(event) => dispatch({
+                                type: 'SET_SECTION_TWO_ENTERPRISE',
+                                payload: { howTheySolve2: event.target.value }
+                                })}
+                            >
 
-                </TextField>
-                <br></br>
-                <p>Describe the individual, community or 
-                    environment that benefits most from your 
-                    solution?</p>
-                <TextField
-                    label="Who Benefits?"
-                    InputLabelProps={{ shrink: true }}
-                    className="whoBenefits"
-                    variant="outlined"
-                    type="text"
-                    placeholder="Who Benefits"
-                    multiline rows={5}
-                    id="outlined-basic" 
-                    sx={{width: 600}}
-                    value={section2Enterprise.whoBenefits2}
-                    onChange={(event) => dispatch({
-                    type: 'SET_SECTION_TWO_ENTERPRISE',
-                    payload: { whoBenefits2: event.target.value }
-                    })}
-                >
-
-                </TextField>
-                <SectionTwoImpactOpportunity />
-                <Link to="/story">
-                    <button 
-                        className="btn"
-                        onClick={(event) => onBack(event)}
-                    >
-                        Back
-                    </button>
-                </Link>
-                <button 
-                    className="btn"
-                    onClick={(event) => handleSubmit(event)}
-                >
-                    Save
-                </button>
-                <Link to="/solution">
-                    <button 
-                    className="btn"
-                    onClick={(event) => onNext(event)}
-                    >
-                        Next
-                    </button>
-                </Link>
-            </form>
+                            </TextField>
+                        </Box>
+                        <Box sx={{marginTop: "50px"}}>
+                            <p>Describe the individual, community or 
+                                environment that benefits most from your 
+                                solution?</p>
+                            <TextField
+                                label="Who Benefits?"
+                                InputLabelProps={{ shrink: true }}
+                                className="whoBenefits"
+                                variant="outlined"
+                                type="text"
+                                placeholder="Who Benefits"
+                                multiline rows={5}
+                                id="outlined-basic" 
+                                sx={{width: 600}}
+                                value={section2Enterprise.whoBenefits2}
+                                onChange={(event) => dispatch({
+                                type: 'SET_SECTION_TWO_ENTERPRISE',
+                                payload: { whoBenefits2: event.target.value }
+                                })}
+                            >
+                            </TextField>
+                        </Box>
+                        <SectionTwoImpactOpportunity />
+                        <Link to="/story">
+                            <button 
+                                className="btn"
+                                onClick={(event) => onBack(event)}
+                            >
+                                Back
+                            </button>
+                        </Link>
+                        <button 
+                            className="btn"
+                            onClick={(event) => handleSubmit(event)}
+                        >
+                            Save
+                        </button>
+                        <Link to="/solution">
+                            <button 
+                            className="btn"
+                            onClick={(event) => onNext(event)}
+                            >
+                                Next
+                            </button>
+                        </Link>
+                    </form>
+                </Box>
 
             <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
@@ -269,12 +275,13 @@ function SectionTwoImpact() {
                 </Alert>
             </Snackbar>
 
-        </Box>
         <AdminInputBox
             value={section2Enterprise.admin2}
             callback={handleAdminDispatch}
         />
-        </Paper>
+            </Paper>
+        </Box>
+
         </>
     )
 }
