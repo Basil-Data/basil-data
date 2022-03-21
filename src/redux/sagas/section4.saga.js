@@ -11,8 +11,8 @@ function* getSectionFour () {
             payload: response.data
         })
     }
-    catch {
-        console.error('GET failed in section 4 saga');
+    catch (error) {
+        console.error('GET failed in section 4 saga', error);
     }
 };
 
