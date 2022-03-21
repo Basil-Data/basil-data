@@ -192,6 +192,38 @@ function SectionFourTraction() {
                       investmentStageId: evt.target.value,
                     },
                   })
+
+        <h5>How much have you received in funding to date?</h5>
+
+        <TextField
+          id="outlined-basic"
+          label="Amount Funded $"
+          variant="outlined"
+          type="number"
+          required
+          InputLabelProps={{ shrink: true }}
+          value={section4Enterprise.fundingReceived4}
+          onChange={(evt) =>
+            dispatch({
+              type: "SET_SECTION4_ENTERPRISE",
+              payload: {
+                fundingReceived4: evt.target.value,
+              },
+            })
+          }
+        />
+
+        <h5>
+          What indicators other than sales show your progress since inception?
+        </h5>
+        <Box>
+          <FormControl className="questionnaireForm centerHelp">
+            {section4.results3?.map((use) => (
+              <FormControlLabel
+                key={use.id}
+                disabled={
+                  !progressIndicator.includes(use.id) &&
+                  progressIndicator.length > 1
                 }
               />
             ))}
@@ -263,11 +295,50 @@ function SectionFourTraction() {
           >
             <TextField
               id="outlined-basic"
-              label="Long Answer Text"
+              label="Progress Indicator Explanation"
               variant="outlined"
               multiline
+              InputLabelProps={{shrink: true,}}
               rows={5}
               fullWidth
+              value={section4Enterprise.progressExplanationOne4}
+              onChange={(evt =>
+                dispatch({
+                  type: 'SET_SECTION4_ENTERPRISE',
+                  payload: {progressExplanationOne4: evt.target.value}
+                }))}
+            />
+          </Box>
+          <br />
+        </Grid>
+
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box
+            sx={{
+              width: 600,
+              maxWidth: "100%",
+            }}
+          >
+            <TextField
+              id="outlined-basic"
+              label="Progress Indicator 2 Explanation"
+              variant="outlined"
+              multiline
+              InputLabelProps={{shrink: true,}}
+              rows={5}
+              fullWidth
+              value={section4Enterprise.progressExplanationTwo4}
+              onChange={(evt =>
+                dispatch({
+                  type: 'SET_SECTION4_ENTERPRISE',
+                  payload: {progressExplanationTwo4: evt.target.value}
+                }))}
             />
           </Box>
         </Grid>
@@ -292,6 +363,8 @@ function SectionFourTraction() {
             }
           />
         </Box>
+
+   
 
         <h5>Are you generating revenue?</h5>
 

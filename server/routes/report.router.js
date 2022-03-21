@@ -24,7 +24,7 @@ router.get('/', rejectUnauthenticated, async (req,res) => {
 		ARRAY_AGG(DISTINCT("investmentVehicles"."investmentVehicle")) AS "investmentVehicles",
 		ARRAY_AGG(DISTINCT("operatingSector"."sector")) AS "operatingSector",
 		ARRAY_AGG(DISTINCT("painPoints"."painPoint")) AS "painPoints",
-		ARRAY_AGG(DISTINCT("progressIndicators"."indicator")) AS "stakeholderSegments",
+		ARRAY_AGG(DISTINCT("progressIndicators"."indicator")) AS "progressIndicators",
 		"sdg"."sdg",
 		"sdg"."icon",
 		ARRAY_AGG(DISTINCT("societalImpact"."societalImpact")) AS "societalImpact",
