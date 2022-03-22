@@ -91,20 +91,22 @@ function NoPoverty() {
                             return (
                                 <Box>
                                     <Table>
-                                        <TableRow sx={{display: "table"}}>
-                                            <TableCell sx={{border: "none"}}>
-                                                <Checkbox
-                                                    key={indicator.id} 
-                                                    checked={selectedIndicator.includes(indicator.id)}
-                                                    value={indicator.id}
-                                                    defaultValue={0}
-                                                    onChange={handleIndicator}
-                                                />
-                                            </TableCell>
-                                            <TableCell sx={{border: "none"}}>
-                                                {indicator.indicator}
-                                            </TableCell>
-                                        </TableRow>
+                                        <TableBody>
+                                            <TableRow sx={{display: "table"}}>
+                                                <TableCell sx={{border: "none"}}>
+                                                    <Checkbox
+                                                        key={indicator.id} 
+                                                        checked={selectedIndicator.includes(indicator.id)}
+                                                        value={indicator.id}
+                                                        defaultValue={0}
+                                                        onChange={handleIndicator}
+                                                    />
+                                                </TableCell>
+                                                <TableCell sx={{border: "none"}}>
+                                                    {indicator.indicator}
+                                                </TableCell>
+                                            </TableRow>
+                                        </TableBody>
                                     </Table> 
                                 </Box>                   
                             )
