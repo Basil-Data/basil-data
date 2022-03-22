@@ -284,7 +284,16 @@ function SectionSixRisksAndHurdles () {
                     </Box>
 
                     <h5>Please explain your reason(s) for your selection(s) above.</h5>
-                    <p>Following on from the previous question, here we are looking for 
+                    <p
+                    onClick={() =>
+                        dispatch({
+                            type: 'SET_SECTION6_ENTERPRISE',
+                            payload: {admin6: `Risk efficiency: Manage uncertainty that matters. Who, what, where, when, why? 
+                            Stakeholder participation risk: you rely on stakeholders that are globally distributed with limited communication.
+                            External risk: how would changes in the market, supply chain, etc affect your ability to reduce plastics in the ocean?
+                            Alignment risk: how will you communicate that your mission is reducing plastics in the ocean and not selling sunglasses?`}
+                        })}>
+                        Following on from the previous question, here we are looking for 
                         explanations that tell us you are aware of how the selected external 
                         factors may impact your organization, or even better, how you are 
                         prepared to deal with external factors that may influence your growth 
