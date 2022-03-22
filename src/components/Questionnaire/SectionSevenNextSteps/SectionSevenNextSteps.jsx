@@ -471,8 +471,7 @@ function SectionSevenNextSteps () {
                             paradigm has emerged in the last decade under several names: online aggregation in the database
                             community; progressive, incremental, or iterative visualization in other communities. It consists
                             of splitting long computations into a series of approximate results improving with time; in this
-                            process, partial or approximate results are then rapidly returned to the user and can be interacted
-                            with in a fluent and iterative fashion.`}
+                            process, partial or approximate results are then rapidly returned to the user.`}
                         })}
                     >
                         How well do you understand the problem?

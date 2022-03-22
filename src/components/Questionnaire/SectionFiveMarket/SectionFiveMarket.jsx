@@ -223,14 +223,7 @@ function SectionFiveMarket() {
             We recommend including a reliable source.  
           </h4>
 
-          <h5 onClick={() =>
-          dispatch({
-              type: 'SET_SECTION5_RESPONSES',
-              payload: {admin5: `I updated the TAM to $20mm. With that value increasing,
-              I'd like you to take a look at if your business model supports taking a
-              proportionate chunk out of that increase, or if you could alter your
-              business model to accommodate that growth.`}
-          })}>
+          <h5>
             Example:
             “Concerns about impact washing (66%) loom largest, followed
             less acutely by the market’s ‘inability to demonstrate impact
