@@ -82,7 +82,7 @@ function GoodHealthAndWellbeing() {
     return(
         <Box className="questionnaireForm">
             <img src="images/SDGs/E-WEB-Goal-03.png" width="200px" height="200px"/>
-            <h1><b>SDG - Zero Hunger</b></h1>
+            <h1><b>SDG - Good Health and Well Being</b></h1>
             <Box sx={{marginTop: "50px"}}>
                 <p>What Indicators do you use/intend to use to track change?</p>
                 <FormControl sx={{marginLeft: "14px"}}>

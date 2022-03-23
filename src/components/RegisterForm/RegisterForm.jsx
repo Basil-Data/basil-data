@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 function RegisterForm() {
@@ -9,6 +10,8 @@ function RegisterForm() {
   const [logoUrl, setLogoUrl] = useState('');
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
+
+  const history = useHistory();
 
   const registerUser = (event) => {
     event.preventDefault();
@@ -23,6 +26,7 @@ function RegisterForm() {
         logoUrl: logoUrl
       },
     });
+    history.push('/login')
   }; // end registerUser
 
   return (
