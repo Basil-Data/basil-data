@@ -17,7 +17,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
-router.post('/register', (req, res, next) => {
+router.post('/register', async (req, res, next) => {
   const enterpriseName = req.body.enterpriseName;
   const email = req.body.email;
   const logoUrl = req.body.logoUrl;
@@ -27,37 +27,21 @@ router.post('/register', (req, res, next) => {
   const queryText = `INSERT INTO "user" ("enterpriseName", "email", "logoUrl", "username", "password")
     VALUES ($1, $2, $3, $4, $5) RETURNING id`;
     
-  pool
+  try {
+  const result = await pool
     .query(queryText, [enterpriseName, email, logoUrl, username, password])
-    .then(() => res.sendStatus(201))
-    .catch((err) => {
-      console.log('User registration failed: ', err);
-      res.sendStatus(500);
-    });
 
-
-});
-
-router.post('/answers', (req, res) => {
-
-  let sqlText = `
+  await pool.query(`
     INSERT INTO "answers"
       ("enterpriseId")
     VALUES
       ($1)
-  `;
-
-  let sqlParams = [
-    req.user.id
-  ];
-
-  pool.query(sqlText, sqlParams)
-    .then(res.sendStatus(200))
-    .catch(error => {
-      res.sendStatus(500);
-      console.log('error posting to answers', error);
-    })  
-})
+  `, [result.rows[0].id])
+  } catch (error) {
+    console.log('error in registration', error);
+    res.sendStatus(500);
+  }
+});
 
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
