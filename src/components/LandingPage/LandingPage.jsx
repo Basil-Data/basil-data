@@ -28,6 +28,7 @@ function LandingPage() {
             investors!
           </p>
         </div>
+        <div class="break"></div>
         <div className="grid-col grid-col_4">
           <RegisterForm />
 

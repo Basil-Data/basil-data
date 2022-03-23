@@ -464,16 +464,7 @@ function SectionSevenNextSteps () {
                 </Box>                               
 
                 <Box sx={{marginTop: "50px"}}>
-                    <h4 onClick={() =>
-                        dispatch({
-                            type: 'SET_NEXT_STEPS_ENTERPRISE',
-                            payload: {admin7: `A new computation
-                            paradigm has emerged in the last decade under several names: online aggregation in the database
-                            community; progressive, incremental, or iterative visualization in other communities. It consists
-                            of splitting long computations into a series of approximate results improving with time; in this
-                            process, partial or approximate results are then rapidly returned to the user.`}
-                        })}
-                    >
+                    <h4>
                         How well do you understand the problem?
                     </h4>
                     <Slider 

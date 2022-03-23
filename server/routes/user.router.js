@@ -25,7 +25,8 @@ router.post('/register', async (req, res, next) => {
   const password = encryptLib.encryptPassword(req.body.password);
 
   const queryText = `INSERT INTO "user" ("enterpriseName", "email", "logoUrl", "username", "password")
-    VALUES ($1, $2, $3, $4, $5) RETURNING id`;
+    VALUES ($1, $2, $3, $4, $5) RETURNING id
+  `;
     
   try {
   const result = await pool
@@ -36,6 +37,8 @@ router.post('/register', async (req, res, next) => {
       ("enterpriseId")
     VALUES
       ($1)
+    ON CONFLICT
+    DO NOTHING;
   `, [result.rows[0].id])
   } catch (error) {
     console.log('error in registration', error);
