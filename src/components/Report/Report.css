@@ -1,9 +1,20 @@
 /* All Report CSS */
 .report {
-    margin: 40px;
+    /* margin: 40px; */
     font-family: 'Montserrat';
     margin-top: 120px;
-    margin-left: 500px;
+    /* margin-left: 500px; */
+}
+
+.reportContainer {
+    display: flex;
+    flex: 0 1 auto;
+    /* defaults to 'row' */
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* defaults to 'flex-start' */
+    align-items: center;
+    justify-content: center;
 }
 
 .pageHeader {

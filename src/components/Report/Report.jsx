@@ -33,7 +33,7 @@ function Report () {
 
 
     return (
-        <Box>
+        <Box className="reportContainer">
         <div className="report">
             <ReportFrontPage />
             <ReportTableOfContents />
@@ -48,7 +48,6 @@ function Report () {
             <ReportSection8StartupBarriers />
             <ReportSection9NextSteps />
             <ReportFinalPage />
-
         </div>
         </Box>
     )
