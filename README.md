@@ -30,6 +30,10 @@ Make a new database called `basil_data` in PostgreSQL and use the **database.sql
 4. Open another terminal and run `npm run client`
 5. This should open a new tab in your browser at `localhost:3000`
 
+## Technical Details
+
+- In the report page, the report can be printed as a PDF, which is accomplished in the code by having separate CSS styling.
+- To find this code, view PRINT VIEW code starting on line 717 of src/components/Report/Report.css.
 ## Built With
 
 This application uses the following technologies:
