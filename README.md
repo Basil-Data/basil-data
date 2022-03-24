@@ -7,7 +7,7 @@ Basil Data is a web application that streamlines the process of generating a rep
 
 <!-- Live Version deployed on Heroku at: [https://skillsense.herokuapp.com/](https://skillsense.herokuapp.com/) -->
 
-## Screenshot
+## Screenshots
 
 ![2022-03-24 15 21 24](https://user-images.githubusercontent.com/87159469/160003399-b4fe6373-884c-40b2-8601-f4e41a091b2d.gif)
 ![2022-03-24 15 22 04](https://user-images.githubusercontent.com/87159469/160003423-1bdce19e-99b8-4981-9cc1-e75a280e54c9.gif)
