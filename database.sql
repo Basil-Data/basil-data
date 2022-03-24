@@ -74,7 +74,7 @@ CREATE TABLE "answers" (
 	"admin4" VARCHAR (1024) DEFAULT NULL,
 	"admin5" VARCHAR (1024) DEFAULT NULL,
 	"admin6" VARCHAR (1024) DEFAULT NULL,
-	"admin7" VARCHAR (1024) DEFAULT NULL,
+	"admin7" VARCHAR (1024) DEFAULT NULL
 );
 
 CREATE TABLE "competitiveAdvantages" (
