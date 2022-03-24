@@ -32,9 +32,12 @@ function Nav() {
               Info Page
             </Link>
 
+          {user.authLevel === 'guest' &&
+            
             <Link className="navLink" to="/report">
               Report
             </Link>
+          }
 
             <Link className="navLink" to="/story" >
               Questionnaire
