@@ -34,6 +34,8 @@ Make a new database called `basil_data` in PostgreSQL and use the **database.sql
 
 - In the report page, the report can be printed as a PDF, which is accomplished in the code by having separate CSS styling.
 - To find this code, view PRINT VIEW code starting on line 717 of src/components/Report/Report.css.
+- The limitations to this at the current moment are the fact that there are some margin issues, causing extraneous pages to exist. This could be fixed by adjusting page margin and padding.
+
 ## Built With
 
 This application uses the following technologies:
